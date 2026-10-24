@@ -28,7 +28,13 @@ export class GraphView {
     const raw = await this.load(cluster);
     if (this.lifetime.signal.aborted || revision !== this.revision) return;
     this.engine?.destroy();
-    this.data = aggregateGraph(raw);
+    const located = raw.truncated && !this.state.selected.startsWith('cluster:') && raw.nodes.some(node => node.id === this.state.selected);
+    if (located) {
+      // Explicit locate is a semantic zoom into a bounded neighborhood, not the whole graph.
+      const nodes = raw.nodes.slice(0, 300);
+      const ids = new Set(nodes.map(node => node.id));
+      this.data = { ...raw, nodes, edges: raw.edges.filter(edge => ids.has(edge.s) && ids.has(edge.t)), truncated: false };
+    } else this.data = aggregateGraph(raw);
     const data = this.data;
     if (!data.nodes.length) {
       this.element.innerHTML = '<h2>知识图谱</h2><div class="empty"><strong>暂无关系图谱</strong><p>保存知识或登记工具后，这里显示真实条目与关系。</p></div>';
@@ -38,14 +44,14 @@ export class GraphView {
       this.element.innerHTML = '<h2>知识图谱</h2><div class="empty"><strong>簇数量过多</strong><p>请先按项目或类型缩小范围。</p></div>';
       return;
     }
-    this.element.innerHTML = `<div class="wx-graph-toolbar">
+    this.element.innerHTML = `<h2>${esc(this.element.getAttribute('aria-label') || '知识图谱')}</h2><div class="wx-graph-toolbar">
       <div class="wx-graph-layout"><button type="button" data-graph-action="sphere">球体</button><button type="button" data-graph-action="network">网络</button></div>
       <input class="wx-graph-search" aria-label="搜索图谱节点" placeholder="高亮标题或标签…" value="${esc(this.state.text)}">
       <button type="button" data-graph-action="reset">重置视角</button><button type="button" data-graph-action="export">导出 PNG</button>
       ${this.expand ? '<button type="button" data-graph-action="expand">展开</button>' : ''}
       ${cluster ? '<button type="button" data-graph-action="back">返回全部簇</button>' : ''}
       </div><div class="wx-graph-legend">${Object.entries(names).map(([kind, name]) => `<button type="button" data-graph-kind="${kind}" aria-pressed="${this.state.kinds.has(kind)}"><i style="background:${graphColors[kind]}"></i>${name}</button>`).join('')}</div>
-      <p class="wx-graph-count">${raw.total} 个条目 · 当前 ${data.nodes.length} 个${raw.truncated || raw.nodes.length > 1500 ? '簇节点（点击展开成员）' : '节点'} · ${data.edges.length} 条可见关系 · ${raw.clusters.length} 个簇${raw.truncated ? ' · 已截断；关系为返回样本，按项目/类型筛选可缩小范围' : ''}</p>
+      <p class="wx-graph-count">${raw.total} 个条目 · 当前 ${data.nodes.length} 个${!located && (raw.truncated || raw.nodes.length > 1500) ? '簇节点（点击展开成员）' : '节点'} · ${data.edges.length} 条可见关系 · ${raw.clusters.length} 个簇${located ? ' · 定位视图（邻域样本）' : ''}${raw.truncated ? ' · 已截断；关系为返回样本，按项目/类型筛选可缩小范围' : ''}</p>
       <div class="wx-graph-body"><canvas class="wx-graph-canvas" aria-label="知识关系图；下方节点列表提供等价键盘操作"></canvas>
       <aside class="wx-graph-info" aria-live="polite">点击节点查看关联信息</aside></div>
       <details class="wx-graph-list"><summary>节点列表（可用键盘打开）</summary><div>${data.nodes.map(node => `<button type="button" data-graph-node="${esc(node.id)}">${esc(node.title)}<small>${names[node.kind]} · ${esc(node.status)}</small></button>`).join('')}</div></details>`;

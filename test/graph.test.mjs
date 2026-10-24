@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildGraph } from '../lib/index.js';
+import { buildGraph, relatedGraph } from '../lib/index.js';
 
 function entry(id, extra = {}) {
   return { id, title: id, type: 'method', tags: [], project: '', body: '', archived: false,
@@ -18,6 +18,19 @@ test('空图无假数据；关系来自会话、标签、弱项目、正文及�
   assert.equal(graph.nodes.find(n => n.kind === 'tool').status, '未检测');
   assert.equal(buildGraph(rows, tools, { scope: 'library' }).nodes.length, 2);
   assert.equal(buildGraph(rows, tools, { scope: 'tools' }).nodes.length, 2);
+});
+
+test('相关知识与工具双向关系及截断以外节点定位', () => {
+  const rows = Array.from({ length: 1600 }, (_, i) => entry('entry-' + i, { updatedAt: new Date(2026, 0, 1, 0, i).toISOString() }));
+  rows[0].body = '引用 [[entry-1]]';
+  const tools = [{ id: 't', name: '关联工具', category: 'CLI', linkedIds: ['entry-0'], status: '未检测' }];
+  const graph = buildGraph(rows, tools, { focus: 'entry-0' });
+  assert.equal(graph.nodes[0].id, 'entry-0');
+  const related = relatedGraph(rows, tools, 'entry-0');
+  assert.ok(related.knowledge.some(node => node.id === 'entry-1'));
+  assert.equal(related.tools[0].title, '关联工具');
+  assert.equal(relatedGraph(rows, tools, 'tool:t').knowledge[0].title, 'entry-0');
+  assert.throws(() => relatedGraph(rows, tools, 'missing'), /不存在/);
 });
 test('图谱筛选归档/项目/类型，3000条截断并且边不悬空', () => {
   const rows = Array.from({ length: 3000 }, (_, i) => entry('node-' + i, { project: 'p', sourceSession: 's', tags: ['same'] }));

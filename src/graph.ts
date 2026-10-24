@@ -27,6 +27,7 @@ export interface GraphOptions {
   archived?: boolean;
   limit?: number;
   cluster?: string;
+  focus?: string;
 }
 
 export function buildGraph(entries: Iterable<Entry>, tools: Tool[], options: GraphOptions = {}): GraphData {
@@ -100,7 +101,13 @@ export function buildGraph(entries: Iterable<Entry>, tools: Tool[], options: Gra
   const counts = new Map<string, number>();
   for (const node of candidates) counts.set(node.cluster, (counts.get(node.cluster) || 0) + 1);
   const rank = (node: GraphNode) => (Date.parse(node.updatedAt) || 0) / 86400000 + Math.log2(1 + node.degree) + Math.log2(1 + (node.recallCount || 0));
-  candidates.sort((a, b) => rank(b) - rank(a) || a.id.localeCompare(b.id));
+  const nearby = new Set<string>();
+  if (options.focus) for (const item of edges.values()) {
+    if (item.s === options.focus) nearby.add(item.t);
+    if (item.t === options.focus) nearby.add(item.s);
+  }
+  const priority = (node: GraphNode) => node.id === options.focus ? 2 : nearby.has(node.id) ? 1 : 0;
+  candidates.sort((a, b) => priority(b) - priority(a) || rank(b) - rank(a) || a.id.localeCompare(b.id));
   const nodes = candidates.slice(0, limit);
   const visible = new Set(nodes.map(node => node.id));
   return {
@@ -108,4 +115,15 @@ export function buildGraph(entries: Iterable<Entry>, tools: Tool[], options: Gra
     clusters: [...counts].map(([id, count]) => ({ id, label: id === 'ungrouped' ? '未分组' : id.slice(id.indexOf(':') + 1), count })),
     truncated: candidates.length > limit, total: candidates.length,
   };
+}
+
+export function relatedGraph(entries: Iterable<Entry>, tools: Tool[], id: string) {
+  const rows = [...entries];
+  const entry = rows.find(item => item.id === id);
+  if (!entry && !tools.some(tool => 'tool:' + tool.id === id)) throw new Error('节点不存在');
+  const graph = buildGraph(rows, tools, { archived: entry?.archived, focus: id, limit: 5000 });
+  const edges = graph.edges.filter(edge => edge.s === id || edge.t === id);
+  const ids = new Set(edges.map(edge => edge.s === id ? edge.t : edge.s));
+  const nodes = graph.nodes.filter(node => ids.has(node.id));
+  return { knowledge: nodes.filter(node => node.kind !== 'tool'), tools: nodes.filter(node => node.kind === 'tool'), edges };
 }
