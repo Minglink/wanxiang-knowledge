@@ -1,0 +1,66 @@
+{
+  "name": "dsh-wanxiang-knowledge",
+  "version": "0.1.0",
+  "description": "万象知识库：一键沉淀 Harness 会话、本地知识检索与工具目录",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "dev": "node scripts/dev.mjs",
+    "pack:plugin": "npm run build && npm pack --pack-destination dist"
+  },
+  "engines": {
+    "node": ">=22.15.0"
+  },
+  "dsh": {
+    "id": "dsh-wanxiang-knowledge",
+    "name": "万象知识库",
+    "version": "0.1.0",
+    "permissions": "读取选定会话；在配置的本地目录保存知识、来源和索引；按用户操作调用宿主模型；检测登记的工具版本",
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-session"
+      ],
+      "immediately": true
+    }
+  },
+  "dependencies": {
+    "sql.js": "^1.14.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^18.3.0",
+    "@types/sql.js": "^1.4.9",
+    "esbuild": "^0.25.0",
+    "playwright": "^1.64.1",
+    "typescript": "^5.9.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Minglink/wanxiang-knowledge.git"
+  },
+  "homepage": "https://github.com/Minglink/wanxiang-knowledge#readme",
+  "bugs": {
+    "url": "https://github.com/Minglink/wanxiang-knowledge/issues"
+  }
+}

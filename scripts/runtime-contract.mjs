@@ -1,0 +1,40 @@
+// Uses the actual installed Harness runtime. Run through Electron in Node mode.
+import path from 'node:path';
+import os from 'node:os';
+import { randomUUID } from 'node:crypto';
+import { pathToFileURL, fileURLToPath } from 'node:url';
+import { mkdtemp, rm, writeFile, mkdir } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const appDir=process.env.WANXIANG_HARNESS_DIR||path.join(process.env.LOCALAPPDATA,'Programs','DeepSeek Harness');
+const runtime=path.join(appDir,'resources','app.asar','dsh','node_modules','@deepseek-ai');
+const load=name=>import(pathToFileURL(path.join(runtime,name,'lib','index.js')).href);
+const {Context}=await load('cordis');
+const {Session,SESSION_FORMAT_VERSION}=await load('dsh-session');
+const {default:Persistence}=await load('dsh-session-persistence-jsonl');
+const {createUserMessage}=await load('dsh-llm');
+const {assertSupportedJsonSchema,validateJsonSchemaValue}=await load('dsh-tools');
+const {apply,snapshotEvents,KnowledgeService}=await import('../lib/index.js');
+const testHome=await mkdtemp(path.join(os.tmpdir(),'wanxiang-runtime-'));
+const oldHome=process.env.DSH_HOME;process.env.DSH_HOME=testHome;
+await mkdir(path.join(testHome,'wanxiang'),{recursive:true});await writeFile(path.join(testHome,'wanxiang','settings.json'),JSON.stringify({root:path.join(testHome,'knowledge'),mode:'ai',autoQueue:true}));
+let registered=[];let dispose;
+const mock={list:()=>[],get:()=>undefined};
+await apply({sessions:mock,sessionPersistence:{list:async()=>[]},agents:{get:()=>undefined},llm:{},agentDefaultModel:{},logger:{info:()=>{}},on:()=>{},effect:fn=>{const d=fn();if(d&&registered.length===3)dispose=d;return d;},inject:(deps,fn)=>fn({effect:fn=>fn(),tools:{register:def=>{assertSupportedJsonSchema(def.parameters);assertSupportedJsonSchema(def.output.schema);registered.push(def);return()=>{};}}}),webServer:{register:()=>()=>{}}});
+assert.equal(registered.length,3);
+const value=await registered[0].execute({query:'中文'});assert.deepEqual(validateJsonSchemaValue(registered[0].output.schema,value,'value'),[]);assert.equal(registered[0].output.render({},value)[0].type,'text');
+console.log('PASS: actual Harness tool schemas and output rendering');
+if(dispose)dispose();
+process.env.DSH_HOME=oldHome||'';
+const ctx=new Context();
+const fixtureMode=process.argv.includes('--fixture');
+const root=fixtureMode?path.join(oldHome||path.join(os.homedir(),'.dsh'),'sessions'):path.join(testHome,'sessions');
+const persistence=new Persistence(ctx,{root,compression:'zstd'});
+const id='wanxiang-smoke-'+randomUUID();
+const session=Session.create(id,undefined,{version:SESSION_FORMAT_VERSION,id,createdAt:Date.now(),cwd:path.dirname(path.dirname(fileURLToPath(import.meta.url))),isSeeded:false});
+session.append('session/title',{title:'万象知识库 · 实机测试会话',messageSeqs:[],source:{kind:'user'}});
+session.append('user/message',createUserMessage({content:[{type:'text',text:'这是万象知识库插件的合成测试资料，不包含私人会话。测试目标：使用 Markdown 保存会话知识，用 SQLite 保存可重建索引。验收步骤：先生成笔记，再搜索“中文检索”，重复生成确认没有重复条目，最后检查来源消息序号。上述内容为测试方案，尚未证明实际性能。请把这份中文检索测试方案沉淀为笔记。'}],source:{kind:'user'}}),{surfaceOp:'append'});
+const handle=await persistence.create(session.header);await handle.append(session.snapshotEvents());await handle.flush();await handle.close();const reader=await persistence.open(id,'read');const restored=await reader.read();await reader.close();const snapshot=snapshotEvents(id,session.header,restored.events);assert.equal(snapshot.messages.length,1);assert.equal(snapshot.title,'万象知识库 · 实机测试会话');
+console.log('PASS: actual Zstandard persistence and session event adapter');
+if(fixtureMode){await mkdir('dist',{recursive:true});await writeFile('dist/live-fixture.json',JSON.stringify({id,title:snapshot.title,createdAt:new Date().toISOString()},null,2));console.log('Fixture session: '+id);}else{await rm(testHome,{recursive:true,force:true});}
+
+process.exit(0);
