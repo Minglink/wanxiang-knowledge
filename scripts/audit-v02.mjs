@@ -102,7 +102,12 @@ try {
     oldProjectVisible: (await page.locator('#project option').allTextContents()).includes('仅旧条目的项目'),
     elapsedMsIncludingSeed: performance.now() - start,
   }, 'AUD-01');
+  assert.ok((await page.locator('#project option').allTextContents()).includes('仅旧条目的项目'));
   await shot('知识库-200条');
+  await page.locator('[data-action="library-graph"]').click();
+  await page.locator('.wx-graph-canvas').waitFor();
+  await shot('知识库-图谱');
+  await page.locator('[data-action="library-list"]').click();
   await page.locator('#query').fill(first.id);
   await page.locator('#query').press('Enter');
   await page.locator('.entry').first().click();
@@ -126,6 +131,8 @@ try {
   const skipped = await service.generate('audit-history', 'export');
   await service.tail;
   record('已落库会话重复登记', { status: skipped.status, pendingRemains: !!service.pending['audit-history'] }, 'AUD-02');
+  assert.equal(service.pending['audit-history'], undefined);
+  await service.markPending('audit-history', '合成忽略操作样例');
   for (const detector of ['node', 'python', 'git', 'powershell']) {
     const tool = await service.store.saveTool({ name: `合成 ${detector}`, detector, linkedIds: [first.id] });
     assert.equal(tool.status, '未检测');
@@ -150,11 +157,14 @@ try {
   assert.equal(Object.keys(service.pending).length, 0);
   record('待落库忽略', '可移除；无批量按钮，无积压分页');
   for (let i = 0; i < 102; i++) service.jobs.push({ ...job, id: `synthetic-log-${i}` });
-  record('日志100条截断', { total: service.jobs.length, exposed: (await service.state()).jobs.length }, 'AUD-03');
+  record('总览状态保留100条兼容摘要（日志页另有分页）', { total: service.jobs.length, exposed: (await service.state()).jobs.length }, 'AUD-03');
   await page.reload();
   await page.locator('#session-select').waitFor();
   await tab('logs');
-  await shot('日志-100条');
+  await page.locator('[data-action="logs-next"]').click();
+  await page.waitForTimeout(100);
+  assert.ok((await page.locator('.wx-log-pages').innerText()).includes('51'));
+  await shot('日志-分页');
   await page.getByRole('button', { name: '设置', exact: true }).first().click();
   await shot('设置');
   await page.locator('#modal [data-action="close"]').first().click();
@@ -194,6 +204,8 @@ try {
     storeRootChanged: service.store.root === brokenRoot,
     entriesNow: service.store.entries.size,
   }, 'AUD-04');
+  assert.notEqual(service.store.root, brokenRoot);
+  assert.equal(service.store.search().length > 0, true);
   record('浏览器异常', errors);
   await writeFile(path.join(output, 'results.json'), JSON.stringify({ rows, errors }, null, 2));
 } finally {

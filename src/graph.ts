@@ -120,7 +120,17 @@ export function buildGraph(entries: Iterable<Entry>, tools: Tool[], options: Gra
 export function relatedGraph(entries: Iterable<Entry>, tools: Tool[], id: string) {
   const rows = [...entries];
   const entry = rows.find(item => item.id === id);
-  if (!entry && !tools.some(tool => 'tool:' + tool.id === id)) throw new Error('节点不存在');
+  const tool = tools.find(item => 'tool:' + item.id === id);
+  if (!entry && !tool) throw new Error('节点不存在');
+  if (tool) {
+    const ids = new Set(tool.linkedIds);
+    const knowledge: GraphNode[] = rows.filter(item => ids.has(item.id)).map(item => ({
+      id: item.id, title: item.title, kind: item.type, project: item.project, tags: item.tags,
+      updatedAt: item.updatedAt, degree: 1, status: item.archived ? '已归档' : item.verification,
+      cluster: item.project ? 'project:' + item.project : 'ungrouped',
+    }));
+    return { knowledge, tools: [], edges: knowledge.map(item => ({ s: id, t: item.id, kind: 'tool_link', w: 1.5 })) };
+  }
   const graph = buildGraph(rows, tools, { archived: entry?.archived, focus: id, limit: 5000 });
   const edges = graph.edges.filter(edge => edge.s === id || edge.t === id);
   const ids = new Set(edges.map(edge => edge.s === id ? edge.t : edge.s));
