@@ -8,6 +8,7 @@ const browser=await chromium.launch({executablePath:'C:\\Program Files\\Google\\
 const errors=[];const page=await browser.newPage({viewport:{width:1280,height:800}});
 page.on('pageerror',e=>errors.push(e.message));
 await mkdir('dist/screenshots',{recursive:true});
+const toolName='UI 验证 Node.js '+Date.now();
 const checks=[];const pass=name=>{checks.push(name);console.log('PASS: '+name);};
 try{
  await page.goto(`${base}/wanxiang?sessionId=${fixture}`);
@@ -16,6 +17,19 @@ try{
  assert.equal(await page.locator('#session-select').inputValue(),fixture);pass('明确识别指定会话');
  await page.locator('[data-action="generate"]').click();
  await page.waitForFunction(()=>document.querySelector('.entries .entry')!==null,{timeout:20000});pass('界面一键落库并显示知识列表');
+ await page.locator('.wx-graph-canvas').waitFor();
+ await page.locator('.wx-graph-list summary').click();
+ await page.locator('[data-graph-node]').first().click();
+ const chosen=await page.locator('.wx-graph-info strong').innerText();
+ await page.screenshot({path:'dist/screenshots/图谱-球体.png',fullPage:true});
+ await page.locator('[data-graph-action="network"]').click();
+ assert.equal(await page.locator('.wx-graph-info strong').innerText(),chosen);
+ await page.waitForTimeout(500);
+ await page.screenshot({path:'dist/screenshots/图谱-网络.png',fullPage:true});
+ await page.locator('[data-graph-action="expand"]').click();
+ await page.locator('dialog[open] .wx-graph-canvas').waitFor();
+ await page.locator('#modal [data-action="close"]').click();
+ pass('球体/网络图谱、选中保留、节点列表与展开');
  await page.screenshot({path:'dist/screenshots/总览-1280.png',fullPage:true});
  await page.setViewportSize({width:1920,height:1080});await page.screenshot({path:'dist/screenshots/总览-1920.png',fullPage:true});
  await page.getByRole('button',{name:'知识库',exact:true}).click();
@@ -23,7 +37,7 @@ try{
  await page.locator('.entry').first().waitFor();pass('中文搜索交互');
  await page.locator('.entry').first().click();await page.locator('dialog[open] .source').waitFor();
  await page.getByRole('button',{name:'编辑',exact:true}).click();await page.locator('#edit-form textarea').fill('## UI 编辑验证\n\n中文检索来源与修订均需保留。');await page.locator('#edit-form button[type="submit"]').click();await page.waitForFunction(()=>!document.querySelector('dialog')?.open);pass('知识详情与编辑保存');
- await page.getByRole('button',{name:'工具库',exact:true}).click();await page.getByRole('button',{name:'添加工具',exact:true}).first().click();await page.locator('#tool-form input[name="name"]').fill('UI 验证 Node.js');await page.locator('#tool-form select[name="detector"]').selectOption('node');await page.locator('#tool-form textarea[name="notes"]').fill('实机 UI 验证条目：确认版本查询、目录保存和状态更新。');await page.locator('#tool-form button[type="submit"]').click();await page.waitForFunction(()=>!document.querySelector('dialog')?.open);await page.locator('.tool-card').filter({hasText:'UI 验证 Node.js'}).getByRole('button',{name:'检测版本'}).click();await page.locator('.tool-card').filter({hasText:'UI 验证 Node.js'}).locator('.badge.good').waitFor();pass('工具登记、持久保存与版本检测');
+ await page.getByRole('button',{name:'工具库',exact:true}).click();await page.getByRole('button',{name:'添加工具',exact:true}).first().click();await page.locator('#tool-form input[name="name"]').fill(toolName);await page.locator('#tool-form select[name="detector"]').selectOption('node');await page.locator('#tool-form textarea[name="notes"]').fill('实机 UI 验证条目：确认版本查询、目录保存和状态更新。');await page.locator('#tool-form button[type="submit"]').click();await page.waitForFunction(()=>!document.querySelector('dialog')?.open);await page.locator('.tool-card').filter({hasText:toolName}).getByRole('button',{name:'检测版本'}).click();await page.locator('.tool-card').filter({hasText:toolName}).locator('.badge.good').waitFor();pass('工具登记、持久保存与版本检测');
  await page.screenshot({path:'dist/screenshots/工具库-1920.png',fullPage:true});
  for(const name of ['检索','待落库','日志']){await page.locator('nav').getByRole('button',{name,exact:true}).click();await page.waitForTimeout(100);}pass('各页面切换');
  await page.getByRole('button',{name:'设置',exact:true}).first().click();await page.locator('#settings-form input[name="root"]').waitFor();await page.locator('#modal [data-action="close"]').first().click();pass('设置面板');
