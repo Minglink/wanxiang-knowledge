@@ -12,9 +12,9 @@ DeepSeek Harness 本地知识库插件。已针对 Windows 上的 `0.2.1-alpha.1
 
 ## 安装
 
-仓库附带 [0.1.0 插件安装包](https://github.com/Minglink/wanxiang-knowledge/raw/refs/heads/main/artifacts/dsh-wanxiang-knowledge-0.1.0.tgz)，可下载后通过宿主的本地插件安装入口加载。源码验证与实机测试范围见 [测试报告](https://github.com/Minglink/wanxiang-knowledge/blob/main/docs/测试报告.md)。
+仓库附带 [0.2.0-alpha.1 插件安装包](https://github.com/Minglink/wanxiang-knowledge/raw/refs/heads/main/artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.1.tgz)，可下载后通过宿主的本地插件安装入口加载。源码验证与实机测试范围见 [测试报告](https://github.com/Minglink/wanxiang-knowledge/blob/main/docs/测试报告.md)。
 
-使用宿主支持的本地插件包安装入口选择 `dsh-wanxiang-knowledge-0.1.0.tgz`。开发机也可在项目目录运行：
+使用宿主支持的本地插件包安装入口选择 `dsh-wanxiang-knowledge-0.2.0-alpha.1.tgz`。开发机也可在项目目录运行：
 
 ```powershell
 npm install
@@ -22,10 +22,11 @@ npm run build
 npm run typecheck
 npm test
 npm run pack:plugin
+$env:WANXIANG_HOST_URL='http://127.0.0.1:<当前Harness端口>'
 node scripts/install-desktop.mjs
 ```
 
-安装脚本通过本机桌面版自带的插件管理 CLI 安装，先备份 profile 的 manifest、锁文件和覆盖配置。默认安装位置为 `%LOCALAPPDATA%/Programs/DeepSeek Harness`，可用环境变量 `WANXIANG_HARNESS_DIR` 指定其他位置。若宿主未热加载新插件，请在正在执行的会话完成后正常退出并重新打开 Harness。
+安装脚本通过本机桌面版自带的插件管理 CLI 安装。必须提供当前本机 WANXIANG_HOST_URL；先确认全部会话明确处于空闲、无落库任务，完整备份知识目录并逐文件校验哈希，同时备份插件设置及 profile 的 manifest、锁文件和覆盖配置。检查或备份失败会停止安装。默认安装位置为 `%LOCALAPPDATA%/Programs/DeepSeek Harness`，可用环境变量 `WANXIANG_HARNESS_DIR` 指定其他位置。若宿主未热加载新插件，请在正在执行的会话完成后正常退出并重新打开 Harness。
 
 普通 Web profile 可以使用该版本宿主的 `dsh plugin --profile web add <插件包路径>`。
 
@@ -35,7 +36,7 @@ node scripts/install-desktop.mjs
 
 正文存于 `notes/`、`cards/`；工具登记保存在 `tools/catalog.json`；来源摘录存于 `sources/`；索引、任务和修订历史存于 `.wanxiang/`。Markdown 元数据以 YAML 兼容的 JSON 对象保存。当前检索使用 SQLite 的 Unicode 规范化子串匹配与多词交集，未包含向量检索。
 
-v0.2 第0期仅增加调查和隔离探针，不更改上述目录或产品行为。当前平铺扫描尚不支持 v2 分片目录，相关兼容迁移与回滚验证在后续存储期进行。
+0.2.0-alpha.1 增加图谱与审计修复，保持上述目录格式及检索算法。目录切换完整预检后原子提交，失败保留原库；重复快照及修复完成清理待落库，日志支持分页，项目筛选覆盖全库元数据。当前平铺扫描尚不支持 v2 分片目录，相关兼容迁移与回滚验证在后续存储期进行。
 
 知识文件与检索在本机处理；AI 模式会向宿主模型服务发送选定会话的正文。插件会屏蔽部分常见凭据格式，这不代表能识别所有敏感内容。原文导出不会调用模型。插件不修改或删除 Harness 会话日志，不自动执行知识中的命令。
 
@@ -55,4 +56,6 @@ v0.2 第0期仅增加调查和隔离探针，不更改上述目录或产品行�
 
 自动模式仅登记待落库候选，生成由用户触发。附件二进制、图像 OCR、语义搜索、批量历史迁移、自动主题合并和云同步未包含在 0.1.0 中。长会话按段整理，上限为 100 段；每张知识卡片必须引用输入中存在的消息序号。模型输出通过结构与来源序号校验，结论仍需结合原文核验。
 
-v0.2 调查结论见 `docs/审计清单.md`、`docs/注入点验证.md`、`docs/引擎探针.md` 和 `docs/测试报告.md`。`node scripts/audit-v02.mjs` 用临时合成库审计页面；`node scripts/eval-recall.mjs` 运行60条固定查询的召回评测（先 build）。`scripts/probes/` 默认关闭且不随产品入口加载；宿主探针需用已安装 Electron 的 Node 模式显式启动。0.2.0-alpha.1 的图谱、修复、打包安装属于第1期，尚未交付。
+v0.2 调查结论见 `docs/审计清单.md`、`docs/注入点验证.md`、`docs/引擎探针.md` 和 `docs/测试报告.md`。`node scripts/audit-v02.mjs` 用临时合成库审计页面；`node scripts/eval-recall.mjs` 运行60条固定查询的召回评测（先 build）。`scripts/probes/` 默认关闭且不随产品入口加载；宿主探针需用已安装 Electron 的 Node 模式显式启动。0.2.0-alpha.1 提供总览、知识库、工具库三处图谱入口、球体/神经网络布局、关系详情双向跳转与节点定位。画布保持白色，3000输入自动聚合，支持键盘节点列表与减少动态效果。性能数据与实机限制见测试报告。
+
+回滚可使用保留的 `artifacts/dsh-wanxiang-knowledge-0.1.0.tgz` 重新安装，安装前仍需确认空闲并备份。此版不迁移知识文件，不实现 node:sqlite/FTS5、questions[]、自动召回或 embedding；这些按后续期文档执行。
