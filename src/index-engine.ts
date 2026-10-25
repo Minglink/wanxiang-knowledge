@@ -17,4 +17,7 @@ export interface IndexEngine {
   search(filter: SearchFilter): string[];
   flush(): Promise<void>;
   close(): void;
+  fullSearch?(filter: SearchFilter & { hot?: boolean; validOnly?: boolean }): { id: string; score: number }[];
+  begin?(): void;
+  end?(): void;
 }
