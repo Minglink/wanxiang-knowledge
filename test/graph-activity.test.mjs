@@ -65,3 +65,19 @@ test('成功读取/搜索/落库产生事件，失败读取与仅候选召回不
   service.recall.section('synthetic');
   assert.equal(emitted().length, count + 1);
 });
+
+
+test('节点本体柠檬黄，两端均活跃才改连线，结束恢复原色且重复使用续期', () => {
+  const layer = new GoldActivityLayer();
+  const data = { nodes: [{ id: 'a' }, { id: 'b' }], edges: [{ s: 'a', t: 'b' }] };
+  layer.accept([{ at: 1000, kind: 'read', entryIds: ['a'] }], data, data, 1000);
+  assert.equal(layer.color('#3563ff', layer.strength('a', 1001)), '#edda00');
+  assert.equal(layer.edgeStrength('a', 'b', 1001), 0);
+  layer.accept([{ at: 2000, kind: 'read', entryIds: ['b'] }], data, data, 2000);
+  assert.equal(layer.edgeStrength('a', 'b', 2001), 1);
+  assert.equal(layer.strength('a', 11000), 0.5);
+  layer.accept([{ at: 11000, kind: 'read', entryIds: ['a'] }], data, data, 11000);
+  assert.equal(layer.strength('a', 11001), 1);
+  layer.enabled = false;
+  assert.equal(layer.color('#3563ff', layer.strength('a', 11001)), '#3563ff');
+});

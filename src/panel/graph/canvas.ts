@@ -216,29 +216,37 @@ export class CanvasGraph {
     }).sort((a, b) => a.depth - b.depth);
     this.positions = new Map(projected.map(p => [p.id, p]));
     this.grid.rebuild(projected);
+    const activityNow = Date.now();
+    this.activity.expire(activityNow);
     const visibleEdges = new Set(this.layout === 'network' ? this.networkEdges : this.edges);
     if (this.selected || this.hover) for (const edge of this.data.edges) {
       if ([edge.s, edge.t].includes(this.hover || this.selected)) visibleEdges.add(edge);
     }
+    for (const edge of this.data.edges) {
+      if (this.activity.edgeStrength(edge.s, edge.t, activityNow) > 0 && this.active(edge.s) && this.active(edge.t)) visibleEdges.add(edge);
+    }
     const sphereMap = new Map(this.sphere.map(p => [p.id, p]));
+    let activityEdges = 0;
     for (const edge of visibleEdges) {
       const a = this.positions.get(edge.s), b = this.positions.get(edge.t);
       if (!a || !b) continue;
+      const gold = this.active(edge.s) && this.active(edge.t) ? this.activity.edgeStrength(edge.s, edge.t, activityNow) : 0;
+      if (gold) activityEdges++;
       const highlighted = [edge.s, edge.t].includes(this.hover || this.selected);
       const bridge = this.nodes.get(edge.s)!.cluster !== this.nodes.get(edge.t)!.cluster;
-      if (this.layout === 'sphere' && !highlighted && this.data.nodes.length > 300 && !this.bridges.has(edge)) continue;
-      ctx.globalAlpha = highlighted ? 0.65 : this.related(edge.s) && this.active(edge.s) && this.active(edge.t) ? 0.075 : 0.015;
-      ctx.strokeStyle = highlighted ? '#3563ff' : '#7890b6';
-      ctx.lineWidth = highlighted ? 1.3 : 0.65;
+      if (this.layout === 'sphere' && !highlighted && !gold && this.data.nodes.length > 300 && !this.bridges.has(edge)) continue;
+      ctx.globalAlpha = gold ? 0.8 : highlighted ? 0.65 : this.related(edge.s) && this.active(edge.s) && this.active(edge.t) ? 0.075 : 0.015;
+      ctx.strokeStyle = this.activity.color(highlighted ? '#3563ff' : '#7890b6', gold);
+      ctx.lineWidth = gold ? 1.7 : highlighted ? 1.3 : 0.65;
       ctx.beginPath(); ctx.moveTo(a.x, a.y);
-      if (this.layout === 'sphere' && (highlighted || bridge)) {
+      if (this.layout === 'sphere' && (gold || highlighted || bridge)) {
         for (let i = 1; i <= 16; i++) {
           const point = this.spherePoint(arc(sphereMap.get(edge.s)!, sphereMap.get(edge.t)!, i / 16));
           ctx.lineTo(point.x, point.y);
         }
       } else ctx.lineTo(b.x, b.y);
       ctx.stroke();
-      if (highlighted && this.layout === 'network' && this.data.nodes.length <= 300 && !this.motion.matches) {
+      if (highlighted && !gold && this.layout === 'network' && this.data.nodes.length <= 300 && !this.motion.matches) {
         const t = (time / 1800) % 1;
         ctx.fillStyle = '#3563ff'; ctx.beginPath(); ctx.arc(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, 2, 0, Math.PI * 2); ctx.fill();
       }
@@ -250,13 +258,14 @@ export class CanvasGraph {
       const node = this.nodes.get(point.id)!;
       const active = this.active(point.id), related = this.related(point.id);
       ctx.globalAlpha = (this.layout === 'sphere' ? 0.3 + (point.depth + 1) * 0.35 : 1) * (active && related ? 1 : 0.15);
+      const gold = active ? this.activity.strength(point.id, activityNow) : 0;
       const selected = point.id === this.selected || point.id === this.hover;
       const radius = point.radius * (!this.motion.matches && this.data.nodes.length <= 300 ? 1 + 0.025 * Math.sin(time / 900) : 1);
       if (selected || this.data.nodes.length <= 60 && Date.now() - Date.parse(node.updatedAt) < 7 * 86400000) {
         ctx.fillStyle = '#3563ff15'; ctx.beginPath(); ctx.arc(point.x, point.y, radius + 5, 0, Math.PI * 2); ctx.fill();
       }
-      ctx.fillStyle = node.status === '已失效' ? '#9ba7ba' : graphColors[node.kind];
-      ctx.strokeStyle = selected ? '#3563ff' : '#ffffff'; ctx.lineWidth = selected ? 2 : 1;
+      ctx.fillStyle = this.activity.color(node.status === '已失效' ? '#9ba7ba' : graphColors[node.kind], gold);
+      ctx.strokeStyle = gold ? '#c5b600' : selected ? '#3563ff' : '#ffffff'; ctx.lineWidth = selected ? 2 : 1;
       ctx.setLineDash(node.status === '已失效' ? [2, 2] : []);
       ctx.beginPath();
       if (node.kind === 'tool') { ctx.moveTo(point.x, point.y - radius); ctx.lineTo(point.x + radius, point.y); ctx.lineTo(point.x, point.y + radius); ctx.lineTo(point.x - radius, point.y); ctx.closePath(); }
@@ -267,8 +276,8 @@ export class CanvasGraph {
         ctx.beginPath(); ctx.arc(point.x + radius, point.y - radius, 2.5, 0, Math.PI * 2); ctx.fill();
       }
     }
-    const activityVisible = this.activity.paint(ctx, this.data, this.positions, id => this.active(id), !this.motion.matches,
-      Date.now(), this.layout === 'sphere' ? (s, t, progress) => this.spherePoint(arc(sphereMap.get(s)!, sphereMap.get(t)!, progress)) : undefined);
+    const activityVisible = this.activity.enabled && this.activity.marks.size > 0;
+    this.canvas.dataset.activityEdges = String(activityEdges);
     this.canvas.dataset.activityNodes = String(this.activity.enabled ? this.activity.marks.size : 0);
     const labelLimit = Math.max(4, Math.min(12, Math.floor(this.width * this.height / 40000)));
     const placer = new LabelPlacer(this.width, this.height, labelLimit);

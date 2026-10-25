@@ -40,6 +40,7 @@ try {
   await knowledgeTools(service).find(tool => tool.name === 'knowledge_read').execute({ id: 'gold-0' });
   await page.waitForFunction(() => document.querySelector('main canvas').dataset.activityNodes === '1');
   assert.notEqual(await canvas.evaluate(node => node.toDataURL()), idle);
+  assert.equal(await canvas.getAttribute('data-activity-edges'), '0');
   await page.getByText('AI 已读取', { exact: false }).waitFor();
   const frames = Number(await canvas.getAttribute('data-frames'));
   await page.waitForTimeout(200);
@@ -53,6 +54,8 @@ try {
   await page.waitForFunction(() => document.querySelector('main canvas').dataset.activityNodes === '1');
   pass('开关恢复原始配色像素，球体和网络切换保留真实活动');
   await mkdir('dist/graph-activity', { recursive: true });
+  await knowledgeTools(service).find(tool => tool.name === 'knowledge_read').execute({ id: 'gold-1' });
+  await page.waitForFunction(() => Number(document.querySelector('main canvas').dataset.activityEdges) > 0);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await knowledgeTools(service).find(tool => tool.name === 'knowledge_read').execute({ id: 'gold-0' });
   await page.waitForTimeout(1200);

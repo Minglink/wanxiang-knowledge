@@ -98,3 +98,6 @@
 .wx-graph-activity-toggle input { flex: none; width: 14px; min-width: 14px; accent-color: #c69a3a; margin: 0; }
 .wx-graph-activity-status { margin: 8px 0; color: #95712d; font-size: 11px; min-height: 16px; }
 .wx-graph-activity-detail { color: #95712d; }
+
+.wx-lemon-activity-toggle { color: #827700; }
+.wx-lemon-activity-toggle input { accent-color: #edda00; }

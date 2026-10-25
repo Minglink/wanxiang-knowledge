@@ -72,7 +72,7 @@ export class GraphView {
     this.element.innerHTML = `<h2>${esc(this.element.getAttribute('aria-label') || '知识图谱')}</h2><div class="wx-graph-toolbar">
       <div class="wx-graph-layout"><button type="button" data-graph-action="sphere">球体</button><button type="button" data-graph-action="network">网络</button></div>
       <input class="wx-graph-search" aria-label="搜索图谱节点" placeholder="高亮标题或标签…" value="${esc(this.state.text)}">
-      <label class="wx-graph-activity-toggle" title="金色表示实际注入、AI读取或落库；光点沿已有关系传播，不代表邻居也被读取"><input type="checkbox" data-graph-activity ${this.activityEnabled() ? 'checked' : ''}>金色活动</label>
+      <label class="wx-graph-activity-toggle wx-lemon-activity-toggle" title="柠檬黄表示实际注入、AI读取或落库；两端均活跃的已有连线同步变黄"><input type="checkbox" data-graph-activity ${this.activityEnabled() ? 'checked' : ''}>金色活动</label>
       <button type="button" data-graph-action="reset">重置视角</button><button type="button" data-graph-action="export">导出 PNG</button>
       ${this.expand ? '<button type="button" data-graph-action="expand">展开</button>' : ''}
       ${cluster ? '<button type="button" data-graph-action="back">返回全部簇</button>' : ''}
