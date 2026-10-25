@@ -69,6 +69,17 @@ export async function apply(ctx, config = {}) {
     if (!state) throw new Error('Only a session created by this probe may be used');
     const agent = ctx.agents.get(data.id);
     if (!agent) throw new Error('Probe agent unavailable');
+    if (data.action === 'knowledge-command') {
+      if (agent.status === 'running') throw new Error('Probe session busy');
+      const commands = ctx.get('commands');
+      if (!commands?.find(agent, 'wanxiang')) throw new Error('/wanxiang is not registered');
+      agent.session.append('session/title', { title: '万象命令合成验收', messageSeqs: [], source: { kind: 'user' } });
+      const result = await commands.execute(agent,
+        '/wanxiang 请只查询合成验收关键词 WXSLASH_SYNTHETIC_FACT，先knowledge_search再knowledge_read，回答知识里记录的验收代号；不要访问文件、网络或调用其他工具。',
+        [], AbortSignal.timeout(10000));
+      state.commandTimer = setTimeout(() => { if (agent.status === 'running') agent.cancel({ kind: 'user' }); }, 90000);
+      return result;
+    }
     if (data.action === 'prompt') {
       if (agent.status === 'running') throw new Error('Probe session busy');
       state.marker = String(data.marker || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 100);
@@ -119,12 +130,13 @@ export async function apply(ctx, config = {}) {
       return { job };
     }
     if (data.action === 'read') {
+      if (agent.status !== 'running') clearTimeout(state.commandTimer);
       await ctx.sessions.flush(agent.session);
       const handle = await ctx.sessionPersistence.open(data.id, 'read');
       let events;
       try { events = (await handle.read()).events; } finally { await handle.close(); }
       return { status: agent.status, records: records.filter(record => record.id === data.id), jobs: [...jobs.values()],
-        events: events.filter(event => ['system/message', 'assistant/message', 'assistant/attempt', 'compaction/start', 'compaction/summary', 'compaction/end', 'agent/error'].includes(event.type)) };
+        events: events.filter(event => ['command/run', 'command/done', 'tool/result', 'user/message', 'system/message', 'assistant/message', 'assistant/attempt', 'compaction/start', 'compaction/summary', 'compaction/end', 'agent/error'].includes(event.type)) };
     }
     throw new Error('Unknown probe action');
   };

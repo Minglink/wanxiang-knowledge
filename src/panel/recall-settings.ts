@@ -16,7 +16,7 @@ export function recallSettings(options: any, warning: string, escape: (value: an
   </section>`;
 }
 export function recallForm(data: Record<string, any>, previous: any) {
-  if (data.recallMode === 'inject' && !previous.acknowledged && !data.recallAcknowledged) throw new Error('请先确认自动注入会发送本地知识摘要给宿主模型服务');
+  if (data.recallMode === 'inject' && previous.mode !== 'inject' && !previous.acknowledged && !data.recallAcknowledged) throw new Error('请先确认自动注入会发送本地知识摘要给宿主模型服务');
   return { mode: data.recallMode, characters: Number(data.recallCharacters), count: Number(data.recallCount), threshold: Number(data.recallThreshold),
     acknowledged: previous.acknowledged || !!data.recallAcknowledged, smartRewrite: !!data.recallRewrite,
     blockedEntries: data.recallBlockedEntries.split(/\r?\n/).map((value: string) => value.trim()).filter(Boolean),
