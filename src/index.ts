@@ -1,3 +1,4 @@
+export { SqlJsEngine } from './sqljs-engine.js';
 import { promises as fs } from 'node:fs';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
