@@ -7,6 +7,8 @@ import { RecallProcessPool, RecallSearch, NodeSqliteEngine, SqlJsEngine, skipRec
 
 test('真实慢SQL在隔离进程硬截止，宿主心跳继续，执行被终止而不是放任后台跑完', async () => {
   const pool = new RecallProcessPool('unused', 'node:sqlite', new URL('./fixtures/blocked-sql-process.mjs', import.meta.url));
+  // Establish a ready child first, so slow process startup cannot masquerade as SQL cancellation.
+  await pool.query({ query: 'warmup', limited: true, limit: 10 }, new AbortController().signal, 3000);
   let beats = 0;
   const heartbeat = setInterval(() => beats++, 5);
   const start = performance.now();
@@ -15,7 +17,7 @@ test('真实慢SQL在隔离进程硬截止，宿主心跳继续，执行被终�
     assert.ok(performance.now() - start < 600);
     assert.ok(beats > 5, 'main thread must remain responsive');
     assert.equal(pool.stats.terminations, 1);
-    assert.equal(pool.stats.completed, 0);
+    assert.equal(pool.stats.completed, 1, 'only warmup may complete');
     assert.equal(pool.stats.started, 1, 'actual SQL must have started');
     await pool.waitForStops();
     assert.equal(pool.stats.exited, 1);
