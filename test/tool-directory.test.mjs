@@ -73,7 +73,7 @@ test('目录元数据非破坏持久化，旧分类保留，重复绑定拒绝�
 
 test('分类列表没有图谱，引用元数据转义且空目录不造工具', () => {
   const page = directoryPage({ discovery: { available: true, scope: 'global' }, groups: [{ category: '<分类>', callable: 1, items: [{ key: 'host:x', name: '<img onerror="x">', category: '<分类>', hostToolName: 'x', callable: true, status: '已注册', description: '<script>alert(1)</script>', version: '', path: '', parameters: [] }] }], callable: 1, total: 1 }, [], '');
-  assert.ok(page.includes('1/1'));
+  assert.ok(page.includes('0/1'));
   assert.ok(page.includes('&lt;img'));
   assert.ok(!page.includes('<script>'));
   assert.ok(!page.includes('<canvas'));
@@ -89,4 +89,16 @@ test('绿色只表示环境检测可用，已注册但未检测仍为灰色，�
   assert.equal(toolAvailability({ callable: false, environmentStatus: '可用' }).tone, 'ready');
   for (const status of ['不可用', '检测失败']) assert.equal(toolAvailability({ environmentStatus: status }).tone, 'failed');
   assert.equal(toolAvailability({ environmentStatus: '版本未知' }).tone, 'unknown');
+});
+
+
+test('用户工具目录只包含登记条目，不发现或混入插件/MCP能力', async () => {
+  const { manualToolDirectory } = await import('data:text/javascript;base64,' + Buffer.from(bundle.outputFiles[0].text).toString('base64'));
+  const directory = await manualToolDirectory([{ id: 'manual', name: '用户工具', category: '测试', status: '可用', notes: '', version: '', path: '', linkedIds: [] }]);
+  assert.equal(directory.total, 1);
+  assert.equal(directory.groups[0].items[0].name, '用户工具');
+  const page = directoryPage(directory, [{ id: 'session', title: '会话' }], 'session');
+  assert.ok(page.includes('1/1'));
+  assert.ok(!page.includes('wx-tool-scope'));
+  assert.ok(!page.includes('MCP'));
 });

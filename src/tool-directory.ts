@@ -33,7 +33,7 @@ const titles: Record<string, string> = {
   security_jadx_decompile: 'JADX 类反编译', security_yara_scan: 'YARA 规则匹配',
 };
 
-export async function readToolDirectory(host: Host, manual: Tool[], sessionId = ''): Promise<ToolDirectory> {
+export async function readToolDirectory(host: Pick<Host, 'listTools'>, manual: Tool[], sessionId = ''): Promise<ToolDirectory> {
   let discovery: ToolDiscovery = { available: false, scope: 'global', warning: '宿主未提供工具发现接口，仅显示手动登记。', tools: [] };
   try { if (host.listTools) { const found = await host.listTools(sessionId); if (!found || !Array.isArray(found.tools)) throw new Error('Invalid tool directory'); discovery = found; } }
   catch { discovery.warning = '宿主工具目录暂不可读取，仅显示手动登记。'; }
@@ -75,4 +75,12 @@ export async function readToolDirectory(host: Host, manual: Tool[], sessionId = 
     })),
     total: entries.length, callable: entries.filter(item => item.callable).length,
   };
+}
+
+
+/** The user-facing directory contains saved tools only, never registry discovery. */
+export async function manualToolDirectory(manual: Tool[]): Promise<ToolDirectory> {
+  const directory = await readToolDirectory({}, manual);
+  directory.discovery = { available: false, scope: 'global' };
+  return directory;
 }
