@@ -1,4 +1,4 @@
-import type { DatabaseSync } from 'node:sqlite';
+import type { DatabaseSync, StatementSync } from 'node:sqlite';
 import type { Entry } from './types.js';
 import type { IndexEngine, SearchFilter } from './index-engine.js';
 import { indexText, matchQuery } from './tokenize.js';
@@ -7,15 +7,25 @@ export class NodeSqliteEngine implements IndexEngine {
   readonly name = 'node:sqlite';
   readonly fullText = true;
   db!: DatabaseSync;
+  private statements = new Map<string, StatementSync>();
+  private statement(sql: string) {
+    let value = this.statements.get(sql);
+    if (!value) {
+      value = this.db.prepare(sql);
+      this.statements.set(sql, value);
+    }
+    return value;
+  }
   constructor(private filename: string) {}
   async init() {
     const { DatabaseSync } = await import('node:sqlite');
     this.db = new DatabaseSync(this.filename);
     try {
-      this.db.exec('CREATE VIRTUAL TABLE IF NOT EXISTS capability_probe USING fts5(x); DROP TABLE capability_probe; PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL; PRAGMA cache_size=-8192;');
+      this.db.exec("CREATE VIRTUAL TABLE IF NOT EXISTS capability_probe USING fts5(x,content='',contentless_delete=1); DROP TABLE capability_probe; PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL; PRAGMA cache_size=-8192;");
     } catch (error) { this.db.close(); throw error; }
   }
   reset() {
+    this.statements.clear();
     this.db.exec(`DROP TABLE IF EXISTS fts; DROP TABLE IF EXISTS entries;
       CREATE TABLE entries(id TEXT PRIMARY KEY,title TEXT,kind TEXT,project TEXT,tags TEXT,search TEXT,archived INTEGER,updated TEXT,invalid_at TEXT);
       CREATE INDEX project_filter ON entries(project,archived,invalid_at);
@@ -23,11 +33,11 @@ export class NodeSqliteEngine implements IndexEngine {
   }
   index(entry: Entry) {
     const search = `${entry.id}\n${entry.title}\n${entry.tags.join(' ')}\n${entry.body}`.normalize('NFKC').toLowerCase();
-    const previous = this.db.prepare('SELECT rowid FROM entries WHERE id=?').get(entry.id);
-    if (previous) this.db.prepare('DELETE FROM fts WHERE rowid=?').run(previous.rowid!);
-    this.db.prepare('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?,?)').run(entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt, entry.invalidAt || null);
-    const row = this.db.prepare('SELECT rowid FROM entries WHERE id=?').get(entry.id)!;
-    this.db.prepare('INSERT INTO fts(rowid,title,l0,l1,questions,body,tags) VALUES(?,?,?,?,?,?,?)').run(row.rowid!, indexText(entry.title), indexText(entry.l0 || ''), indexText(entry.l1 || ''), indexText((entry.questions || []).join('\n')), indexText(entry.body), indexText(entry.tags.join(' ')));
+    const previous = this.statement('SELECT rowid FROM entries WHERE id=?').get(entry.id);
+    if (previous) this.statement('DELETE FROM fts WHERE rowid=?').run(previous.rowid!);
+    this.statement('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?,?)').run(entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt, entry.invalidAt || null);
+    const row = this.statement('SELECT rowid FROM entries WHERE id=?').get(entry.id)!;
+    this.statement('INSERT INTO fts(rowid,title,l0,l1,questions,body,tags) VALUES(?,?,?,?,?,?,?)').run(row.rowid!, indexText(entry.title), indexText(entry.l0 || ''), indexText(entry.l1 || ''), indexText((entry.questions || []).join('\n')), indexText(entry.body), indexText(entry.tags.join(' ')));
   }
   search(filter: SearchFilter) {
     let sql = 'SELECT id FROM entries WHERE archived=?';
@@ -39,12 +49,12 @@ export class NodeSqliteEngine implements IndexEngine {
     }
     sql += ' ORDER BY updated DESC LIMIT ? OFFSET ?';
     args.push(Math.max(1, Math.min(1000, filter.limit || 200)), Math.max(0, filter.offset || 0));
-    return this.db.prepare(sql).all(...args).map(row => String(row.id));
+    return this.statement(sql).all(...args).map(row => String(row.id));
   }
   async flush() { this.db.exec('PRAGMA wal_checkpoint(PASSIVE)'); }
   replaceRelations(rows: Iterable<import('./relations.js').Relation>) {
     this.db.exec('CREATE TABLE IF NOT EXISTS relations(src TEXT,dst TEXT,kind TEXT,weight REAL,PRIMARY KEY(src,dst,kind));DELETE FROM relations');
-    const insert=this.db.prepare('INSERT OR REPLACE INTO relations VALUES(?,?,?,?)');
+    const insert=this.statement('INSERT OR REPLACE INTO relations VALUES(?,?,?,?)');
     for(const row of rows)insert.run(row.s,row.t,row.kind,row.w);
   }
   begin() { this.db.exec('BEGIN'); }
@@ -59,7 +69,7 @@ export class NodeSqliteEngine implements IndexEngine {
     if (filter.project) { where += ' AND e.project=?'; args.push(filter.project); }
     if (filter.type) { where += ' AND e.kind=?'; args.push(filter.type); }
     args.push(filter.limit || 100, filter.offset || 0);
-    return this.db.prepare(`SELECT e.id,bm25(fts,10,6,4,8,1,3) AS rank FROM fts JOIN entries e ON e.rowid=fts.rowid WHERE ${where} ORDER BY rank LIMIT ? OFFSET ?`).all(...args).map(row => ({ id: String(row.id), score: -Number(row.rank) }));
+    return this.statement(`SELECT e.id,bm25(fts,10,6,4,8,1,3) AS rank FROM fts JOIN entries e ON e.rowid=fts.rowid WHERE ${where} ORDER BY rank LIMIT ? OFFSET ?`).all(...args).map(row => ({ id: String(row.id), score: -Number(row.rank) }));
   }
   close() { this.db?.close(); }
 }
