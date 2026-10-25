@@ -11,14 +11,14 @@ export function directoryPage(directory: ToolDirectory, sessions: { id: string; 
     <span>${directory.callable} 个已注册 · ${directory.total} 个条目</span></div>
     <p class="muted small">包含插件和 MCP 提供的工具能力。登记不等于接入；实际调用仍受会话权限、参数和工具环境限制。</p>
     ${directory.discovery.warning ? `<p class="warning">${esc(directory.discovery.warning)}</p>` : ''}
-    ${directory.groups.length ? `<div class="wx-tool-groups">${directory.groups.map(group => `<section class="wx-tool-group"><div class="section-head"><h3>${esc(group.category)}</h3><span class="wx-tool-count" title="当前范围已注册 / 全部条目">${group.callable}/${group.items.length}</span></div>
-    <div>${group.items.map(entry => `<article class="wx-tool-row" data-tool-entry="${esc(entry.key)}"><div class="wx-tool-description"><strong>${esc(entry.name)}</strong>
-    <p>${esc(entry.description || '暂无使用说明')}</p><small>${entry.hostToolName ? `调用名：<code>${esc(entry.hostToolName)}</code>` : `手动登记${entry.path ? ' · ' + esc(entry.path) : ''}`}</small>
-    ${entry.environmentStatus ? `<small>环境：${esc(entry.environmentStatus)}${entry.version ? ' · '+esc(entry.version) : ''}</small>` : ''}</div>
-    <div class="wx-tool-actions"><span class="badge ${entry.callable ? 'good' : ''}">${esc(entry.status)}</span>
-    <button class="text-btn" data-tool-key="${esc(entry.key)}">${entry.toolId ? '详情 / 编辑' : '详情 / 分类'}</button>
-    ${entry.toolId && entry.detector ? `<button class="text-btn" data-action="tool-detect" data-id="${esc(entry.toolId)}">检测版本</button>` : ''}</div></article>`).join('')}</div></section>`).join('')}</div>`
+    ${directory.groups.length ? `<div class="wx-tool-list">${directory.groups.map(group => `<section class="wx-tool-list-section">
+      <div class="wx-tool-list-heading"><h3>${esc(group.category)}</h3><span class="wx-tool-list-count" title="当前范围已注册 / 全部条目">${group.callable}/${group.items.length}</span></div>
+      <ul class="wx-tool-list-items">${group.items.map(entry => `<li data-tool-entry="${esc(entry.key)}">
+        <button type="button" class="wx-tool-list-name" data-tool-key="${esc(entry.key)}" title="${esc(entry.status + (entry.description ? ' · ' + entry.description : ''))}">${esc(entry.name)}</button>
+      </li>`).join('')}</ul>
+    </section>`).join('')}</div>`
       : '<div class="empty"><strong>暂无工具条目</strong><p>刷新宿主工具，或添加自己的工具记录。</p></div>'}`;
+
 }
 
 export function directoryDraft(entry: DirectoryEntry, saved: any[]) {
@@ -32,7 +32,10 @@ export function directoryDraft(entry: DirectoryEntry, saved: any[]) {
 
 export function directoryFormFields(tool: any, directory?: ToolDirectory) {
   const mode = tool ? tool.categoryMode || 'manual' : 'auto';
-  return `<label>分类方式<select name="categoryMode"><option value="auto" ${mode === 'auto' ? 'selected' : ''}>自动分类</option><option value="manual" ${mode === 'manual' ? 'selected' : ''}>自定义分类</option></select></label>
+  const entry = directory?.groups.flatMap(group => group.items).find(item => tool?.id ? item.toolId === tool.id : item.hostToolName === tool?.hostToolName);
+  return `<div class="wx-tool-detail-state"><p>${esc(entry?.status || '手动登记')}${tool?.status ? ` · 环境：${esc(tool.status)}` : ''}${tool?.version ? ` · ${esc(tool.version)}` : ''}</p>
+    ${tool?.id && tool?.detector ? `<button type="button" class="text-btn" data-action="tool-detect" data-id="${esc(tool.id)}">检测版本</button>` : ''}</div>
+    <label>分类方式<select name="categoryMode"><option value="auto" ${mode === 'auto' ? 'selected' : ''}>自动分类</option><option value="manual" ${mode === 'manual' ? 'selected' : ''}>自定义分类</option></select></label>
     <label>宿主调用名（可选）<input name="hostToolName" value="${esc(tool?.hostToolName)}" list="wx-host-tool-names" maxlength="200" placeholder="绑定已注册工具，或只登记本机软件">
     <datalist id="wx-host-tool-names">${directory?.groups.flatMap(group => group.items).filter(entry => entry.callable).map(entry => `<option value="${esc(entry.hostToolName)}">${esc(entry.name)}</option>`).join('') || ''}</datalist>
     <small>只绑定当前真实注册的能力；填写名字不会安装软件或创建调用接口。</small></label>`;

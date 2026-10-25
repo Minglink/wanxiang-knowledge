@@ -65,3 +65,16 @@
 .wx-tool-description p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;color:var(--muted);line-height:1.7;margin:6px 0}
 .wx-tool-description small{display:block;color:var(--muted);font-size:11px;line-height:1.7}
 .wx-tool-actions{display:flex;align-items:flex-end;flex-direction:column;gap:8px;flex-shrink:0;font-size:11px}
+
+/* Compact tool list: details are opened through the tool name. */
+.wx-tool-list { margin-top: 22px; }
+.wx-tool-list-section { margin: 0; padding: 0 0 22px; }
+.wx-tool-list-heading { display: flex; align-items: baseline; gap: 12px; margin-bottom: 7px; }
+.wx-tool-list-heading h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.wx-tool-list-count { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.wx-tool-list-items { display: flex; flex-wrap: wrap; gap: 6px 24px; list-style: none; margin: 0; padding: 0; }
+.wx-tool-list-items li { min-width: 0; max-width: 100%; }
+.wx-tool-list-name { display: inline; border: 0; border-radius: 3px; background: transparent; padding: 3px 0; font: inherit; font-size: 14px; line-height: 1.6; text-align: left; color: var(--ink); cursor: pointer; overflow-wrap: anywhere; }
+.wx-tool-list-name:hover { color: #4d6bfe; text-decoration: underline; text-underline-offset: 4px; }
+.wx-tool-list-name:focus-visible { outline: 2px solid #4d6bfe; outline-offset: 4px; }
+.wx-tool-detail-state { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; color: var(--muted); }
