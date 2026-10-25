@@ -1,3 +1,4 @@
+import { recallOptions } from './recall-options.js';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { Store, atomic, json } from './store.js';
@@ -30,6 +31,7 @@ export async function switchSettings(owner: SettingsOwner, input: Partial<Settin
     root: path.resolve(input.root ?? owner.settings.root),
     mode: input.mode ?? owner.settings.mode,
     autoQueue: input.autoQueue ?? owner.settings.autoQueue,
+    ...(input.recall || owner.settings.recall ? {recall: recallOptions({...owner.settings.recall,...input.recall})} : {}),
   };
   let staged: Store | undefined;
   let jobs = owner.jobs;

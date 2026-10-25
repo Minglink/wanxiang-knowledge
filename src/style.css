@@ -37,3 +37,5 @@
 .wx-search-field input[type=date]{width:140px;max-width:100%}
 .wx-search-field select{width:auto;max-width:100%}
 @media(max-width:700px){.wx-search-field{white-space:normal}}
+
+.wx-recall-settings{border:1px solid var(--line);border-radius:8px;padding:14px;margin:14px 0;background:#fff}
