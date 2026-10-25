@@ -4,7 +4,7 @@
 
 <h1 align="center">万象知识库</h1>
 
-<p align="center"><strong>把 DeepSeek Harness 的会话、项目资料和实践经验，变成可以再次调用的本地知识。</strong></p>
+<p align="center">让你的<strong>DeepSeek Harness成为你的专属Agent，陪你一起无限进步！</strong></p>
 
 <p align="center">
   <a href="https://github.com/Minglink/wanxiang-knowledge/releases"><img src="https://img.shields.io/badge/version-0.2.0--alpha.8-4D6BFE" alt="0.2.0-alpha.8"></a>
