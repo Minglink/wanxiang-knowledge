@@ -4,6 +4,8 @@
 
 <h1 align="center">万象知识库</h1>
 
+<p align="center">简体中文 · <a href="README.en.md">English</a></p>
+
 <p align="center"><strong>让你的DeepSeek Harness成为你的专属Agent，陪你一起无限进步！</strong></p>
 
 <p align="center">
