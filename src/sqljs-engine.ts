@@ -44,5 +44,9 @@ export class SqlJsEngine implements IndexEngine {
     for(const row of rows)this.db.run('INSERT OR REPLACE INTO relations VALUES(?,?,?,?)',[row.s,row.t,row.kind,row.w]);
   }
   async flush() { await this.persist(this.db.export()); }
+  recordRecall(record: import('./recall-log.js').StoredRecall) {
+    this.db.run('CREATE TABLE IF NOT EXISTS recall_log(id TEXT PRIMARY KEY,session_id TEXT,turn INTEGER,at TEXT,query TEXT,entry_ids TEXT,injected INTEGER,latency_ms REAL,feedback TEXT)');
+    this.db.run('INSERT OR REPLACE INTO recall_log VALUES(?,?,?,?,?,?,?,?,?)', [record.id, record.sessionId, record.seq, record.at, record.query, JSON.stringify(record.entryIds), record.injected ? 1 : 0, record.latencyMs, JSON.stringify(record.feedback || {})]);
+  }
   close() { this.db?.close(); }
 }

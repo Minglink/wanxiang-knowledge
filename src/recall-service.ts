@@ -3,6 +3,7 @@ import type { KnowledgeService } from './service.js';
 import { recallOptions } from './recall-options.js';
 import { recallTemplate } from './recall-template.js';
 import { redacted } from './knowledge-prompts.js';
+import { randomUUID } from 'node:crypto';
 
 export interface RecallCandidate { id: string; score: number }
 export interface RecallInput { sessionId: string; messageId: string; seq: number; query: string; cwd: string; recent: string[] }
@@ -10,6 +11,7 @@ export type RecallSearch = (input: RecallInput, signal: AbortSignal) => Promise<
 export interface RecallRecord {
   id: string; sessionId: string; messageId: string; seq: number; at: string; query: string;
   reason: string; entryIds: string[]; injected: boolean; latencyMs: number;
+  missedSteps?: number; citedIds?: string[]; mode?: string; candidateLimit?: number;
 }
 interface Cached {
   input: RecallInput; root: string; revision: number; controller: AbortController; ready: boolean;
@@ -26,7 +28,6 @@ export class RecallService {
   private provider: any;
   private unregister?: () => void;
   private available = false;
-  private counter = 0;
   constructor(private owner: KnowledgeService) {}
   options() { return recallOptions(this.owner.settings?.recall); }
   get mode() {
@@ -63,6 +64,7 @@ export class RecallService {
     this.unregister = undefined;
   }
   private key(sessionId: string, messageId: string) { return sessionId + '\0' + messageId; }
+  private changed(cached: Cached) { this.owner.recallLog?.schedule(cached.root, cached.record); }
   event(session: any, event: any) {
     if (this.options().mode === 'off') return;
     const id = session.id;
@@ -91,7 +93,17 @@ export class RecallService {
         cached.record.seq = event.seq;
         this.active.set(id, event.data.id);
         this.recent.set(id, [...(this.recent.get(id) || []), cached.input.query.slice(0, 600)].slice(-2));
+        this.changed(cached);
       }
+    } else if (event.type === 'assistant/message') {
+      const cached = this.cache.get(this.key(id, this.active.get(id) || ''));
+      if (!cached) return;
+      const text = JSON.stringify(event.data?.message?.content || []);
+      cached.record.citedIds = [...new Set([...(cached.record.citedIds || []), ...cached.record.entryIds.filter(entryId => text.includes(entryId) || text.includes(entryId.slice(0, 8)))])];
+      this.changed(cached);
+    } else if (event.type === 'turn/end') {
+      const cached = this.cache.get(this.key(id, this.active.get(id) || ''));
+      if (cached) this.changed(cached);
     }
   }
   prepare(input: RecallInput) {
@@ -99,14 +111,15 @@ export class RecallService {
     if (options.mode === 'off') return;
     const key = this.key(input.sessionId, input.messageId);
     this.cache.get(key)?.controller.abort();
-    const record: RecallRecord = { id: 'recall-' + Date.now() + '-' + ++this.counter, sessionId: input.sessionId,
+    const record: RecallRecord = { id: 'recall-' + Date.now() + '-' + randomUUID(), sessionId: input.sessionId,
       messageId: input.messageId, seq: input.seq, at: new Date().toISOString(), query: redacted(input.query.slice(0, 2000)),
-      reason: options.mode === 'inject' && !options.acknowledged ? 'privacy_pending' : 'pending', entryIds: [], injected: false, latencyMs: 0 };
+      reason: this.mode === 'inject' && !options.acknowledged ? 'privacy_pending' : 'pending', entryIds: [], injected: false, latencyMs: 0 };
     const cached: Cached = { input: { ...input, query: redacted(input.query.slice(0, 4000)) }, root: this.owner.store.root, revision: this.owner.store.revision,
       controller: new AbortController(), ready: false, rows: [], started: performance.now(), record };
     this.cache.set(key, cached);
     this.records.unshift(record);
     this.records.length = Math.min(500, this.records.length);
+    this.changed(cached);
     if (this.cache.size > 100) {
       const oldest = this.cache.keys().next().value!;
       this.cache.get(oldest)?.controller.abort(); this.cache.delete(oldest);
@@ -116,6 +129,7 @@ export class RecallService {
       if (!cached.ready && !cached.controller.signal.aborted) {
         record.reason = 'timeout'; record.latencyMs = performance.now() - cached.started;
         cached.controller.abort();
+        this.changed(cached);
       }
     }, 200);
     cached.controller.signal.addEventListener('abort', () => clearTimeout(cached.timer), { once: true });
@@ -123,18 +137,24 @@ export class RecallService {
       clearTimeout(cached.timer);
       if (cached.controller.signal.aborted || this.cache.get(key) !== cached || cached.root !== this.owner.store.root || cached.revision !== this.owner.store.revision) return;
       if (performance.now() - cached.started > 200) {
-        record.reason = 'timeout'; record.latencyMs = performance.now() - cached.started; cached.controller.abort(); return;
+        record.reason = 'timeout'; record.latencyMs = performance.now() - cached.started; cached.controller.abort(); this.changed(cached); return;
       }
       cached.rows = rows;
       cached.ready = true;
       record.reason = rows.length ? 'ready' : 'no_match';
       record.latencyMs = performance.now() - cached.started;
       record.entryIds = this.allowed(cached).map(entry => entry.id);
+      record.mode = this.owner.recallSearch?.lastPolicy.mode;
+      record.candidateLimit = this.owner.recallSearch?.lastPolicy.limit;
+      this.changed(cached);
     }).catch(error => {
       clearTimeout(cached.timer);
       if (!cached.controller.signal.aborted) {
         record.reason = error.name === 'RecallTimeout' ? error.reason || 'timeout' : error.name === 'RecallSkip' ? error.message : 'error';
         record.latencyMs = performance.now() - cached.started;
+        record.mode = error.policy?.mode;
+        record.candidateLimit = error.policy?.limit;
+        this.changed(cached);
       }
     });
   }
@@ -152,12 +172,15 @@ export class RecallService {
     if (!cached || cached.root !== this.owner.store.root || cached.revision !== this.owner.store.revision || cached.controller.signal.aborted) return '';
     if (!cached.ready) {
       if (['pending', 'not_ready'].includes(cached.record.reason)) cached.record.reason = 'not_ready';
+      cached.record.missedSteps = (cached.record.missedSteps || 0) + 1;
+      this.changed(cached);
       return '';
     }
     const result = recallTemplate(this.allowed(cached), this.options().characters);
     cached.record.entryIds = result.ids;
     cached.record.injected = !!result.text;
     cached.record.reason = result.text ? 'injected' : cached.rows.length ? 'below_threshold' : 'no_match';
+    this.changed(cached);
     return result.text;
   }
 }

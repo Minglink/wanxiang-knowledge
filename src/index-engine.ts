@@ -24,4 +24,5 @@ export interface IndexEngine {
   begin?(): void;
   end?(): void;
   replaceRelations?(rows: Iterable<import('./relations.js').Relation>): void;
+  recordRecall?(record: import('./recall-log.js').StoredRecall): void;
 }

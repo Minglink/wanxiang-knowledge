@@ -55,6 +55,10 @@ export class NodeSqliteEngine implements IndexEngine {
     return this.statement(sql).all(...args).map(row => String(row.id));
   }
   async flush() { this.db.exec('PRAGMA wal_checkpoint(PASSIVE)'); }
+  recordRecall(record: import('./recall-log.js').StoredRecall) {
+    this.db.exec('CREATE TABLE IF NOT EXISTS recall_log(id TEXT PRIMARY KEY,session_id TEXT,turn INTEGER,at TEXT,query TEXT,entry_ids TEXT,injected INTEGER,latency_ms REAL,feedback TEXT)');
+    this.statement('INSERT OR REPLACE INTO recall_log VALUES(?,?,?,?,?,?,?,?,?)').run(record.id, record.sessionId, record.seq, record.at, record.query, JSON.stringify(record.entryIds), record.injected ? 1 : 0, record.latencyMs, JSON.stringify(record.feedback || {}));
+  }
   replaceRelations(rows: Iterable<import('./relations.js').Relation>) {
     this.db.exec('CREATE TABLE IF NOT EXISTS relations(src TEXT,dst TEXT,kind TEXT,weight REAL,PRIMARY KEY(src,dst,kind));DELETE FROM relations');
     const insert=this.statement('INSERT OR REPLACE INTO relations VALUES(?,?,?,?)');
