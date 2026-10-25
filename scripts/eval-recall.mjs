@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, mkdtemp, rm, mkdir, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { Store } from '../lib/index.js';
+import { Store, SearchService } from '../lib/index.js';
 
 const fixturePath = path.resolve(process.argv[2] || 'test/fixtures/recall-eval.json');
 const fixture = JSON.parse(await readFile(fixturePath, 'utf8'));
@@ -32,7 +32,7 @@ try {
   const results = [];
   for (const item of fixture.queries) {
     const started = performance.now();
-    const found = store.search(item.query).map(e => e.id);
+    const found = process.argv.includes('--hybrid') ? (await new SearchService(store).search(item.query,{mode:'hybrid',limit:100})).items.map(e=>e.id) : store.search(item.query).map(e => e.id);
     const latencyMs = performance.now() - started;
     const top5 = found.slice(0, 5);
     const rank = found.findIndex(id => item.expected.includes(id));
@@ -43,10 +43,10 @@ try {
   const times = results.map(r => r.latencyMs).sort((a, b) => a - b);
   const groups = Object.fromEntries([...new Set(results.map(r => r.category))].map(category => {
     const subset = results.filter(r => r.category === category);
-    return [category, { count: subset.length, recallAt5: subset.reduce((s, r) => s + r.recallAt5, 0) / subset.length }];
+    return [category, { count: subset.length, recallAt5: subset.reduce((s, r) => s + r.recallAt5, 0) / subset.length, MRR:subset.reduce((s,r)=>s+r.reciprocalRank,0)/subset.length }];
   }));
   const report = {
-    engine: 'v0.1 Store.search (NFKC instr intersection, updated DESC, LIMIT 200)',
+    engine: process.argv.includes('--hybrid')?'SearchService hybrid rules+questions+FTS':'v0.1-compatible substring',
     corpus: ids.size, queries: results.length,
     recallAt5: mean('recallAt5'), MRR: mean('reciprocalRank'),
     meanMs: mean('latencyMs'), p50Ms: times[Math.floor(times.length * 0.5)],
@@ -56,7 +56,7 @@ try {
       timing: 'per query only, excludes corpus/file creation; tiny synthetic corpus, not a scale benchmark' },
   };
   await mkdir('dist/v02-probes', { recursive: true });
-  await writeFile('dist/v02-probes/recall-baseline.json', JSON.stringify(report, null, 2));
+  await writeFile(process.argv.includes('--hybrid')?'dist/v02-probes/recall-hybrid.json':'dist/v02-probes/recall-baseline-80.json', JSON.stringify(report, null, 2));
   const { results: _results, ...summary } = report;
   console.log(JSON.stringify(summary, null, 2));
 } finally {

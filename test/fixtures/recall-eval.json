@@ -2,87 +2,868 @@
   "version": 1,
   "description": "完全合成的知识与查询；不含个人会话、凭据。用于测量现有子串与未来FTS，不代表真实使用分布。",
   "entries": [
-    {"id":"r01","title":"SQLite 索引损坏后的重建","tags":["索引","SQLite"],"body":"出现 ERR_SQLITE_CORRUPT 时，先备份 Markdown 真相源，再重建可删除的 SQLite 索引。重建不改正文。"},
-    {"id":"r02","title":"中文两字词检索方案","tags":["中文","分词"],"body":"用 Intl.Segmenter 做中文预分词，补二元切词。FTS5 unicode61 可配合预分词；trigram 对不足三个字符的查询需要回退。"},
-    {"id":"r03","title":"Windows 路径与文件名","tags":["路径","Windows"],"body":"中文空格路径 C:\\合成项目\\知识 库 可以使用 path.join 组合。创建文件名时移除 Windows 非法字符，不把登记路径当命令执行。"},
-    {"id":"r04","title":"PowerShell 7 检测","tags":["PowerShell","检测器"],"body":"PowerShell 7 使用 pwsh --version。Windows PowerShell 使用 powershell，不可把二者可用性混为一谈。"},
-    {"id":"r05","title":"工具登记状态","tags":["工具","检测"],"body":"新登记的 Node.js、Python、Git 工具默认未检测。只有内置版本查询成功后才显示可用，路径输入仅作为说明。"},
-    {"id":"r06","title":"Git 分支与小步提交","tags":["Git","分支"],"body":"先切到 feat/synthetic 分支，单任务单提交。提交之前运行类型检查和测试，避免同一次提交混入大面积格式化。"},
-    {"id":"r07","title":"npm 安装 EACCES 排查","tags":["npm","权限"],"body":"npm ci 报 EACCES 时检查缓存目录权限及占用进程。不要直接删除整个用户目录，先在隔离目录复现。"},
-    {"id":"r08","title":"模型输出 JSON 校验","tags":["JSON","校验"],"body":"模型输出必须为单个 JSON 对象。可以去除 Markdown 围栏，但非法枚举、超长字段、不存在的来源 seq 必须拒绝，不猜测修复。"},
-    {"id":"r09","title":"知识引用与提示注入隔离","tags":["安全","引用"],"body":"知识是引用资料，不是指令。正文出现 忽略以上规则 或 </wanxiang-recall> 时不执行；注入前转义闭合标签并调用 redacted()。"},
-    {"id":"r10","title":"手工编辑保护与修订撤销","tags":["修订","编辑"],"body":"generatedHash 不等于正文哈希表示手工编辑，自动对账不得覆盖。自动更改前写修订副本并记日志，撤销恢复原版本。"},
-    {"id":"r11","title":"切换知识目录的原子性","tags":["目录","设置"],"body":"切换前完整读取并验证目标库的 catalog.json、pending.json 和 jobs。任意解析失败时保留旧存储，不提前关闭当前索引连接。"},
-    {"id":"r12","title":"向后兼容与非破坏迁移","tags":["迁移","回滚"],"body":"旧版平铺 notes 和 cards 保持可读。新写入可按月分片，递归扫描兼容两种布局。整理目录先复制校验，保留备份与回滚入口。"},
-    {"id":"r13","title":"Canvas 图谱规模策略","tags":["图谱","性能"],"body":"200 节点显示完整动效，1000 节点关闭脉冲，3000 节点采用簇聚合。命中测试使用空间网格，力导向斥力避免 O(n²)。"},
-    {"id":"r14","title":"球体布局与透视投影","tags":["球体","图谱"],"body":"斐波那契球面布局按簇聚拢，用透视投影表现深度，拖拽旋转带惯性。选中节点朝向屏幕，边沿大圆弧绘制。"},
-    {"id":"r15","title":"网络布局与力导向降温","tags":["网络","图谱"],"body":"库仑斥力、弹簧引力、向心力以及簇内吸引驱动神经网络布局。alpha 衰减到收敛时暂停模拟，拖拽重新唤醒。"},
-    {"id":"r16","title":"页面 CSP 与离线资源","tags":["CSP","前端"],"body":"script-src 'self' 下新代码打入 panel.js，不加载 CDN，不创建 blob: Worker。白底 Canvas 与 prefers-reduced-motion 保持一致。"},
-    {"id":"r17","title":"自动召回预算与热层","tags":["召回","预算"],"body":"自动召回只查询 L0 L1 元数据。超过 200ms 放弃注入并记日志，最多五条摘要，总共不超过800字符，不阻塞用户发送。"},
-    {"id":"r18","title":"FTS5 与 node:sqlite 降级","tags":["FTS5","引擎"],"body":"先 import node:sqlite 并创建 FTS5 虚表验证能力。无原生接口时降级 sql.js；不假设 sql.js 自带 FTS5。"},
-    {"id":"r19","title":"embedding 未启用时的行为","tags":["embedding","向量"],"body":"只有宿主提供且已启用 embedding 时才向量化，否则 VectorIndex 为 Off，保留纯关键词检索。不要猜测远程端点或报错打扰。"},
-    {"id":"r20","title":"日志分页与待落库清理","tags":["日志","待落库"],"body":"运行日志需要分页。相同快照跳过生成或索引修复成功后也应移出待落库列表，不能让已完成会话长期堆积。"}
+    {
+      "id": "r01",
+      "title": "SQLite 索引损坏后的重建",
+      "tags": [
+        "索引",
+        "SQLite"
+      ],
+      "body": "出现 ERR_SQLITE_CORRUPT 时，先备份 Markdown 真相源，再重建可删除的 SQLite 索引。重建不改正文。",
+      "questions": [
+        "程序启动提示数据库坏了怎么救回笔记？",
+        "看到ERR_SQLITE_CORRUPT先备份哪些内容？",
+        "我想修复搜索但不能改变原文怎么做？"
+      ]
+    },
+    {
+      "id": "r02",
+      "title": "中文两字词检索方案",
+      "tags": [
+        "中文",
+        "分词"
+      ],
+      "body": "用 Intl.Segmenter 做中文预分词，补二元切词。FTS5 unicode61 可配合预分词；trigram 对不足三个字符的查询需要回退。",
+      "questions": [
+        "输入两个汉字搜不出来怎么办？",
+        "trigram查不到短关键词该怎么补救？",
+        "我想让生僻词也能搜到需要什么处理？"
+      ]
+    },
+    {
+      "id": "r03",
+      "title": "Windows 路径与文件名",
+      "tags": [
+        "路径",
+        "Windows"
+      ],
+      "body": "中文空格路径 C:\\合成项目\\知识 库 可以使用 path.join 组合。创建文件名时移除 Windows 非法字符，不把登记路径当命令执行。",
+      "questions": [
+        "文件夹名字带汉字和空格会有问题吗？",
+        "保存文件时提示文件名不合法怎么处理？",
+        "我想拼接本机目录而不执行它该怎么写？"
+      ]
+    },
+    {
+      "id": "r04",
+      "title": "PowerShell 7 检测",
+      "tags": [
+        "PowerShell",
+        "检测器"
+      ],
+      "body": "PowerShell 7 使用 pwsh --version。Windows PowerShell 使用 powershell，不可把二者可用性混为一谈。",
+      "questions": [
+        "自带终端和新版命令行为什么检测结果不一样？",
+        "找不到pwsh但powershell能运行算安装成功吗？",
+        "我想区分系统内置和第七版终端的状态怎么做？"
+      ]
+    },
+    {
+      "id": "r05",
+      "title": "工具登记状态",
+      "tags": [
+        "工具",
+        "检测"
+      ],
+      "body": "新登记的 Node.js、Python、Git 工具默认未检测。只有内置版本查询成功后才显示可用，路径输入仅作为说明。",
+      "questions": [
+        "刚录入一个应用就能表示它已装好吗？",
+        "版本查询失败后状态该显示什么？",
+        "想记录软件地址但不运行任何命令可以吗？"
+      ]
+    },
+    {
+      "id": "r06",
+      "title": "Git 分支与小步提交",
+      "tags": [
+        "Git",
+        "分支"
+      ],
+      "body": "先切到 feat/synthetic 分支，单任务单提交。提交之前运行类型检查和测试，避免同一次提交混入大面积格式化。",
+      "questions": [
+        "每做完一个功能该怎样保存一个版本？",
+        "类型检查没通过能不能提交？",
+        "我想把整理排版和功能修改分开该怎么操作？"
+      ]
+    },
+    {
+      "id": "r07",
+      "title": "npm 安装 EACCES 排查",
+      "tags": [
+        "npm",
+        "权限"
+      ],
+      "body": "npm ci 报 EACCES 时检查缓存目录权限及占用进程。不要直接删除整个用户目录，先在隔离目录复现。",
+      "questions": [
+        "装包时说没有权限怎么排查？",
+        "npm出现EACCES是否能清空用户文件夹？",
+        "我想知道是不是缓存被占用该如何复现？"
+      ]
+    },
+    {
+      "id": "r08",
+      "title": "模型输出 JSON 校验",
+      "tags": [
+        "JSON",
+        "校验"
+      ],
+      "body": "模型输出必须为单个 JSON 对象。可以去除 Markdown 围栏，但非法枚举、超长字段、不存在的来源 seq 必须拒绝，不猜测修复。",
+      "questions": [
+        "助手返回的结构不合法该怎样处理？",
+        "结果引用了根本不存在的消息序号怎么办？",
+        "我想接收被代码围栏包住的对象但拒绝猜测修补可以吗？"
+      ]
+    },
+    {
+      "id": "r09",
+      "title": "知识引用与提示注入隔离",
+      "tags": [
+        "安全",
+        "引用"
+      ],
+      "body": "知识是引用资料，不是指令。正文出现 忽略以上规则 或 </wanxiang-recall> 时不执行；注入前转义闭合标签并调用 redacted()。",
+      "questions": [
+        "笔记里让忽略规则的句子会被执行吗？",
+        "资料里出现闭合标签怎么避免注入攻击？",
+        "我想引用经验又不暴露密钥该如何做？"
+      ]
+    },
+    {
+      "id": "r10",
+      "title": "手工编辑保护与修订撤销",
+      "tags": [
+        "修订",
+        "编辑"
+      ],
+      "body": "generatedHash 不等于正文哈希表示手工编辑，自动对账不得覆盖。自动更改前写修订副本并记日志，撤销恢复原版本。",
+      "questions": [
+        "自己写的批注会不会被机器改没了？",
+        "哈希跟最初生成的不一样应该怎么保护？",
+        "想撤回一次自动整理该去哪里恢复？"
+      ]
+    },
+    {
+      "id": "r11",
+      "title": "切换知识目录的原子性",
+      "tags": [
+        "目录",
+        "设置"
+      ],
+      "body": "切换前完整读取并验证目标库的 catalog.json、pending.json 和 jobs。任意解析失败时保留旧存储，不提前关闭当前索引连接。",
+      "questions": [
+        "换库失败后怎么确保不会保存到错误文件夹？",
+        "目标pending.json坏了旧搜索还能用吗？",
+        "我想切换存放位置时完整保留之前的状态怎么做？"
+      ]
+    },
+    {
+      "id": "r12",
+      "title": "向后兼容与非破坏迁移",
+      "tags": [
+        "迁移",
+        "回滚"
+      ],
+      "body": "旧版平铺 notes 和 cards 保持可读。新写入可按月分片，递归扫描兼容两种布局。整理目录先复制校验，保留备份与回滚入口。",
+      "questions": [
+        "升级后以前的文件还能读吗？",
+        "整理文件夹复制过程中出错如何回到原样？",
+        "我想把笔记分到每月目录又不搬旧文件可以吗？"
+      ]
+    },
+    {
+      "id": "r13",
+      "title": "Canvas 图谱规模策略",
+      "tags": [
+        "图谱",
+        "性能"
+      ],
+      "body": "200 节点显示完整动效，1000 节点关闭脉冲，3000 节点采用簇聚合。命中测试使用空间网格，力导向斥力避免 O(n²)。",
+      "questions": [
+        "关系画面点太多越来越卡怎么处理？",
+        "三千条数据能否合并成分组再显示？",
+        "我想加速鼠标选中节点避免遍历所有圆点怎么做？"
+      ]
+    },
+    {
+      "id": "r14",
+      "title": "球体布局与透视投影",
+      "tags": [
+        "球体",
+        "图谱"
+      ],
+      "body": "斐波那契球面布局按簇聚拢，用透视投影表现深度，拖拽旋转带惯性。选中节点朝向屏幕，边沿大圆弧绘制。",
+      "questions": [
+        "怎么把背面的圆点转到眼前？",
+        "拖动后圆球还继续转是什么效果？",
+        "我想画球面上两个点之间的曲线怎么做？"
+      ]
+    },
+    {
+      "id": "r15",
+      "title": "网络布局与力导向降温",
+      "tags": [
+        "网络",
+        "图谱"
+      ],
+      "body": "库仑斥力、弹簧引力、向心力以及簇内吸引驱动神经网络布局。alpha 衰减到收敛时暂停模拟，拖拽重新唤醒。",
+      "questions": [
+        "一堆连接的圆点什么时候停下来？",
+        "为什么拖一个点会带动周围的点？",
+        "想让布局稳定后不再耗费计算怎么实现？"
+      ]
+    },
+    {
+      "id": "r16",
+      "title": "页面 CSP 与离线资源",
+      "tags": [
+        "CSP",
+        "前端"
+      ],
+      "body": "script-src 'self' 下新代码打入 panel.js，不加载 CDN，不创建 blob: Worker。白底 Canvas 与 prefers-reduced-motion 保持一致。",
+      "questions": [
+        "页面必须离线还能从网上加载脚本吗？",
+        "浏览器拒绝blob工作线程时怎么办？",
+        "我想让不喜欢动画的人看到静止画面怎么设置？"
+      ]
+    },
+    {
+      "id": "r17",
+      "title": "自动召回预算与热层",
+      "tags": [
+        "召回",
+        "预算"
+      ],
+      "body": "自动召回只查询 L0 L1 元数据。超过 200ms 放弃注入并记日志，最多五条摘要，总共不超过800字符，不阻塞用户发送。",
+      "questions": [
+        "后台查经验会不会让我发消息卡住？",
+        "每次带入很多历史笔记会不会超长？",
+        "想只引用短结论而不加载全文怎么办？"
+      ]
+    },
+    {
+      "id": "r18",
+      "title": "FTS5 与 node:sqlite 降级",
+      "tags": [
+        "FTS5",
+        "引擎"
+      ],
+      "body": "先 import node:sqlite 并创建 FTS5 虚表验证能力。无原生接口时降级 sql.js；不假设 sql.js 自带 FTS5。",
+      "questions": [
+        "内置数据库用不了还能继续查东西吗？",
+        "加载数据库模块失败时该降级到什么？",
+        "我想确认当前环境确实支持全文搜索怎么测试？"
+      ]
+    },
+    {
+      "id": "r19",
+      "title": "embedding 未启用时的行为",
+      "tags": [
+        "embedding",
+        "向量"
+      ],
+      "body": "只有宿主提供且已启用 embedding 时才向量化，否则 VectorIndex 为 Off，保留纯关键词检索。不要猜测远程端点或报错打扰。",
+      "questions": [
+        "没有开语义服务能不能正常搜索？",
+        "宿主根本没有向量接口时需要报错吗？",
+        "我想避免把笔记发到未知远程地址怎么设置？"
+      ]
+    },
+    {
+      "id": "r20",
+      "title": "日志分页与待落库清理",
+      "tags": [
+        "日志",
+        "待落库"
+      ],
+      "body": "运行日志需要分页。相同快照跳过生成或索引修复成功后也应移出待落库列表，不能让已完成会话长期堆积。",
+      "questions": [
+        "事情已经做完为什么候选里还有它？",
+        "只能看最近一百条记录怎样找更早的任务？",
+        "我想清理重复完成的会话又不删笔记怎么办？"
+      ]
+    }
   ],
   "queries": [
-    {"query":"ERR_SQLITE_CORRUPT","expected":["r01"],"category":"error-code"},
-    {"query":"SQLite 重建","expected":["r01"],"category":"intersection"},
-    {"query":"数据库索引坏了如何恢复","expected":["r01"],"category":"paraphrase"},
-    {"query":"索引","expected":["r01","r11"],"category":"zh-two-char"},
-    {"query":"Intl.Segmenter 中文","expected":["r02"],"category":"mixed"},
-    {"query":"为什么两个汉字查不到","expected":["r02"],"category":"paraphrase"},
-    {"query":"C:\\合成项目\\知识 库","expected":["r03"],"category":"windows-path"},
-    {"query":"Windows 非法字符","expected":["r03"],"category":"intersection"},
-    {"query":"中文带空格目录怎么拼接","expected":["r03"],"category":"paraphrase"},
-    {"query":"pwsh --version","expected":["r04"],"category":"command"},
-    {"query":"ＰｏｗｅｒＳｈｅｌｌ ７","expected":["r04"],"category":"nfkc"},
-    {"query":"电脑自带终端为什么显示不可用","expected":["r04"],"category":"paraphrase"},
-    {"query":"未检测","expected":["r05"],"category":"literal"},
-    {"query":"Node.js Python Git","expected":["r05"],"category":"mixed"},
-    {"query":"刚添加工具能标成可用吗","expected":["r05"],"category":"paraphrase"},
-    {"query":"feat/synthetic","expected":["r06"],"category":"slash"},
-    {"query":"Git 分支 提交","expected":["r06"],"category":"intersection"},
-    {"query":"每个功能要如何保存版本","expected":["r06"],"category":"paraphrase"},
-    {"query":"EACCES","expected":["r07"],"category":"error-code"},
-    {"query":"NPM CI 权限","expected":["r07"],"category":"case"},
-    {"query":"安装包没有写入权限怎么处理","expected":["r07"],"category":"paraphrase"},
-    {"query":"JSON 校验","expected":["r08"],"category":"mixed"},
-    {"query":"Markdown 围栏 seq","expected":["r08"],"category":"intersection"},
-    {"query":"大模型返回畸形数据应该猜测修复吗","expected":["r08"],"category":"paraphrase"},
-    {"query":"</wanxiang-recall>","expected":["r09"],"category":"injection-delimiter"},
-    {"query":"redacted()","expected":["r09"],"category":"punctuation"},
-    {"query":"资料里要求忽略规则会被执行吗","expected":["r09"],"category":"paraphrase"},
-    {"query":"generatedHash","expected":["r10"],"category":"identifier"},
-    {"query":"修订 撤销","expected":["r10"],"category":"intersection"},
-    {"query":"自动整理会覆盖我改的笔记吗","expected":["r10"],"category":"paraphrase"},
-    {"query":"pending.json","expected":["r11"],"category":"filename"},
-    {"query":"切换 解析 旧存储","expected":["r11"],"category":"intersection"},
-    {"query":"换库报错后原来的资料消失了","expected":["r11"],"category":"paraphrase"},
-    {"query":"回滚","expected":["r12"],"category":"zh-two-char"},
-    {"query":"notes cards 递归","expected":["r12"],"category":"mixed"},
-    {"query":"老版本可以读新文件夹吗","expected":["r12"],"category":"paraphrase"},
-    {"query":"3000 簇聚合","expected":["r13"],"category":"scale"},
-    {"query":"O(n²)","expected":["r13"],"category":"punctuation"},
-    {"query":"关系图数据很多变卡怎么办","expected":["r13"],"category":"paraphrase"},
-    {"query":"球体","expected":["r14"],"category":"zh-two-char"},
-    {"query":"大圆弧 透视","expected":["r14"],"category":"intersection"},
-    {"query":"怎样让圆球上的点转到正面","expected":["r14"],"category":"paraphrase"},
-    {"query":"alpha","expected":["r15"],"category":"identifier"},
-    {"query":"力导向 降温","expected":["r15"],"category":"intersection"},
-    {"query":"网状节点什么时候停止运动","expected":["r15"],"category":"paraphrase"},
-    {"query":"script-src 'self'","expected":["r16"],"category":"csp"},
-    {"query":"blob: Worker","expected":["r16"],"category":"punctuation"},
-    {"query":"插件页面可以从外站加载脚本吗","expected":["r16"],"category":"paraphrase"},
-    {"query":"200ms","expected":["r17"],"category":"budget"},
-    {"query":"L0 L1 摘要","expected":["r17"],"category":"mixed"},
-    {"query":"自动检索太慢会卡住发送吗","expected":["r17"],"category":"paraphrase"},
-    {"query":"node:sqlite","expected":["r18"],"category":"identifier"},
-    {"query":"sql.js FTS5","expected":["r18"],"category":"mixed"},
-    {"query":"没有原生数据库时怎么兼容","expected":["r18"],"category":"paraphrase"},
-    {"query":"embedding Off","expected":["r19"],"category":"mixed"},
-    {"query":"VectorIndex","expected":["r19"],"category":"identifier"},
-    {"query":"宿主没开向量服务还可以搜索吗","expected":["r19"],"category":"paraphrase"},
-    {"query":"分页","expected":["r20"],"category":"zh-two-char"},
-    {"query":"快照 待落库","expected":["r20"],"category":"intersection"},
-    {"query":"生成早已完成为什么还排在候选里","expected":["r20"],"category":"paraphrase"}
+    {
+      "query": "ERR_SQLITE_CORRUPT",
+      "expected": [
+        "r01"
+      ],
+      "category": "error-code"
+    },
+    {
+      "query": "SQLite 重建",
+      "expected": [
+        "r01"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "数据库索引坏了如何恢复",
+      "expected": [
+        "r01"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "索引",
+      "expected": [
+        "r01",
+        "r11"
+      ],
+      "category": "zh-two-char"
+    },
+    {
+      "query": "Intl.Segmenter 中文",
+      "expected": [
+        "r02"
+      ],
+      "category": "mixed"
+    },
+    {
+      "query": "为什么两个汉字查不到",
+      "expected": [
+        "r02"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "C:\\合成项目\\知识 库",
+      "expected": [
+        "r03"
+      ],
+      "category": "windows-path"
+    },
+    {
+      "query": "Windows 非法字符",
+      "expected": [
+        "r03"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "中文带空格目录怎么拼接",
+      "expected": [
+        "r03"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "pwsh --version",
+      "expected": [
+        "r04"
+      ],
+      "category": "command"
+    },
+    {
+      "query": "ＰｏｗｅｒＳｈｅｌｌ ７",
+      "expected": [
+        "r04"
+      ],
+      "category": "nfkc"
+    },
+    {
+      "query": "电脑自带终端为什么显示不可用",
+      "expected": [
+        "r04"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "未检测",
+      "expected": [
+        "r05"
+      ],
+      "category": "literal"
+    },
+    {
+      "query": "Node.js Python Git",
+      "expected": [
+        "r05"
+      ],
+      "category": "mixed"
+    },
+    {
+      "query": "刚添加工具能标成可用吗",
+      "expected": [
+        "r05"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "feat/synthetic",
+      "expected": [
+        "r06"
+      ],
+      "category": "slash"
+    },
+    {
+      "query": "Git 分支 提交",
+      "expected": [
+        "r06"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "每个功能要如何保存版本",
+      "expected": [
+        "r06"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "EACCES",
+      "expected": [
+        "r07"
+      ],
+      "category": "error-code"
+    },
+    {
+      "query": "NPM CI 权限",
+      "expected": [
+        "r07"
+      ],
+      "category": "case"
+    },
+    {
+      "query": "安装包没有写入权限怎么处理",
+      "expected": [
+        "r07"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "JSON 校验",
+      "expected": [
+        "r08"
+      ],
+      "category": "mixed"
+    },
+    {
+      "query": "Markdown 围栏 seq",
+      "expected": [
+        "r08"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "大模型返回畸形数据应该猜测修复吗",
+      "expected": [
+        "r08"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "</wanxiang-recall>",
+      "expected": [
+        "r09"
+      ],
+      "category": "injection-delimiter"
+    },
+    {
+      "query": "redacted()",
+      "expected": [
+        "r09"
+      ],
+      "category": "punctuation"
+    },
+    {
+      "query": "资料里要求忽略规则会被执行吗",
+      "expected": [
+        "r09"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "generatedHash",
+      "expected": [
+        "r10"
+      ],
+      "category": "identifier"
+    },
+    {
+      "query": "修订 撤销",
+      "expected": [
+        "r10"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "自动整理会覆盖我改的笔记吗",
+      "expected": [
+        "r10"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "pending.json",
+      "expected": [
+        "r11"
+      ],
+      "category": "filename"
+    },
+    {
+      "query": "切换 解析 旧存储",
+      "expected": [
+        "r11"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "换库报错后原来的资料消失了",
+      "expected": [
+        "r11"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "回滚",
+      "expected": [
+        "r12"
+      ],
+      "category": "zh-two-char"
+    },
+    {
+      "query": "notes cards 递归",
+      "expected": [
+        "r12"
+      ],
+      "category": "mixed"
+    },
+    {
+      "query": "老版本可以读新文件夹吗",
+      "expected": [
+        "r12"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "3000 簇聚合",
+      "expected": [
+        "r13"
+      ],
+      "category": "scale"
+    },
+    {
+      "query": "O(n²)",
+      "expected": [
+        "r13"
+      ],
+      "category": "punctuation"
+    },
+    {
+      "query": "关系图数据很多变卡怎么办",
+      "expected": [
+        "r13"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "球体",
+      "expected": [
+        "r14"
+      ],
+      "category": "zh-two-char"
+    },
+    {
+      "query": "大圆弧 透视",
+      "expected": [
+        "r14"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "怎样让圆球上的点转到正面",
+      "expected": [
+        "r14"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "alpha",
+      "expected": [
+        "r15"
+      ],
+      "category": "identifier"
+    },
+    {
+      "query": "力导向 降温",
+      "expected": [
+        "r15"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "网状节点什么时候停止运动",
+      "expected": [
+        "r15"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "script-src 'self'",
+      "expected": [
+        "r16"
+      ],
+      "category": "csp"
+    },
+    {
+      "query": "blob: Worker",
+      "expected": [
+        "r16"
+      ],
+      "category": "punctuation"
+    },
+    {
+      "query": "插件页面可以从外站加载脚本吗",
+      "expected": [
+        "r16"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "200ms",
+      "expected": [
+        "r17"
+      ],
+      "category": "budget"
+    },
+    {
+      "query": "L0 L1 摘要",
+      "expected": [
+        "r17"
+      ],
+      "category": "mixed"
+    },
+    {
+      "query": "自动检索太慢会卡住发送吗",
+      "expected": [
+        "r17"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "node:sqlite",
+      "expected": [
+        "r18"
+      ],
+      "category": "identifier"
+    },
+    {
+      "query": "sql.js FTS5",
+      "expected": [
+        "r18"
+      ],
+      "category": "mixed"
+    },
+    {
+      "query": "没有原生数据库时怎么兼容",
+      "expected": [
+        "r18"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "embedding Off",
+      "expected": [
+        "r19"
+      ],
+      "category": "mixed"
+    },
+    {
+      "query": "VectorIndex",
+      "expected": [
+        "r19"
+      ],
+      "category": "identifier"
+    },
+    {
+      "query": "宿主没开向量服务还可以搜索吗",
+      "expected": [
+        "r19"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "分页",
+      "expected": [
+        "r20"
+      ],
+      "category": "zh-two-char"
+    },
+    {
+      "query": "快照 待落库",
+      "expected": [
+        "r20"
+      ],
+      "category": "intersection"
+    },
+    {
+      "query": "生成早已完成为什么还排在候选里",
+      "expected": [
+        "r20"
+      ],
+      "category": "paraphrase"
+    },
+    {
+      "query": "坏掉的数据文件怎样找回历史内容",
+      "expected": [
+        "r01"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "两个汉字查不出东西要怎么补救",
+      "expected": [
+        "r02"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "文件夹名里有汉字和空格保存失败",
+      "expected": [
+        "r03"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "系统自带终端和新版终端不是同一个吗",
+      "expected": [
+        "r04"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "刚录入应用能认为它已安装吗",
+      "expected": [
+        "r05"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "做完一个功能怎样留下一份版本",
+      "expected": [
+        "r06"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "装包提示没有写权限怎么办",
+      "expected": [
+        "r07"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "助手返回的结构坏了可以猜着修吗",
+      "expected": [
+        "r08"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "笔记叫我忽略规则会照做吗",
+      "expected": [
+        "r09"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "我的批注会被机器改没吗",
+      "expected": [
+        "r10"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "换存放位置失败会写进别处吗",
+      "expected": [
+        "r11"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "升级后老文件还能打开吗",
+      "expected": [
+        "r12"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "画面点太多越用越卡",
+      "expected": [
+        "r13"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "背面的点如何转到眼前",
+      "expected": [
+        "r14"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "连着的圆点怎样稳定下来不再耗电",
+      "expected": [
+        "r15"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "页面要离线可以从网上加载脚本吗",
+      "expected": [
+        "r16"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "查历史会拖慢我发消息吗",
+      "expected": [
+        "r17"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "内置数据库用不了还可以查吗",
+      "expected": [
+        "r18"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "没开语义服务能正常查找吗",
+      "expected": [
+        "r19"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    },
+    {
+      "query": "事情做完为什么还留在候选里",
+      "expected": [
+        "r20"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary"
+    }
   ]
 }
