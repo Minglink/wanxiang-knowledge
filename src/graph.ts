@@ -92,7 +92,7 @@ export function buildGraph(entries: Iterable<Entry>, tools: Tool[], options: Gra
   grouped(entry => entry.tags, 'shared_tag', 0.7);
   grouped(entry => [entry.project], 'same_project', 0.2);
   for (const entry of knowledge) {
-    const references = new Set(entry.body.match(/[\p{L}\p{N}_][\p{L}\p{N}_:.-]{2,}/gu) || []);
+    const references = new Set(entry._references || entry.body.match(/[\p{L}\p{N}_][\p{L}\p{N}_:.-]{2,}/gu) || []);
     for (const id of references) if (nodeMap.has(id)) edge(entry.id, id, 'link');
   }
   if (scope !== 'library') for (const tool of tools) for (const id of tool.linkedIds) edge('tool:' + tool.id, id, 'tool_link', 1.5);

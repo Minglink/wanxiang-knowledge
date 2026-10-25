@@ -18,7 +18,7 @@ test('项目筛选涵盖200条之外及归档独有项目', async t => {
   await s.generate('s', 'export'); await s.tail;
   const template = [...s.store.entries.values()][0];
   for (let i = 0; i < 220; i++) {
-    const entry = { ...template, id: 'e-' + i, project: i === 0 ? '旧项目' : i === 1 ? '归档项目' : '新项目', archived: i === 1,
+    const entry = { ...template, body:template.body, id: 'e-' + i, project: i === 0 ? '旧项目' : i === 1 ? '归档项目' : '新项目', archived: i === 1,
       updatedAt: new Date(2026, 0, 1, 0, i).toISOString() };
     s.store.entries.set(entry.id, entry); s.store.index(entry);
   }
