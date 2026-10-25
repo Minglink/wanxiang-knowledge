@@ -44,6 +44,9 @@ export class NodeSqliteEngine implements IndexEngine {
     const args: (string | number)[] = [filter.archived ? 1 : 0];
     if (filter.type) { sql += ' AND kind=?'; args.push(filter.type); }
     if (filter.project) { sql += ' AND project=?'; args.push(filter.project); }
+    if (filter.validOnly) sql += ' AND invalid_at IS NULL';
+    if (filter.updatedAfter) { sql += ' AND updated>=?'; args.push(filter.updatedAfter); }
+    if (filter.updatedBefore) { sql += ' AND updated<=?'; args.push(filter.updatedBefore); }
     for (const term of (filter.query || '').normalize('NFKC').toLowerCase().trim().split(/\s+/).filter(Boolean).slice(0, 12)) {
       sql += ' AND instr(search,?)>0'; args.push(term);
     }
@@ -68,6 +71,8 @@ export class NodeSqliteEngine implements IndexEngine {
     if (filter.validOnly !== false) where += ' AND e.invalid_at IS NULL';
     if (filter.project) { where += ' AND e.project=?'; args.push(filter.project); }
     if (filter.type) { where += ' AND e.kind=?'; args.push(filter.type); }
+    if (filter.updatedAfter) { where += ' AND e.updated>=?'; args.push(filter.updatedAfter); }
+    if (filter.updatedBefore) { where += ' AND e.updated<=?'; args.push(filter.updatedBefore); }
     args.push(filter.limit || 100, filter.offset || 0);
     return this.statement(`SELECT e.id,bm25(fts,10,6,4,8,1,3) AS rank FROM fts JOIN entries e ON e.rowid=fts.rowid WHERE ${where} ORDER BY rank LIMIT ? OFFSET ?`).all(...args).map(row => ({ id: String(row.id), score: -Number(row.rank) }));
   }

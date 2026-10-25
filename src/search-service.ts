@@ -3,7 +3,7 @@ import type { Store } from './store.js';
 import type { Host } from './types.js';
 import { rewriteRules, rewriteModel, validateAliases, type Aliases } from './query-rewrite.js';
 
-export interface SearchOptions { mode?: string; type?: string; project?: string; archived?: boolean; validOnly?: boolean; offset?: number; limit?: number; smartRewrite?: boolean }
+export interface SearchOptions { updatedAfter?: string; updatedBefore?: string; mode?: string; type?: string; project?: string; archived?: boolean; validOnly?: boolean; offset?: number; limit?: number; smartRewrite?: boolean }
 export class SearchService {
   constructor(private store: Store, private host?: Host) {}
   aliases(): Aliases {
@@ -17,7 +17,11 @@ export class SearchService {
     const limit = Math.max(1, Math.min(100, Math.floor(Number(options.limit) || 20)));
     let rewritten = rewriteRules(query, this.aliases());
     if (options.smartRewrite && this.host) rewritten = await rewriteModel(query, this.host, rewritten);
-    const filter = { query, type: options.type, archived: options.archived, project: options.project, limit: 1000 };
+    for (const value of [options.updatedAfter, options.updatedBefore]) {
+      if (value && !/^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(value)) throw new Error('无效时间过滤');
+      if (value && !Number.isFinite(Date.parse(value))) throw new Error('无效时间过滤');
+    }
+    const filter = { validOnly: options.validOnly !== false, updatedAfter: options.updatedAfter && new Date(options.updatedAfter).toISOString(), updatedBefore: options.updatedBefore && new Date(options.updatedBefore.length === 10 ? options.updatedBefore + 'T23:59:59.999Z' : options.updatedBefore).toISOString(), query, type: options.type, archived: options.archived, project: options.project, limit: 1000 };
     const exact = this.store.engine.search(filter);
     const full = mode !== 'exact' && this.store.engine.fullSearch ? this.store.engine.fullSearch({ ...filter, query: rewritten, hot: mode !== 'deep', validOnly: options.validOnly }) : [];
     const candidates = new Map<string, number>();

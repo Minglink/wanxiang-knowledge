@@ -19,6 +19,11 @@ for (const name of ['sql.js', 'node:sqlite']) test(name + ' 同一引擎契约�
   assert.deepEqual(engine.search({ project: 'none' }), []);
   assert.deepEqual(engine.search({ archived: true }), ['b']);
   assert.deepEqual(engine.search({ offset: 1 }), []);
+  assert.deepEqual(engine.search({ updatedAfter: '2027-01-01' }), []);
+  assert.deepEqual(engine.search({ updatedBefore: '2025-01-01' }), []);
+  engine.index({ ...entry, id: 'invalid', body: '其他合成正文', invalidAt: '2026-01-01' });
+  assert.deepEqual(engine.search({ validOnly: true, limit: 1 }), ['s']);
+  assert.equal(engine.search({}).length, 2);
   engine.index({ ...entry, body: '替换正文' });
   assert.deepEqual(engine.search({ query: 'ERR_TEST' }), []);
   assert.deepEqual(engine.search({ query: '替换' }), ['s']);
@@ -37,3 +42,4 @@ test('禁用或原生打开失败自动降级，提示大规模限制', async t 
     result.engine.close();
   }
 });
+

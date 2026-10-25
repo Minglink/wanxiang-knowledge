@@ -19,6 +19,9 @@ test('别名/问法参与召回，失效过滤、分页与深度层级', async t
   const next = await search.search('包管理器', { offset: 10, limit: 10 });
   assert.ok(next.items.every(item => !first.items.some(previous => previous.id === item.id)));
   assert.ok((await search.search('装包卡住')).items.length);
+  assert.equal((await search.search('包管理器', { updatedAfter: '2027-01-01' })).total, 0);
+  assert.equal((await search.search('包管理器', { updatedBefore: '2025-01-01' })).total, 0);
+  await assert.rejects(search.search('包管理器', { updatedAfter: 'not-a-date' }), /无效时间/);
   assert.ok((await search.search('深度秘密标识', { mode: 'deep' })).items.every(item => item.tier === 'L2'));
 });
 test('模型改写超时/非法JSON回退，输入和输出经过脱敏', async () => {

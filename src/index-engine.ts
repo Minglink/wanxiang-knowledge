@@ -5,6 +5,9 @@ export interface SearchFilter {
   type?: string;
   archived?: boolean;
   project?: string;
+  validOnly?: boolean;
+  updatedAfter?: string;
+  updatedBefore?: string;
   offset?: number;
   limit?: number;
 }

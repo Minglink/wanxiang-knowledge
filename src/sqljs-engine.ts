@@ -14,11 +14,11 @@ export class SqlJsEngine implements IndexEngine {
     this.db = new SQL.Database();
   }
   reset() {
-    this.db.run('DROP TABLE IF EXISTS entries; CREATE TABLE entries(id TEXT PRIMARY KEY,title TEXT,kind TEXT,project TEXT,tags TEXT,search TEXT,archived INTEGER,updated TEXT)');
+    this.db.run('DROP TABLE IF EXISTS entries; CREATE TABLE entries(id TEXT PRIMARY KEY,title TEXT,kind TEXT,project TEXT,tags TEXT,search TEXT,archived INTEGER,updated TEXT,invalid_at TEXT)');
   }
   index(entry: Entry) {
     const search = `${entry.id}\n${entry.title}\n${entry.tags.join(' ')}\n${entry.body}`.normalize('NFKC').toLowerCase();
-    this.db.run('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?)', [entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt]);
+    this.db.run('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?,?)', [entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt, entry.invalidAt || null]);
   }
   search(filter: SearchFilter) {
     const terms = (filter.query || '').normalize('NFKC').toLowerCase().trim().split(/\s+/).filter(Boolean).slice(0, 12);
@@ -26,6 +26,9 @@ export class SqlJsEngine implements IndexEngine {
     const args: (string | number)[] = [filter.archived ? 1 : 0];
     if (filter.type) { sql += ' AND kind=?'; args.push(filter.type); }
     if (filter.project) { sql += ' AND project=?'; args.push(filter.project); }
+    if (filter.validOnly) sql += ' AND invalid_at IS NULL';
+    if (filter.updatedAfter) { sql += ' AND updated>=?'; args.push(filter.updatedAfter); }
+    if (filter.updatedBefore) { sql += ' AND updated<=?'; args.push(filter.updatedBefore); }
     for (const term of terms) { sql += ' AND instr(search,?)>0'; args.push(term); }
     sql += ' ORDER BY updated DESC LIMIT ? OFFSET ?';
     args.push(Math.max(1, Math.min(1000, filter.limit || 200)), Math.max(0, filter.offset || 0));

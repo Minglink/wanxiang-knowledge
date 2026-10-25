@@ -57,6 +57,35 @@ try{
  pass('工具关联显示标题、知识反向工具关联、详情定位与图谱回详情');
  await page.screenshot({path:'dist/screenshots/工具库-1920.png',fullPage:true});
  for(const name of ['检索','待落库','日志']){await page.locator('nav').getByRole('button',{name,exact:true}).click();await page.waitForTimeout(100);}pass('各页面切换');
+ await page.locator('[data-action="metadata-start"]').waitFor();
+ assert.ok((await page.locator('main').innerText()).includes('发送已有知识正文'));
+ pass('后台补全控件与模型发送说明');
+ await page.locator('nav [data-tab="search"]').click();
+ for (const mode of ['exact', 'deep', 'hybrid']) {
+  await Promise.all([page.waitForResponse(r => r.url().includes('/search?') && r.url().includes('mode=' + mode)), page.locator('#wx-search-mode').selectOption(mode)]);
+  await page.locator('.wx-search-result').waitFor();
+ }
+ await Promise.all([page.waitForResponse(r => r.url().includes('updatedAfter=2099-01-01')), page.locator('#wx-search-after').fill('2099-01-01')]);
+ await page.waitForFunction(() => document.querySelector('.wx-search-result')?.textContent.includes('0 条候选'));
+ await page.locator('#wx-search-after').fill('');
+ await page.locator('[data-action="aliases-edit"]').click();
+ const originalAliases = await page.locator('#wx-aliases-form textarea').inputValue();
+ await page.locator('#wx-aliases-form textarea').fill(JSON.stringify({ '合成别名': ['合成同义词'] }));
+ await page.locator('#wx-aliases-form button[type="submit"]').click();
+ await page.waitForFunction(() => !document.querySelector('dialog')?.open);
+ await page.locator('[data-action="aliases-edit"]').click();
+ assert.ok((await page.locator('#wx-aliases-form textarea').inputValue()).includes('合成同义词'));
+ await page.locator('#wx-aliases-form textarea').fill(originalAliases);
+ await page.locator('#wx-aliases-form button[type="submit"]').click();
+ await page.waitForFunction(() => !document.querySelector('dialog')?.open);
+ await page.screenshot({ path: 'dist/screenshots/第2期-检索.png', fullPage: true });
+ pass('三种检索模式、时间过滤、别名保存与恢复');
+ await page.getByRole('button',{name:'设置',exact:true}).first().click();
+ await page.locator('[data-action="storage-plan"]').click();
+ await page.getByRole('heading', { name: '目录整理预检', exact: true }).waitFor();
+ await page.screenshot({ path: 'dist/screenshots/第2期-整理预检.png', fullPage: true });
+ await page.locator('#modal [data-action="close"]').first().click();
+ pass('目录整理预检可见且可取消');
  await page.getByRole('button',{name:'设置',exact:true}).first().click();await page.locator('#settings-form input[name="root"]').waitFor();await page.locator('#modal [data-action="close"]').first().click();pass('设置面板');
  await page.setViewportSize({width:640,height:800});await page.locator('nav').getByRole('button',{name:'总览',exact:true}).click();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.screenshot({path:'dist/screenshots/窄屏-640.png',fullPage:true});pass('窄屏无横向溢出');
  await page.goto(`${base}/wanxiang?sessionId=${fixture}&compact=1`);await page.getByRole('heading',{name:'本次会话',exact:true}).waitFor();await page.screenshot({path:'dist/screenshots/会话快捷面板.png',fullPage:true});pass('会话快捷面板');
