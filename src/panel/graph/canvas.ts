@@ -36,6 +36,7 @@ export class CanvasGraph {
   private secondRing = false;
   private kinds = new Set(Object.keys(graphColors));
   private edges: GraphEdge[];
+  private bridges = new Set<GraphEdge>();
 
   constructor(public canvas: HTMLCanvasElement, public data: GraphData, private select: (id: string) => void, private open: (id: string) => void) {
     this.ctx = canvas.getContext('2d')!;
@@ -60,7 +61,11 @@ export class CanvasGraph {
       }
     }
     // Weak edges are visually sampled at medium scale, selected edges are always restored.
-    this.edges = data.nodes.length > 300 ? [...data.edges].sort((a, b) => b.w - a.w).slice(0, data.nodes.length * 2) : data.edges;
+    const rankedEdges = [...data.edges].sort((a, b) => b.w - a.w);
+    const bridges = rankedEdges.filter(edge => this.nodes.get(edge.s)?.cluster !== this.nodes.get(edge.t)?.cluster).slice(0, 60);
+    this.bridges = new Set(bridges);
+    this.edges = data.nodes.length > 300
+      ? [...new Set([...bridges, ...rankedEdges.slice(0, data.nodes.length * 2)])] : data.edges;
     const options = { signal: this.lifetime.signal };
     canvas.addEventListener('pointerdown', this.pointerDown, options);
     canvas.addEventListener('pointermove', this.pointerMove, options);
@@ -172,7 +177,7 @@ export class CanvasGraph {
     const projected = particles.map(p => {
       const point = this.layout === 'sphere' ? this.spherePoint(p) : { x: this.width / 2 + (p.x - this.networkCenter.x) * this.networkScale() + this.pan.x, y: this.height / 2 + (p.y - this.networkCenter.y) * this.networkScale() + this.pan.y, depth: 0, scale: 1 };
       const node = this.nodes.get(p.id)!;
-      return { ...point, id: p.id, radius: Math.min(5.5, 2.5 + Math.log2(1 + node.degree) * 0.45) * (this.layout === 'sphere' ? point.scale : 1) };
+      return { ...point, id: p.id, radius: Math.min(4.6, 2.3 + Math.log2(1 + node.degree) * 0.32) * (this.layout === 'sphere' ? point.scale : 1) };
     }).sort((a, b) => a.depth - b.depth);
     this.positions = new Map(projected.map(p => [p.id, p]));
     this.grid.rebuild(projected);
@@ -185,12 +190,13 @@ export class CanvasGraph {
       const a = this.positions.get(edge.s), b = this.positions.get(edge.t);
       if (!a || !b) continue;
       const highlighted = [edge.s, edge.t].includes(this.hover || this.selected);
-      if (this.layout === 'sphere' && !highlighted && this.data.nodes.length > 300) continue;
+      const bridge = this.nodes.get(edge.s)!.cluster !== this.nodes.get(edge.t)!.cluster;
+      if (this.layout === 'sphere' && !highlighted && this.data.nodes.length > 300 && !this.bridges.has(edge)) continue;
       ctx.globalAlpha = highlighted ? 0.65 : this.related(edge.s) && this.active(edge.s) && this.active(edge.t) ? 0.075 : 0.015;
       ctx.strokeStyle = highlighted ? '#3563ff' : '#7890b6';
       ctx.lineWidth = highlighted ? 1.3 : 0.65;
       ctx.beginPath(); ctx.moveTo(a.x, a.y);
-      if (this.layout === 'sphere' && highlighted) {
+      if (this.layout === 'sphere' && (highlighted || bridge)) {
         for (let i = 1; i <= 16; i++) {
           const point = this.spherePoint(arc(sphereMap.get(edge.s)!, sphereMap.get(edge.t)!, i / 16));
           ctx.lineTo(point.x, point.y);

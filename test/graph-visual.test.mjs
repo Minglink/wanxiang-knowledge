@@ -7,20 +7,48 @@ async function moduleFrom(path) {
   return import('data:text/javascript;base64,' + Buffer.from(result.outputFiles[0].text).toString('base64'));
 }
 
-test('两个不均衡大簇也铺满球面；节点不丢失、不重合', async () => {
+test('不均衡双簇保留聚集与间隔，稳定、完整且始终在球面上', async () => {
   const { sphereLayout } = await moduleFrom('src/panel/graph/layouts.ts');
   for (const count of [200, 1000]) {
     const nodes = Array.from({ length: count }, (_, i) => ({
-      id: String(i), cluster: i < count * 0.9 ? 'large' : 'small', kind: 'note',
+      id: String(i), cluster: i < count * 0.9 ? 'large' : 'small', kind: 'note', degree: i % 15,
     }));
     const points = sphereLayout(nodes);
     assert.deepEqual(points.map(p => p.id), nodes.map(n => n.id));
+    assert.deepEqual(sphereLayout(nodes), points, '重新打开不得随机洗牌');
     assert.equal(new Set(points.map(p => [p.x, p.y, p.z].join(','))).size, count);
-    const octants = new Set(points.map(p => [p.x > 0, p.y > 0, p.z > 0].join(',')));
-    assert.equal(octants.size, 8, '不能仍挤在两个球冠里');
+    const centers = ['large', 'small'].map(cluster => {
+      const members = points.filter(p => p.cluster === cluster);
+      const mean = key => members.reduce((sum, p) => sum + p[key], 0) / members.length;
+      return { x: mean('x'), y: mean('y'), z: mean('z') };
+    });
+    for (const center of centers) assert.ok(Math.hypot(center.x, center.y, center.z) > 0.75, '不能再平均铺满球面');
+    assert.ok(Math.hypot(centers[0].x - centers[1].x, centers[0].y - centers[1].y, centers[0].z - centers[1].z) > 1);
     for (const point of points) assert.ok(Math.abs(Math.hypot(point.x, point.y, point.z) - 1) < 1e-9);
   }
   assert.deepEqual(sphereLayout([]), []);
+});
+
+test('网络的两个真实关联簇收敛后仍有疏密层次，不把节点并成一团', async () => {
+  const { NetworkLayout } = await moduleFrom('src/panel/graph/layouts.ts');
+  const nodes = Array.from({ length: 200 }, (_, i) => ({
+    id: String(i), cluster: i < 100 ? 'left' : 'right', degree: 3,
+  }));
+  const edges = nodes.flatMap((node, i) => i % 100 ? [{ s: node.id, t: String(i - 1), w: 1 }] : []);
+  edges.push({ s: '50', t: '150', w: 1 });
+  const original = structuredClone({ nodes, edges });
+  const layout = new NetworkLayout(nodes, edges);
+  for (let i = 0; i < 100; i++) layout.tick();
+  const clouds = ['left', 'right'].map(cluster => {
+    const members = layout.particles.filter(p => p.cluster === cluster);
+    const x = members.reduce((sum, p) => sum + p.x, 0) / members.length;
+    const y = members.reduce((sum, p) => sum + p.y, 0) / members.length;
+    return { x, y, radius: Math.sqrt(members.reduce((sum, p) => sum + (p.x - x) ** 2 + (p.y - y) ** 2, 0) / members.length) };
+  });
+  assert.ok(Math.hypot(clouds[0].x - clouds[1].x, clouds[0].y - clouds[1].y) > clouds[0].radius + clouds[1].radius);
+  for (const cloud of clouds) assert.ok(cloud.radius > 20);
+  assert.deepEqual({ nodes, edges }, original, '布局不能改变关系数据');
+  assert.equal(layout.particles.length, nodes.length);
 });
 
 test('密集标题避让、边界约束与数量上限', async () => {
