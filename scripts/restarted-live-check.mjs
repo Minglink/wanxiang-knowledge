@@ -9,7 +9,7 @@ import { installPreflight, inventory } from './install-preflight.mjs';
 
 const base = process.argv[2];
 if (!base) throw new Error('请提供重启后的本机Harness地址');
-const output = path.resolve('dist/v02-restarted');
+const output = path.resolve(process.argv[3] || 'dist/v02-restarted');
 await mkdir(output, { recursive: true });
 const preflight = await installPreflight(base, path.join(output, 'pretest-backup-' + Date.now()), process.env.DSH_HOME || path.join(os.homedir(), '.dsh'));
 const html = await (await fetch(base + '/wanxiang')).text();
@@ -38,13 +38,13 @@ try {
   assert.ok(graph.edges.some(edge => edge.kind === 'tool_link'));
   assert.ok((await api('jobs?offset=0')).total > 0);
   await cp('dist/screenshots', path.join(output, 'screenshots'), { recursive: true });
-  await writeFile(path.join(output, 'live-result.json'), JSON.stringify({ time: new Date().toISOString(), freshRoot: root, preflight, UI: '12 checks passed', graphNodes: graph.nodes.length, graphEdges: graph.edges.length, providerCalls: 0 }, null, 2));
+  await writeFile(path.join(output, 'live-result.json'), JSON.stringify({ time: new Date().toISOString(), freshRoot: root, preflight, UI: '15 checks passed', engine: (await api('search?mode=hybrid&q=')).engine, graphNodes: graph.nodes.length, graphEdges: graph.edges.length, providerCalls: 0 }, null, 2));
 } finally {
   await api('settings', original);
   assert.deepEqual((await api('state')).settings, original);
   // Store.init rebuilds only the derived index on returning to original root.
   const after = await inventory(original.root);
-  const contentOnly = records => records.filter(item => item.file !== path.join('.wanxiang', 'index.sqlite'));
+  const contentOnly = records => records.filter(item => !/^\.wanxiang[\\/](?:index\.sqlite|index\.db(?:-wal|-shm)?)$/.test(item.file));
   assert.deepEqual(contentOnly(after), contentOnly(before), '原库正文、工具、任务及来源必须不变');
   console.log('PASS: restored original settings; original content hashes unchanged');
 }

@@ -10,7 +10,7 @@ import assert from 'node:assert/strict';
 
 const installed = path.join(process.env.DSH_HOME || path.join(os.homedir(), '.dsh'), 'profiles/desktop/node_modules/dsh-wanxiang-knowledge');
 const manifest = JSON.parse(await readFile(path.join(installed, 'package.json'), 'utf8'));
-assert.equal(manifest.version, '0.2.0-alpha.1');
+assert.equal(manifest.version, JSON.parse(await readFile('package.json', 'utf8')).version);
 for (const file of ['index.js', 'panel.js', 'client.js', 'panel.html', 'style.css', 'sql-wasm.wasm']) {
   const digest = async source => createHash('sha256').update(await readFile(source)).digest('hex');
   assert.equal(await digest(path.join(installed, 'lib', file)), await digest(path.resolve('lib', file)), 'installed mismatch: ' + file);
@@ -40,7 +40,7 @@ try {
   assert.equal(code, 0);
   await mkdir('dist/v02-installed', { recursive: true });
   await writeFile('dist/v02-installed/result.json', JSON.stringify({ version: manifest.version, runtime: process.version, installedFilesMatch: true, syntheticUI: true,
-    productionHostReload: false, nativeSidebar: 'unverified', nativeQuickButton: 'unverified' }, null, 2));
+    engine: service.store.engine.name, fullText: service.store.engine.fullText, productionHostReload: false, nativeSidebar: 'unverified', nativeQuickButton: 'unverified' }, null, 2));
 } finally {
   await new Promise(resolve => server.close(resolve));
   await service.dispose();

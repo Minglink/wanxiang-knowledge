@@ -12,9 +12,9 @@ DeepSeek Harness 本地知识库插件。已针对 Windows 上的 `0.2.1-alpha.1
 
 ## 安装
 
-仓库附带 [0.2.0-alpha.1 插件安装包](https://github.com/Minglink/wanxiang-knowledge/raw/refs/heads/main/artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.1.tgz)，可下载后通过宿主的本地插件安装入口加载。源码验证与实机测试范围见 [测试报告](https://github.com/Minglink/wanxiang-knowledge/blob/main/docs/测试报告.md)。
+仓库附带 [0.2.0-alpha.2 插件安装包](https://github.com/Minglink/wanxiang-knowledge/raw/refs/heads/main/artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.2.tgz)，可下载后通过宿主的本地插件安装入口加载。源码验证与实机测试范围见 [测试报告](https://github.com/Minglink/wanxiang-knowledge/blob/main/docs/测试报告.md)。
 
-使用宿主支持的本地插件包安装入口选择 `dsh-wanxiang-knowledge-0.2.0-alpha.1.tgz`。开发机也可在项目目录运行：
+使用宿主支持的本地插件包安装入口选择 `dsh-wanxiang-knowledge-0.2.0-alpha.2.tgz`。开发机也可在项目目录运行：
 
 ```powershell
 npm install
@@ -34,9 +34,11 @@ node scripts/install-desktop.mjs
 
 默认目录是用户 Documents 下的「万象知识库」，可在设置中填写新的绝对路径。切换目录不会移动或删除旧文件。配置保存于 `<DSH_HOME>/wanxiang/settings.json`。
 
-正文存于 `notes/`、`cards/`；工具登记保存在 `tools/catalog.json`；来源摘录存于 `sources/`；索引、任务和修订历史存于 `.wanxiang/`。Markdown 元数据以 YAML 兼容的 JSON 对象保存。当前检索使用 SQLite 的 Unicode 规范化子串匹配与多词交集，未包含向量检索。
+正文存于 `notes/`、`cards/`；工具登记保存在 `tools/catalog.json`；来源摘录存于 `sources/`；索引、任务和修订历史存于 `.wanxiang/`。Markdown 元数据以 YAML 兼容的 JSON 对象保存。主引擎为 node:sqlite + FTS5，不能使用时自动降级 sql.js 并提示“大规模场景受限”。检索支持精确子串、混合关键词、深度正文三模式；中文预分词与两字词、卡片 questions[] 和本地别名表共同补强自然语言召回，未实现向量检索。智能改写可选，发送查询给宿主模型，800ms超时回退到规则。
 
-0.2.0-alpha.1 增加图谱与审计修复，保持上述目录格式及检索算法。目录切换完整预检后原子提交，失败保留原库；重复快照及修复完成清理待落库，日志支持分页，项目筛选覆盖全库元数据。当前平铺扫描尚不支持 v2 分片目录，相关兼容迁移与回滚验证在后续存储期进行。
+0.2.0-alpha.2 增加存储与检索：正文按需读取；新笔记按年月、新卡片按项目分片，同时维护顶层兼容副本，供0.1.0读取。旧目录不自动整理。设置提供整理预检、备份及撤销；单侧外部编辑可同步，双方不同修改会停止并提示人工处理。请保留 `.wanxiang/mirrors.json` 及备份。副本会增加磁盘占用。
+
+日志页提供摘要与问法补全，每批20条、可暂停续跑，只补元数据并保留修订。启动补全会发送已有知识正文给宿主模型。别名配置保存在 `.wanxiang/aliases.json`，仅在本机使用。
 
 知识文件与检索在本机处理；AI 模式会向宿主模型服务发送选定会话的正文。插件会屏蔽部分常见凭据格式，这不代表能识别所有敏感内容。原文导出不会调用模型。插件不修改或删除 Harness 会话日志，不自动执行知识中的命令。
 
@@ -56,6 +58,8 @@ node scripts/install-desktop.mjs
 
 自动模式仅登记待落库候选，生成由用户触发。附件二进制、图像 OCR、语义搜索、批量历史迁移、自动主题合并和云同步未包含在 0.1.0 中。长会话按段整理，上限为 100 段；每张知识卡片必须引用输入中存在的消息序号。模型输出通过结构与来源序号校验，结论仍需结合原文核验。
 
-v0.2 调查结论见 `docs/审计清单.md`、`docs/注入点验证.md`、`docs/引擎探针.md` 和 `docs/测试报告.md`。`node scripts/audit-v02.mjs` 用临时合成库审计页面；`node scripts/eval-recall.mjs` 运行60条固定查询的召回评测（先 build）。`scripts/probes/` 默认关闭且不随产品入口加载；宿主探针需用已安装 Electron 的 Node 模式显式启动。0.2.0-alpha.1 提供总览、知识库、工具库三处图谱入口、球体/神经网络布局、关系详情双向跳转与节点定位。画布保持白色，3000输入自动聚合，支持键盘节点列表与减少动态效果。性能数据与实机限制见测试报告。
+v0.2 调查结论见 `docs/审计清单.md`、`docs/注入点验证.md`、`docs/引擎探针.md` 和 `docs/测试报告.md`。`node scripts/audit-v02.mjs` 用临时合成库审计页面；`node scripts/eval-recall.mjs` 运行80条固定查询的召回评测（先 build）。`scripts/probes/` 默认关闭且不随产品入口加载；宿主探针需用已安装 Electron 的 Node 模式显式启动。0.2.0-alpha.2 提供总览、知识库、工具库三处图谱入口、球体/神经网络布局、关系详情双向跳转与节点定位。画布保持白色，3000输入自动聚合，支持键盘节点列表与减少动态效果。性能数据与实机限制见测试报告。
 
-回滚可使用保留的 `artifacts/dsh-wanxiang-knowledge-0.1.0.tgz` 重新安装，安装前仍需确认空闲并备份。此版不迁移知识文件，不实现 node:sqlite/FTS5、questions[]、自动召回或 embedding；这些按后续期文档执行。
+回滚可使用保留的 `artifacts/dsh-wanxiang-knowledge-0.1.0.tgz` 重新安装，安装前仍需确认空闲并备份。第2期实现 node:sqlite/FTS5、questions[]、分片与兼容副本；自动召回、对账与反思仍待后续期。整理撤销会核对后续编辑，存在变化时拒绝覆盖；同步异常可回滚，跨文件断电恢复未实机验证。
+
+基准：`node scripts/bench.mjs --run`（三档原生FTS，不含Markdown文件或完整SearchService）；`node --expose-gc scripts/bench-memory.mjs` 对比10万条正文与元数据Map；`node scripts/eval-recall.mjs test/fixtures/recall-eval.json --hybrid` 复测关键词和自然语言。固定合成评测不是实际用户查询或在线模型质量承诺。
