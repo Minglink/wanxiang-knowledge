@@ -93,3 +93,8 @@
 .wx-tool-status-label:hover { box-shadow: 0 0 0 1px currentColor; }
 .wx-tool-status-count { padding-top: 5px; color: var(--muted); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
 @media(max-width:600px) { .wx-tool-status-row { grid-template-columns: minmax(0, 1fr) 46px; gap: 7px 10px; } .wx-tool-status-items { grid-row: 2; grid-column: 1 / -1; } .wx-tool-status-count { grid-row: 1; grid-column: 2; } }
+
+.wx-graph-activity-toggle { flex-shrink: 0; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: #95712d; cursor: pointer; }
+.wx-graph-activity-toggle input { flex: none; width: 14px; min-width: 14px; accent-color: #c69a3a; margin: 0; }
+.wx-graph-activity-status { margin: 8px 0; color: #95712d; font-size: 11px; min-height: 16px; }
+.wx-graph-activity-detail { color: #95712d; }

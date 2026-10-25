@@ -1,3 +1,5 @@
+import { GoldActivityLayer } from './activity-layer.js';
+import type { GraphActivityEvent } from '../../graph-activity.js';
 import type { GraphData, GraphNode, GraphEdge } from '../../graph.js';
 import { rotatePoint, rotatedExtent, rotationRadians } from './network-transform.js';
 import { LabelPlacer } from './labels.js';
@@ -6,6 +8,8 @@ import { NetworkLayout, sphereLayout, arc, type Layout, type Particle } from './
 
 export const graphColors: Record<string, string> = { note: '#3563ff', method: '#168881', pitfall: '#dc8b25', project: '#9258c5', tool: '#3d779d' };
 export class CanvasGraph {
+  readonly activity = new GoldActivityLayer();
+  private activityTimer?: ReturnType<typeof setTimeout>;
   layout: Layout = 'sphere';
   selected = '';
   hover = '';
@@ -101,6 +105,16 @@ export class CanvasGraph {
     this.measure();
   }
 
+  setActivity(events: GraphActivityEvent[], raw: GraphData, enabled: boolean) {
+    this.activity.enabled = enabled;
+    this.activity.accept(events, this.data, raw);
+    clearTimeout(this.activityTimer);
+    if (enabled && this.activity.marks.size) {
+      const end = Math.min(...[...this.activity.marks.values()].map(mark => mark.at + 12000));
+      this.activityTimer = setTimeout(() => this.wake(), Math.max(1, end - Date.now() + 10));
+    }
+    this.wake();
+  }
   setLayout(layout: Layout) { this.layout = layout; this.wake(); }
   setFilter(text: string, kinds: Set<string>) { this.text = text.toLocaleLowerCase(); this.kinds = kinds; this.wake(); }
   setNetworkRotation(degrees: number) {
@@ -130,7 +144,7 @@ export class CanvasGraph {
     this.select(id); this.wake();
   }
   exportPNG() { const link = document.createElement('a'); link.download = '万象知识图谱.png'; link.href = this.canvas.toDataURL('image/png'); link.click(); }
-  destroy() { cancelAnimationFrame(this.frame); this.lifetime.abort(); this.resize.disconnect(); }
+  destroy() { clearTimeout(this.activityTimer); cancelAnimationFrame(this.frame); this.lifetime.abort(); this.resize.disconnect(); }
   private point(event: MouseEvent) { const rect = this.canvas.getBoundingClientRect(); return { x: event.clientX - rect.left, y: event.clientY - rect.top }; }
   private measure() {
     const rect = this.canvas.getBoundingClientRect();
@@ -253,6 +267,9 @@ export class CanvasGraph {
         ctx.beginPath(); ctx.arc(point.x + radius, point.y - radius, 2.5, 0, Math.PI * 2); ctx.fill();
       }
     }
+    const activityVisible = this.activity.paint(ctx, this.data, this.positions, id => this.active(id), !this.motion.matches,
+      Date.now(), this.layout === 'sphere' ? (s, t, progress) => this.spherePoint(arc(sphereMap.get(s)!, sphereMap.get(t)!, progress)) : undefined);
+    this.canvas.dataset.activityNodes = String(this.activity.enabled ? this.activity.marks.size : 0);
     const labelLimit = Math.max(4, Math.min(12, Math.floor(this.width * this.height / 40000)));
     const placer = new LabelPlacer(this.width, this.height, labelLimit);
     const priority = (id: string) => id === this.hover ? 4 : id === this.selected ? 3 : this.text && this.active(id) ? 2 : 0;
@@ -279,7 +296,7 @@ export class CanvasGraph {
     this.canvas.dataset.frames = String(this.frames);
     this.canvas.dataset.drawMs = String(this.drawMs);
     this.canvas.dataset.layout = this.layout;
-    if (!this.motion.matches && (this.layout === 'sphere' && (!this.selected || this.target || Math.abs(this.velocity.x) + Math.abs(this.velocity.y) > 0.0001) || this.layout === 'network' && (this.network.alpha >= 0.005 || this.data.nodes.length <= 300))) this.wake();
+    if (!this.motion.matches && (activityVisible || this.layout === 'sphere' && (!this.selected || this.target || Math.abs(this.velocity.x) + Math.abs(this.velocity.y) > 0.0001) || this.layout === 'network' && (this.network.alpha >= 0.005 || this.data.nodes.length <= 300))) this.wake();
   };
   private drawGlobe() {
     const ctx = this.ctx;

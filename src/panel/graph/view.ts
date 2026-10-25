@@ -1,3 +1,6 @@
+import { ActivityFeed } from './activity-feed.js';
+import { activityNames } from './activity-layer.js';
+import type { GraphActivityEvent } from '../../graph-activity.js';
 import type { GraphData, GraphNode } from '../../graph.js';
 import type { Layout } from './layouts.js';
 import { CanvasGraph, graphColors } from './canvas.js';
@@ -5,7 +8,7 @@ import { aggregateGraph } from './aggregate.js';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 const names: Record<string, string> = { note: '笔记', method: '方法', pitfall: '踩坑', project: '项目' };
-export interface GraphViewState { layout: Layout; selected: string; text: string; kinds: Set<string>; networkRotation: number }
+export interface GraphViewState { layout: Layout; selected: string; text: string; kinds: Set<string>; networkRotation: number; activityEnabled?: boolean }
 export const newGraphState = (): GraphViewState => ({ layout: 'sphere', networkRotation: 0, selected: '', text: '', kinds: new Set(Object.keys(names)) });
 export function graphMarkup(title = '知识图谱') {
   return `<section class="wx-graph" aria-label="${esc(title)}"><div class="wx-graph-head"><h2>${esc(title)}</h2><span class="wx-graph-loading">正在读取本地关系…</span></div></section>`;
@@ -13,6 +16,10 @@ export function graphMarkup(title = '知识图谱') {
 
 export class GraphView {
   private engine?: CanvasGraph;
+  private feed?: ActivityFeed;
+  private raw?: GraphData;
+  private activityEvents: GraphActivityEvent[] = [];
+  private reloading = false;
   private lifetime = new AbortController();
   private data?: GraphData;
   private cluster = '';
@@ -28,6 +35,8 @@ export class GraphView {
     const raw = await this.load(cluster);
     if (this.lifetime.signal.aborted || revision !== this.revision) return;
     this.engine?.destroy();
+    this.engine = undefined;
+    this.raw = raw;
     const located = raw.truncated && !this.state.selected.startsWith('cluster:') && raw.nodes.some(node => node.id === this.state.selected);
     if (located) {
       // Explicit locate is a semantic zoom into a bounded neighborhood, not the whole graph.
@@ -36,6 +45,22 @@ export class GraphView {
       this.data = { ...raw, nodes, edges: raw.edges.filter(edge => ids.has(edge.s) && ids.has(edge.t)), truncated: false };
     } else this.data = aggregateGraph(raw);
     const data = this.data;
+    if (!this.feed) {
+      this.feed = new ActivityFeed(this.element, (page, reset) => {
+        if (reset) {
+          this.activityEvents = [];
+          this.engine?.activity.marks.clear();
+        }
+        this.activityEvents = [...this.activityEvents, ...page.events].filter(event => Date.now() - event.at < 12000).slice(-128);
+        this.updateActivity();
+        const writes = page.events.some(event => event.kind === 'write');
+        if ((reset || writes) && !this.reloading) {
+          this.reloading = true;
+          void this.mount(this.cluster).catch(error => this.error(error)).finally(() => { this.reloading = false; });
+        }
+      });
+      this.feed.start();
+    }
     if (!data.nodes.length) {
       this.element.innerHTML = '<h2>知识图谱</h2><div class="empty"><strong>暂无关系图谱</strong><p>保存知识后，这里显示真实知识条目与关系。</p></div>';
       return;
@@ -47,6 +72,7 @@ export class GraphView {
     this.element.innerHTML = `<h2>${esc(this.element.getAttribute('aria-label') || '知识图谱')}</h2><div class="wx-graph-toolbar">
       <div class="wx-graph-layout"><button type="button" data-graph-action="sphere">球体</button><button type="button" data-graph-action="network">网络</button></div>
       <input class="wx-graph-search" aria-label="搜索图谱节点" placeholder="高亮标题或标签…" value="${esc(this.state.text)}">
+      <label class="wx-graph-activity-toggle" title="金色表示实际注入、AI读取或落库；光点沿已有关系传播，不代表邻居也被读取"><input type="checkbox" data-graph-activity ${this.activityEnabled() ? 'checked' : ''}>金色活动</label>
       <button type="button" data-graph-action="reset">重置视角</button><button type="button" data-graph-action="export">导出 PNG</button>
       ${this.expand ? '<button type="button" data-graph-action="expand">展开</button>' : ''}
       ${cluster ? '<button type="button" data-graph-action="back">返回全部簇</button>' : ''}
@@ -54,7 +80,7 @@ export class GraphView {
       <label>网络旋转 <input type="range" min="-180" max="180" step="1" value="0" aria-label="网络旋转角度"><output>0°</output></label>
       <span>Shift＋拖拽旋转 · 普通拖拽平移 · 滚轮缩放</span>
       </div><div class="wx-graph-legend">${Object.entries(names).map(([kind, name]) => `<button type="button" data-graph-kind="${kind}" aria-pressed="${this.state.kinds.has(kind)}"><i style="background:${graphColors[kind]}"></i>${name}</button>`).join('')}</div>
-      <p class="wx-graph-count">${raw.total} 个条目 · 当前 ${data.nodes.length} 个${!located && (raw.truncated || raw.nodes.length > 1500) ? '簇节点（点击展开成员）' : '节点'} · ${data.edges.length} 条可见关系 · ${raw.clusters.length} 个簇${located ? ' · 定位视图（邻域样本）' : ''}${raw.truncated ? ' · 已截断；关系为返回样本，按项目/类型筛选可缩小范围' : ''}</p>
+      <p class="wx-graph-activity-status" aria-live="polite">等待知识使用事件</p><p class="wx-graph-count">${raw.total} 个条目 · 当前 ${data.nodes.length} 个${!located && (raw.truncated || raw.nodes.length > 1500) ? '簇节点（点击展开成员）' : '节点'} · ${data.edges.length} 条可见关系 · ${raw.clusters.length} 个簇${located ? ' · 定位视图（邻域样本）' : ''}${raw.truncated ? ' · 已截断；关系为返回样本，按项目/类型筛选可缩小范围' : ''}</p>
       <div class="wx-graph-body"><canvas class="wx-graph-canvas" aria-label="知识关系图；下方节点列表提供等价键盘操作"></canvas>
       <aside class="wx-graph-info" aria-live="polite">点击节点查看关联信息</aside></div>
       <details class="wx-graph-list"><summary>节点列表（可用键盘打开）</summary><div>${data.nodes.map(node => `<button type="button" data-graph-node="${esc(node.id)}">${esc(node.title)}<small>${names[node.kind]} · ${esc(node.status)}</small></button>`).join('')}</div></details>`;
@@ -63,6 +89,7 @@ export class GraphView {
     this.engine.setNetworkRotation(this.state.networkRotation);
     this.applyFilter();
     this.updateLayout();
+    this.updateActivity();
     if (this.state.selected && data.nodes.some(node => node.id === this.state.selected)) this.engine.focus(this.state.selected);
     // Listeners are installed once on the stable container, even after cluster drill-down.
     if (!this.element.dataset.wxBound) {
@@ -71,6 +98,13 @@ export class GraphView {
       this.element.addEventListener('wx-graph-rotate', event => {
         this.state.networkRotation = (event as CustomEvent<number>).detail;
         this.updateRotation();
+      }, { signal: this.lifetime.signal });
+      this.element.addEventListener('change', event => {
+        const target = event.target as HTMLInputElement;
+        if (!target.matches('[data-graph-activity]')) return;
+        this.state.activityEnabled = target.checked;
+        try { localStorage.setItem('wanxiang.graph.activity', String(target.checked)); } catch { /* Optional local preference. */ }
+        this.updateActivity();
       }, { signal: this.lifetime.signal });
       this.element.addEventListener('input', event => {
         if ((event.target as HTMLElement).matches('.wx-graph-rotation input')) {
@@ -83,8 +117,21 @@ export class GraphView {
     }
   }
 
+  private activityEnabled() {
+    if (this.state.activityEnabled !== undefined) return this.state.activityEnabled;
+    try { return localStorage.getItem('wanxiang.graph.activity') !== 'false'; } catch { return true; }
+  }
+  private updateActivity() {
+    if (!this.raw) return;
+    this.engine?.setActivity(this.activityEvents, this.raw, this.activityEnabled());
+    const status = this.element.querySelector('.wx-graph-activity-status');
+    if (!status) return;
+    const latest = this.activityEvents.at(-1);
+    status.textContent = !this.activityEnabled() ? '金色活动已关闭' : latest
+      ? `${activityNames[latest.kind]} · ${latest.entryIds.length} 条 · ${new Date(latest.at).toLocaleTimeString()}` : '等待知识使用事件';
+  }
   focus(id: string) { this.engine?.focus(id); }
-  destroy() { this.revision++; this.lifetime.abort(); this.engine?.destroy(); delete this.element.dataset.wxBound; }
+  destroy() { this.feed?.stop(); this.revision++; this.lifetime.abort(); this.engine?.destroy(); delete this.element.dataset.wxBound; }
   private applyFilter() {
     this.engine?.setFilter(this.state.text, this.state.kinds);
     for (const button of this.element.querySelectorAll<HTMLButtonElement>('[data-graph-node]')) {
@@ -110,7 +157,11 @@ export class GraphView {
     const node = this.data!.nodes.find(item => item.id === id)!;
     const cluster = id.startsWith('cluster:');
     this.element.querySelector('.wx-graph-info')!.innerHTML = `<strong>${esc(node.title)}</strong><p>${cluster ? '聚合簇' : names[node.kind]} · ${esc(node.status)}</p><p>${esc(node.project || '未分配项目')}</p><small>更新：${esc(node.updatedAt || '未记录')}<br>关联数量：${node.degree}</small>
-      <button type="button" data-graph-open="${esc(id)}">${cluster ? '展开成员' : '打开详情'}</button>`;
+      ${this.activityDetail(id)}<button type="button" data-graph-open="${esc(id)}">${cluster ? '展开成员' : '打开详情'}</button>`;
+  }
+  private activityDetail(id: string) {
+    const mark = this.engine?.activity.marks.get(id);
+    return mark ? `<p class="wx-graph-activity-detail">${activityNames[mark.kind]} · ${esc(new Date(mark.at).toLocaleTimeString())}</p>` : '';
   }
   private click = (event: Event) => {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
@@ -136,5 +187,5 @@ export class GraphView {
       } else this.open(id);
     }
   };
-  private error(error: unknown) { this.element.querySelector('.wx-graph-info')!.textContent = String(error); }
+  private error(error: unknown) { const target = this.element.querySelector('.wx-graph-info'); if (target) target.textContent = String(error); }
 }

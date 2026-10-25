@@ -64,7 +64,10 @@ export class RecallService {
     this.unregister = undefined;
   }
   private key(sessionId: string, messageId: string) { return sessionId + '\0' + messageId; }
-  private changed(cached: Cached) { this.owner.recallLog?.schedule(cached.root, cached.record); }
+  private changed(cached: Cached) {
+    this.owner.recallLog?.schedule(cached.root, cached.record);
+    if (cached.record.injected) this.owner.graphActivity?.emit(cached.root, 'inject', cached.record.entryIds, cached.record.id);
+  }
   event(session: any, event: any) {
     if (this.options().mode === 'off') return;
     const id = session.id;
