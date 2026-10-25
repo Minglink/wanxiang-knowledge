@@ -81,3 +81,12 @@ test('分类列表没有图谱，引用元数据转义且空目录不造工具',
   assert.ok(empty.includes('暂无工具条目'));
   assert.ok(!empty.includes('PE / ELF'));
 });
+
+
+test('绿色只表示环境检测可用，已注册但未检测仍为灰色，异常为警示色', async () => {
+  const { toolAvailability } = await import('data:text/javascript;base64,' + Buffer.from(bundle.outputFiles[0].text).toString('base64'));
+  assert.equal(toolAvailability({ callable: true }).tone, 'unknown');
+  assert.equal(toolAvailability({ callable: false, environmentStatus: '可用' }).tone, 'ready');
+  for (const status of ['不可用', '检测失败']) assert.equal(toolAvailability({ environmentStatus: status }).tone, 'failed');
+  assert.equal(toolAvailability({ environmentStatus: '版本未知' }).tone, 'unknown');
+});

@@ -3,19 +3,32 @@ import { toolCategories } from '../tool-categories.js';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]!));
 
+export function toolAvailability(entry: DirectoryEntry) {
+  if (entry.environmentStatus === '可用') return { tone: 'ready', label: '环境检测可用' };
+  if (['不可用', '检测失败'].includes(entry.environmentStatus || '')) {
+    return { tone: 'failed', label: '环境' + entry.environmentStatus };
+  }
+  return { tone: 'unknown', label: entry.environmentStatus || '环境未检测' };
+}
+
+function toolLabel(entry: DirectoryEntry) {
+  const availability = toolAvailability(entry);
+  return `<li data-tool-entry="${esc(entry.key)}"><button type="button" class="wx-tool-status-label wx-tool-status-${availability.tone}"
+    data-tool-key="${esc(entry.key)}" title="${esc(availability.label + ' · ' + entry.status + (entry.description ? ' · ' + entry.description : ''))}">
+    <i aria-hidden="true"></i>${esc(entry.name)}</button></li>`;
+}
+
 export function directoryPage(directory: ToolDirectory, sessions: { id: string; title: string }[], scope: string) {
   return `<div class="section-head"><div><h2>工具库</h2><p class="muted">按用途自动分类，支持手动调整。分类数字：当前范围已注册 / 全部条目。</p></div>
     <div class="actions"><button class="btn" data-tool-refresh>刷新工具</button><button class="btn primary" data-action="tool-new">添加工具</button></div></div>
     <div class="wx-tool-scope"><label>工具可见范围 <select aria-label="工具可见范围" id="wx-tool-scope"><option value="">宿主全局</option>
     ${sessions.map(session => `<option value="${esc(session.id)}" ${scope === session.id ? 'selected' : ''}>${esc(session.title)}</option>`).join('')}</select></label>
     <span>${directory.callable} 个已注册 · ${directory.total} 个条目</span></div>
-    <p class="muted small">包含插件和 MCP 提供的工具能力。登记不等于接入；实际调用仍受会话权限、参数和工具环境限制。</p>
+    <p class="muted small">包含插件和 MCP 提供的工具能力。绿色表示上次环境检测可用，灰色表示未确认，警示色表示检测异常；数量为已注册 / 全部。实际调用仍受会话权限限制。</p>
     ${directory.discovery.warning ? `<p class="warning">${esc(directory.discovery.warning)}</p>` : ''}
-    ${directory.groups.length ? `<div class="wx-tool-list">${directory.groups.map(group => `<section class="wx-tool-list-section">
-      <div class="wx-tool-list-heading"><h3>${esc(group.category)}</h3><span class="wx-tool-list-count" title="当前范围已注册 / 全部条目">${group.callable}/${group.items.length}</span></div>
-      <ul class="wx-tool-list-items">${group.items.map(entry => `<li data-tool-entry="${esc(entry.key)}">
-        <button type="button" class="wx-tool-list-name" data-tool-key="${esc(entry.key)}" title="${esc(entry.status + (entry.description ? ' · ' + entry.description : ''))}">${esc(entry.name)}</button>
-      </li>`).join('')}</ul>
+    ${directory.groups.length ? `<div class="wx-tool-status-list">${directory.groups.map(group => `<section class="wx-tool-status-row">
+      <h3>${esc(group.category)}</h3><ul class="wx-tool-status-items">${group.items.map(toolLabel).join('')}</ul>
+      <span class="wx-tool-status-count" title="当前范围已注册 / 全部条目">${group.callable}/${group.items.length}</span>
     </section>`).join('')}</div>`
       : '<div class="empty"><strong>暂无工具条目</strong><p>刷新宿主工具，或添加自己的工具记录。</p></div>'}`;
 

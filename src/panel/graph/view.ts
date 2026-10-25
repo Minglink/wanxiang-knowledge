@@ -4,7 +4,7 @@ import { CanvasGraph, graphColors } from './canvas.js';
 import { aggregateGraph } from './aggregate.js';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
-const names: Record<string, string> = { note: '笔记', method: '方法', pitfall: '踩坑', project: '项目', tool: '工具' };
+const names: Record<string, string> = { note: '笔记', method: '方法', pitfall: '踩坑', project: '项目' };
 export interface GraphViewState { layout: Layout; selected: string; text: string; kinds: Set<string>; networkRotation: number }
 export const newGraphState = (): GraphViewState => ({ layout: 'sphere', networkRotation: 0, selected: '', text: '', kinds: new Set(Object.keys(names)) });
 export function graphMarkup(title = '知识图谱') {
@@ -37,7 +37,7 @@ export class GraphView {
     } else this.data = aggregateGraph(raw);
     const data = this.data;
     if (!data.nodes.length) {
-      this.element.innerHTML = '<h2>知识图谱</h2><div class="empty"><strong>暂无关系图谱</strong><p>保存知识或登记工具后，这里显示真实条目与关系。</p></div>';
+      this.element.innerHTML = '<h2>知识图谱</h2><div class="empty"><strong>暂无关系图谱</strong><p>保存知识后，这里显示真实知识条目与关系。</p></div>';
       return;
     }
     if (data.nodes.length > 1500) {

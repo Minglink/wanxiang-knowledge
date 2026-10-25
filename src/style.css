@@ -78,3 +78,18 @@
 .wx-tool-list-name:hover { color: #4d6bfe; text-decoration: underline; text-underline-offset: 4px; }
 .wx-tool-list-name:focus-visible { outline: 2px solid #4d6bfe; outline-offset: 4px; }
 .wx-tool-detail-state { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; color: var(--muted); }
+
+/* Tool status rows, matching the compact category directory. */
+.wx-tool-status-list { margin-top: 20px; }
+.wx-tool-status-row { display: grid; grid-template-columns: 104px minmax(0, 1fr) 46px; align-items: start; gap: 12px; margin: 0; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.wx-tool-status-row:last-child { border-bottom: 0; }
+.wx-tool-status-row h3 { margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
+.wx-tool-status-items { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; margin: 0; min-width: 0; }
+.wx-tool-status-items li { min-width: 0; max-width: 100%; }
+.wx-tool-status-label { display: inline-flex; align-items: baseline; gap: 6px; max-width: 100%; padding: 4px 8px; border: 0; border-radius: 3px; background: #edf1f7; color: #65758d; font-size: 13px; line-height: 1.5; text-align: left; overflow-wrap: anywhere; }
+.wx-tool-status-label i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; align-self: center; }
+.wx-tool-status-ready { color: #008368; background: #e8fbf2; }
+.wx-tool-status-failed { color: #b84141; background: #fff0ee; }
+.wx-tool-status-label:hover { box-shadow: 0 0 0 1px currentColor; }
+.wx-tool-status-count { padding-top: 5px; color: var(--muted); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+@media(max-width:600px) { .wx-tool-status-row { grid-template-columns: minmax(0, 1fr) 46px; gap: 7px 10px; } .wx-tool-status-items { grid-row: 2; grid-column: 1 / -1; } .wx-tool-status-count { grid-row: 1; grid-column: 2; } }

@@ -39,11 +39,11 @@ try {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(base + '/wanxiang');
-  await page.locator('.wx-graph-canvas').waitFor();
+  await page.locator('main .wx-graph-canvas').waitFor();
   await page.locator('nav [data-tab="tools"]').click();
-  await page.locator('.wx-tool-list').waitFor();
+  await page.locator('.wx-tool-status-list').waitFor();
   assert.equal(await page.locator('canvas').count(), 0);
-  assert.equal(await page.locator('.wx-tool-list-section').count(), 4);
+  assert.equal(await page.locator('.wx-tool-status-row').count(), 4);
   assert.equal(await page.locator('[data-tool-entry]').count(), 4);
   assert.equal(await page.locator('.wx-tool-group, .wx-tool-row').count(), 0);
   assert.equal(await page.locator('[data-tool-entry] p, [data-tool-entry] small, [data-tool-entry] .badge').count(), 0);
@@ -61,10 +61,12 @@ try {
   const manual = () => page.locator('[data-tool-entry]').filter({ hasText: 'Frida 合成工具' });
   await manual().waitFor();
   assert.ok((await manual().locator('..').locator('..').innerText()).includes('动态分析'));
+  assert.equal(await manual().locator('.wx-tool-status-unknown').count(), 1);
   await manual().getByRole('button').click();
   await page.locator('#tool-form').getByRole('button', { name: '检测版本', exact: true }).click();
   await page.getByText('检测完成', { exact: true }).waitFor();
   await page.getByRole('button', { name: '取消', exact: true }).click();
+  assert.equal(await manual().locator('.wx-tool-status-ready').count(), 1);
   await manual().getByRole('button').click();
   await page.locator('#tool-form').getByText('手动登记 · 环境：可用', { exact: false }).waitFor();
   await page.getByRole('button', { name: '取消', exact: true }).click();
@@ -78,16 +80,16 @@ try {
   await page.waitForFunction(() => !document.querySelector('dialog').open);
   await page.locator('[data-tool-entry]').filter({ hasText: '合成反汇编入口' }).waitFor();
   assert.equal(await page.locator('[data-tool-entry]').count(), 4);
-  assert.ok((await page.locator('.wx-tool-list-section').filter({ hasText: '我的研究分类' }).innerText()).includes('1/1'));
+  assert.ok((await page.locator('.wx-tool-status-row').filter({ hasText: '我的研究分类' }).innerText()).includes('1/1'));
   pass('自定义分类覆盖保留，绑定已注册能力后去重');
   await page.getByRole('combobox', { name: '工具可见范围' }).selectOption(fixture.id);
-  await page.locator('[data-tool-key][title^="当前范围未注册"]').waitFor();
+  await page.locator('[data-tool-key][title*="当前范围未注册"]').waitFor();
   await page.getByRole('combobox', { name: '工具可见范围' }).selectOption('');
-  await page.locator('.wx-tool-list-section').filter({ hasText: '我的研究分类' }).locator('[data-tool-key][title^="已注册"]').waitFor();
+  await page.locator('.wx-tool-status-row').filter({ hasText: '我的研究分类' }).locator('[data-tool-key][title*="已注册"]').waitFor();
   pass('会话工具范围变化实时反映，未启动任务或调用工具');
   enabled = false;
   await page.getByRole('button', { name: '刷新工具', exact: true }).click();
-  await page.locator('[data-tool-key][title^="当前范围未注册"]').waitFor();
+  await page.locator('[data-tool-key][title*="当前范围未注册"]').waitFor();
   assert.equal(await page.locator('[data-tool-entry]').count(), 1);
   enabled = true;
   await page.getByRole('button', { name: '刷新工具', exact: true }).click();
@@ -98,11 +100,25 @@ try {
   await page.setViewportSize({ width: 720, height: 900 });
   await page.screenshot({ path: 'dist/tool-directory/synthetic-720.png', fullPage: true });
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  const graphRequests = [];
+  page.on('request', request => {
+    if (new URL(request.url()).pathname === '/api/wanxiang/graph') graphRequests.push(request.url());
+  });
   await page.locator('nav [data-tab="overview"]').click();
-  await page.locator('.wx-graph-canvas').waitFor();
+  await page.locator('main .wx-graph-canvas').waitFor();
+  for (const layout of ['sphere', 'network']) {
+    await page.locator(`[data-graph-action="${layout}"]`).click();
+    assert.equal(await page.locator('[data-graph-kind="tool"], [data-graph-node^="tool:"]').count(), 0);
+  }
+  await page.locator('[data-graph-action="expand"]').click();
+  await page.locator('dialog .wx-graph-canvas').waitFor();
+  assert.equal(await page.locator('dialog [data-graph-node^="tool:"], dialog [data-graph-kind="tool"]').count(), 0);
+  await page.getByRole('button', { name: '关闭', exact: true }).click();
   await page.locator('nav [data-tab="library"]').click();
   await page.getByRole('button', { name: '图谱', exact: true }).click();
-  await page.locator('.wx-graph-canvas').waitFor();
+  await page.locator('main .wx-graph-canvas').waitFor();
+  assert.ok(graphRequests.length >= 3);
+  assert.ok(graphRequests.every(url => new URL(url).searchParams.get('scope') === 'library'));
   await page.getByRole('button', { name: '设置', exact: true }).click();
   await page.locator('#settings-form').waitFor();
   assert.deepEqual(errors, []);
