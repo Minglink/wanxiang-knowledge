@@ -37,6 +37,8 @@ test('同步section仅取当前已就绪缓存，未就绪/其他会话为空，
   assert.equal(f.recall.section('other-session'), '');
   f.recall.event(f.session, { type: 'user/message', seq: 12, data: { id: 'message-a', source: { kind: 'user' } } });
   assert.equal(f.recall.records[0].seq, 12);
+  f.owner.store.revision = 1;
+  assert.equal(f.recall.section(f.session.id), '', 'library changes invalidate an old result');
   f.recall.dispose();
 });
 test('排队的未来用户消息不替换当前消息，claim后不得复用前轮缓存', async () => {

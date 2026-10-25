@@ -1,3 +1,6 @@
+export { RecallProcessPool, RecallTimeout } from './recall-process-pool.js';
+export { skipRecall, recallConfidence } from './recall-query.js';
+export { RecallSearch } from './recall-search.js';
 export { RecallService } from './recall-service.js';
 export { recallOptions } from './recall-options.js';
 export { recallTemplate } from './recall-template.js';

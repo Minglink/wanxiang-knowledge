@@ -27,7 +27,7 @@ export class NodeSqliteEngine implements IndexEngine {
   reset() {
     this.statements.clear();
     this.db.exec(`DROP TABLE IF EXISTS fts; DROP TABLE IF EXISTS entries;
-      CREATE TABLE entries(id TEXT PRIMARY KEY,title TEXT,kind TEXT,project TEXT,tags TEXT,search TEXT,archived INTEGER,updated TEXT,invalid_at TEXT);
+      CREATE TABLE entries(id TEXT PRIMARY KEY,title TEXT,kind TEXT,project TEXT,tags TEXT,search TEXT,archived INTEGER,updated TEXT,invalid_at TEXT,l0 TEXT,questions TEXT);
       CREATE INDEX project_filter ON entries(project,archived,invalid_at);
       CREATE VIRTUAL TABLE fts USING fts5(title,l0,l1,questions,body,tags,content='',contentless_delete=1,tokenize='unicode61');`);
   }
@@ -35,7 +35,7 @@ export class NodeSqliteEngine implements IndexEngine {
     const search = `${entry.id}\n${entry.title}\n${entry.tags.join(' ')}\n${entry.body}`.normalize('NFKC').toLowerCase();
     const previous = this.statement('SELECT rowid FROM entries WHERE id=?').get(entry.id);
     if (previous) this.statement('DELETE FROM fts WHERE rowid=?').run(previous.rowid!);
-    this.statement('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?,?)').run(entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt, entry.invalidAt || null);
+    this.statement('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt, entry.invalidAt || null, entry.l0 || '', JSON.stringify(entry.questions || []));
     const row = this.statement('SELECT rowid FROM entries WHERE id=?').get(entry.id)!;
     this.statement('INSERT INTO fts(rowid,title,l0,l1,questions,body,tags) VALUES(?,?,?,?,?,?,?)').run(row.rowid!, indexText(entry.title), indexText(entry.l0 || ''), indexText(entry.l1 || ''), indexText((entry.questions || []).join('\n')), indexText(entry.body), indexText(entry.tags.join(' ')));
   }

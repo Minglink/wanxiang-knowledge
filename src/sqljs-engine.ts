@@ -14,11 +14,11 @@ export class SqlJsEngine implements IndexEngine {
     this.db = new SQL.Database();
   }
   reset() {
-    this.db.run('DROP TABLE IF EXISTS entries; CREATE TABLE entries(id TEXT PRIMARY KEY,title TEXT,kind TEXT,project TEXT,tags TEXT,search TEXT,archived INTEGER,updated TEXT,invalid_at TEXT)');
+    this.db.run('DROP TABLE IF EXISTS entries; CREATE TABLE entries(id TEXT PRIMARY KEY,title TEXT,kind TEXT,project TEXT,tags TEXT,search TEXT,archived INTEGER,updated TEXT,invalid_at TEXT,l0 TEXT,questions TEXT)');
   }
   index(entry: Entry) {
     const search = `${entry.id}\n${entry.title}\n${entry.tags.join(' ')}\n${entry.body}`.normalize('NFKC').toLowerCase();
-    this.db.run('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?,?)', [entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt, entry.invalidAt || null]);
+    this.db.run('INSERT OR REPLACE INTO entries VALUES(?,?,?,?,?,?,?,?,?,?,?)', [entry.id, entry.title, entry.type, entry.project, entry.tags.join(' '), search, entry.archived ? 1 : 0, entry.updatedAt, entry.invalidAt || null, entry.l0 || '', JSON.stringify(entry.questions || [])]);
   }
   search(filter: SearchFilter) {
     const terms = (filter.query || '').normalize('NFKC').toLowerCase().trim().split(/\s+/).filter(Boolean).slice(0, 12);
