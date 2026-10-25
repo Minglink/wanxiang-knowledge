@@ -50,3 +50,18 @@
 .wx-graph-rotation label{display:inline-flex;gap:8px;align-items:center}
 .wx-graph-rotation input{width:140px;accent-color:var(--blue)}
 .wx-graph-rotation output{min-width:38px;font-variant-numeric:tabular-nums}
+
+/* Categorized tool directory */
+.wx-tool-scope{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:12px 0;color:var(--muted);font-size:12px}
+.wx-tool-scope label{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.wx-tool-scope select{max-width:300px;padding:7px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.wx-tool-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,390px),1fr));gap:16px;margin-top:20px;align-items:start}
+.wx-tool-group{margin:0;padding:18px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.wx-tool-group h3{margin:0;font-size:15px}
+.wx-tool-count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.wx-tool-row{display:flex;gap:12px;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line);min-width:0}
+.wx-tool-description{min-width:0;overflow-wrap:anywhere}
+.wx-tool-description strong{font-size:13px;color:var(--ink)}
+.wx-tool-description p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;color:var(--muted);line-height:1.7;margin:6px 0}
+.wx-tool-description small{display:block;color:var(--muted);font-size:11px;line-height:1.7}
+.wx-tool-actions{display:flex;align-items:flex-end;flex-direction:column;gap:8px;flex-shrink:0;font-size:11px}
