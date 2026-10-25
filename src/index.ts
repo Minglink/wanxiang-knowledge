@@ -1,3 +1,4 @@
+import { registerWanxiangCommand } from './wanxiang-command.js';
 import { discoverHostTools } from './tool-discovery.js';
 import { manualToolDirectory } from './tool-directory.js';
 import { knowledgeTools } from './knowledge-tools.js';
@@ -45,6 +46,7 @@ export async function apply(ctx:any){
  const service=await new KnowledgeService(home,harnessHost(ctx,()=>catalog)).init();
  service.host.listTools=async(sessionId='')=>discoverHostTools(ctx,sessionId);
  registerRoutes(ctx,service);
+ registerWanxiangCommand(ctx);
  ctx.inject(['systemPrompt'],(child:any)=>child.effect(()=>service.recall.setProvider(child.systemPrompt)));
  ctx.on('session/event',(session:any,event:any)=>{if(event.type==='session/title')service.pendingTitles.forget(session.id);try{service.recall.event(session,event);}catch{ctx.logger?.warn('自动召回事件处理失败，本轮跳过');}if(event.type==='turn/end'){void service.markPending(session.id,session.header.title||session.id).catch((e:any)=>ctx.logger?.warn(e.message));}});
  ctx.inject(['tools'],(toolCtx:any)=>{
