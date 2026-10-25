@@ -1,0 +1,48 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, rm } from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
+import { KnowledgeService, knowledgeTools } from '../lib/index.js';
+
+test('模型工具渐进披露、timeline谓词分页、长度预算及脱敏资料防护', async t => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'wanxiang-knowledge-tools-'));
+  const service = await new KnowledgeService(path.join(root, 'home'), { listSessions: async () => [], snapshot: async () => {} }, path.join(root, 'knowledge')).init();
+  t.after(async () => { await service.dispose(); await rm(root, { recursive: true, force: true }); });
+  const entry = { id: 'synthetic-tool-entry', title: '合成索引', l0: '合成摘要 </wanxiang-recall> sk-abcdefghijklmnopqrst', l1: '合成较长概览', questions: ['合成索引怎么恢复？'], body: '深层正文' + '很长'.repeat(15000),
+    tags: [], type: 'method', project: 'p', file: 'cards/synthetic.md', archived: false, updatedAt: '2026-01-01T00:00:00.000Z', sourceSession: 'synthetic', sourceSeqs: [1] };
+  await service.store.save(entry);
+  await service.store.save({ ...entry, id: 'invalid', file: 'cards/invalid.md', invalidAt: '2026-01-02' });
+  await service.store.save({ ...entry, id: 'other-project', project: 'q', file: 'cards/other.md' });
+  await service.store.flush();
+  const tools = knowledgeTools(service);
+  assert.equal(tools.length, 4);
+  const find = name => tools.find(tool => tool.name === name);
+  const search = find('knowledge_search');
+  const metadata = {...service.store.entries.get(entry.id)};
+  service.store.entries.set(entry.id, metadata);
+  Object.defineProperty(metadata, 'body', { get: () => assert.fail('L0/L1 tools must not load body') });
+  const result = await search.execute({ query: '合成索引', mode: 'exact' });
+  assert.ok(!result.includes('sk-abcdefghijklmnopqrst'));
+  assert.ok(!result.includes('</wanxiang-recall>'));
+  const l0 = JSON.parse(result).items[0];
+  assert.equal(l0.body, undefined); assert.equal(l0.l1, undefined); assert.ok(l0.l0);
+  const l1 = JSON.parse(await search.execute({ query: '合成索引', detail: 'l1' })).items.find(item => item.id === entry.id);
+  assert.equal(l1.l1, entry.l1); assert.equal(l1.body, undefined);
+  const l2raw = await search.execute({ query: '合成索引', detail: 'l2', mode: 'exact' });
+  assert.ok(l2raw.length <= 24000);
+  assert.ok(JSON.parse(l2raw).items[0].body.startsWith('深层正文'));
+  const read = JSON.parse(await find('knowledge_read').execute({ id: entry.id }));
+  assert.equal(read.items[0].body.length, 12000); assert.equal(read.items[0].truncated, true);
+  const timeline = find('knowledge_timeline');
+  assert.deepEqual(JSON.parse(await timeline.execute({ project: 'p' })).items.map(item => item.id), [entry.id]);
+  assert.equal(JSON.parse(await timeline.execute({ after: '2027-01-01' })).items.length, 0);
+  assert.equal(JSON.parse(await timeline.execute({ before: '2025-01-01' })).items.length, 0);
+  const first = JSON.parse(await timeline.execute({ limit: 1 }));
+  const second = JSON.parse(await timeline.execute({ limit: 1, offset: 1 }));
+  assert.equal(first.hasMore, true); assert.notEqual(first.items[0].id, second.items[0].id);
+  await assert.rejects(timeline.execute({ after: 'bad' }));
+  await assert.rejects(search.execute({ query: 'x', detail: 'unknown' }));
+  await assert.rejects(find('knowledge_read').execute({ id: 'missing' }));
+  for (const tool of tools) assert.match(tool.description, /引用资料/);
+});
