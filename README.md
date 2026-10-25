@@ -4,7 +4,7 @@
 
 <h1 align="center">万象知识库</h1>
 
-<p align="center">让你的<strong>DeepSeek Harness成为你的专属Agent，陪你一起无限进步！</strong></p>
+<p align="center"><strong>让你的DeepSeek Harness成为你的专属Agent，陪你一起无限进步！</strong></p>
 
 <p align="center">
   <a href="https://github.com/Minglink/wanxiang-knowledge/releases"><img src="https://img.shields.io/badge/version-0.2.0--alpha.8-4D6BFE" alt="0.2.0-alpha.8"></a>
@@ -17,9 +17,9 @@
   <a href="#快速安装">安装</a> · <a href="#在-harness-中使用">使用</a> · <a href="#记忆检索">记忆检索</a> · <a href="#性能实测">性能</a> · <a href="#架构与数据">架构</a> · <a href="docs/测试报告.md">测试报告</a>
 </p>
 
-万象知识库是为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 开发的社区插件。它在 Harness 内提供会话落库、本地检索、可选自动召回、知识图谱、工具目录和文件夹学习：当前 AI 可以通过 `/wanxiang` 查询已有知识，也可以按需读取摘要、正文和项目时间线。
+万象知识库是为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 开发的社区插件。它在 Harness 内提供会话落库、本地检索、可选自动召回、知识图谱、工具目录和文件夹学习，支持构建属于你的专属Agent：当前 AI 可以通过 `/wanxiang` 查询已有知识，也可以按需读取摘要、正文和项目时间线。
 
-当前版本为 **0.2.0-alpha.8 预览版**，主要验证环境是 Windows + Harness Desktop `0.2.1-alpha.1`。插件代码采用 MIT 许可证；可选知识内容包保留各来源的署名和许可。本项目由社区维护。
+当前版本为 **0.2.0-alpha.8 预览版**，主要验证环境是 Windows + Harness Desktop `0.2.1-alpha.1`。插件代码采用 MIT 许可证，后续我作者的知识库链接也会放在这个介绍（我的主要方向是逆向工程，也欢迎大家提交自己的知识库链接分享(*^▽^*)）。
 
 ## 在 Harness 中使用
 
@@ -122,14 +122,14 @@
 
 | 实测项目 | 结果 | 测量范围 |
 | --- | --- | --- |
-| 中文混合检索合成评测 | 80 个查询，Recall@5 **100%**，MRR **0.98125** | 20 条固定合成知识，非真实历史留出集 |
+| 中文混合检索合成评测 | 80 个查询，Recall@5 **100%**，MRR **0.98125** | 20 条固定合成知识 |
 | 10 万条原生 FTS 查询 | p50 **0.75ms** / p95 **85.20ms** | 原生磁盘索引，含宽泛词；不含模型和完整服务 |
 | 10 万条隔离自动召回 | p95 **91.27ms**，40/40 未超时 | RecallSearch + IPC + 规则/置信度，含冷启动 |
 | 10 万条驻留 Map | 堆内存 **716.90 → 181.02 MiB**，约降低 **74.7%** | 全正文与仅元数据两种驻留方式；非应用总内存 |
-| 百万条压力测试 | FTS p95 **844.68ms**；隔离召回 **20/40 超时** | 用于暴露宽泛检索和预算限制，不宣称百万规模无损召回 |
+| 百万条压力测试 | FTS p95 **844.68ms**；隔离召回 **20/40 超时** | 宽泛检索和预算限制 |
 | 当前代码验证 | 构建、类型检查、**80/80 测试通过** | 本机验证，不代表所有宿主版本均兼容 |
 
-自动召回的截止预算用于限制开销，超时会放弃注入，不能把「预算 200ms」理解为任何规模都能成功检索。百万规模、宽泛词与冷启动的成本会在性能说明中一并展示。
+自动召回的截止预算用于限制开销，超时会放弃注入。
 
 ## 架构与数据
 
@@ -220,4 +220,4 @@ npm run pack:plugin
 
 ## 许可与致谢
 
-插件源码采用 [MIT](LICENSE)。`knowledge/` 中第三方文献遵循各条目及随附许可；DeepSeek、DeepSeek Harness 和第三方工具名称归各自权利人所有。封面为 AI 生成的社区项目宣传图，界面配图由项目维护者提供。
+插件源码采用 [MIT](LICENSE)。`knowledge/` 中第三方文献遵循各条目及随附许可；DeepSeek、DeepSeek Harness 和第三方工具名称归各自权利人所有。
