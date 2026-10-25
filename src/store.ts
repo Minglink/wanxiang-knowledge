@@ -1,3 +1,4 @@
+import { relations } from './relations.js';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
@@ -16,9 +17,9 @@ export class Store {
   read(id:string){const entry=this.entries.get(id);if(!entry)throw new Error('知识不存在');return this.repo.read(entry.file);}
   local(...parts:string[]) {const p=path.resolve(this.root,...parts);if(p!==this.root&&!p.startsWith(this.root+path.sep))throw new Error('路径超出知识目录');return p;}
   async init(){for(const d of ['notes','cards','tools','sources','.wanxiang/jobs','.wanxiang/revisions','.wanxiang/staging'])await fs.mkdir(this.local(d),{recursive:true});const selected=await createEngine(this.root,data=>atomic(this.local('.wanxiang','index.sqlite'),data));this.engine=selected.engine;this.engineWarning=selected.warning||'';this.tools=await json(this.local('tools','catalog.json'),[]);await this.rebuild();return this;}
-  async rebuild(){this.entries.clear();this.warnings=this.engineWarning?[this.engineWarning]:[];this.engine.reset();for(const file of await this.repo.files()){try{const e=this.repo.read(file);if(this.entries.has(e.id))throw new Error('重复 ID');this.entries.set(e.id,this.repo.metadata(e));this.index(e);}catch(e:any){this.warnings.push(`${file}：${e.message}`);}}await this.flush();return {count:this.entries.size,warnings:this.warnings};}
+  async rebuild(){this.entries.clear();this.warnings=this.engineWarning?[this.engineWarning]:[];this.engine.reset();for(const file of await this.repo.files()){try{await this.repo.synchronize(file);const e=this.repo.read(file);if(this.entries.has(e.id))throw new Error('重复 ID');this.entries.set(e.id,this.repo.metadata(e));this.index(e);}catch(e:any){this.warnings.push(`${file}：${e.message}`);}}await this.flush();return {count:this.entries.size,warnings:this.warnings};}
   index(e:Entry){this.engine.index(e);}
-  async flush(){await this.engine.flush();}
+  async flush(){if(this.engine.replaceRelations)this.engine.replaceRelations(relations(this.entries,this.tools));await this.engine.flush();}
   search(q='',type='',archived=false,project=''){return this.engine.search({query:q,type,archived,project}).map(id=>this.entries.get(id)!); }
   async save(e:Entry){await this.repo.write(e);this.entries.set(e.id,this.repo.metadata(e));this.index(e);}
   async edit(id:string,body:string,title:string,expected:string,archived?:boolean){const e=this.entries.get(id);if(!e)throw new Error('知识不存在');if(e.updatedAt!==expected)throw new Error('内容已更新，请刷新后再保存');const disk=await fs.readFile(this.local(e.file),'utf8');const match=disk.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);if(!match||(e._bodyHash?hash(match[2])!==e._bodyHash:match[2]!==e.body)||JSON.parse(match[1]).updatedAt!==e.updatedAt||JSON.parse(match[1]).title!==e.title)throw new Error('文件已在外部修改，请重建索引后重试');await atomic(this.local('.wanxiang','revisions',`${id}-${Date.now()}.json`),JSON.stringify({...e,body:e.body}));const next={...e,body,title:title.trim()||e.title,archived:archived??e.archived,updatedAt:new Date(Math.max(Date.now(),Date.parse(e.updatedAt)+1)).toISOString()};await this.save(next);await this.flush();return next;}

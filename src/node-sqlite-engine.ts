@@ -42,6 +42,11 @@ export class NodeSqliteEngine implements IndexEngine {
     return this.db.prepare(sql).all(...args).map(row => String(row.id));
   }
   async flush() { this.db.exec('PRAGMA wal_checkpoint(PASSIVE)'); }
+  replaceRelations(rows: Iterable<import('./relations.js').Relation>) {
+    this.db.exec('CREATE TABLE IF NOT EXISTS relations(src TEXT,dst TEXT,kind TEXT,weight REAL,PRIMARY KEY(src,dst,kind));DELETE FROM relations');
+    const insert=this.db.prepare('INSERT OR REPLACE INTO relations VALUES(?,?,?,?)');
+    for(const row of rows)insert.run(row.s,row.t,row.kind,row.w);
+  }
   begin() { this.db.exec('BEGIN'); }
   end() { this.db.exec('COMMIT'); }
   fullSearch(filter: SearchFilter & { hot?: boolean; validOnly?: boolean }) {

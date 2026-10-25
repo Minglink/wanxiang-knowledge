@@ -36,6 +36,10 @@ export class SqlJsEngine implements IndexEngine {
     finally { statement.free(); }
     return result;
   }
+  replaceRelations(rows: Iterable<import('./relations.js').Relation>) {
+    this.db.run('CREATE TABLE IF NOT EXISTS relations(src TEXT,dst TEXT,kind TEXT,weight REAL,PRIMARY KEY(src,dst,kind));DELETE FROM relations');
+    for(const row of rows)this.db.run('INSERT OR REPLACE INTO relations VALUES(?,?,?,?)',[row.s,row.t,row.kind,row.w]);
+  }
   async flush() { await this.persist(this.db.export()); }
   close() { this.db?.close(); }
 }

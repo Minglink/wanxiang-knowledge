@@ -4,6 +4,7 @@ import path from 'node:path';
 import type { Entry } from './types.js';
 import { createHash } from 'node:crypto';
 import { atomic } from './store.js';
+import { transactionalFiles } from './storage-transaction.js';
 
 const owned = (value: string) => Buffer.from(value).toString();
 function bodyReader(repo: MarkdownRepo, file: string) { return () => repo.read(file).body; }
@@ -21,19 +22,60 @@ export function parseMarkdown(raw: string, file: string): Entry {
 }
 
 export class MarkdownRepo {
+  private mirrors: Record<string, { primary: string; mirror: string; hash: string }> = {};
   constructor(public root: string) {}
   local(...parts: string[]) {
     const resolved = path.resolve(this.root, ...parts);
     if (resolved !== this.root && !resolved.startsWith(this.root + path.sep)) throw new Error('路径超出知识目录');
     return resolved;
   }
-  read(file: string) { return parseMarkdown(readFileSync(this.local(file), 'utf8'), file); }
-  async files() {
-    const result: string[] = [];
-    for (const dir of ['notes', 'cards']) for (const filename of await fs.readdir(this.local(dir))) {
-      if (filename.endsWith('.md')) result.push(path.join(dir, filename));
+  private mirrorFile = '.wanxiang/mirrors.json';
+  private digest(raw: string) { return createHash('sha256').update(raw).digest('hex'); }
+  async loadMirrors() {
+    try { this.mirrors = JSON.parse(await fs.readFile(this.local(this.mirrorFile), 'utf8')); }
+    catch (error: any) { if (error.code !== 'ENOENT') throw error; this.mirrors = {}; }
+    if (!this.mirrors || Array.isArray(this.mirrors) || typeof this.mirrors !== 'object') throw new Error('兼容副本清单无效');
+    for (const item of Object.values(this.mirrors)) {
+      if (!item || typeof item.primary !== 'string' || typeof item.mirror !== 'string' || typeof item.hash !== 'string') throw new Error('兼容副本清单无效');
+      this.local(item.primary); this.local(item.mirror);
     }
-    return result;
+  }
+  private current(file: string) {
+    const record = Object.values(this.mirrors).find(item => item.primary === file || item.mirror === file);
+    if (!record) return { raw: readFileSync(this.local(file), 'utf8'), file };
+    const primary = readFileSync(this.local(record.primary), 'utf8');
+    const mirror = readFileSync(this.local(record.mirror), 'utf8');
+    if(parseMarkdown(primary,record.primary).id!==parseMarkdown(mirror,record.mirror).id)throw new Error('兼容副本ID冲突，需人工处理');
+    if (primary === mirror) return { raw: primary, file: record.primary };
+    const primaryChanged = this.digest(primary) !== record.hash, mirrorChanged = this.digest(mirror) !== record.hash;
+    if (primaryChanged && mirrorChanged) throw new Error('分片与平铺兼容副本均被修改，需人工处理；未覆盖任何一份');
+    return { raw: primaryChanged ? primary : mirror, file: record.primary };
+  }
+  read(file: string) { const current = this.current(file); return parseMarkdown(current.raw, current.file); }
+  async files() {
+    await this.loadMirrors();
+    const result: string[] = [];
+    const walk = async (dir: string) => {
+      for (const item of await fs.readdir(this.local(dir), { withFileTypes: true })) {
+        const file = path.join(dir, item.name);
+        if (item.isSymbolicLink()) throw new Error('知识目录含符号链接，需人工检查');
+        if (item.isDirectory()) await walk(file);
+        else if (file.endsWith('.md')) result.push(file);
+      }
+    };
+    for (const dir of ['notes', 'cards']) await walk(dir);
+    const mirrors = new Set(Object.values(this.mirrors).map(item => item.mirror));
+    return result.filter(file => !mirrors.has(file)).sort();
+  }
+  async synchronize(file: string) {
+    const record = Object.values(this.mirrors).find(item => item.primary === file);
+    if (!record) return;
+    const current = this.current(file);
+    const digest = this.digest(current.raw);
+    if (digest === record.hash) return;
+    const next = { ...this.mirrors, [parseMarkdown(current.raw, file).id]: { ...record, hash: digest } };
+    await transactionalFiles(this, { [record.primary]: current.raw, [record.mirror]: current.raw, [this.mirrorFile]: JSON.stringify(next) }, '同步单侧编辑，原编辑副本保留在备份');
+    this.mirrors = next;
   }
   metadata(entry: Entry): Entry {
     const { body, ...metadata } = entry;
@@ -48,6 +90,19 @@ export class MarkdownRepo {
   }
   async write(entry: Entry) {
     const { body, file, _references, _bodyHash, ...metadata } = entry;
-    await atomic(this.local(file), `---\n${JSON.stringify(metadata, null, 2)}\n---\n${body}`);
+    const raw = `---\n${JSON.stringify(metadata, null, 2)}\n---\n${body}`;
+    if (file.split(/[\\/]/).length <= 2) { await atomic(this.local(file), raw); return; }
+    const mirror = path.join(file.split(/[\\/]/)[0], path.basename(file));
+    try {
+      const existing = parseMarkdown(await fs.readFile(this.local(mirror), 'utf8'), mirror);
+      if (existing.id !== entry.id) throw new Error('平铺兼容文件名冲突');
+    } catch (error: any) { if (error.code !== 'ENOENT') throw error; }
+    const record = this.mirrors[entry.id];
+    if (record) this.current(record.primary); // Refuse diverged manual edits.
+    const next = { ...this.mirrors, [entry.id]: { primary: file, mirror, hash: this.digest(raw) } };
+    const changes:Record<string,string>={ [file]: raw, [mirror]: raw, [this.mirrorFile]: JSON.stringify(next) };
+    try{await fs.access(this.local('wanxiang.json'));}catch(error:any){if(error.code!=='ENOENT')throw error;changes['wanxiang.json']=JSON.stringify({schemaVersion:2,createdAt:new Date().toISOString(),app:'dsh-wanxiang-knowledge'});}
+    await transactionalFiles(this, changes, '写入分片与平铺兼容副本');
+    this.mirrors = next;
   }
 }

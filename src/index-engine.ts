@@ -20,4 +20,5 @@ export interface IndexEngine {
   fullSearch?(filter: SearchFilter & { hot?: boolean; validOnly?: boolean }): { id: string; score: number }[];
   begin?(): void;
   end?(): void;
+  replaceRelations?(rows: Iterable<import('./relations.js').Relation>): void;
 }
