@@ -1,4 +1,5 @@
 import type { GraphData, GraphNode, GraphEdge } from '../../graph.js';
+import { LabelPlacer } from './labels.js';
 import { HitGrid, type HitPoint } from './spatial.js';
 import { NetworkLayout, sphereLayout, arc, type Layout, type Particle } from './layouts.js';
 
@@ -12,6 +13,8 @@ export class CanvasGraph {
   private ctx: CanvasRenderingContext2D;
   private network: NetworkLayout;
   private sphere: Particle[];
+  private networkCenter = { x: 0, y: 0 };
+  private networkExtent = { x: 200, y: 150 };
   private nodes: Map<string, GraphNode>;
   private neighbors = new Map<string, Set<string>>();
   private positions = new Map<string, HitPoint>();
@@ -38,6 +41,17 @@ export class CanvasGraph {
     this.ctx = canvas.getContext('2d')!;
     this.nodes = new Map(data.nodes.map(node => [node.id, node]));
     this.network = new NetworkLayout(data.nodes, data.edges);
+    // Warm up before fitting, so the opening view includes the settled graph.
+    for (let i = 0; i < 80; i++) this.network.tick();
+    const particles = this.network.particles;
+    if (particles.length) {
+      const minX = Math.min(...particles.map(p => p.x));
+      const maxX = Math.max(...particles.map(p => p.x));
+      const minY = Math.min(...particles.map(p => p.y));
+      const maxY = Math.max(...particles.map(p => p.y));
+      this.networkCenter = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
+      this.networkExtent = { x: Math.max(100, (maxX - minX) * 0.6), y: Math.max(100, (maxY - minY) * 0.6) };
+    }
     this.sphere = sphereLayout(data.nodes);
     for (const edge of data.edges) {
       for (const [s, t] of [[edge.s, edge.t], [edge.t, edge.s]]) {
@@ -78,7 +92,7 @@ export class CanvasGraph {
     this.measure();
   }
 
-  setLayout(layout: Layout) { this.layout = layout; this.network.alpha = 1; this.wake(); }
+  setLayout(layout: Layout) { this.layout = layout; this.wake(); }
   setFilter(text: string, kinds: Set<string>) { this.text = text.toLocaleLowerCase(); this.kinds = kinds; this.wake(); }
   reset() { this.zoom = 1; this.pan = { x: 0, y: 0 }; this.yaw = 0; this.pitch = 0; this.target = undefined; this.velocity = { x: 0, y: 0 }; this.wake(); }
   focus(id: string) {
@@ -94,7 +108,7 @@ export class CanvasGraph {
       if (this.motion.matches) { this.yaw = yaw; this.pitch = this.target.pitch; this.target = undefined; }
     } else if (this.layout === 'network') {
       const p = this.network.particles.find(point => point.id === id)!;
-      this.pan = { x: -p.x * this.networkScale(), y: -p.y * this.networkScale() };
+      this.pan = { x: -(p.x - this.networkCenter.x) * this.networkScale(), y: -(p.y - this.networkCenter.y) * this.networkScale() };
     }
     this.select(id); this.wake();
   }
@@ -109,7 +123,10 @@ export class CanvasGraph {
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0); this.wake();
   }
   private wake() { if (!this.frame && !document.hidden) this.frame = requestAnimationFrame(this.draw); }
-  private networkScale() { return Math.min(this.width, this.height) / Math.max(450, Math.sqrt(this.data.nodes.length) * 38) * this.zoom; }
+  private networkScale() {
+    return Math.min(Math.max(80, this.width - 100) / (this.networkExtent.x * 2),
+      Math.max(80, this.height - 60) / (this.networkExtent.y * 2)) * this.zoom;
+  }
   private spherePoint(p: { x: number; y: number; z: number }) {
     const x = p.x * Math.cos(this.yaw) + p.z * Math.sin(this.yaw);
     const z0 = p.z * Math.cos(this.yaw) - p.x * Math.sin(this.yaw);
@@ -153,9 +170,9 @@ export class CanvasGraph {
     if (this.layout === 'sphere') this.drawGlobe();
     const particles = this.layout === 'sphere' ? this.sphere : this.network.particles;
     const projected = particles.map(p => {
-      const point = this.layout === 'sphere' ? this.spherePoint(p) : { x: this.width / 2 + p.x * this.networkScale() + this.pan.x, y: this.height / 2 + p.y * this.networkScale() + this.pan.y, depth: 0, scale: 1 };
+      const point = this.layout === 'sphere' ? this.spherePoint(p) : { x: this.width / 2 + (p.x - this.networkCenter.x) * this.networkScale() + this.pan.x, y: this.height / 2 + (p.y - this.networkCenter.y) * this.networkScale() + this.pan.y, depth: 0, scale: 1 };
       const node = this.nodes.get(p.id)!;
-      return { ...point, id: p.id, radius: Math.min(10, 3 + Math.log2(1 + node.degree)) * (this.layout === 'sphere' ? point.scale : 1) };
+      return { ...point, id: p.id, radius: Math.min(5.5, 2.5 + Math.log2(1 + node.degree) * 0.45) * (this.layout === 'sphere' ? point.scale : 1) };
     }).sort((a, b) => a.depth - b.depth);
     this.positions = new Map(projected.map(p => [p.id, p]));
     this.grid.rebuild(projected);
@@ -169,7 +186,7 @@ export class CanvasGraph {
       if (!a || !b) continue;
       const highlighted = [edge.s, edge.t].includes(this.hover || this.selected);
       if (this.layout === 'sphere' && !highlighted && this.data.nodes.length > 300) continue;
-      ctx.globalAlpha = highlighted ? 0.65 : this.related(edge.s) && this.active(edge.s) && this.active(edge.t) ? 0.1 : 0.025;
+      ctx.globalAlpha = highlighted ? 0.65 : this.related(edge.s) && this.active(edge.s) && this.active(edge.t) ? 0.075 : 0.015;
       ctx.strokeStyle = highlighted ? '#3563ff' : '#7890b6';
       ctx.lineWidth = highlighted ? 1.3 : 0.65;
       ctx.beginPath(); ctx.moveTo(a.x, a.y);
@@ -194,7 +211,7 @@ export class CanvasGraph {
       ctx.globalAlpha = (this.layout === 'sphere' ? 0.3 + (point.depth + 1) * 0.35 : 1) * (active && related ? 1 : 0.15);
       const selected = point.id === this.selected || point.id === this.hover;
       const radius = point.radius * (!this.motion.matches && this.data.nodes.length <= 300 ? 1 + 0.025 * Math.sin(time / 900) : 1);
-      if (selected || Date.now() - Date.parse(node.updatedAt) < 7 * 86400000) {
+      if (selected || this.data.nodes.length <= 60 && Date.now() - Date.parse(node.updatedAt) < 7 * 86400000) {
         ctx.fillStyle = '#3563ff15'; ctx.beginPath(); ctx.arc(point.x, point.y, radius + 5, 0, Math.PI * 2); ctx.fill();
       }
       ctx.fillStyle = node.status === '已失效' ? '#9ba7ba' : graphColors[node.kind];
@@ -208,11 +225,28 @@ export class CanvasGraph {
         ctx.fillStyle = node.status === '可用' ? '#179466' : node.status === '不可用' ? '#cf4c56' : '#9ba7ba';
         ctx.beginPath(); ctx.arc(point.x + radius, point.y - radius, 2.5, 0, Math.PI * 2); ctx.fill();
       }
-      if (selected || (this.data.nodes.length <= 60 || node.degree >= 12) && active && related && point.depth > -0.2) {
-        ctx.globalAlpha = active ? 0.95 : 0.2; ctx.fillStyle = '#263d60'; ctx.font = selected ? '600 12px sans-serif' : '11px sans-serif';
-        ctx.fillText(node.title.slice(0, 18), point.x + radius + 4, point.y + 4);
-      }
     }
+    const labelLimit = Math.max(4, Math.min(12, Math.floor(this.width * this.height / 40000)));
+    const placer = new LabelPlacer(this.width, this.height, labelLimit);
+    const priority = (id: string) => id === this.hover ? 4 : id === this.selected ? 3 : this.text && this.active(id) ? 2 : 0;
+    const candidates = projected.filter(point => this.active(point.id) && this.related(point.id)
+      && (priority(point.id) > 0 || point.depth > -0.2 && (this.data.nodes.length <= 60 || this.nodes.get(point.id)!.degree >= 12)))
+      .sort((a, b) => priority(b.id) - priority(a.id)
+        || this.nodes.get(b.id)!.degree - this.nodes.get(a.id)!.degree || b.depth - a.depth);
+    for (const point of candidates) {
+      const focused = point.id === this.hover || point.id === this.selected;
+      const title = this.nodes.get(point.id)!.title;
+      const text = title.length > 15 ? title.slice(0, 15) + '…' : title;
+      ctx.font = focused ? '600 12px sans-serif' : '11px sans-serif';
+      const box = placer.place(point.x, point.y, point.radius, Math.ceil(ctx.measureText(text).width) + 12);
+      if (!box) continue;
+      ctx.globalAlpha = focused ? 1 : 0.88;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath(); ctx.roundRect(box.x, box.y, box.width, box.height, 4); ctx.fill();
+      ctx.fillStyle = focused ? '#244dc0' : '#526681';
+      ctx.fillText(text, box.x + 6, box.y + 14);
+    }
+    this.canvas.dataset.labels = String(placer.boxes.length);
     ctx.globalAlpha = 1;
     this.frames++; this.drawMs = performance.now() - started;
     this.canvas.dataset.frames = String(this.frames);

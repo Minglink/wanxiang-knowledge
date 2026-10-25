@@ -10,25 +10,37 @@ function fibonacci(index: number, count: number) {
 }
 
 export function sphereLayout(nodes: GraphNode[]): Particle[] {
-  const clusters = [...new Set(nodes.map(node => node.cluster))];
-  const counts = new Map<string, number>();
-  const totals = new Map<string, number>();
-  for (const node of nodes) totals.set(node.cluster, (totals.get(node.cluster) || 0) + 1);
-  return nodes.map((node, index) => {
-    const local = counts.get(node.cluster) || 0;
-    counts.set(node.cluster, local + 1);
-    const center = fibonacci(clusters.indexOf(node.cluster), clusters.length);
-    const spread = fibonacci(local, totals.get(node.cluster)!);
-    const factor = clusters.length === 1 ? 1 : 0.32;
-    let x = clusters.length === 1 ? spread.x : center.x + spread.x * factor;
-    let y = clusters.length === 1 ? spread.y : center.y + spread.y * factor;
-    let z = clusters.length === 1 ? spread.z : center.z + spread.z * factor;
-    if (node.kind === 'tool') {
-      x = Math.cos(index * golden); y = 0.1 * Math.sin(index); z = Math.sin(index * golden);
-    }
-    const length = Math.hypot(x, y, z) || 1;
-    return { id: node.id, x: x / length, y: y / length, z: z / length, vx: 0, vy: 0, cluster: node.cluster };
+  // Allocate the complete Fibonacci surface by population, rather than squeezing
+  // every community into the same fixed cap regardless of its member count.
+  const groups = new Map<string, GraphNode[]>();
+  for (const node of nodes) {
+    const members = groups.get(node.cluster) || [];
+    members.push(node);
+    groups.set(node.cluster, members);
+  }
+  const communities = [...groups.values()].sort((a, b) => b.length - a.length);
+  let available = nodes.map((_, index) => fibonacci(index, nodes.length));
+  const assigned = new Map<string, Particle>();
+  const order = new Map(nodes.map((node, index) => [node.id, index]));
+  communities.forEach((members, index) => {
+    const center = fibonacci(index, communities.length);
+    const distance = (point: typeof center) => point.x * center.x + point.y * center.y + point.z * center.z;
+    available.sort((a, b) => distance(b) - distance(a));
+    members.forEach((node, local) => {
+      const point = available[local];
+      const index = order.get(node.id)!;
+      const position = node.kind === 'tool'
+        ? { x: Math.cos(index * golden), y: 0.1 * Math.sin(index), z: Math.sin(index * golden) }
+        : point;
+      const length = Math.hypot(position.x, position.y, position.z) || 1;
+      assigned.set(node.id, {
+        id: node.id, x: position.x / length, y: position.y / length,
+        z: position.z / length, vx: 0, vy: 0, cluster: node.cluster,
+      });
+    });
+    available = available.slice(members.length);
   });
+  return nodes.map(node => assigned.get(node.id)!);
 }
 
 export class NetworkLayout {
