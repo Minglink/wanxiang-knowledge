@@ -1,4 +1,5 @@
 import type { GraphData, GraphNode, GraphEdge } from '../../graph.js';
+import { rotatePoint, rotatedExtent, rotationRadians } from './network-transform.js';
 import { LabelPlacer } from './labels.js';
 import { HitGrid, type HitPoint } from './spatial.js';
 import { NetworkLayout, sphereLayout, arc, type Layout, type Particle } from './layouts.js';
@@ -13,6 +14,7 @@ export class CanvasGraph {
   private ctx: CanvasRenderingContext2D;
   private network: NetworkLayout;
   private sphere: Particle[];
+  private networkAngle = 0;
   private networkCenter = { x: 0, y: 0 };
   private networkExtent = { x: 200, y: 150 };
   private nodes: Map<string, GraphNode>;
@@ -31,7 +33,7 @@ export class CanvasGraph {
   private pitch = 0;
   private velocity = { x: 0, y: 0 };
   private target?: { yaw: number; pitch: number };
-  private drag?: { x: number; y: number; startX: number; startY: number; node?: string; moved: boolean };
+  private drag?: { x: number; y: number; startX: number; startY: number; node?: string; rotate: boolean; moved: boolean };
   private text = '';
   private secondRing = false;
   private kinds = new Set(Object.keys(graphColors));
@@ -101,7 +103,14 @@ export class CanvasGraph {
 
   setLayout(layout: Layout) { this.layout = layout; this.wake(); }
   setFilter(text: string, kinds: Set<string>) { this.text = text.toLocaleLowerCase(); this.kinds = kinds; this.wake(); }
-  reset() { this.zoom = 1; this.pan = { x: 0, y: 0 }; this.yaw = 0; this.pitch = 0; this.target = undefined; this.velocity = { x: 0, y: 0 }; this.wake(); }
+  setNetworkRotation(degrees: number) {
+    this.networkAngle = rotationRadians(degrees);
+    this.canvas.dispatchEvent(new CustomEvent('wx-graph-rotate', {
+      bubbles: true, detail: this.networkAngle * 180 / Math.PI,
+    }));
+    this.wake();
+  }
+  reset() { this.setNetworkRotation(0); this.zoom = 1; this.pan = { x: 0, y: 0 }; this.yaw = 0; this.pitch = 0; this.target = undefined; this.velocity = { x: 0, y: 0 }; this.wake(); }
   focus(id: string) {
     if (!this.nodes.has(id)) return;
     this.selected = id;
@@ -115,7 +124,8 @@ export class CanvasGraph {
       if (this.motion.matches) { this.yaw = yaw; this.pitch = this.target.pitch; this.target = undefined; }
     } else if (this.layout === 'network') {
       const p = this.network.particles.find(point => point.id === id)!;
-      this.pan = { x: -(p.x - this.networkCenter.x) * this.networkScale(), y: -(p.y - this.networkCenter.y) * this.networkScale() };
+      const point = this.networkPoint(p);
+      this.pan = { x: -point.x * this.networkScale(), y: -point.y * this.networkScale() };
     }
     this.select(id); this.wake();
   }
@@ -130,9 +140,13 @@ export class CanvasGraph {
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0); this.wake();
   }
   private wake() { if (!this.frame && !document.hidden) this.frame = requestAnimationFrame(this.draw); }
+  private networkPoint(point: { x: number; y: number }) {
+    return rotatePoint({ x: point.x - this.networkCenter.x, y: point.y - this.networkCenter.y }, this.networkAngle);
+  }
   private networkScale() {
-    return Math.min(Math.max(80, this.width - 100) / (this.networkExtent.x * 2),
-      Math.max(80, this.height - 60) / (this.networkExtent.y * 2)) * this.zoom;
+    const extent = rotatedExtent(this.networkExtent, this.networkAngle);
+    return Math.min(Math.max(80, this.width - 100) / (extent.x * 2),
+      Math.max(80, this.height - 60) / (extent.y * 2)) * this.zoom;
   }
   private spherePoint(p: { x: number; y: number; z: number }) {
     const x = p.x * Math.cos(this.yaw) + p.z * Math.sin(this.yaw);
@@ -177,7 +191,11 @@ export class CanvasGraph {
     if (this.layout === 'sphere') this.drawGlobe();
     const particles = this.layout === 'sphere' ? this.sphere : this.network.particles;
     const projected = particles.map(p => {
-      const point = this.layout === 'sphere' ? this.spherePoint(p) : { x: this.width / 2 + (p.x - this.networkCenter.x) * this.networkScale() + this.pan.x, y: this.height / 2 + (p.y - this.networkCenter.y) * this.networkScale() + this.pan.y, depth: 0, scale: 1 };
+      const rotated = this.layout === 'network' ? this.networkPoint(p) : p;
+      const point = this.layout === 'sphere' ? this.spherePoint(p) : {
+        x: this.width / 2 + rotated.x * this.networkScale() + this.pan.x,
+        y: this.height / 2 + rotated.y * this.networkScale() + this.pan.y, depth: 0, scale: 1,
+      };
       const node = this.nodes.get(p.id)!;
       return { ...point, id: p.id, radius: (this.layout === 'network' ? Math.min(5.5, 2.5 + Math.log2(1 + node.degree) * 0.45)
         : Math.min(4.6, 2.3 + Math.log2(1 + node.degree) * 0.32)) * (this.layout === 'sphere' ? point.scale : 1) };
@@ -287,7 +305,8 @@ export class CanvasGraph {
   }
   private pointerDown = (event: PointerEvent) => {
     const p = this.point(event);
-    this.drag = { ...p, startX: p.x, startY: p.y, node: this.grid.hit(p.x, p.y), moved: false };
+    const rotate = this.layout === 'network' && event.shiftKey;
+    this.drag = { ...p, startX: p.x, startY: p.y, node: rotate ? undefined : this.grid.hit(p.x, p.y), rotate, moved: false };
     this.target = undefined; this.velocity = { x: 0, y: 0 };
     this.canvas.setPointerCapture(event.pointerId);
   };
@@ -299,13 +318,16 @@ export class CanvasGraph {
       if (this.layout === 'sphere') {
         this.yaw += dx * 0.006; this.pitch += dy * 0.006;
         this.velocity = this.motion.matches ? { x: 0, y: 0 } : { x: dx * 0.002, y: dy * 0.002 };
+      } else if (this.drag.rotate) {
+        this.setNetworkRotation(this.networkAngle * 180 / Math.PI + dx * 0.6);
       } else if (this.drag.node) {
         const particle = this.network.particles.find(node => node.id === this.drag!.node)!;
-        particle.x += dx / this.networkScale(); particle.y += dy / this.networkScale(); this.network.alpha = 0.4;
+        const movement = rotatePoint({ x: dx / this.networkScale(), y: dy / this.networkScale() }, -this.networkAngle);
+        particle.x += movement.x; particle.y += movement.y; this.network.alpha = 0.4;
       } else { this.pan.x += dx; this.pan.y += dy; }
       this.drag.x = p.x; this.drag.y = p.y;
     } else this.hover = this.grid.hit(p.x, p.y) || '';
-    this.canvas.title = this.nodes.get(this.hover)?.title || '拖拽移动，滚轮缩放；节点列表可用键盘操作';
+    this.canvas.title = this.nodes.get(this.hover)?.title || (this.layout === 'network' ? '拖拽平移，Shift+拖拽旋转，滚轮缩放' : '拖拽旋转，滚轮缩放；节点列表可用键盘操作');
     this.wake();
   };
   private pointerUp = (event: PointerEvent) => {

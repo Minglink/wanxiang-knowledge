@@ -43,3 +43,10 @@
 .wx-recall-panel{margin:16px 0}
 .wx-recall-row{border:1px solid var(--line);border-radius:8px;background:#fff;padding:14px;margin:10px 0;overflow-wrap:anywhere}
 .wx-recall-item{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+
+/* Network rotation controls */
+.wx-graph-rotation{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--muted)}
+.wx-graph-rotation[hidden]{display:none}
+.wx-graph-rotation label{display:inline-flex;gap:8px;align-items:center}
+.wx-graph-rotation input{width:140px;accent-color:var(--blue)}
+.wx-graph-rotation output{min-width:38px;font-variant-numeric:tabular-nums}

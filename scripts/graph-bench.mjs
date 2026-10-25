@@ -24,6 +24,7 @@ try {
       const data = GraphBench.aggregateGraph(original);
       window.engine = new GraphBench.CanvasGraph(document.querySelector('canvas'), data, id => { window.lastSelected = id; }, () => {});
       window.engine.setLayout(layout);
+      if (layout === 'network') window.engine.setNetworkRotation(45);
       const frames = [];
       let previous;
       const started = performance.now();
@@ -36,7 +37,7 @@ try {
         previous = now;
       }
       const sorted = [...frames].sort((a, b) => a - b);
-      return { inputNodes: count, visibleNodes: data.nodes.length, layout,
+      return { inputNodes: count, visibleNodes: data.nodes.length, layout, rotationDegrees: layout === 'network' ? 45 : 0,
         fps: 1000 / (frames.reduce((a, b) => a + b, 0) / frames.length),
         frameP95Ms: sorted[Math.ceil(sorted.length * 0.95) - 1],
         drawLastMs: window.engine.drawMs, drawnFrames: window.engine.frames,
