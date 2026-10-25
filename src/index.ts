@@ -46,7 +46,7 @@ export async function apply(ctx:any){
  service.host.listTools=async(sessionId='')=>discoverHostTools(ctx,sessionId);
  registerRoutes(ctx,service);
  ctx.inject(['systemPrompt'],(child:any)=>child.effect(()=>service.recall.setProvider(child.systemPrompt)));
- ctx.on('session/event',(session:any,event:any)=>{try{service.recall.event(session,event);}catch{ctx.logger?.warn('自动召回事件处理失败，本轮跳过');}if(event.type==='turn/end'){void service.markPending(session.id,session.header.title||session.id).catch((e:any)=>ctx.logger?.warn(e.message));}});
+ ctx.on('session/event',(session:any,event:any)=>{if(event.type==='session/title')service.pendingTitles.forget(session.id);try{service.recall.event(session,event);}catch{ctx.logger?.warn('自动召回事件处理失败，本轮跳过');}if(event.type==='turn/end'){void service.markPending(session.id,session.header.title||session.id).catch((e:any)=>ctx.logger?.warn(e.message));}});
  ctx.inject(['tools'],(toolCtx:any)=>{
    const defs=knowledgeTools(service);
    for(const def of defs)toolCtx.effect(()=>toolCtx.tools.register(def));
