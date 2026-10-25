@@ -218,6 +218,11 @@ npm run pack:plugin
 
 欢迎通过 [Issues](https://github.com/Minglink/wanxiang-knowledge/issues) 提交可复现问题，或提交改进检索、图谱与兼容性的 PR。请使用脱敏的最小示例，不上传私人会话、凭据或业务样本。
 
+## 交流社区
+
+- 红队安全交流 11 群：`1043279187`
+- 腾讯 QQ 频道技术交流社区：`pd86424753`
+
 ## 许可与致谢
 
 插件源码采用 [MIT](LICENSE)。`knowledge/` 中第三方文献遵循各条目及随附许可；DeepSeek、DeepSeek Harness 和第三方工具名称归各自权利人所有。
