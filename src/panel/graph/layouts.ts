@@ -67,28 +67,15 @@ export class NetworkLayout {
   private anchors = new Map<string, { x: number; y: number }>();
 
   constructor(nodes: GraphNode[], edges: GraphEdge[]) {
-    const groups = communities(nodes);
-    const extent = Math.max(180, Math.sqrt(nodes.length) * 18);
-    const assigned = new Map<string, Particle>();
-    groups.forEach((members, index) => {
-      const angle = index * golden + Math.PI;
-      const anchor = groups.length === 1 ? { x: 0, y: 0 } : {
-        x: Math.cos(angle) * extent * 0.58,
-        y: Math.sin(angle) * extent * 0.38,
-      };
-      this.anchors.set(members[0].cluster, anchor);
-      const radius = Math.max(35, Math.sqrt(members.length) * 11);
-      members.forEach((node, local) => {
-        const offset = cloudOffset(local, members.length, node.id);
-        assigned.set(node.id, {
-          id: node.id, cluster: node.cluster,
-          x: anchor.x + offset.x * radius,
-          y: anchor.y + offset.y * radius * 0.88,
-          z: 0, vx: 0, vy: 0,
-        });
-      });
-    });
-    this.particles = nodes.map(node => assigned.get(node.id)!);
+    const clusters = [...new Set(nodes.map(node => node.cluster))];
+    const extent = Math.max(180, Math.sqrt(nodes.length) * 16);
+    clusters.forEach((cluster, i) => this.anchors.set(cluster, {
+      x: Math.cos(i * golden) * extent * 0.5, y: Math.sin(i * golden) * extent * 0.5,
+    }));
+    this.particles = nodes.map((node, i) => ({
+      id: node.id, cluster: node.cluster, x: Math.cos(i * golden) * Math.sqrt(i + 1) * 15,
+      y: Math.sin(i * golden) * Math.sqrt(i + 1) * 15, z: 0, vx: 0, vy: 0,
+    }));
     this.byId = new Map(this.particles.map(p => [p.id, p]));
     this.links = edges.flatMap(edge => {
       const a = this.byId.get(edge.s), b = this.byId.get(edge.t);
@@ -100,7 +87,7 @@ export class NetworkLayout {
     if (this.alpha < 0.005) return;
     // Aggregate repulsion on a spatial grid: O(nodes × occupied cells), bounded local extent.
     const cells = new Map<string, { x: number; y: number; count: number }>();
-    const cellSize = Math.max(70, Math.sqrt(this.particles.length) * 3);
+    const cellSize = Math.max(70, Math.sqrt(this.particles.length) * 12);
     for (const p of this.particles) {
       const key = `${Math.floor(p.x / cellSize)},${Math.floor(p.y / cellSize)}`;
       const cell = cells.get(key) || { x: 0, y: 0, count: 0 };
@@ -115,8 +102,8 @@ export class NetworkLayout {
         p.vx += dx * force; p.vy += dy * force;
       }
       const anchor = this.anchors.get(p.cluster)!;
-      p.vx += ((anchor.x - p.x) * 0.016 - p.x * 0.0003) * this.alpha;
-      p.vy += ((anchor.y - p.y) * 0.016 - p.y * 0.0003) * this.alpha;
+      p.vx += ((anchor.x - p.x) * 0.004 - p.x * 0.001) * this.alpha;
+      p.vy += ((anchor.y - p.y) * 0.004 - p.y * 0.001) * this.alpha;
     }
     for (const [a, b, weight] of this.links) {
       const dx = b.x - a.x, dy = b.y - a.y;

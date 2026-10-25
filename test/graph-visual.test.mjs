@@ -29,7 +29,7 @@ test('不均衡双簇保留聚集与间隔，稳定、完整且始终在球面�
   assert.deepEqual(sphereLayout([]), []);
 });
 
-test('网络的两个真实关联簇收敛后仍有疏密层次，不把节点并成一团', async () => {
+test('网络共享空间力导向支持固定拖拽节点、降温停算且不改关系数据', async () => {
   const { NetworkLayout } = await moduleFrom('src/panel/graph/layouts.ts');
   const nodes = Array.from({ length: 200 }, (_, i) => ({
     id: String(i), cluster: i < 100 ? 'left' : 'right', degree: 3,
@@ -39,14 +39,15 @@ test('网络的两个真实关联簇收敛后仍有疏密层次，不把节点�
   const original = structuredClone({ nodes, edges });
   const layout = new NetworkLayout(nodes, edges);
   for (let i = 0; i < 100; i++) layout.tick();
-  const clouds = ['left', 'right'].map(cluster => {
-    const members = layout.particles.filter(p => p.cluster === cluster);
-    const x = members.reduce((sum, p) => sum + p.x, 0) / members.length;
-    const y = members.reduce((sum, p) => sum + p.y, 0) / members.length;
-    return { x, y, radius: Math.sqrt(members.reduce((sum, p) => sum + (p.x - x) ** 2 + (p.y - y) ** 2, 0) / members.length) };
-  });
-  assert.ok(Math.hypot(clouds[0].x - clouds[1].x, clouds[0].y - clouds[1].y) > clouds[0].radius + clouds[1].radius);
-  for (const cloud of clouds) assert.ok(cloud.radius > 20);
+  const settled = structuredClone(layout.particles);
+  layout.tick();
+  assert.deepEqual(layout.particles, settled, '降温后不再持续改变布局');
+  const moving = new NetworkLayout(nodes, edges);
+  const fixed = { ...moving.particles[0] };
+  moving.tick(fixed.id);
+  assert.equal(moving.particles[0].x, fixed.x);
+  assert.equal(moving.particles[0].y, fixed.y);
+  assert.ok(moving.particles.some((point, index) => index > 0 && Math.hypot(point.x - settled[index].x, point.y - settled[index].y) > 0));
   assert.deepEqual({ nodes, edges }, original, '布局不能改变关系数据');
   assert.equal(layout.particles.length, nodes.length);
 });

@@ -37,6 +37,7 @@ export class CanvasGraph {
   private kinds = new Set(Object.keys(graphColors));
   private edges: GraphEdge[];
   private bridges = new Set<GraphEdge>();
+  private networkEdges: GraphEdge[];
 
   constructor(public canvas: HTMLCanvasElement, public data: GraphData, private select: (id: string) => void, private open: (id: string) => void) {
     this.ctx = canvas.getContext('2d')!;
@@ -64,6 +65,7 @@ export class CanvasGraph {
     const rankedEdges = [...data.edges].sort((a, b) => b.w - a.w);
     const bridges = rankedEdges.filter(edge => this.nodes.get(edge.s)?.cluster !== this.nodes.get(edge.t)?.cluster).slice(0, 60);
     this.bridges = new Set(bridges);
+    this.networkEdges = data.nodes.length > 300 ? rankedEdges.slice(0, data.nodes.length * 2) : data.edges;
     this.edges = data.nodes.length > 300
       ? [...new Set([...bridges, ...rankedEdges.slice(0, data.nodes.length * 2)])] : data.edges;
     const options = { signal: this.lifetime.signal };
@@ -177,11 +179,12 @@ export class CanvasGraph {
     const projected = particles.map(p => {
       const point = this.layout === 'sphere' ? this.spherePoint(p) : { x: this.width / 2 + (p.x - this.networkCenter.x) * this.networkScale() + this.pan.x, y: this.height / 2 + (p.y - this.networkCenter.y) * this.networkScale() + this.pan.y, depth: 0, scale: 1 };
       const node = this.nodes.get(p.id)!;
-      return { ...point, id: p.id, radius: Math.min(4.6, 2.3 + Math.log2(1 + node.degree) * 0.32) * (this.layout === 'sphere' ? point.scale : 1) };
+      return { ...point, id: p.id, radius: (this.layout === 'network' ? Math.min(5.5, 2.5 + Math.log2(1 + node.degree) * 0.45)
+        : Math.min(4.6, 2.3 + Math.log2(1 + node.degree) * 0.32)) * (this.layout === 'sphere' ? point.scale : 1) };
     }).sort((a, b) => a.depth - b.depth);
     this.positions = new Map(projected.map(p => [p.id, p]));
     this.grid.rebuild(projected);
-    const visibleEdges = new Set(this.edges);
+    const visibleEdges = new Set(this.layout === 'network' ? this.networkEdges : this.edges);
     if (this.selected || this.hover) for (const edge of this.data.edges) {
       if ([edge.s, edge.t].includes(this.hover || this.selected)) visibleEdges.add(edge);
     }
