@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
-import { SqlJsEngine } from './sqljs-engine.js';
+import { createEngine } from './engine-factory.js';
 import type { IndexEngine } from './index-engine.js';
 import type { Entry, Tool } from './types.js';
 export const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
@@ -9,11 +9,11 @@ export const now=()=>new Date().toISOString();
 export async function atomic(file:string,data:string|Uint8Array) { await fs.mkdir(path.dirname(file),{recursive:true});const tmp=file+'.'+randomUUID()+'.tmp';try{await fs.writeFile(tmp,data);await fs.rename(tmp,file);}finally{await fs.rm(tmp,{force:true}).catch(()=>{});} }
 export async function json<T>(file:string,fallback:T):Promise<T>{try{return JSON.parse(await fs.readFile(file,'utf8'));}catch(e:any){if(e.code==='ENOENT')return fallback;throw new Error(`无法读取 ${path.basename(file)}：${e.message}`);}}
 export class Store {
-  engine!:IndexEngine; get db(){return this.engine;} entries=new Map<string,Entry>(); tools:Tool[]=[]; warnings:string[]=[];
+  engine!:IndexEngine; get db(){return this.engine;} entries=new Map<string,Entry>(); tools:Tool[]=[]; warnings:string[]=[]; private engineWarning='';
   constructor(public root:string){}
   local(...parts:string[]) {const p=path.resolve(this.root,...parts);if(p!==this.root&&!p.startsWith(this.root+path.sep))throw new Error('路径超出知识目录');return p;}
-  async init(){for(const d of ['notes','cards','tools','sources','.wanxiang/jobs','.wanxiang/revisions','.wanxiang/staging'])await fs.mkdir(this.local(d),{recursive:true});this.engine=new SqlJsEngine(data=>atomic(this.local('.wanxiang','index.sqlite'),data));await this.engine.init();this.tools=await json(this.local('tools','catalog.json'),[]);await this.rebuild();return this;}
-  async rebuild(){this.entries.clear();this.warnings=[];this.engine.reset();for(const dir of ['notes','cards']){for(const f of await fs.readdir(this.local(dir))){if(!f.endsWith('.md'))continue;try{const raw=await fs.readFile(this.local(dir,f),'utf8');const m=raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);if(!m)throw new Error('缺少元数据');const e={...JSON.parse(m[1]),body:m[2],file:path.join(dir,f)} as Entry;if(!e.id||!e.title||!['note','method','pitfall','project'].includes(e.type)||!Array.isArray(e.tags))throw new Error('元数据无效');if(this.entries.has(e.id))throw new Error('重复 ID');this.entries.set(e.id,e);this.index(e);}catch(e:any){this.warnings.push(`${f}：${e.message}`);}}}await this.flush();return {count:this.entries.size,warnings:this.warnings};}
+  async init(){for(const d of ['notes','cards','tools','sources','.wanxiang/jobs','.wanxiang/revisions','.wanxiang/staging'])await fs.mkdir(this.local(d),{recursive:true});const selected=await createEngine(this.root,data=>atomic(this.local('.wanxiang','index.sqlite'),data));this.engine=selected.engine;this.engineWarning=selected.warning||'';this.tools=await json(this.local('tools','catalog.json'),[]);await this.rebuild();return this;}
+  async rebuild(){this.entries.clear();this.warnings=this.engineWarning?[this.engineWarning]:[];this.engine.reset();for(const dir of ['notes','cards']){for(const f of await fs.readdir(this.local(dir))){if(!f.endsWith('.md'))continue;try{const raw=await fs.readFile(this.local(dir,f),'utf8');const m=raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);if(!m)throw new Error('缺少元数据');const e={...JSON.parse(m[1]),body:m[2],file:path.join(dir,f)} as Entry;if(!e.id||!e.title||!['note','method','pitfall','project'].includes(e.type)||!Array.isArray(e.tags))throw new Error('元数据无效');if(this.entries.has(e.id))throw new Error('重复 ID');this.entries.set(e.id,e);this.index(e);}catch(e:any){this.warnings.push(`${f}：${e.message}`);}}}await this.flush();return {count:this.entries.size,warnings:this.warnings};}
   index(e:Entry){this.engine.index(e);}
   async flush(){await this.engine.flush();}
   search(q='',type='',archived=false,project=''){return this.engine.search({query:q,type,archived,project}).map(id=>this.entries.get(id)!); }

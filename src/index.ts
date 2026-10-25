@@ -1,3 +1,5 @@
+export { NodeSqliteEngine } from './node-sqlite-engine.js';
+export { createEngine } from './engine-factory.js';
 export { SqlJsEngine } from './sqljs-engine.js';
 import { promises as fs } from 'node:fs';
 import { spawn } from 'node:child_process';

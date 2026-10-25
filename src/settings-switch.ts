@@ -38,7 +38,8 @@ export async function switchSettings(owner: SettingsOwner, input: Partial<Settin
     if (settings.root !== owner.settings.root) {
       staged = new Store(settings.root);
       await staged.init();
-      if (staged.warnings.length) throw new Error('目标知识库文件损坏：' + staged.warnings.join('；'));
+      const fileWarnings = staged.warnings.filter(warning => !warning.includes('大规模场景受限'));
+      if (fileWarnings.length) throw new Error('目标知识库文件损坏：' + fileWarnings.join('；'));
       if (!Array.isArray(staged.tools) || staged.tools.some(tool => !tool || typeof tool.id !== 'string' || typeof tool.name !== 'string' || !Array.isArray(tool.linkedIds))) {
         throw new Error('目标工具目录无效');
       }
