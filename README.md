@@ -63,3 +63,11 @@ v0.2 调查结论见 `docs/审计清单.md`、`docs/注入点验证.md`、`docs/
 回滚可使用保留的 `artifacts/dsh-wanxiang-knowledge-0.1.0.tgz` 重新安装，安装前仍需确认空闲并备份。第2期实现 node:sqlite/FTS5、questions[]、分片与兼容副本；自动召回、对账与反思仍待后续期。整理撤销会核对后续编辑，存在变化时拒绝覆盖；同步异常可回滚，跨文件断电恢复未实机验证。
 
 基准：`node scripts/bench.mjs --run`（三档原生FTS，不含Markdown文件或完整SearchService）；`node --expose-gc scripts/bench-memory.mjs` 对比10万条正文与元数据Map；`node scripts/eval-recall.mjs test/fixtures/recall-eval.json --hybrid` 复测关键词和自然语言。固定合成评测不是实际用户查询或在线模型质量承诺。
+
+## 第3期开发状态（尚未发布）
+
+源码已接入自动召回三档、隐私确认、只读缓存section、可强制终止的隔离SQL子进程、召回记录/反馈/屏蔽和渐进披露工具。默认档位为自动注入；首次确认会向宿主模型发送知识摘要前不会开始自动注入。section未就绪就跳过该步，不阻塞请求。智能改写默认关闭，实测provider单次改写已超过200ms预算。
+
+当前安装与交付包仍是alpha.2；第3期未整体验收、未安装上线。真实知识库正在准备，真实历史留出评测和正式阈值尚未完成；代码中的0.65是开发占位，合成策略评测在该值下漏召率76.25%，不可据此宣称效果达标。`node scripts/eval-recall-policy.mjs`仅运行合成正负例；`node scripts/bench-recall.mjs --run`测实际隔离检索耗时并保留超时比例。百万条基准20/40次超时放弃。
+
+仅显式构建的第3期临时探针包用于生产合成会话验证，产品包不导入探针。清理探针和安装新产品前仍必须确认宿主空闲、备份知识目录；用户制作知识库期间不自动重启。
