@@ -1,0 +1,12 @@
+{
+  "size": 100000,
+  "indexMs": 6260.8606,
+  "queryP50Ms": 0.7528999999994994,
+  "queryP95Ms": 85.20229999999992,
+  "selectiveP95Ms": 0.5433999999995649,
+  "broadP95Ms": 85.57780000000002,
+  "rssMiB": 86.17578125,
+  "heapMiB": 10.361167907714844,
+  "runtime": "v24.19.0",
+  "scope": "Native disk FTS: tokenization+insertion; excludes Markdown files/metadata Map. Queries exclude model/full SearchService exact scan."
+}

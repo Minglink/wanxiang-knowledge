@@ -11,7 +11,7 @@ import assert from 'node:assert/strict';
 const installed = path.join(process.env.DSH_HOME || path.join(os.homedir(), '.dsh'), 'profiles/desktop/node_modules/dsh-wanxiang-knowledge');
 const manifest = JSON.parse(await readFile(path.join(installed, 'package.json'), 'utf8'));
 assert.equal(manifest.version, JSON.parse(await readFile('package.json', 'utf8')).version);
-for (const file of ['index.js', 'panel.js', 'client.js', 'panel.html', 'style.css', 'sql-wasm.wasm']) {
+for (const file of ['index.js', 'panel.js', 'client.js', 'panel.html', 'style.css', 'sql-wasm.wasm', 'security-worker.py','security-extra-worker.py']) {
   const digest = async source => createHash('sha256').update(await readFile(source)).digest('hex');
   assert.equal(await digest(path.join(installed, 'lib', file)), await digest(path.resolve('lib', file)), 'installed mismatch: ' + file);
 }

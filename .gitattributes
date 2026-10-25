@@ -9,3 +9,5 @@
 *.css text eol=lf
 *.tgz binary
 *.png binary
+# Content-pack manifests hash original bytes; preserve across Git checkouts.
+knowledge/** -text

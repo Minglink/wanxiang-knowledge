@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "full",
+    "count": 100000,
+    "heapMiB": 716.8993988037109,
+    "rssMiB": 915.94921875,
+    "heapDeltaMiB": 711.1169357299805,
+    "scope": "Map retention only; excludes disk index, corpus files and application jobs"
+  },
+  {
+    "mode": "metadata",
+    "count": 100000,
+    "heapMiB": 181.0207977294922,
+    "rssMiB": 361.51953125,
+    "heapDeltaMiB": 175.23826599121094,
+    "scope": "Map retention only; excludes disk index, corpus files and application jobs"
+  }
+]

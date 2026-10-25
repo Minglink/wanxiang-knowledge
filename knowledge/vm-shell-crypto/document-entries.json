@@ -1,0 +1,4682 @@
+[
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-asym-cipher-rsa",
+    "title": "OpenSSL：EVP 密码接口 · EVP_ASYM_CIPHER-RSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-asym-cipher-rsa.md",
+    "sha256": "5d8801483019b87da5b944f2ce9178b3c8a0cc6285043041e2f0dd1e42b67ebb",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-asym-cipher-rsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-cipher-aes",
+    "title": "OpenSSL：对称密码：AES · EVP_CIPHER-AES（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-cipher-aes.md",
+    "sha256": "e4fb8b858014968f27efc61b5a4945b63bd4120fb661e89dc97ab271cb7263d2",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-cipher-aes"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-argon2",
+    "title": "OpenSSL：密钥派生：ARGON2 · EVP_KDF-ARGON2（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-argon2.md",
+    "sha256": "d6e69fc92382a301289c16e6461fef9c1952e915d3365f697d52bd741c4f22ca",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-argon2"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-hkdf",
+    "title": "OpenSSL：密钥派生：HKDF · EVP_KDF-HKDF（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-hkdf.md",
+    "sha256": "82121bd253f42a5e966e77513ebede4fd764262f25cc4b26fd038eebd53c232b",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-hkdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-hmac-drbg",
+    "title": "OpenSSL：密钥派生：HMAC-DRBG · EVP_KDF-HMAC-DRBG（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-hmac-drbg.md",
+    "sha256": "ed0a93da9ebf77e0a9d334946148d168fd7b583e9fd4b8aa11d3a69c63699acd",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-hmac-drbg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-kb",
+    "title": "OpenSSL：密钥派生：KB · EVP_KDF-KB（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-kb.md",
+    "sha256": "dc7402d2c9746e15b5f11eff1efdcbe56d755ff93bf8ae3853d73f28f548ba58",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-kb"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-krb5kdf",
+    "title": "OpenSSL：密钥派生：KRB5KDF · EVP_KDF-KRB5KDF（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-krb5kdf.md",
+    "sha256": "b3a39ea290561e33477a35ce651bf6da87eee626bf5025fc48c14e26587933aa",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-krb5kdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-pbkdf1",
+    "title": "OpenSSL：密钥派生：PBKDF1 · EVP_KDF-PBKDF1（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-pbkdf1.md",
+    "sha256": "58a880bf192dd46b6c94ac2c290ade0ca4d3cc1791d3fd811f77a3baf3d254f3",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-pbkdf1"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-pbkdf2",
+    "title": "OpenSSL：密钥派生：PBKDF2 · EVP_KDF-PBKDF2（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-pbkdf2.md",
+    "sha256": "9fd324ac35dc003b7dc0c5cd9ee0ed788bb4d9ef3e8deb7b1ca457c18cfbb626",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-pbkdf2"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-pkcs12kdf",
+    "title": "OpenSSL：密钥派生：PKCS12KDF · EVP_KDF-PKCS12KDF（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-pkcs12kdf.md",
+    "sha256": "2b0db376d6befdd782418c589c45692d8b7befbfa5b5b5cc94f1a3a6eb547818",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-pkcs12kdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-pvkkdf",
+    "title": "OpenSSL：密钥派生：PVKKDF · EVP_KDF-PVKKDF（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-pvkkdf.md",
+    "sha256": "922181c08d5165711ca2c9e4f4f4edda11602fd607cd822c49b076d0f74a2258",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-pvkkdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-scrypt",
+    "title": "OpenSSL：密钥派生：SCRYPT · EVP_KDF-SCRYPT（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-scrypt.md",
+    "sha256": "50753d88c580230d490e941a25beebf901c8175bd2a2e9409c34dde475c66c87",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-scrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-ss",
+    "title": "OpenSSL：密钥派生：SS · EVP_KDF-SS（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-ss.md",
+    "sha256": "422eeff608cff27c9c734c15d4a4cc0c0823bb483d2bfe1abf26b9a575ba9fe0",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-ss"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-sshkdf",
+    "title": "OpenSSL：密钥派生：SSHKDF · EVP_KDF-SSHKDF（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-sshkdf.md",
+    "sha256": "1a442f80776085d15dbc0861de87b17d62bb8dc0c4707ec5125c0e1ecab0e176",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-sshkdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-tls13-kdf",
+    "title": "OpenSSL：密钥派生：TLS13_KDF · EVP_KDF-TLS13_KDF（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-tls13-kdf.md",
+    "sha256": "d934af8469f973724b8aa647e248e941d5f4f778887b52a297ef5e891a82a426",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-tls13-kdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-tls1-prf",
+    "title": "OpenSSL：密钥派生：TLS1_PRF · EVP_KDF-TLS1_PRF（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-tls1-prf.md",
+    "sha256": "b4a5ce67997c6aa6366694ffe859e8afe9690e7ab27bd3037c1d773f26b84072",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-tls1-prf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-x942-asn1",
+    "title": "OpenSSL：密钥派生：X942-ASN1 · EVP_KDF-X942-ASN1（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-x942-asn1.md",
+    "sha256": "bcb0e5038fd753b4e5c635a3a028d8bc1da589faed51b794e01d133a8f673e18",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-x942-asn1"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kdf-x963",
+    "title": "OpenSSL：密钥派生：X963 · EVP_KDF-X963（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kdf-x963.md",
+    "sha256": "5ecfc7f23cadd3d3febf8c76794e49df73b36aa3545656dcb1572f469eecee63",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kdf-x963"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kem-ec",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEM-EC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kem-ec.md",
+    "sha256": "4677453b4d693305c3b8e40ea86f6022dcc7c46784410f3b5cf5d111f9f01787",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kem-ec"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kem-rsa",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEM-RSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kem-rsa.md",
+    "sha256": "b9e895491194f3bb26fd717eb6511a4339e830057451b1288adfcd57a3bb08a8",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kem-rsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-kem-x25519",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEM-X25519（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-kem-x25519.md",
+    "sha256": "5f92985caa192bdf3ad3fab904006722f6845ab03ee3e865b3e23fd2e1040165",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-kem-x25519"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-keyexch-dh",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEYEXCH-DH（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-keyexch-dh.md",
+    "sha256": "66c88e253abe8104fbdcfd6eb4845165b032658e85805278d2a888c555519999",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-keyexch-dh"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-keyexch-ecdh",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEYEXCH-ECDH（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-keyexch-ecdh.md",
+    "sha256": "c7edbb82ef0ff07f2a69d89146b52aa7442849896c190b1b818fd74fe7214e5a",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-keyexch-ecdh"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-mac-blake2",
+    "title": "OpenSSL：消息认证：BLAKE2 · EVP_MAC-BLAKE2（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-mac-blake2.md",
+    "sha256": "ec825de3900065d6dcdb98bffcd939bd932238451e9c62caf6513b072754cc02",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-mac-blake2"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-mac-cmac",
+    "title": "OpenSSL：消息认证：CMAC · EVP_MAC-CMAC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-mac-cmac.md",
+    "sha256": "54bd590c31b9887e338b1ae0f8522410f0a40862d2d9297bbe409a3ecc09e131",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-mac-cmac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-mac-gmac",
+    "title": "OpenSSL：消息认证：GMAC · EVP_MAC-GMAC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-mac-gmac.md",
+    "sha256": "0ec72777c567a8dbe29f84c879d1d529093dcafbd5aa4a769f425d2c08a99df9",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-mac-gmac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-mac-hmac",
+    "title": "OpenSSL：消息认证：HMAC · EVP_MAC-HMAC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-mac-hmac.md",
+    "sha256": "afc1ff46cca83f02c59447871677b48a890a4f7b59b05afdda872b8568ae807a",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-mac-hmac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-mac-kmac",
+    "title": "OpenSSL：消息认证：KMAC · EVP_MAC-KMAC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-mac-kmac.md",
+    "sha256": "1eb7f2831b7e1842e8c5ae00febfd2b5a0f9c81e481505cc208c840a907b0b7a",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-mac-kmac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-mac-poly1305",
+    "title": "OpenSSL：消息认证：Poly1305 · EVP_MAC-Poly1305（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-mac-poly1305.md",
+    "sha256": "7a67f7879656db9619a6248343838705309b67a948c07286742b0147aa56d937",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-mac-poly1305"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-mac-siphash",
+    "title": "OpenSSL：消息认证：Siphash · EVP_MAC-Siphash（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-mac-siphash.md",
+    "sha256": "8ef5366954e30d63ff06f9292f23cb3e31dbb36fcd9cba96da097208cfa3097d",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-mac-siphash"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-md-blake2",
+    "title": "OpenSSL：摘要算法：BLAKE2 · EVP_MD-BLAKE2（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-md-blake2.md",
+    "sha256": "3f823bb524ef8f8c7ee766b43164aa95fb57e868e281dc06e1a5c1f997e34578",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-md-blake2"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-md-md5-sha1",
+    "title": "OpenSSL：摘要算法：MD5-SHA1 · EVP_MD-MD5-SHA1（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-md-md5-sha1.md",
+    "sha256": "bc8627b961819cef07e5379f05311c0b964ae220f3e50f1d6ff1531b111ef8a0",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-md-md5-sha1"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-md-sha1",
+    "title": "OpenSSL：摘要算法：SHA1 · EVP_MD-SHA1（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-md-sha1.md",
+    "sha256": "9512a15e80a5b713e088bf38cab1823ac4433281178a277d7a842f3b830a1d04",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-md-sha1"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-md-shake",
+    "title": "OpenSSL：摘要算法：SHAKE · EVP_MD-SHAKE（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-md-shake.md",
+    "sha256": "b7f1655452b65e9b754e0b81f5f35d645d606bcfb0ba53f1318bd58e4a45bba9",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-md-shake"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-md-common",
+    "title": "OpenSSL：摘要算法：common · EVP_MD-common（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-md-common.md",
+    "sha256": "39a6f3f1ec5993170f2af112e61ccb9b5b8768bd8cb0dd0166e524c196525186",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-md-common"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-dh",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-DH（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-dh.md",
+    "sha256": "89a794cd2ce456227c1bc1dbd18e97eb8b24d483ac5e90a003f2bbd0834f2d2d",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-dh"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-dsa",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-DSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-dsa.md",
+    "sha256": "a2f26348364653e48c38552f64cf11be2ce97fb477cd646d5d88e8a48f8a6c29",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-dsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-ec",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-EC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-ec.md",
+    "sha256": "c6f2d6b17b4a41f587afc1effb3b06001eafd2f7fc6003d791a71777093fd5c1",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-ec"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-ffc",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-FFC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-ffc.md",
+    "sha256": "844d3d0405748ccfe112c8266cd3cc7c58a622a05864f86e473952b1951f1a10",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-ffc"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-hmac",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-HMAC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-hmac.md",
+    "sha256": "2c28767e117ba4aae5aefe1a0331c873206192b5b6c07b1e2343e9fac4a24cfd",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-hmac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-ml-dsa",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-ML-DSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-ml-dsa.md",
+    "sha256": "a419e299ea51f4e90532b62bcc964ddb9fb9ba88999feb550140b163ec1ac4fb",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-ml-dsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-ml-kem",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-ML-KEM（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-ml-kem.md",
+    "sha256": "098e1aee5b71ecf833202342c8d3d80da97cb69dd94f546c8d4afe4898ebf8df",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-ml-kem"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-rsa",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-RSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-rsa.md",
+    "sha256": "7e87a320d5dbbf6d774de331c97c0bbd972da5f662ceb17509aa3c702b924c08",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-rsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-slh-dsa",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-SLH-DSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-slh-dsa.md",
+    "sha256": "82f3faa28c66295bb93cafe18375e4ae7efa5887b0c3f534a29c0f876f772cce",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-slh-dsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-sm2",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-SM2（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-sm2.md",
+    "sha256": "2bbbe92c305a4a3e5b850eda641beb8c07366b87eb8eb8dd0f17f85c401d3626",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-sm2"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-pkey-x25519",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY-X25519（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-pkey-x25519.md",
+    "sha256": "3110db58d852dbf56ce1aad8207eab0a2767e6b8007fa3f237d928d520e25037",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-pkey-x25519"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand",
+    "title": "OpenSSL：密码随机数 · EVP_RAND（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand.md",
+    "sha256": "f15663c35c7f33b5dada4ecc3a32a4bb4c3222f9c6a55bb284a32e63771bbd88",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand-crng-test",
+    "title": "OpenSSL：密码随机数 · EVP_RAND-CRNG-TEST（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand-crng-test.md",
+    "sha256": "30acb7d64f7f93124f65ff53b60c6f2852473d5a2b215dd6eb65fdd2e9400272",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand-crng-test"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand-ctr-drbg",
+    "title": "OpenSSL：密码随机数 · EVP_RAND-CTR-DRBG（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand-ctr-drbg.md",
+    "sha256": "4d23e333d306a941dc49439df748f0cb56fd8d3f284822df41186c3fd75ffdce",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand-ctr-drbg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand-hash-drbg",
+    "title": "OpenSSL：密码随机数 · EVP_RAND-HASH-DRBG（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand-hash-drbg.md",
+    "sha256": "b7bcbcd15282d335c57957379e67a0dbef920e9f9cfcf9ca7a5740aac6dbd6e7",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand-hash-drbg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand-hmac-drbg",
+    "title": "OpenSSL：密码随机数 · EVP_RAND-HMAC-DRBG（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand-hmac-drbg.md",
+    "sha256": "bd4eb9854a16089b4edb27095673ee159e85c0c5f404b5cf30089feed62cff50",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand-hmac-drbg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand-jitter",
+    "title": "OpenSSL：密码随机数 · EVP_RAND-JITTER（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand-jitter.md",
+    "sha256": "8739068a8b545fe8bc0f88bb70b36dea77dc2ccf3b14667469fa18a51eb60f9f",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand-jitter"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand-seed-src",
+    "title": "OpenSSL：密码随机数 · EVP_RAND-SEED-SRC（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand-seed-src.md",
+    "sha256": "f90175b898f2e6ff1f3c53297f55479556864ab7a0e96ec879d6e9f8eed1750f",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand-seed-src"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-rand-test-rand",
+    "title": "OpenSSL：密码随机数 · EVP_RAND-TEST-RAND（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-rand-test-rand.md",
+    "sha256": "85a28d510e266cbcc7dc0da1f3c0d3d17e1609f1e308ddbe6dc5b7a18be7ac07",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-rand-test-rand"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-signature-dsa",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SIGNATURE-DSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-signature-dsa.md",
+    "sha256": "47ae10dc793184eddf64e2d22ce7b34fc782504691aa8cc627ee93a1e2154454",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-signature-dsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-signature-ecdsa",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SIGNATURE-ECDSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-signature-ecdsa.md",
+    "sha256": "1baff381a4a2154d475478460595deeb0efebe10c116f554786eb326662460a7",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-signature-ecdsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-signature-ed25519",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SIGNATURE-ED25519（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-signature-ed25519.md",
+    "sha256": "1ec286eb52fe7059638fbd0069922ad7f97f0523195ae532bc5e0c586b968406",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-signature-ed25519"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-signature-ml-dsa",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SIGNATURE-ML-DSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-signature-ml-dsa.md",
+    "sha256": "f9144d99ad706c2aa491b1b7f7bb060f1e3814862530961edf827a64b9768827",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-signature-ml-dsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-signature-rsa",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SIGNATURE-RSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-signature-rsa.md",
+    "sha256": "74fc7522de94cc69171fd94ca3638870a82e9d58ecd8bb8b37788c223ae45567",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-signature-rsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp-signature-slh-dsa",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SIGNATURE-SLH-DSA（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp-signature-slh-dsa.md",
+    "sha256": "2bb0a52e0f199d71e72fe0b0b431fc3649955b595fd882a3266e9c8a9b900556",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp-signature-slh-dsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-ossl-provider-fips",
+    "title": "OpenSSL：Provider 架构 · OSSL_PROVIDER-FIPS（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-ossl-provider-fips.md",
+    "sha256": "8e981d14fac73875e34a69741c96f9db0dec148d48e548b893a9089132fa4f1e",
+    "sourceIds": [
+      "doc-openssl-doc-man7-ossl-provider-fips"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-ossl-provider-base",
+    "title": "OpenSSL：Provider 架构 · OSSL_PROVIDER-base（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-ossl-provider-base.md",
+    "sha256": "f958ab05a7e3aa749c3924f27baaee166419fd2f871e5e647e295a45ffbac956",
+    "sourceIds": [
+      "doc-openssl-doc-man7-ossl-provider-base"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-ossl-provider-default",
+    "title": "OpenSSL：Provider 架构 · OSSL_PROVIDER-default（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-ossl-provider-default.md",
+    "sha256": "6744cf7e45a81bde7976e5b043ee69344d5ee0fadc53cf94133ce901810ef854",
+    "sourceIds": [
+      "doc-openssl-doc-man7-ossl-provider-default"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-ossl-provider-legacy",
+    "title": "OpenSSL：Provider 架构 · OSSL_PROVIDER-legacy（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-ossl-provider-legacy.md",
+    "sha256": "60fc449745fc4bd4c9493ec862f1ad217510b8234eeefa23268c3dabf19ee8ea",
+    "sourceIds": [
+      "doc-openssl-doc-man7-ossl-provider-legacy"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-fips-module",
+    "title": "OpenSSL：密码实现与接口 · fips_module（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-fips-module.md",
+    "sha256": "5bb9a450071df37f6be3e4db38b670c2e865b6989b40cb249a9e7651ff7dc234",
+    "sourceIds": [
+      "doc-openssl-doc-man7-fips-module"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider",
+    "title": "OpenSSL：Provider 架构 · provider（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider.md",
+    "sha256": "876299098bf6e67a7643f9288464ce50987aa6a5673fdffa3a20d2d18f74d9f1",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-asym-cipher",
+    "title": "OpenSSL：Provider 架构 · provider-asym_cipher（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-asym-cipher.md",
+    "sha256": "9ecaca08f3bba4efd9cd98fd82cb28907e33a8263dd0c9990b4cce57934583b9",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-asym-cipher"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-base",
+    "title": "OpenSSL：Provider 架构 · provider-base（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-base.md",
+    "sha256": "fd68bcaf564695bfa0e35d6639700403770441412e2ca8972952e4ae706180dc",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-base"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-cipher",
+    "title": "OpenSSL：Provider 架构 · provider-cipher（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-cipher.md",
+    "sha256": "0ed15010dd6eeb90b5d6a19e89ff742e780fb23832f2e88f14c87abb7d3348bd",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-cipher"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-decoder",
+    "title": "OpenSSL：Provider 架构 · provider-decoder（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-decoder.md",
+    "sha256": "33a63aa103d6030b255e14c8fb7a960170066df7261fc6cbc227add67a252adb",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-decoder"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-digest",
+    "title": "OpenSSL：Provider 架构 · provider-digest（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-digest.md",
+    "sha256": "7b8bbb9a22e2cc90bd422e920c7a80d974d7e8a9cc0c727c7fea7de00b617f6c",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-digest"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-encoder",
+    "title": "OpenSSL：Provider 架构 · provider-encoder（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-encoder.md",
+    "sha256": "b2598b77a95c1d3466d8d760e95be0216040a9a07f9b3eafed5d0c3e904730d4",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-encoder"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-kdf",
+    "title": "OpenSSL：Provider 架构 · provider-kdf（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-kdf.md",
+    "sha256": "c312c6be9a9c6cab22bfcb489887a32e9db3dba3a77236c7cbf30c3dc7094756",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-kdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-kem",
+    "title": "OpenSSL：Provider 架构 · provider-kem（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-kem.md",
+    "sha256": "2db32c9924ef19cd8fed3c3d9eed4cffa7c7d9f68a2a061822e4a586f13edcde",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-kem"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-keyexch",
+    "title": "OpenSSL：Provider 架构 · provider-keyexch（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-keyexch.md",
+    "sha256": "58a468ac52c0a1a278cee97b1e1385fb5e17a45c39c11da5cd23463526d1521b",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-keyexch"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-keymgmt",
+    "title": "OpenSSL：Provider 架构 · provider-keymgmt（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-keymgmt.md",
+    "sha256": "cfa92208b988783dce83121a2c8397ea89be6b77f808aa680c7ed51d54aff4c2",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-keymgmt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-mac",
+    "title": "OpenSSL：Provider 架构 · provider-mac（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-mac.md",
+    "sha256": "01534675605e56d868cc19c90925853b8a7d87b0d4a13e0b1d3b1267fe7a5946",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-mac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-object",
+    "title": "OpenSSL：Provider 架构 · provider-object（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-object.md",
+    "sha256": "8bc03dd7480b050366b9b3061569c078c43fc79473bb2ecd12473e576bc100a0",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-object"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-rand",
+    "title": "OpenSSL：Provider 架构 · provider-rand（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-rand.md",
+    "sha256": "ca18847f8aba0c89a2a354a69351b006c06129f725d815a6bf6edd16ac3ab58d",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-rand"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-signature",
+    "title": "OpenSSL：Provider 架构 · provider-signature（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-signature.md",
+    "sha256": "16185ccc5321864df61c66eddd3933f7251394953cb7b17a782b6691133442cc",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-signature"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-skeymgmt",
+    "title": "OpenSSL：Provider 架构 · provider-skeymgmt（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-skeymgmt.md",
+    "sha256": "5821da5013c2a6906331c72baf3954d7bf9fc3b1dc1da7b17b2ccf9f0f9316f9",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-skeymgmt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-provider-storemgmt",
+    "title": "OpenSSL：Provider 架构 · provider-storemgmt（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-provider-storemgmt.md",
+    "sha256": "031699cd1d512752e3d386d22b25b8e1617f7de17f12878294612f03de590c2c",
+    "sourceIds": [
+      "doc-openssl-doc-man7-provider-storemgmt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-blinding-new",
+    "title": "OpenSSL：大整数运算 · BN_BLINDING_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-blinding-new.md",
+    "sha256": "d6b7f5d199b315c178f40754f10ee85fa4887c2d3bcd42c580ac965af46abd35",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-blinding-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-ctx-new",
+    "title": "OpenSSL：大整数运算 · BN_CTX_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-ctx-new.md",
+    "sha256": "0dc8815a627e53265a346c78aa69b8848a87a17f55f1b35f1071f9d7debc9c02",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-ctx-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-ctx-start",
+    "title": "OpenSSL：大整数运算 · BN_CTX_start（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-ctx-start.md",
+    "sha256": "db440387e56d53e7508955687c065b7f610afdfb71cb641053e09ca4b6877606",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-ctx-start"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-add",
+    "title": "OpenSSL：大整数运算 · BN_add（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-add.md",
+    "sha256": "2c193ab683967664132970c71cb10604434fb595094fad3e7afecac689f74ded",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-add"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-bn2bin",
+    "title": "OpenSSL：大整数运算 · BN_bn2bin（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-bn2bin.md",
+    "sha256": "84eb6fa4025b198fd42d0db5e077e3be933feccafb96970e286fd625269506b9",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-bn2bin"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-copy",
+    "title": "OpenSSL：大整数运算 · BN_copy（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-copy.md",
+    "sha256": "1e7248bd39ccef3f9083673be84604ce6e13bfd2d80dcdfd2c7c7da13ad0947d",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-copy"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-generate-prime",
+    "title": "OpenSSL：大整数运算 · BN_generate_prime（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-generate-prime.md",
+    "sha256": "b3a93cd4dcebc01203ad523d5e506901f64f3a08d525745518bfe3b1deee1bff",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-generate-prime"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-mod-exp-mont",
+    "title": "OpenSSL：大整数运算 · BN_mod_exp_mont（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-mod-exp-mont.md",
+    "sha256": "42cd80a168e827099bdb484fffca827191affff5d21cc81f4bcdb27511be7a69",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-mod-exp-mont"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-mod-mul-montgomery",
+    "title": "OpenSSL：大整数运算 · BN_mod_mul_montgomery（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-mod-mul-montgomery.md",
+    "sha256": "455dc263e05458fe79af2b73689ffee4b2f5e1ab14d2d147ee77a64e739ae028",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-mod-mul-montgomery"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-mod-mul-reciprocal",
+    "title": "OpenSSL：大整数运算 · BN_mod_mul_reciprocal（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-mod-mul-reciprocal.md",
+    "sha256": "84ce747ebbbfab5e5a9502a16a9db95c9a02ddc3afaf1692895af61758680aed",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-mod-mul-reciprocal"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-rand",
+    "title": "OpenSSL：大整数运算 · BN_rand（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-rand.md",
+    "sha256": "1546334f4ac8b746f4d34409e08693eb23d0a33a06c3bcb66b7cd5a9d70435af",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-rand"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bn-set-bit",
+    "title": "OpenSSL：大整数运算 · BN_set_bit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bn-set-bit.md",
+    "sha256": "20ddd1075deb32e3d15c8f2e91eb1c882b7b90353579bb7e48ad8554c9364627",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bn-set-bit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ec-gfp-simple-method",
+    "title": "OpenSSL：椭圆曲线 · EC_GFp_simple_method（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ec-gfp-simple-method.md",
+    "sha256": "04153c05e909c84aed6a4656847557e63395857f6fb9da447a0b38ebd31b92ed",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ec-gfp-simple-method"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ec-group-copy",
+    "title": "OpenSSL：椭圆曲线 · EC_GROUP_copy（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ec-group-copy.md",
+    "sha256": "8dca3e91f5e1b032744edbebd8f8bc82950bf1a6309fe9d3dea9ad63b8d09453",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ec-group-copy"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ec-group-new",
+    "title": "OpenSSL：椭圆曲线 · EC_GROUP_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ec-group-new.md",
+    "sha256": "1ca65e8c385d40f74e48ac76470283c067c13b997ce582ebf3a16b9550b2a53e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ec-group-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ec-key-get-enc-flags",
+    "title": "OpenSSL：椭圆曲线 · EC_KEY_get_enc_flags（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ec-key-get-enc-flags.md",
+    "sha256": "3dc0ff7195cd200a0fbc30821686ec3d8c39c5528811664a7b88ad70df35daf9",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ec-key-get-enc-flags"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ec-key-new",
+    "title": "OpenSSL：椭圆曲线 · EC_KEY_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ec-key-new.md",
+    "sha256": "caa3b1e0b4fedd4f83067596146a568a495a66d7a777cb3b8dbfb4d20926e7c0",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ec-key-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ec-point-add",
+    "title": "OpenSSL：椭圆曲线 · EC_POINT_add（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ec-point-add.md",
+    "sha256": "ad5340f5014f2e4ec586a9d703341a79f503497c400cabfaab5efe5fa37de82e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ec-point-add"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ec-point-new",
+    "title": "OpenSSL：椭圆曲线 · EC_POINT_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ec-point-new.md",
+    "sha256": "701f0f7ffde518a46de78e824f2053be3b613e42e12ab474124f7a334db84fe1",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ec-point-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-asym-cipher-free",
+    "title": "OpenSSL：EVP 密码接口 · EVP_ASYM_CIPHER_free（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-asym-cipher-free.md",
+    "sha256": "366f65bf383f882bc5f662aaa839c7caac0ae781441d04888a95bf6f23d87c1f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-asym-cipher-free"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-cipher-ctx-get-cipher-data",
+    "title": "OpenSSL：对称密码与工作模式 · EVP_CIPHER_CTX_get_cipher_data（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-cipher-ctx-get-cipher-data.md",
+    "sha256": "5f5434c3c733ed83f08b95f4986880c8ac8cfbbebae38e4182c436f5c3994600",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-cipher-ctx-get-cipher-data"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-cipher-ctx-get-original-iv",
+    "title": "OpenSSL：对称密码与工作模式 · EVP_CIPHER_CTX_get_original_iv（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-cipher-ctx-get-original-iv.md",
+    "sha256": "59732c63fae5987781c124e9bd10e78d5a2be796f5f5d13599bc2b772fc389be",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-cipher-ctx-get-original-iv"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-cipher-meth-new",
+    "title": "OpenSSL：对称密码与工作模式 · EVP_CIPHER_meth_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-cipher-meth-new.md",
+    "sha256": "b795e3e5ecc79d522b43a2d4ffe12c531846b0f9cf0c5e81fd07a23a04de9b9d",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-cipher-meth-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-digestinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_DigestInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-digestinit.md",
+    "sha256": "a4253b3cfe90c7033a95ec18e655290cfb9563175695dbf3ad22bf5fbc14ad28",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-digestinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-digestsigninit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_DigestSignInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-digestsigninit.md",
+    "sha256": "5457ca4e66bc8c21a3fb0d40e66ffb25a9208f1e93dbf45a76c5f61ff676f0fd",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-digestsigninit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-digestverifyinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_DigestVerifyInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-digestverifyinit.md",
+    "sha256": "be951e46dd770d7ed433d2967c3d9aa23c37ec828a7dc3bd853aa79f6124f348",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-digestverifyinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-encodeinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_EncodeInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-encodeinit.md",
+    "sha256": "18eb53b87508a8815b42c40fadaef849b4ac757b887cb160981bc834d6370d6d",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-encodeinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-encryptinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_EncryptInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-encryptinit.md",
+    "sha256": "20cf3e03815a99cfed0b2533c04b562a4e61bd0bdd80bf58f9b976f73060b15f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-encryptinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-kdf",
+    "title": "OpenSSL：密钥派生 · EVP_KDF（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-kdf.md",
+    "sha256": "69c2c6f1bb267e92219622e417ff26e51bc3edd0d65f8fb99a37d7a0c3cc1c8a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-kdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-kem-free",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEM_free（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-kem-free.md",
+    "sha256": "794a161487f79a026ec555b99b6e7f0d35985d7d80413654731b6edbcb3bdbe3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-kem-free"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-keyexch-free",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEYEXCH_free（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-keyexch-free.md",
+    "sha256": "69ef412571214f7ad9cd3a47614dd5ff10ec7fef3f0b798275a8052206c33cd2",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-keyexch-free"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-keymgmt",
+    "title": "OpenSSL：EVP 密码接口 · EVP_KEYMGMT（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-keymgmt.md",
+    "sha256": "a06c1b59d67002834bab9f4645b442262316d2b189c51e01a25752a54edf727b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-keymgmt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-mac",
+    "title": "OpenSSL：消息认证码 · EVP_MAC（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-mac.md",
+    "sha256": "d132927ad25002a1e52c9d2eff4f695bb999f4c42178c6bd537a3d8eb37a62be",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-mac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-md-meth-new",
+    "title": "OpenSSL：摘要算法 · EVP_MD_meth_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-md-meth-new.md",
+    "sha256": "22c33dc40b3a24712e59b8718bf2093f202a449ec1d85d784dc3ac87786b8729",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-md-meth-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-openinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_OpenInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-openinit.md",
+    "sha256": "51c67dafc1c9e7654fae1554caeb75275e1d4f14a93676a7cf6d38fe322a1e28",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-openinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pbe-cipherinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_PBE_CipherInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pbe-cipherinit.md",
+    "sha256": "aa0abfe2e5f80c1a494a4421e64c24d1ff99d938eb7c0af8db181a2778b92ab0",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pbe-cipherinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-asn1-method",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_ASN1_METHOD（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-asn1-method.md",
+    "sha256": "b4391d463f42f5906dbe88546770bc90aa7c094ffb6c1904792616e402d0b60c",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-asn1-method"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-ctx-ctrl",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_CTX_ctrl（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-ctx-ctrl.md",
+    "sha256": "67947ccc31782ce7dcb3699d11a962cccd0b8a120ace27b7c52abb546e95cad5",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-ctx-ctrl"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-ctx-get-algor",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_CTX_get_algor（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-ctx-get-algor.md",
+    "sha256": "d3b4ebd99705ec5226a3981e24f6e8ffb0447c9a01dce09764d955a2304eb250",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-ctx-get-algor"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-ctx-new",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_CTX_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-ctx-new.md",
+    "sha256": "a872ed5b2d82ebb4bb081fcdf678389d48529accf8c809c8afad634696342857",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-ctx-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-hkdf-md",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_CTX_set_hkdf_md（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-hkdf-md.md",
+    "sha256": "e5f517a79559f456f3283c0ed16e6448253bf950b9640dd9bf79bfbae0662ec2",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-ctx-set-hkdf-md"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-params",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_CTX_set_params（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-params.md",
+    "sha256": "4afd7547dce3a602ec0b4411a1bb31ca8c9391069dd77b048e65799ba221f87a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-ctx-set-params"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-rsa-pss-keygen-md",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_CTX_set_rsa_pss_keygen_md（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-rsa-pss-keygen-md.md",
+    "sha256": "fcd87ad775e4825e9a972c472e771e07d06d9a06db9428835308343d881409af",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-ctx-set-rsa-pss-keygen-md"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-tls1-prf-md",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_CTX_set_tls1_prf_md（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-ctx-set-tls1-prf-md.md",
+    "sha256": "9f74615b545bfb9d9ddfd9aa529665e9090b261982d135559ce40c74c4048e09",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-ctx-set-tls1-prf-md"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-asn1-get-count",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_asn1_get_count（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-asn1-get-count.md",
+    "sha256": "4ff1f9e51b7c4cd3e4a051dc73cd895b8da79ed591d2c6bb4962a095e5184c60",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-asn1-get-count"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-check",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_check（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-check.md",
+    "sha256": "473d9bb488d73a4abb0613856d8a9df1de1f41fbddddfe44a752c22e7991e6de",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-check"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-copy-parameters",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_copy_parameters（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-copy-parameters.md",
+    "sha256": "d620c9412c5fdea639a4b7b90006f7a9eca3a238096775c39d8982e363e6cd4f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-copy-parameters"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-decapsulate",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_decapsulate（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-decapsulate.md",
+    "sha256": "7129e8250662859857b025e6769597e142418bfc56c09f37d532e44457b48ab1",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-decapsulate"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-decrypt",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_decrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-decrypt.md",
+    "sha256": "6bd460232ce9476856c06c808c39b032596898aa70a39188c5c0bca70e364ba3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-decrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-derive",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_derive（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-derive.md",
+    "sha256": "448dd36554efde8ff4190256fbad4261428b8b30594dc875ed0440a86286a98f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-derive"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-encapsulate",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_encapsulate（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-encapsulate.md",
+    "sha256": "cad211c818da3441d16221028ec2018f137d63683844945d6481502598eee263",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-encapsulate"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-encrypt",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_encrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-encrypt.md",
+    "sha256": "5371b3993ae0b0ae96c4f74a7c15e554ea87986e2f4a94a337be356ebde24270",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-encrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-fromdata",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_fromdata（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-fromdata.md",
+    "sha256": "8e4a83f34fcd71d873c4bf98e3cd46242213ce9cac681ffd84d5f22853f0269b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-fromdata"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-get-attr",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_get_attr（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-get-attr.md",
+    "sha256": "a8968698890d0c21a969a0a5e137d290e4367f4d51e963147f7160c04e0e5211",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-get-attr"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-get-default-digest-nid",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_get_default_digest_nid（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-get-default-digest-nid.md",
+    "sha256": "5df33d115de0625eb36bcccbb4bac72f7a04b25cf06d9b31914b3a5ce638035f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-get-default-digest-nid"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-get-size",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_get_size（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-get-size.md",
+    "sha256": "bf0ccd364f7e8bf791a9e1aaca730eb92b77e80878ce05e2960335de2890b30b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-get-size"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-gettable-params",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_gettable_params（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-gettable-params.md",
+    "sha256": "34138104fd49b78bb436331c78158203b721d78e8acecdbcbfaea6e71f363e00",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-gettable-params"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-is-a",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_is_a（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-is-a.md",
+    "sha256": "28574c34f51c50bfa98408c47aed63f3de758ad3995a2346fdff1ee5dd897189",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-is-a"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-keygen",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_keygen（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-keygen.md",
+    "sha256": "49b3603e8d3587b83f9f93ec772eb4324f176ea682b04b0116b241f782793a28",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-keygen"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-meth-new",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_meth_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-meth-new.md",
+    "sha256": "b9b89527d741bf4634fc35032a4e5ca32d31bece7da2ec0e252edf0d12558a83",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-meth-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-new",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-new.md",
+    "sha256": "eed9996e8cf002c9b5cb823e3680159e2ce7fbdee970924229236bcd9998b0b1",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-print-private",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_print_private（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-print-private.md",
+    "sha256": "2611c7d5e6535746d8ede6d914653e5dd3b28a3ff0d9925b58e8ebd2d9c6c3c7",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-print-private"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-set1-rsa",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_set1_RSA（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-set1-rsa.md",
+    "sha256": "46d13381d4fe0b85372e52be88648a72d8747f03c7e8556d3f16d8ef01b9b509",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-set1-rsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-set1-encoded-public-key",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_set1_encoded_public_key（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-set1-encoded-public-key.md",
+    "sha256": "84aeb717c8e3645068a3fa2f72b9f83584aa2f9db47f071aa566ac24a93ccd3e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-set1-encoded-public-key"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-set-type",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_set_type（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-set-type.md",
+    "sha256": "e591aa3497fe16216975a8c6e5b2c0e6524f1579d8e8b43f2648a45654ba7fac",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-set-type"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-settable-params",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_settable_params（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-settable-params.md",
+    "sha256": "8b60ba1bbcf7e4cc1b91f404770c44044a7949bfe47c23205fdca6ae78f4763c",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-settable-params"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-sign",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_sign（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-sign.md",
+    "sha256": "fd2026489a16af7a2b2d471e16ad0b55909912d50246edd2508256a558ddfbc0",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-sign"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-todata",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_todata（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-todata.md",
+    "sha256": "545a4f194ca3d7b388d0062a39c0c5eae2149088872221e79303843fee229716",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-todata"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-verify",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_verify（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-verify.md",
+    "sha256": "db2e4685f457ecd7e32cc9f2004ee61881aad38c507b7a46e50a088d3694a979",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-verify"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-pkey-verify-recover",
+    "title": "OpenSSL：非对称密钥与签名 · EVP_PKEY_verify_recover（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-pkey-verify-recover.md",
+    "sha256": "eec249aee6194e14d38ac0ff32472641821dadc6b8336a0647d34cdb65479582",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-pkey-verify-recover"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-rand",
+    "title": "OpenSSL：密码随机数 · EVP_RAND（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-rand.md",
+    "sha256": "aa99f04d09dad584c8d5baf79116b7e31d7b80243a7c46f4287ccd29f059d764",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-rand"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-signature",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SIGNATURE（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-signature.md",
+    "sha256": "b4be2c70d21984fc97a06c6611871f3337bd5725172439bf4b08178dc6747583",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-signature"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-skey",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SKEY（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-skey.md",
+    "sha256": "f66464c11e51d24ed7bdb563c0a5a0f46a9fc30f369c9237a6bd06a89982f035",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-skey"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-skeymgmt",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SKEYMGMT（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-skeymgmt.md",
+    "sha256": "def0a314fcc2cafc60da712b06be002bd799c936c8162c0e6127c795887b1d78",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-skeymgmt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-sealinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SealInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-sealinit.md",
+    "sha256": "06dfecbbd2a815e44abc314b6bb7f7d7e8e7e55525a88c3941825a2709ffade7",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-sealinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-signinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_SignInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-signinit.md",
+    "sha256": "0374b32fdf2116f242d6229388e51106d82214b25aef84445a39b189a8040eff",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-signinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-verifyinit",
+    "title": "OpenSSL：EVP 密码接口 · EVP_VerifyInit（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-verifyinit.md",
+    "sha256": "5e632a7706acfb048adf49ac63105b848de02eeb531e0b3d853a4b29937027a0",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-verifyinit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-aes-128-gcm",
+    "title": "OpenSSL：EVP 密码接口 · EVP_aes_128_gcm（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-aes-128-gcm.md",
+    "sha256": "99caf4770d793e7eb7c50e3c65e16648d62ee9871b2bad571576abad6ebd7c7c",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-aes-128-gcm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-aria-128-gcm",
+    "title": "OpenSSL：EVP 密码接口 · EVP_aria_128_gcm（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-aria-128-gcm.md",
+    "sha256": "b99acf2b4644c28bc1eb1377c89c6660a664ae21f2e9f8667d03ddec1135e348",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-aria-128-gcm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-chacha20",
+    "title": "OpenSSL：EVP 密码接口 · EVP_chacha20（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-chacha20.md",
+    "sha256": "9c78e5ac468faeb40c534fb6610b296dd1674e95684627780a9e6bcff7d98bf8",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-chacha20"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-des-cbc",
+    "title": "OpenSSL：EVP 密码接口 · EVP_des_cbc（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-des-cbc.md",
+    "sha256": "5dcab94b86ce186181942736f992e23f4771395169b903c444f22000cbbd882a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-des-cbc"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-rc2-cbc",
+    "title": "OpenSSL：EVP 密码接口 · EVP_rc2_cbc（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-rc2-cbc.md",
+    "sha256": "f2c8d7f0369140bfdaaab2c6c608c250483ad55d5a1e127345e856dddd3dbe48",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-rc2-cbc"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-rc4",
+    "title": "OpenSSL：EVP 密码接口 · EVP_rc4（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-rc4.md",
+    "sha256": "c63bfa843d12133b22287835d6dd55bce1b14eb76914e4773cb8a369e288452c",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-rc4"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-rc5-32-12-16-cbc",
+    "title": "OpenSSL：EVP 密码接口 · EVP_rc5_32_12_16_cbc（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-rc5-32-12-16-cbc.md",
+    "sha256": "4c378e68b67f7a1d8652f95b559fa23f90310959b86b34432ab80b64754e089a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-rc5-32-12-16-cbc"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-set-default-properties",
+    "title": "OpenSSL：EVP 密码接口 · EVP_set_default_properties（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-set-default-properties.md",
+    "sha256": "82b6c429c212e3bfc59fe28ac75a56f0bce151d5649b377946f96eaeaaac7446",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-set-default-properties"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-sha224",
+    "title": "OpenSSL：EVP 密码接口 · EVP_sha224（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-sha224.md",
+    "sha256": "38e6cd2d9b9e2fafb82cf5ffdf82f30749c6ce9b28bbeecc745e5ea876d15fa2",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-sha224"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-evp-sha3-224",
+    "title": "OpenSSL：EVP 密码接口 · EVP_sha3_224（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-evp-sha3-224.md",
+    "sha256": "22cbe1f399b220c12b829fb50fc89adb68536226c8ff9fd30edc8dbf95a7ecce",
+    "sourceIds": [
+      "doc-openssl-doc-man3-evp-sha3-224"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-hmac",
+    "title": "OpenSSL：消息认证码 · HMAC（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-hmac.md",
+    "sha256": "e77ea4fc23d0fb0ee3ccac963205ca567f4189fc4974c9c8ea26fb615ecf521f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-hmac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-algorithm",
+    "title": "OpenSSL：密码实现与接口 · OSSL_ALGORITHM（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-algorithm.md",
+    "sha256": "eb606f0ed2d63c0b5052bc65490da209a80cc1172986193a319c0fc27baaa109",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-algorithm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-callback",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CALLBACK（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-callback.md",
+    "sha256": "2c1142a7b6acf330e42225e3352e7c840f787b7aee88498a1a04f03be43deddb",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-callback"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-atav-set0",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_ATAV_set0（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-atav-set0.md",
+    "sha256": "a67a66e8c01f741c04ec97be2704a56502c90eb7dd9b055155a3dcbfab124e06",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-atav-set0"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-ctx-new",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_CTX_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-ctx-new.md",
+    "sha256": "3d76220bc78fbbb9865582a821ee339a0e1e54384eab0f0bf036ff8f018f8c63",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-ctx-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-itav-new-cacerts",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_ITAV_new_caCerts（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-itav-new-cacerts.md",
+    "sha256": "22c0af2c22c0fe640a46f240afb0a1a768a58e6021052875de777baf12311b90",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-itav-new-cacerts"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-itav-set0",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_ITAV_set0（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-itav-set0.md",
+    "sha256": "6b0455039d5e281b03541b53903a0a7aa1e8b5ef31af2e540e623833f515688d",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-itav-set0"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-msg-get0-header",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_MSG_get0_header（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-msg-get0-header.md",
+    "sha256": "c053a84e6a1265153a40a0c47ca438355277bf05a677ed17fc148b5f71ab96aa",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-msg-get0-header"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-msg-http-perform",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_MSG_http_perform（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-msg-http-perform.md",
+    "sha256": "eb682c13b6e5429bb05402e15137e7a5c379bcffc6264393e5b36a06b830ac86",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-msg-http-perform"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-srv-ctx-new",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_SRV_CTX_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-srv-ctx-new.md",
+    "sha256": "c573b951b8d83c88140dd5e4716157d6548524a4b1c612e71cd3e393d0e5c185",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-srv-ctx-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-statusinfo-new",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_STATUSINFO_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-statusinfo-new.md",
+    "sha256": "07181c958556600b215c3017e4a5fc3b52d20315e3e0fe3a4a8f6f41f9613606",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-statusinfo-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-exec-certreq",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_exec_certreq（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-exec-certreq.md",
+    "sha256": "6bef650cd88f0c851a5ce92474b32391f1b47dacd033df74fa3397840290253a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-exec-certreq"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-log-open",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_log_open（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-log-open.md",
+    "sha256": "07a6462a9b239d31200950c089f62fa99ce075ab97376c299afc6773a0f82ddc",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-log-open"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-cmp-validate-msg",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CMP_validate_msg（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-cmp-validate-msg.md",
+    "sha256": "3c1d9f87bfb3c171c487f01b3f19c528395d663d265716dcb4f749f8446d0106",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-cmp-validate-msg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-crmf-msg-get0-tmpl",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CRMF_MSG_get0_tmpl（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-crmf-msg-get0-tmpl.md",
+    "sha256": "a4d377d1d828e0dac98237e711878c2b579ebbf26f6ccb9cf85a0d4f6ff78fe2",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-crmf-msg-get0-tmpl"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-crmf-msg-set0-validity",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CRMF_MSG_set0_validity（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-crmf-msg-set0-validity.md",
+    "sha256": "391f94d94e1c1c3b18793e071e41481db849f36d5ba46324fcd99925735b032e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-crmf-msg-set0-validity"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-crmf-msg-set1-regctrl-regtoken",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CRMF_MSG_set1_regCtrl_regToken（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-crmf-msg-set1-regctrl-regtoken.md",
+    "sha256": "239f4e274af754fe8b3b479884e600f9f6f306271a3e4162e800cca927d74ad8",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-crmf-msg-set1-regctrl-regtoken"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-crmf-pbmp-new",
+    "title": "OpenSSL：密码实现与接口 · OSSL_CRMF_pbmp_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-crmf-pbmp-new.md",
+    "sha256": "3514b3a18b7c8957e4a9d0478ae03491d21b7a4813393a0969ad800efe73509e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-crmf-pbmp-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-decoder",
+    "title": "OpenSSL：密码实现与接口 · OSSL_DECODER（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-decoder.md",
+    "sha256": "1b8cf1749790cc68db0a7956142d58e3d72afa9ab649704c3311f7c98da3444d",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-decoder"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-decoder-ctx",
+    "title": "OpenSSL：密码实现与接口 · OSSL_DECODER_CTX（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-decoder-ctx.md",
+    "sha256": "2cc421650dededab1af1fc50e43f6082d84bcdcf034c44b59beb5f12e567c9d4",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-decoder-ctx"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-decoder-ctx-new-for-pkey",
+    "title": "OpenSSL：密码实现与接口 · OSSL_DECODER_CTX_new_for_pkey（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-decoder-ctx-new-for-pkey.md",
+    "sha256": "8db0bcfd5a3b8263c82e7f0a3bd835366b43cc0083f4665afbcef46b2af64e27",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-decoder-ctx-new-for-pkey"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-decoder-from-bio",
+    "title": "OpenSSL：密码实现与接口 · OSSL_DECODER_from_bio（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-decoder-from-bio.md",
+    "sha256": "402d918b9f0053b97c354f3e3e695fad4e3763de995e25df457c6b650c77beb1",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-decoder-from-bio"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-dispatch",
+    "title": "OpenSSL：密码实现与接口 · OSSL_DISPATCH（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-dispatch.md",
+    "sha256": "8ea3dc47c821059aafbb49c7f01de5ca0ad21542debcd8cff89775d303ca40e6",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-dispatch"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-encoder",
+    "title": "OpenSSL：密码实现与接口 · OSSL_ENCODER（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-encoder.md",
+    "sha256": "2351d019658a0ce19005e9e32ce793a0726b4f8cd744d8cf53262eae42ee0b7c",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-encoder"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-encoder-ctx",
+    "title": "OpenSSL：密码实现与接口 · OSSL_ENCODER_CTX（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-encoder-ctx.md",
+    "sha256": "d62e8c7dc13e2a9a8621dde0939fe1a0613b31a51956fbb2215155d389556596",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-encoder-ctx"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-encoder-ctx-new-for-pkey",
+    "title": "OpenSSL：密码实现与接口 · OSSL_ENCODER_CTX_new_for_pkey（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-encoder-ctx-new-for-pkey.md",
+    "sha256": "93d08223bda9b3a6c751375894bbe3e3f769dc94c2f33f69bb97643b34129a69",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-encoder-ctx-new-for-pkey"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-encoder-to-bio",
+    "title": "OpenSSL：密码实现与接口 · OSSL_ENCODER_to_bio（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-encoder-to-bio.md",
+    "sha256": "efbfc2b4ae02f18852686c9f5c6e1662828751f77c6a9fe8b68c21575f600a5f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-encoder-to-bio"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-err-state-save",
+    "title": "OpenSSL：密码实现与接口 · OSSL_ERR_STATE_save（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-err-state-save.md",
+    "sha256": "0edded2a44380a713798a618e716d5665eb9b8d74cc077dba81296f5243c0eef",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-err-state-save"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-ess-check-signing-certs",
+    "title": "OpenSSL：密码实现与接口 · OSSL_ESS_check_signing_certs（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-ess-check-signing-certs.md",
+    "sha256": "7b3055e7812c20964802bd9dd2bd825f28ba2c5f1f43a46acef8857cab959e4b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-ess-check-signing-certs"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-hpke-ctx-new",
+    "title": "OpenSSL：密码实现与接口 · OSSL_HPKE_CTX_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-hpke-ctx-new.md",
+    "sha256": "33a708946841b8902b7cd4a59a6a5252df79966ce54834bd6bfc6466f0b02095",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-hpke-ctx-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-http-req-ctx",
+    "title": "OpenSSL：密码实现与接口 · OSSL_HTTP_REQ_CTX（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-http-req-ctx.md",
+    "sha256": "f937218d4941d2bad7ba95a529028415321499ed15951895bff89a1cd3c9f0f3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-http-req-ctx"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-http-parse-url",
+    "title": "OpenSSL：密码实现与接口 · OSSL_HTTP_parse_url（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-http-parse-url.md",
+    "sha256": "8476ede0db680cd0eba6ab0b8e36663b9c468f4a042adcb7893b1f907ee41cde",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-http-parse-url"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-http-transfer",
+    "title": "OpenSSL：密码实现与接口 · OSSL_HTTP_transfer（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-http-transfer.md",
+    "sha256": "187483971a99b6895d62b6f82ae3ee31ad4df0a99de04fa1d5406bcb1813533f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-http-transfer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-ietf-attr-syntax",
+    "title": "OpenSSL：密码实现与接口 · OSSL_IETF_ATTR_SYNTAX（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-ietf-attr-syntax.md",
+    "sha256": "ab71731192a1bb61ee55c60cdf1e4b988aebc124be69adf16860a6bfe9e92cd3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-ietf-attr-syntax"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-indicator-set-callback",
+    "title": "OpenSSL：密码实现与接口 · OSSL_INDICATOR_set_callback（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-indicator-set-callback.md",
+    "sha256": "b5965c6d864a84ef18dba2a0f3122faed3af5adef5a864a5b817a0a86a08ee50",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-indicator-set-callback"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-lib-ctx",
+    "title": "OpenSSL：密码实现与接口 · OSSL_LIB_CTX（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-lib-ctx.md",
+    "sha256": "4e8bc7677d1ded2e8ca46874d92df9d83a0bdbe4030f1f46c50d2b4b14ecdae8",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-lib-ctx"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-lib-ctx-set-conf-diagnostics",
+    "title": "OpenSSL：密码实现与接口 · OSSL_LIB_CTX_set_conf_diagnostics（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-lib-ctx-set-conf-diagnostics.md",
+    "sha256": "2c706bab1e22bdc7a23355cadc9b357aa48e6ae8f5b09087a1e0cce442b7e92b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-lib-ctx-set-conf-diagnostics"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-param",
+    "title": "OpenSSL：密码实现与接口 · OSSL_PARAM（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-param.md",
+    "sha256": "6dac8d291395286f5165ed04a69561180f4a000369497295c0e0f4718b685b15",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-param"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-param-bld",
+    "title": "OpenSSL：密码实现与接口 · OSSL_PARAM_BLD（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-param-bld.md",
+    "sha256": "8434c650aa69a5e2b02afe464e7bbad9c00a5cc01172398c948e5ad31f4227c3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-param-bld"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-param-allocate-from-text",
+    "title": "OpenSSL：密码实现与接口 · OSSL_PARAM_allocate_from_text（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-param-allocate-from-text.md",
+    "sha256": "1e645bba38c0ace91d9fd1bff07846e20ee6041cfceecb9ab4318dfb89bf27be",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-param-allocate-from-text"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-param-dup",
+    "title": "OpenSSL：密码实现与接口 · OSSL_PARAM_dup（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-param-dup.md",
+    "sha256": "8bd7ba65f325d55bc5dc106f2b94f1bff650c4ace51df8b2c188127f7080214b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-param-dup"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-param-int",
+    "title": "OpenSSL：密码实现与接口 · OSSL_PARAM_int（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-param-int.md",
+    "sha256": "1af846192cdf84f1ee97341578db7a30a1a33040c4f2393ab614545c8be21fa8",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-param-int"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-provider",
+    "title": "OpenSSL：Provider 架构 · OSSL_PROVIDER（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-provider.md",
+    "sha256": "e8150054fa4ce48ea44e6081558d27fcba8f4a350a033b476a8c00b0e6664e64",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-provider"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-self-test-new",
+    "title": "OpenSSL：密码实现与接口 · OSSL_SELF_TEST_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-self-test-new.md",
+    "sha256": "d311548534fa19006e1589cc7501f1f5d4b4f3f664c5955a2c1c24276b35d4f7",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-self-test-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-ossl-store-winstore",
+    "title": "OpenSSL：密码实现与接口 · OSSL_STORE-winstore（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-ossl-store-winstore.md",
+    "sha256": "22ab507449425ce67ebc63e7d04df11462a9f47fcacbecaeefd34d06d8bf1b13",
+    "sourceIds": [
+      "doc-openssl-doc-man7-ossl-store-winstore"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-store-info",
+    "title": "OpenSSL：密码实现与接口 · OSSL_STORE_INFO（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-store-info.md",
+    "sha256": "b148035f1da4e43168415968329441eeb0d763d8213b865b9c65ea0d51048ccd",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-store-info"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-store-loader",
+    "title": "OpenSSL：密码实现与接口 · OSSL_STORE_LOADER（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-store-loader.md",
+    "sha256": "5985467fb7ad732b2c06e5b9265865c070796ea53a872ad45203628969eb071b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-store-loader"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-store-search",
+    "title": "OpenSSL：密码实现与接口 · OSSL_STORE_SEARCH（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-store-search.md",
+    "sha256": "f6bbfbdb9150103af680a99ec2ea62e4c8454fb716854a38f171b726e9664664",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-store-search"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-store-expect",
+    "title": "OpenSSL：密码实现与接口 · OSSL_STORE_expect（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-store-expect.md",
+    "sha256": "f118ec1a505ea5053cf095c09f5e7b081842d0abac61512cff6a6d5e41f5c0c3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-store-expect"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-store-open",
+    "title": "OpenSSL：密码实现与接口 · OSSL_STORE_open（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-store-open.md",
+    "sha256": "aa29f883644414f185ead2b805b39a0340988310a615ba5c0c38df3e6384e958",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-store-open"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-trace-enabled",
+    "title": "OpenSSL：密码实现与接口 · OSSL_trace_enabled（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-trace-enabled.md",
+    "sha256": "700cecd4a93ca4a915632b27d3bedc6ac99a9b78d71a924b57dee7972b029007",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-trace-enabled"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-ossl-trace-set-channel",
+    "title": "OpenSSL：密码实现与接口 · OSSL_trace_set_channel（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-ossl-trace-set-channel.md",
+    "sha256": "10dccf814dffb61a419f2eed0a2e1355b28032754d611f0eb78f90bd72e9a535",
+    "sourceIds": [
+      "doc-openssl-doc-man3-ossl-trace-set-channel"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-rand",
+    "title": "OpenSSL：密码随机数 · RAND（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-rand.md",
+    "sha256": "9768f9b971b6da5ca11ca490a4b6520176d2fdbac81601f9e795fc26651c4b4a",
+    "sourceIds": [
+      "doc-openssl-doc-man7-rand"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rand-add",
+    "title": "OpenSSL：密码随机数 · RAND_add（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rand-add.md",
+    "sha256": "32f688d8ac33e61e60d0eb8e611621a32162da740563065e74fbea4e9c6d74a2",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rand-add"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rand-bytes",
+    "title": "OpenSSL：密码随机数 · RAND_bytes（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rand-bytes.md",
+    "sha256": "5c9f90bfe70b77cb8a5f2e39cfa4c11449875908aaf665622b453124fdcfe3e2",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rand-bytes"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rand-egd",
+    "title": "OpenSSL：密码随机数 · RAND_egd（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rand-egd.md",
+    "sha256": "f9b45f21095ba368d0d91837eec22cec4ecd2355729af5fca6a174ff0bf3bd48",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rand-egd"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rand-load-file",
+    "title": "OpenSSL：密码随机数 · RAND_load_file（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rand-load-file.md",
+    "sha256": "450ef5c668a0162a465f8ab61d05c1453ab0ede20056443c0f2112c6390d95ab",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rand-load-file"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rand-set-drbg-type",
+    "title": "OpenSSL：密码随机数 · RAND_set_DRBG_type（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rand-set-drbg-type.md",
+    "sha256": "7306f8cd06ab2ef2a46e764171363844c1561c2c885fcb593b194d05492866a7",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rand-set-drbg-type"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rand-set-rand-method",
+    "title": "OpenSSL：密码随机数 · RAND_set_rand_method（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rand-set-rand-method.md",
+    "sha256": "4f4a69c582de52e01904e10dd635e57b5cfba2172ee809efa8d9188c7ace8fa4",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rand-set-rand-method"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-rsa-pss",
+    "title": "OpenSSL：RSA 密码 · RSA-PSS（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-rsa-pss.md",
+    "sha256": "121059ed31386f8f5ccfcb88dc59c30b80c4b805dbfde064d33e00a9dbeb1d12",
+    "sourceIds": [
+      "doc-openssl-doc-man7-rsa-pss"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-check-key",
+    "title": "OpenSSL：RSA 密码 · RSA_check_key（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-check-key.md",
+    "sha256": "eefd3ebde4e9618ca6ea486981f1b320a85ee70a70b7bd2dca86c81960be9f13",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-check-key"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-generate-key",
+    "title": "OpenSSL：RSA 密码 · RSA_generate_key（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-generate-key.md",
+    "sha256": "4e4b7515814d6fc4dd8dbe5294b105d79c7f9d7ede8a5a6ab1c69d84b689a7fb",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-generate-key"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-get0-key",
+    "title": "OpenSSL：RSA 密码 · RSA_get0_key（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-get0-key.md",
+    "sha256": "d043bec89431873ec9dab6d99b14604cc6a666f6355b915826199fd29a5c61b3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-get0-key"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-meth-new",
+    "title": "OpenSSL：RSA 密码 · RSA_meth_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-meth-new.md",
+    "sha256": "a960fa3185e318aa3cdf8abbdffd878d191f20a6c3dae82f9f67b19e16f8651d",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-meth-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-padding-add-pkcs1-type-1",
+    "title": "OpenSSL：RSA 密码 · RSA_padding_add_PKCS1_type_1（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-padding-add-pkcs1-type-1.md",
+    "sha256": "cbb49b6f3643b7255a3d2a6bf05a138e0fb67a325f060459a6aef400006ddbac",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-padding-add-pkcs1-type-1"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-private-encrypt",
+    "title": "OpenSSL：RSA 密码 · RSA_private_encrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-private-encrypt.md",
+    "sha256": "e6434f73f84aac1ce0831e0cca565bd3a45bf813d0192a8869343446ec78396f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-private-encrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-public-encrypt",
+    "title": "OpenSSL：RSA 密码 · RSA_public_encrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-public-encrypt.md",
+    "sha256": "12ba58488a056715d881fb91c73c7f6be06b21dbee52395911421196846d9c2c",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-public-encrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-set-method",
+    "title": "OpenSSL：RSA 密码 · RSA_set_method（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-set-method.md",
+    "sha256": "877a34bec0cd3295087d5010388f2a7c278d23707b2c6111b81288a200fefd6e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-set-method"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-sign",
+    "title": "OpenSSL：RSA 密码 · RSA_sign（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-sign.md",
+    "sha256": "2e571c9e159ddf18c98aa7688d85c59dfd51d060fbe28c6ffeee893900b05794",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-sign"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-rsa-sign-asn1-octet-string",
+    "title": "OpenSSL：RSA 密码 · RSA_sign_ASN1_OCTET_STRING（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-rsa-sign-asn1-octet-string.md",
+    "sha256": "46b37384cbd1f636d63d703b2ee97ead41e3d51cb9f2646b1b09dfdc89ab253a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-rsa-sign-asn1-octet-string"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-sha256-init",
+    "title": "OpenSSL：SHA 摘要 · SHA256_Init（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-sha256-init.md",
+    "sha256": "52d1014480f2d3c0525de1807a76e7392c4c14ceb23fab736448dd6e5b346cf5",
+    "sourceIds": [
+      "doc-openssl-doc-man3-sha256-init"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-bio",
+    "title": "OpenSSL：密码实现与接口 · bio（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-bio.md",
+    "sha256": "9083d96bb4803d3d30d70b38924a8821c58aa2a93e0ea6b4e0986ce8a404e63b",
+    "sourceIds": [
+      "doc-openssl-doc-man7-bio"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-evp",
+    "title": "OpenSSL：密码实现与接口 · evp（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-evp.md",
+    "sha256": "81803cd317c825c7c49e6e77625bf026d79c1b48d8266709b9b1087968119956",
+    "sourceIds": [
+      "doc-openssl-doc-man7-evp"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-life-cycle-cipher",
+    "title": "OpenSSL：密码实现与接口 · life_cycle-cipher（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-life-cycle-cipher.md",
+    "sha256": "ba3144fb7b9b868715733331126986a96137d216d4ea84fe6c226d73a05d737a",
+    "sourceIds": [
+      "doc-openssl-doc-man7-life-cycle-cipher"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-life-cycle-digest",
+    "title": "OpenSSL：密码实现与接口 · life_cycle-digest（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-life-cycle-digest.md",
+    "sha256": "7dd1c2933da2a9cad52e85ac65208b29f71e061b0e70f49d711731088ac81ccd",
+    "sourceIds": [
+      "doc-openssl-doc-man7-life-cycle-digest"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-life-cycle-kdf",
+    "title": "OpenSSL：密码实现与接口 · life_cycle-kdf（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-life-cycle-kdf.md",
+    "sha256": "ab118100fe0a595ae7e6fb3f83fe937f66d0c69ca0043687fd1884294bcd2c6f",
+    "sourceIds": [
+      "doc-openssl-doc-man7-life-cycle-kdf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-life-cycle-mac",
+    "title": "OpenSSL：密码实现与接口 · life_cycle-mac（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-life-cycle-mac.md",
+    "sha256": "d38265cf994ef2cf00e6f363b74d139d7c9bb011034ee61d093a4935cde2d26a",
+    "sourceIds": [
+      "doc-openssl-doc-man7-life-cycle-mac"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-life-cycle-pkey",
+    "title": "OpenSSL：密码实现与接口 · life_cycle-pkey（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-life-cycle-pkey.md",
+    "sha256": "8a690d80d870112bb6d255c6ece81c44e445088e16110558c309d60d53ac277d",
+    "sourceIds": [
+      "doc-openssl-doc-man7-life-cycle-pkey"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-life-cycle-rand",
+    "title": "OpenSSL：密码实现与接口 · life_cycle-rand（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-life-cycle-rand.md",
+    "sha256": "6c39edc1989bc5857e82e3b513137280298e47d45a0f78bc7270d9cc3746c35d",
+    "sourceIds": [
+      "doc-openssl-doc-man7-life-cycle-rand"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-openssl-env",
+    "title": "OpenSSL：密码实现与接口 · openssl-env（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-openssl-env.md",
+    "sha256": "b84502e22b4a729cc9c371d78ed977bb806681df9791a90c47d0cfae8e0f2cef",
+    "sourceIds": [
+      "doc-openssl-doc-man7-openssl-env"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-openssl-glossary",
+    "title": "OpenSSL：密码实现与接口 · openssl-glossary（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-openssl-glossary.md",
+    "sha256": "63d1bf2ee85ecc6876a70e2a4a42625a567692a664d86949478b6da6b8a5b1dd",
+    "sourceIds": [
+      "doc-openssl-doc-man7-openssl-glossary"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-openssl-qlog",
+    "title": "OpenSSL：密码实现与接口 · openssl-qlog（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-openssl-qlog.md",
+    "sha256": "d08de6de9d4443b97565d7ca82fb6b07138cc9199ce92fdd4896234103414cd5",
+    "sourceIds": [
+      "doc-openssl-doc-man7-openssl-qlog"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-openssl-quic",
+    "title": "OpenSSL：密码实现与接口 · openssl-quic（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-openssl-quic.md",
+    "sha256": "e698115be9010d3c410a10cda1cafa812778786c66b419cbdb8adab4577c7503",
+    "sourceIds": [
+      "doc-openssl-doc-man7-openssl-quic"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-openssl-threads",
+    "title": "OpenSSL：密码实现与接口 · openssl-threads（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-openssl-threads.md",
+    "sha256": "105fff42e05030f655fdbe5dba4302ae4d71cf33521682a5d8df3d3ad659dfeb",
+    "sourceIds": [
+      "doc-openssl-doc-man7-openssl-threads"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-ossl-store",
+    "title": "OpenSSL：密码实现与接口 · ossl_store（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-ossl-store.md",
+    "sha256": "df117603dd63ca46719f3fee1b3eb3ee2d4f5255209ef46fca7ef32f5d4f9e05",
+    "sourceIds": [
+      "doc-openssl-doc-man7-ossl-store"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-ossl-store-file",
+    "title": "OpenSSL：密码实现与接口 · ossl_store-file（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-ossl-store-file.md",
+    "sha256": "7617b32c41abe26f51be7d962078e0562d311b24ae48f735f26a6af41d64db29",
+    "sourceIds": [
+      "doc-openssl-doc-man7-ossl-store-file"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-passphrase-encoding",
+    "title": "OpenSSL：密码实现与接口 · passphrase-encoding（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-passphrase-encoding.md",
+    "sha256": "f691c007083e09caeb9ee96746430c5465bb41cbcc22ab85aba8957019b7f59f",
+    "sourceIds": [
+      "doc-openssl-doc-man7-passphrase-encoding"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-property",
+    "title": "OpenSSL：密码实现与接口 · property（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-property.md",
+    "sha256": "bb4a87e40dc00bd29396b7817f1496544f03fd5404a01562eb9f6f9eb53bf336",
+    "sourceIds": [
+      "doc-openssl-doc-man7-property"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-proxy-certificates",
+    "title": "OpenSSL：密码实现与接口 · proxy-certificates（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-proxy-certificates.md",
+    "sha256": "468eb55dd0dd1d686c9f2b095f078010a30cdee6d0545c52dc2ab71a48c1b838",
+    "sourceIds": [
+      "doc-openssl-doc-man7-proxy-certificates"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man7-x509",
+    "title": "OpenSSL：密码实现与接口 · x509（man7）",
+    "file": "cards/wx-re-doc-openssl-doc-man7-x509.md",
+    "sha256": "a0caa2432f10fd944a22f5db53d5620a5ee356662fa13790b5516d05a0d478df",
+    "sourceIds": [
+      "doc-openssl-doc-man7-x509"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-admissions",
+    "title": "OpenSSL：密码实现与接口 · ADMISSIONS（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-admissions.md",
+    "sha256": "ea164f1b3a1d0427b56a762c48a6914d7dc5d2bebf2614c263a2f86258683a6b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-admissions"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-extern-funcs",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_EXTERN_FUNCS（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-extern-funcs.md",
+    "sha256": "85cd333ecc2bcffdf18f6519dcd99785d1c45063329d3c35bcd3a9024e96151f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-extern-funcs"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-integer-get-int64",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_INTEGER_get_int64（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-integer-get-int64.md",
+    "sha256": "15751c1d6b3ba99ecc55cac18a395aba856255656383310fd52fab60e924b3e3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-integer-get-int64"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-string-table-add",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_STRING_TABLE_add（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-string-table-add.md",
+    "sha256": "60532540e1794c75814b63feb9ccb88eae98ab46bdd5545f7677f0ea77a2de92",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-string-table-add"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-string-length",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_STRING_length（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-string-length.md",
+    "sha256": "e4e89db42ac9fea007cbef120724a409fcbe89c5044cb81898b6135bf3087d06",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-string-length"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-time-set",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_TIME_set（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-time-set.md",
+    "sha256": "c99fffbf8ccc40006a7b23febf3746166dde3abef6b845c781fe05ed09d04ae5",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-time-set"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-type-get",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_TYPE_get（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-type-get.md",
+    "sha256": "7f69785b0a18f325e1bc14616580f838fbb0eb01137082a5fccaac5819158748",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-type-get"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-aux-cb",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_aux_cb（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-aux-cb.md",
+    "sha256": "916dc19c79d3767491007dec076ee967b5190c4e2fd3818a68373233828fe452",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-aux-cb"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-item-d2i-bio",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_item_d2i_bio（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-item-d2i-bio.md",
+    "sha256": "5bffb2757b3ba8fed5d6b2e09ae9235815e090acc800f1da9928492f3f9712fc",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-item-d2i-bio"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-asn1-item-sign",
+    "title": "OpenSSL：ASN.1 编码 · ASN1_item_sign（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-asn1-item-sign.md",
+    "sha256": "53e32ba341714e9bf168a18598c023dea3374ac491596f5ed694383cf95f623a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-asn1-item-sign"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-async-wait-ctx-new",
+    "title": "OpenSSL：密码实现与接口 · ASYNC_WAIT_CTX_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-async-wait-ctx-new.md",
+    "sha256": "97817d0f9f8da1a742fdee93337c1108dc166dd5f0e1ec57ae28506bcd23aefd",
+    "sourceIds": [
+      "doc-openssl-doc-man3-async-wait-ctx-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-async-start-job",
+    "title": "OpenSSL：密码实现与接口 · ASYNC_start_job（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-async-start-job.md",
+    "sha256": "7bcfbd9e7120dfd51534130e2af84a4af820c1cbe8280c53a70a98981e934e68",
+    "sourceIds": [
+      "doc-openssl-doc-man3-async-start-job"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bf-encrypt",
+    "title": "OpenSSL：密码实现与接口 · BF_encrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bf-encrypt.md",
+    "sha256": "0617e043f0dd447508a4b699a46fce90909696233ebc8c25d07fa72469a40a56",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bf-encrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-addr",
+    "title": "OpenSSL：密码数据流 · BIO_ADDR（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-addr.md",
+    "sha256": "73514d19187acc145336db868a769d40bd7e3c735d4459c8c1d1e5adb066271e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-addr"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-addrinfo",
+    "title": "OpenSSL：密码数据流 · BIO_ADDRINFO（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-addrinfo.md",
+    "sha256": "2da99ed0e9c6610c7b6aa1e30de274a0a4bacee871484437d16d295512fe4d5a",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-addrinfo"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-connect",
+    "title": "OpenSSL：密码数据流 · BIO_connect（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-connect.md",
+    "sha256": "b029a20fdf35820413e7588b3efe62d99cdbc4fdf0be7d084ccf7489b80e08ae",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-connect"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-ctrl",
+    "title": "OpenSSL：密码数据流 · BIO_ctrl（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-ctrl.md",
+    "sha256": "85285d27d77005bcfe89b17295e4b3bb46b3c7fe5e9876ab2ed98ff0d2b05cb0",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-ctrl"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-f-base64",
+    "title": "OpenSSL：密码数据流 · BIO_f_base64（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-f-base64.md",
+    "sha256": "1194868aead2fcb87bbe69cb701a86091175c7f03eaf9622630c8bc26dd06dbe",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-f-base64"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-f-buffer",
+    "title": "OpenSSL：密码数据流 · BIO_f_buffer（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-f-buffer.md",
+    "sha256": "8835925dea7f69995c4e0f151d47112b5382f35e877fef732c35bd7ed820e4fa",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-f-buffer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-f-cipher",
+    "title": "OpenSSL：密码数据流 · BIO_f_cipher（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-f-cipher.md",
+    "sha256": "53a102ee0cf3311a78f0b169aaaf6f154011ad139c8e2f7285497ebb4c84a9a7",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-f-cipher"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-f-md",
+    "title": "OpenSSL：密码数据流 · BIO_f_md（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-f-md.md",
+    "sha256": "dcccdb93171e9b4848341fca7063853c830795cf87b1d7fa649763ee82c1701b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-f-md"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-f-prefix",
+    "title": "OpenSSL：密码数据流 · BIO_f_prefix（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-f-prefix.md",
+    "sha256": "e7f7b066e7e946d68aee3bd67e32344d999f1bf579401e51fec598f9120ada34",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-f-prefix"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-f-ssl",
+    "title": "OpenSSL：密码数据流 · BIO_f_ssl（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-f-ssl.md",
+    "sha256": "54a7c5595c5bbc8e295c3aa6ec31f02629ef49fe4dfc7e4c79d2fcac2bc4bc0b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-f-ssl"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-find-type",
+    "title": "OpenSSL：密码数据流 · BIO_find_type（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-find-type.md",
+    "sha256": "0b991e69a2dc1dbd9703e1833d7a9ba75b9bbb708c5d4ca00449bacbbc76459f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-find-type"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-get-data",
+    "title": "OpenSSL：密码数据流 · BIO_get_data（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-get-data.md",
+    "sha256": "bdc64839f526ce73923ba2c094fe3f334705dd42c621fb7f1b371d0fcf9ccd1b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-get-data"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-get-ex-new-index",
+    "title": "OpenSSL：密码数据流 · BIO_get_ex_new_index（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-get-ex-new-index.md",
+    "sha256": "4228188e2cbc994d44628f066f901ef59536cb6ecc5a842462c615032d9ab19e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-get-ex-new-index"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-get-rpoll-descriptor",
+    "title": "OpenSSL：密码数据流 · BIO_get_rpoll_descriptor（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-get-rpoll-descriptor.md",
+    "sha256": "f075fe30e9c54fc85f22fa3aa5fb624af747960afa863217788ca99db43aab2b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-get-rpoll-descriptor"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-meth-new",
+    "title": "OpenSSL：密码数据流 · BIO_meth_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-meth-new.md",
+    "sha256": "3e5403a85fc0916e30891ca3b00bc87965a2345e90bc4663d57fd4f3a8baeffa",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-meth-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-new",
+    "title": "OpenSSL：密码数据流 · BIO_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-new.md",
+    "sha256": "2ae242dfa070b7df7e5d594fb3ba2603cd1dcf678fda5ee6ee28ba4612536363",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-parse-hostserv",
+    "title": "OpenSSL：密码数据流 · BIO_parse_hostserv（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-parse-hostserv.md",
+    "sha256": "18c6b03019029f618916e93c1ad26d8964d739d027a2cd86910fa242de5a732f",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-parse-hostserv"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-printf",
+    "title": "OpenSSL：密码数据流 · BIO_printf（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-printf.md",
+    "sha256": "f7c4a41b2abea3529a4cdce5c4c673f072c573bbf5c932113350faabb364bbb6",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-printf"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-push",
+    "title": "OpenSSL：密码数据流 · BIO_push（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-push.md",
+    "sha256": "f860a44fb2870046917ebcae95fcbc147aca4eed661e9ed6e35e9f4dd0c093e3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-push"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-read",
+    "title": "OpenSSL：密码数据流 · BIO_read（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-read.md",
+    "sha256": "994e237ce57cba9ac85a30f5514ed1b526613ed333189f007999903dac2e8149",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-read"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-accept",
+    "title": "OpenSSL：密码数据流 · BIO_s_accept（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-accept.md",
+    "sha256": "a13f4ca2b3d3660dfd253c23a9d998ff08e5dc768fea5ed722a84a09fba066d9",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-accept"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-bio",
+    "title": "OpenSSL：密码数据流 · BIO_s_bio（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-bio.md",
+    "sha256": "4a0de580312e5e369590825cb108f5e9544188da2e149e488f691024d8938788",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-bio"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-connect",
+    "title": "OpenSSL：密码数据流 · BIO_s_connect（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-connect.md",
+    "sha256": "0a4c9728b93a36fe08c47a9826dc809b7c7b53b1e589c385687aea94284ac58b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-connect"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-core",
+    "title": "OpenSSL：密码数据流 · BIO_s_core（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-core.md",
+    "sha256": "583fac5baee751e17f23176fcf989541c995c8c12263a61b48972beb0cd168c3",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-core"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-datagram",
+    "title": "OpenSSL：密码数据流 · BIO_s_datagram（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-datagram.md",
+    "sha256": "cef5ccd0c9207d4cae5e67483a41f81b6d26f8c4d9298135949f3ecb7f4f1753",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-datagram"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-dgram-pair",
+    "title": "OpenSSL：密码数据流 · BIO_s_dgram_pair（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-dgram-pair.md",
+    "sha256": "76056707457af3e79a69c874bdc6d906a19adb25e6ce78b01749851d445648cd",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-dgram-pair"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-fd",
+    "title": "OpenSSL：密码数据流 · BIO_s_fd（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-fd.md",
+    "sha256": "58d79135ca3b48559e58a714c2048d0dc561940df4480154cc6eabe2c8bc587c",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-fd"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-file",
+    "title": "OpenSSL：密码数据流 · BIO_s_file（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-file.md",
+    "sha256": "8be3bd7dcfccc5c31f61cc58ea5c9e47ad2fd190067d142d4b5329f6f334b912",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-file"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-s-mem",
+    "title": "OpenSSL：密码数据流 · BIO_s_mem（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-s-mem.md",
+    "sha256": "d7897aa6829d61788437220b1d9427cffce83784e56e9204f299dab89b4b8798",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-s-mem"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-sendmmsg",
+    "title": "OpenSSL：密码数据流 · BIO_sendmmsg（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-sendmmsg.md",
+    "sha256": "d97dcebe26b92142255f16194c82753b43a070de8d2078baac974b8f9dd6e285",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-sendmmsg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-set-callback",
+    "title": "OpenSSL：密码数据流 · BIO_set_callback（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-set-callback.md",
+    "sha256": "c037e743893ed523afcb0c71dd3fbc082a18e33209e226976af953972963cce0",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-set-callback"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-should-retry",
+    "title": "OpenSSL：密码数据流 · BIO_should_retry（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-should-retry.md",
+    "sha256": "7a1a9c6a1d73095af6d28fdb45e3b834224b390fa6f7e833e72d6f6cbe2f007d",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-should-retry"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-bio-socket-wait",
+    "title": "OpenSSL：密码数据流 · BIO_socket_wait（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-bio-socket-wait.md",
+    "sha256": "c97b14d5d7e94e58d2a4293ec58c7ac62cfe1ad6965cb4d5dd25b7be66f50143",
+    "sourceIds": [
+      "doc-openssl-doc-man3-bio-socket-wait"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-buf-mem-new",
+    "title": "OpenSSL：密码实现与接口 · BUF_MEM_new（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-buf-mem-new.md",
+    "sha256": "34bb5e705080ba926a9df0ffe0c11302a3838a99a3723dd0300c7aa1201eb397",
+    "sourceIds": [
+      "doc-openssl-doc-man3-buf-mem-new"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cmac-ctx",
+    "title": "OpenSSL：密码实现与接口 · CMAC_CTX（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cmac-ctx.md",
+    "sha256": "0739c13d066be5a42d0d59f2c798684e6d68282095d16238b4d16f0e84114305",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cmac-ctx"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-encrypteddata-decrypt",
+    "title": "OpenSSL：密码实现与接口 · CMS_EncryptedData_decrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-encrypteddata-decrypt.md",
+    "sha256": "f7336eda10df2306da66a82dd6fd5f656266e7f33cc06254a793abc01f3e238b",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-encrypteddata-decrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-encrypteddata-encrypt",
+    "title": "OpenSSL：密码实现与接口 · CMS_EncryptedData_encrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-encrypteddata-encrypt.md",
+    "sha256": "da174eaf8850fe6bf6ec9182b4875d30e11f2a3b1285b3afecd493e35d41b060",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-encrypteddata-encrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-envelopeddata-create",
+    "title": "OpenSSL：密码实现与接口 · CMS_EnvelopedData_create（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-envelopeddata-create.md",
+    "sha256": "c74ea7998d2088f89c0b536d3302c1c0da4a435672995d076808d15fd48d9bc6",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-envelopeddata-create"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-add0-cert",
+    "title": "OpenSSL：密码实现与接口 · CMS_add0_cert（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-add0-cert.md",
+    "sha256": "d5654f26a29d9bbd6c3ac761a9bd6b6b8817db68137ee7b8e85f60f7858f0bb8",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-add0-cert"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-add1-recipient-cert",
+    "title": "OpenSSL：密码实现与接口 · CMS_add1_recipient_cert（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-add1-recipient-cert.md",
+    "sha256": "ee9bb0339a623d2656c495e147ab63602578425c4629ded64a39842428bccee0",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-add1-recipient-cert"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-add1-signer",
+    "title": "OpenSSL：密码实现与接口 · CMS_add1_signer（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-add1-signer.md",
+    "sha256": "5005e097083d263ad2309eeff43103d3cc7a7a03d76e53d07e6a2949a4957d22",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-add1-signer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-compress",
+    "title": "OpenSSL：密码实现与接口 · CMS_compress（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-compress.md",
+    "sha256": "c8518958200b9d0f485533c1d3eff791a5953ef397edc408d3e2414ecbae1017",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-compress"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-decrypt",
+    "title": "OpenSSL：密码实现与接口 · CMS_decrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-decrypt.md",
+    "sha256": "ab400fdb15dd9ab03bca8bac998a79978e16f31b5d9fae4a6abe394479433351",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-decrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-digest-create",
+    "title": "OpenSSL：密码实现与接口 · CMS_digest_create（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-digest-create.md",
+    "sha256": "3e1f063c0b7c5a8b45d6530c83e5cbefa38a725e643ba97232850d1fe8efecfd",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-digest-create"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-encrypt",
+    "title": "OpenSSL：密码实现与接口 · CMS_encrypt（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-encrypt.md",
+    "sha256": "efe868f3c5358029ac29074dceeb6c57f6dc8440d5df70385b4f70e21dffcaeb",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-encrypt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-get0-recipientinfos",
+    "title": "OpenSSL：密码实现与接口 · CMS_get0_RecipientInfos（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-get0-recipientinfos.md",
+    "sha256": "a59f024402a50d982cfc6aee262715bd6b81576c2ff19cee22f0f1bfac606c1e",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-get0-recipientinfos"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-get0-signerinfos",
+    "title": "OpenSSL：密码实现与接口 · CMS_get0_SignerInfos（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-get0-signerinfos.md",
+    "sha256": "f4bd44120f83fbd0aa5f9b1c21fd6699bc36cf0fafed3535fd9bcbf16cc15623",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-get0-signerinfos"
+    ]
+  },
+  {
+    "id": "wx-re-doc-openssl-doc-man3-cms-get0-type",
+    "title": "OpenSSL：密码实现与接口 · CMS_get0_type（man3）",
+    "file": "cards/wx-re-doc-openssl-doc-man3-cms-get0-type.md",
+    "sha256": "2b76dda8f6c7d7accfd54848f05956a858919685330eb5560f19c24849fde295",
+    "sourceIds": [
+      "doc-openssl-doc-man3-cms-get0-type"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-aliasanalysis",
+    "title": "LLVM：别名分析",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-aliasanalysis.md",
+    "sha256": "c3e970e11792f115ef5dc8d06f8253abc37c82d08d6e52d232246eca44a54641",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-aliasanalysis"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-atomics",
+    "title": "LLVM：原子操作与内存模型",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-atomics.md",
+    "sha256": "3e64022ffb3942d1efd0975b11e77c097e07634d6b9eca16715f20386178baec",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-atomics"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-bitcodeformat",
+    "title": "LLVM：位码格式",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-bitcodeformat.md",
+    "sha256": "1486956c4f8c857bdf3e15c7661280c4b8e552a0ec00905381ddc96819b81c8e",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-bitcodeformat"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-codegenerator",
+    "title": "LLVM：代码生成器",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-codegenerator.md",
+    "sha256": "d39c67ba54fe46ca1faaa5ca6412cc86003748f63228d97844b8b4fa4af5cd73",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-codegenerator"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-coroutines",
+    "title": "LLVM：协程",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-coroutines.md",
+    "sha256": "b7d66666c2984e94687e066a600d62441ec752f0746dc59a5e1405b6da7a8bbb",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-coroutines"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-debuggingjitedcode",
+    "title": "LLVM：JIT 代码调试",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-debuggingjitedcode.md",
+    "sha256": "cf6b7e2f6c9f18a565f544ec34fef3d1bb8fd43812443acf91dbcb0236d47fd6",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-debuggingjitedcode"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-exceptionhandling",
+    "title": "LLVM：异常处理",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-exceptionhandling.md",
+    "sha256": "6cf676b0b59f5b459a5fd18dd5a5634db5487e880e530e5cbe14671fb6535db0",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-exceptionhandling"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-garbagecollection",
+    "title": "LLVM：垃圾回收",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-garbagecollection.md",
+    "sha256": "a716ff1c75ccfca17e3f67e3f97915f7c0ba1d642b629d04af051f75b4580f2b",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-garbagecollection"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-getelementptr",
+    "title": "LLVM：指针寻址语义",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-getelementptr.md",
+    "sha256": "8ae799460836d4fff682e7dc9d2ca583dfb146cc12a8f0c1ec11c282ace7f00c",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-getelementptr"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-inalloca",
+    "title": "LLVM：栈参数存储",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-inalloca.md",
+    "sha256": "375ce57535bc4e36405a4f71d3d0ff68aa97b8e376d0cd7e56974d5aa29109cd",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-inalloca"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-jitlink",
+    "title": "LLVM：JIT 链接器",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-jitlink.md",
+    "sha256": "ccc14da890f8f509e9fd56e5876230ac654e8ee09f9e5545060925a2c9089912",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-jitlink"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-langref",
+    "title": "LLVM：中间表示语言规范",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-langref.md",
+    "sha256": "a00d5bb8c4df8b451929c0ce92d994823dcf0c803a6a1f95cf50c8749d66b86f",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-langref"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-libfuzzer",
+    "title": "LLVM：覆盖引导模糊测试",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-libfuzzer.md",
+    "sha256": "fa6fbcb05ffff669b0abf935e6fe1c0fc530b3cbf7676ceb96e1dacd07709af7",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-libfuzzer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-linktimeoptimization",
+    "title": "LLVM：链接时优化",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-linktimeoptimization.md",
+    "sha256": "11d49479f3659277e8a9fc1578da0a2563622033c71248a589b0fecd2220abca",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-linktimeoptimization"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-mcjitdesignandimplementation",
+    "title": "LLVM：MCJIT 设计与实现",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-mcjitdesignandimplementation.md",
+    "sha256": "96a632f8007eff6e516529efa78ae35a3e57592a6d809433daaeb01bbc6d81d3",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-mcjitdesignandimplementation"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-mirlangref",
+    "title": "LLVM：机器中间表示",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-mirlangref.md",
+    "sha256": "0475ba257cbeb6a9fc09087480a44584cf1d17b71ce79de469c09ece2e603a81",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-mirlangref"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-memoryssa",
+    "title": "LLVM：内存静态单赋值",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-memoryssa.md",
+    "sha256": "9d3c7ba4e5287568e66c17db213e244cb52f582f1bbdcfaef6e3cba17bf76670",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-memoryssa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-newpassmanager",
+    "title": "LLVM：优化 Pass 管理器",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-newpassmanager.md",
+    "sha256": "b9a5239f600f8e279983ea37f911a36a7482eefb1c4b71ad4ef79c270f6d2583",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-newpassmanager"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-orcv2",
+    "title": "LLVM：ORC JIT 架构",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-orcv2.md",
+    "sha256": "cbb9dcd3d344e42f4136b4ef9b60c7cc8e9f639d72aaa6f56ef1411e5aa786e4",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-orcv2"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-opaquepointers",
+    "title": "LLVM：不透明指针",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-opaquepointers.md",
+    "sha256": "b2307a5463f7608d5aa65f3d681e6db066ae50eda37facd2c6d3a22fdb4b15f5",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-opaquepointers"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-scudohardenedallocator",
+    "title": "LLVM：Scudo 加固分配器",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-scudohardenedallocator.md",
+    "sha256": "a759d1f8a354246a8082c69434c5608cc3dce073203ffa834e26ceaf5b645537",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-scudohardenedallocator"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-sourceleveldebugging",
+    "title": "LLVM：源码级调试信息",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-sourceleveldebugging.md",
+    "sha256": "8d8e5ec44f1cf8a0eb3787071cec9c82086f4a2e8794c2f37dccfbaf243b7459",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-sourceleveldebugging"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-stackmaps",
+    "title": "LLVM：栈映射",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-stackmaps.md",
+    "sha256": "7e37b0e793efc933aeb41e3281b1d879581f55fbd352dff852638e99689f9bab",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-stackmaps"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-stacksafetyanalysis",
+    "title": "LLVM：栈安全分析",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-stacksafetyanalysis.md",
+    "sha256": "7a78f921490d63ab81d13b63d67b46ce6d9ee6f2523486cd6e500085cfca21d2",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-stacksafetyanalysis"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-statepoints",
+    "title": "LLVM：垃圾回收安全点",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-statepoints.md",
+    "sha256": "f406a43485ba1ac0cbc5311eb88737ce00e52bab040c51dcc7fe8460d5d469bd",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-statepoints"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-typemetadata",
+    "title": "LLVM：类型元数据",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-typemetadata.md",
+    "sha256": "b78c7df1ec75f83222641b3cf01ad18f5f3943a69cc17d48b685eeaa27eeaa28",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-typemetadata"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-undefinedbehavior",
+    "title": "LLVM：未定义行为",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-undefinedbehavior.md",
+    "sha256": "0f8b121f3c6de41cfa7f96a26f7398e011c70ba8583a630271ae9712640bf2ff",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-undefinedbehavior"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-vectorizers",
+    "title": "LLVM：向量化",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-vectorizers.md",
+    "sha256": "256cdea6c3d014bc30c08cb60fbcccae4453f62dd321654a605db369438e3939",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-vectorizers"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-writinganllvmbackend",
+    "title": "LLVM：后端实现",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-writinganllvmbackend.md",
+    "sha256": "1f39e7d5010428e5ebeb3bbdb6d3c7cd8a539dd9fa1dbf2c3006843c5fe1f158",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-writinganllvmbackend"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-xray",
+    "title": "LLVM：函数执行追踪",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-xray.md",
+    "sha256": "d7de1b3348c470f027483078c56290c3b836785bfee256dd50a4ce5f8516885a",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-xray"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-aarch64sme",
+    "title": "LLVM：Support for AArch64 Scalable Matrix Extension in LLVM",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-aarch64sme.md",
+    "sha256": "b90d0355c03c5b9cda11e2c74be30caea1309778d61b27f1426bb3fccda21f70",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-aarch64sme"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-amdgpudwarfextensionsforheterogeneousdebugging",
+    "title": "LLVM：DWARF Extensions For Heterogeneous Debugging",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-amdgpudwarfextensionsforheterogeneousdebugging.md",
+    "sha256": "0a15c33f325590a48ea523008b6cb5e428d409e7f20148ae8908a8a4875aa8d7",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-amdgpudwarfextensionsforheterogeneousdebugging"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-amdgpuinstructionnotation",
+    "title": "LLVM：AMDGPU Instructions Notation",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-amdgpuinstructionnotation.md",
+    "sha256": "81092350c9eb2ce204a4519768674a0a800f02e5f8c4afd3614821d04f21a77d",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-amdgpuinstructionnotation"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-amdgpuinstructionsyntax",
+    "title": "LLVM：AMDGPU Instruction Syntax",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-amdgpuinstructionsyntax.md",
+    "sha256": "93140c83ffcfbd3dbba465f3ae63abbb5ff63544642350ddc17d61dbe1ff9668",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-amdgpuinstructionsyntax"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-amdgpumodifiersyntax",
+    "title": "LLVM：Syntax of AMDGPU Instruction Modifiers",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-amdgpumodifiersyntax.md",
+    "sha256": "9dc24e8dec027cbd454091b630e1b450b38b31bc77313c33a2fe9909bedf9c86",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-amdgpumodifiersyntax"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-amdgpuoperandsyntax",
+    "title": "LLVM：Syntax of AMDGPU Instruction Operands",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-amdgpuoperandsyntax.md",
+    "sha256": "5f73eb11a2644f34e902b55013a6c42183dd192caa8d795ae7d7d0c69fbf59bb",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-amdgpuoperandsyntax"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-amdgpuusage",
+    "title": "LLVM：User Guide for AMDGPU Backend",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-amdgpuusage.md",
+    "sha256": "b6442ac6519705c7ea82e36af6e17e0f60cb4cc49845ac269d3b724791d7067f",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-amdgpuusage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-addingconstrainedintrinsics",
+    "title": "LLVM：How To Add A Constrained Floating-Point Intrinsic",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-addingconstrainedintrinsics.md",
+    "sha256": "1c288127e185615624a05929950c9efd49fedd2fe3d5812ca2212bf70186d574",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-addingconstrainedintrinsics"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-benchmarking",
+    "title": "LLVM：Benchmarking tips",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-benchmarking.md",
+    "sha256": "b0f3b58dfd43eb6f34767114c841fdadfe1bbd480617c7757cacebc0c6e3dce3",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-benchmarking"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-bigendianneon",
+    "title": "LLVM：Using ARM NEON instructions in big endian mode",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-bigendianneon.md",
+    "sha256": "172d8c386312c0ee0014527fa954b684385b664ca4341d71aa2ff52a41f23153",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-bigendianneon"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-blockfrequencyterminology",
+    "title": "LLVM：LLVM Block Frequency Terminology",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-blockfrequencyterminology.md",
+    "sha256": "1e395556854decbd24569d8a575662d32fbb8da39021e36f89d12e919c888bf8",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-blockfrequencyterminology"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-branchweightmetadata",
+    "title": "LLVM：LLVM Branch Weight Metadata",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-branchweightmetadata.md",
+    "sha256": "ee6aea76d04eb44bae9bfc3db6f54cdcf45f2c3e90201741022b05bba98a670a",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-branchweightmetadata"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-bugpoint",
+    "title": "LLVM：LLVM bugpoint tool: design and usage",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-bugpoint.md",
+    "sha256": "5fd2c26a987a0c2d166777ffd81bcc07795a5c14ed4dec53cf34fe2f22d46e5d",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-bugpoint"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-cfiverify",
+    "title": "LLVM：Control Flow Verification Tool Design Document",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-cfiverify.md",
+    "sha256": "54449454cb1e96a4fccf083ef02e7d0e5c3080a23bfedb065becdad9b0308515",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-cfiverify"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-commandline",
+    "title": "LLVM：CommandLine 2.0 Library Manual",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-commandline.md",
+    "sha256": "0d37bf8ec16b8ba4212f3988da0343cadb45755759182e9674398ebb2f018fae",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-commandline"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-compilerwriterinfo",
+    "title": "LLVM：Architecture & Platform Information for Compiler Writers",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-compilerwriterinfo.md",
+    "sha256": "746689ee8c4dcd41add78f22ee0cb30e27eea8090ad7c0663f4987224c70b493",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-compilerwriterinfo"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-convergenceanduniformity",
+    "title": "LLVM：Convergence And Uniformity",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-convergenceanduniformity.md",
+    "sha256": "86e4e1726df1225b743473506e3fc8b79139cb2a4b95623a7c2ea5f7c8dd091a",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-convergenceanduniformity"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-convergentoperations",
+    "title": "LLVM：Convergent Operation Semantics",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-convergentoperations.md",
+    "sha256": "a8799ad6a7dbe2a9dd2bc24663091ee2148f2c89ab09d197358c357ae8e5d7cb",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-convergentoperations"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-coveragemappingformat",
+    "title": "LLVM：LLVM Code Coverage Mapping Format",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-coveragemappingformat.md",
+    "sha256": "2143f2098c89f1f42fc9af6b136f001c468987bbe0ba4172565e58841f04454e",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-coveragemappingformat"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-cycleterminology",
+    "title": "LLVM：LLVM Cycle Terminology",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-cycleterminology.md",
+    "sha256": "6dc31c32e751bc0652271aac698a8d0a21289b772ac5e7dc0ac1c6cd43a1b8cc",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-cycleterminology"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-directxusage",
+    "title": "LLVM：User Guide for the DirectX Target",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-directxusage.md",
+    "sha256": "5a90bd572377c3a49297a1368d0f9f1a74a358421a1df6cdb498196cda9e73f7",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-directxusage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-extendingllvm",
+    "title": "LLVM：Extending LLVM: Adding instructions, intrinsics, types, etc.",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-extendingllvm.md",
+    "sha256": "bd4c57090cee9bae97cb12b34568f18255dfdea3217612246a88d61016ea9cc2",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-extendingllvm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-extensions",
+    "title": "LLVM：LLVM Extensions",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-extensions.md",
+    "sha256": "09637e407a75340f23ac6ad992e35ec888feed6716b844b93cef464ff3f59661",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-extensions"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-fatlto",
+    "title": "LLVM：FatLTO",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-fatlto.md",
+    "sha256": "2c6c395b53f623096f5cce03ea62ad65963122c263be6735b7a9505209ce13e4",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-fatlto"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-faultmaps",
+    "title": "LLVM：FaultMaps and implicit checks",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-faultmaps.md",
+    "sha256": "c5e8024dfca3612c0d4a81322b4891e19468b6b5a2765ea3813b169a3b6df663",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-faultmaps"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-fuzzingllvm",
+    "title": "LLVM：Fuzzing LLVM libraries and tools",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-fuzzingllvm.md",
+    "sha256": "33702a26c7ef886ff61b7b905a1b189a947cc66e3d77b7c4e99ec8ed6314a6e6",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-fuzzingllvm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-goldplugin",
+    "title": "LLVM：The LLVM gold plugin",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-goldplugin.md",
+    "sha256": "03f4f2c6211b8a4f2cfaf755c19a280e6cff0b35db315794a96f6f888182992d",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-goldplugin"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-gwpasan",
+    "title": "LLVM：GWP-ASan",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-gwpasan.md",
+    "sha256": "3b05f9e0b85c543cd80211558e1ce890381a44d8826b107c129a654a7a13de5a",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-gwpasan"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-howtocrosscompilebuiltinsonarm",
+    "title": "LLVM：How to Cross Compile Compiler-rt Builtins For Arm",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-howtocrosscompilebuiltinsonarm.md",
+    "sha256": "6d929808c8bace33fcea8623131ac22cc32ea61fafe09115a8672712c037ae8b",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-howtocrosscompilebuiltinsonarm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-howtocrosscompilellvm",
+    "title": "LLVM：How To Cross-Compile Clang/LLVM using Clang/LLVM",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-howtocrosscompilellvm.md",
+    "sha256": "62316dc88a5578c2931c8245155757091bfff6972b5d9ce93f1c56912cefd269",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-howtocrosscompilellvm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-howtosetupllvmstylertti",
+    "title": "LLVM：How to set up LLVM-style RTTI for your class hierarchy",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-howtosetupllvmstylertti.md",
+    "sha256": "66d5f88004ec4e12fd1e0fcd5e57558bfe6758f4827ae9db055fcba3382ec35b",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-howtosetupllvmstylertti"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-howtoupdatedebuginfo",
+    "title": "LLVM：How to Update Debug Info: A Guide for LLVM Pass Authors",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-howtoupdatedebuginfo.md",
+    "sha256": "ebd072e78f03dab1a3459e0841455b0cfb9937164b298002fdae11f88edc00f1",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-howtoupdatedebuginfo"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-howtouseattributes",
+    "title": "LLVM：How To Use Attributes",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-howtouseattributes.md",
+    "sha256": "b16637f6df17de7600dc1a40ee5f45ec815f1bd767ce9f396858d6de39d5e038",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-howtouseattributes"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-howtouseinstrmappings",
+    "title": "LLVM：How To Use Instruction Mappings",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-howtouseinstrmappings.md",
+    "sha256": "507e6a2104daa880bc62fa52710ebc05256363cf3fee3bfabe6f87f1ee16b998",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-howtouseinstrmappings"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-instrprofileformat",
+    "title": "LLVM：Instrumentation Profile Format",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-instrprofileformat.md",
+    "sha256": "ace148aad03bb8fb470b913ad2fb4c4dfb4ed0c8c7c5f1e0d0a1a36b34d2b2d4",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-instrprofileformat"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-lexicon",
+    "title": "LLVM：The LLVM Lexicon",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-lexicon.md",
+    "sha256": "dcc20fea9361cef17a232c767acb1ff12ba1b957e3fd44994cfb59979d79e294",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-lexicon"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-loopterminology",
+    "title": "LLVM：LLVM Loop Terminology (and Canonical Forms)",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-loopterminology.md",
+    "sha256": "e12a5845d1d42d8210d55c2b12c8947f112f7762f338b88587e150ff1e08b90f",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-loopterminology"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-markedupdisassembly",
+    "title": "LLVM：LLVM's Optional Rich Disassembly Output",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-markedupdisassembly.md",
+    "sha256": "362f8283a5b8c89cfb5b58e28601613acbe18f51d050b7c247688df9c97797e9",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-markedupdisassembly"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-memtagsanitizer",
+    "title": "LLVM：MemTagSanitizer",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-memtagsanitizer.md",
+    "sha256": "6138d60bdc7e8c41c08b0b8635549414d11f0d7afdd8b5afeea92f6329f06071",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-memtagsanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-memorymodelrelaxationannotations",
+    "title": "LLVM：Memory Model Relaxation Annotations",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-memorymodelrelaxationannotations.md",
+    "sha256": "8e15067d74068441f7c188f57b1baaccd72996e7df495093d133f8ddc219724c",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-memorymodelrelaxationannotations"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-mergefunctions",
+    "title": "LLVM：MergeFunctions pass, how it works",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-mergefunctions.md",
+    "sha256": "4947b24217fa01b077132d3908d49857dc55deeac2dbf74a0e7cebf0108525ed",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-mergefunctions"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-misexpect",
+    "title": "LLVM：Misexpect",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-misexpect.md",
+    "sha256": "405f15349538ce7993685195590ecf1997ccdab55a160f7afa5714248f8c9563",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-misexpect"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-nvptxusage",
+    "title": "LLVM：User Guide for NVPTX Back-end",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-nvptxusage.md",
+    "sha256": "ba5abcb78e76598c2dbb107503bc3a45d55e6198ea9a705f441c9fe7db51c8ee",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-nvptxusage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-optbisect",
+    "title": "LLVM：Using -opt-bisect-limit to debug optimization errors",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-optbisect.md",
+    "sha256": "873c25200358a654d60bccd838ae77a518da691b70f35ae2af6c97c931b4770f",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-optbisect"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-pcsectionsmetadata",
+    "title": "LLVM：LLVM PC Sections Metadata",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-pcsectionsmetadata.md",
+    "sha256": "99df7b28d00b4ca8ee59d49c410fa7466c31286ff7a15f49ed5ac5c84d36e0ab",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-pcsectionsmetadata"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-passes",
+    "title": "LLVM：LLVM's Analysis and Transform Passes",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-passes.md",
+    "sha256": "8c7d154b2cc03228fbe6766bc582e0857d5af560e40682a9c64aaa4fd2fc0c02",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-passes"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-programmersmanual",
+    "title": "LLVM：LLVM Programmer's Manual",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-programmersmanual.md",
+    "sha256": "ff9d772ed8a2d8849e05dd470b860eed474d753f0a2c5155dbe6b9d7cc0d0ec9",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-programmersmanual"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-riscvusage",
+    "title": "LLVM：User Guide for RISC-V Target",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-riscvusage.md",
+    "sha256": "d8017812c7bd4287ecb1323623d1b85f093f126929e73e1a6ee620e45d4d9c59",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-riscvusage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-remarks",
+    "title": "LLVM：Remarks",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-remarks.md",
+    "sha256": "7695fc419fc52c013e3669d5e7d65d852e6ab70ae63ece4c04b846c3498b412a",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-remarks"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-spirvusage",
+    "title": "LLVM：User Guide for SPIR-V Target",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-spirvusage.md",
+    "sha256": "13a0ff85a57272441926a07025ec540ca45cd36844f3cd0f1fe5644950ce9c34",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-spirvusage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-segmentedstacks",
+    "title": "LLVM：Segmented Stacks in LLVM",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-segmentedstacks.md",
+    "sha256": "446126ffc26d73288df144cfb5d46b9493dc81b560ba51ad939344ff68b80292",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-segmentedstacks"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-supportlibrary",
+    "title": "LLVM：Support Library",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-supportlibrary.md",
+    "sha256": "4f0f9cd16ff26820521d2c43d39f9b61215f401e4532c523a8ee1daa33c1552b",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-supportlibrary"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-symbolizermarkupformat",
+    "title": "LLVM：Symbolizer Markup Format",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-symbolizermarkupformat.md",
+    "sha256": "af073bec756f75bb6f6309c30be6218c277802f5e6e3a4e2672b67459a239f8d",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-symbolizermarkupformat"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-telemetry",
+    "title": "LLVM：Telemetry framework in LLVM",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-telemetry.md",
+    "sha256": "ef3165b87922769d5dfc4b408012458ce5d4c39141c0830cf87186b1346eaa1a",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-telemetry"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-transformmetadata",
+    "title": "LLVM：Code Transformation Metadata",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-transformmetadata.md",
+    "sha256": "97cdd71603ec8decbf2a0704efc5566c58b190879e30bf77428c6a5e2f922da2",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-transformmetadata"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-vectorizationplan",
+    "title": "LLVM：Vectorization Plan",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-vectorizationplan.md",
+    "sha256": "e794631981e6955c36486a363ee1e0e30b558e7b0cd59612dc0b19a5a9ca0060",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-vectorizationplan"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-writinganllvmnewpmpass",
+    "title": "LLVM：Writing an LLVM Pass",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-writinganllvmnewpmpass.md",
+    "sha256": "e1cfa86f098fdf90a3eb898f82c6f9191a2f08dce2ded0c27922ed773433a559",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-writinganllvmnewpmpass"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-writinganllvmpass",
+    "title": "LLVM：Writing an LLVM Pass (legacy PM version)",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-writinganllvmpass.md",
+    "sha256": "24e09c34bd574ea84224eb25a9a2ad259d81352b9a9d362e844df81a7f7ad7df",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-writinganllvmpass"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-xrayexample",
+    "title": "LLVM：Debugging with XRay",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-xrayexample.md",
+    "sha256": "96939b79d57eb8e1b38bb4c17bd3f2b0e34bb38795a62569bd43c50c6919386d",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-xrayexample"
+    ]
+  },
+  {
+    "id": "wx-re-doc-llvm-llvm-docs-xrayfdrformat",
+    "title": "LLVM：XRay Flight Data Recorder Trace Format",
+    "file": "cards/wx-re-doc-llvm-llvm-docs-xrayfdrformat.md",
+    "sha256": "018f4c7808f668a4dffeddd4536b00af783406cd6341a13f73994aa6f2abc97f",
+    "sourceIds": [
+      "doc-llvm-llvm-docs-xrayfdrformat"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-addresssanitizer",
+    "title": "CLANG：地址消毒器",
+    "file": "cards/wx-re-doc-clang-clang-docs-addresssanitizer.md",
+    "sha256": "5ca438a541d686ce532c9179c49774d57a98b2b10e4d80d37f721dc4cb89066c",
+    "sourceIds": [
+      "doc-clang-clang-docs-addresssanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-automaticreferencecounting",
+    "title": "CLANG：自动引用计数",
+    "file": "cards/wx-re-doc-clang-clang-docs-automaticreferencecounting.md",
+    "sha256": "c09261bed0aae20f1e56ca4d8c03df32b7a1637ee1e4bbacb65581f2e03a2214",
+    "sourceIds": [
+      "doc-clang-clang-docs-automaticreferencecounting"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-constantinterpreter",
+    "title": "CLANG：常量表达式解释器",
+    "file": "cards/wx-re-doc-clang-clang-docs-constantinterpreter.md",
+    "sha256": "a989fa4054c433da7b502db9dff4a9d1f6797ab915d161fd2d64769eb833290b",
+    "sourceIds": [
+      "doc-clang-clang-docs-constantinterpreter"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-controlflowintegrity",
+    "title": "CLANG：控制流完整性",
+    "file": "cards/wx-re-doc-clang-clang-docs-controlflowintegrity.md",
+    "sha256": "28a3ef8965a6bd5bb5b4477479abc0dc754afb9baf64e51e8800416d2fa89d61",
+    "sourceIds": [
+      "doc-clang-clang-docs-controlflowintegrity"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-controlflowintegritydesign",
+    "title": "CLANG：控制流完整性设计",
+    "file": "cards/wx-re-doc-clang-clang-docs-controlflowintegritydesign.md",
+    "sha256": "3d3f24400b225a3a44f48790b05954a530fefb7fc9913749bc683e0453a54148",
+    "sourceIds": [
+      "doc-clang-clang-docs-controlflowintegritydesign"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-dataflowsanitizer",
+    "title": "CLANG：数据流追踪",
+    "file": "cards/wx-re-doc-clang-clang-docs-dataflowsanitizer.md",
+    "sha256": "0e4328552a2af12413ebdd6e2b2c117b91cfdd73381c504d9a0fa18a8661b40b",
+    "sourceIds": [
+      "doc-clang-clang-docs-dataflowsanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-driverinternals",
+    "title": "CLANG：编译驱动内部机制",
+    "file": "cards/wx-re-doc-clang-clang-docs-driverinternals.md",
+    "sha256": "e5d3b2bf6bc1c85c00ea5c3cea379453b36598d6e0ef307100581a1269a6b02b",
+    "sourceIds": [
+      "doc-clang-clang-docs-driverinternals"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-internalsmanual",
+    "title": "CLANG：编译器内部机制",
+    "file": "cards/wx-re-doc-clang-clang-docs-internalsmanual.md",
+    "sha256": "c0a361b15b443efe70a5b44884b7c78d68ccb13bf7aabd7d39894e8ad7da4803",
+    "sourceIds": [
+      "doc-clang-clang-docs-internalsmanual"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-introductiontotheclangast",
+    "title": "CLANG：抽象语法树",
+    "file": "cards/wx-re-doc-clang-clang-docs-introductiontotheclangast.md",
+    "sha256": "f0f398c51982a44dbf79aa932b48751441519d0a2f413ac6c9eae4a4b9cc6b6e",
+    "sourceIds": [
+      "doc-clang-clang-docs-introductiontotheclangast"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-itaniummangleabitags",
+    "title": "CLANG：名称修饰与 ABI 标签",
+    "file": "cards/wx-re-doc-clang-clang-docs-itaniummangleabitags.md",
+    "sha256": "7018cca20364003065bee966c0f288a3b483daf5d959942c7509896b785c58f5",
+    "sourceIds": [
+      "doc-clang-clang-docs-itaniummangleabitags"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-languageextensions",
+    "title": "CLANG：语言扩展",
+    "file": "cards/wx-re-doc-clang-clang-docs-languageextensions.md",
+    "sha256": "8b7adbc650e1e15c61fba765ac8e59ad67fc7241d591f853c5ca7eb830510e14",
+    "sourceIds": [
+      "doc-clang-clang-docs-languageextensions"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-leaksanitizer",
+    "title": "CLANG：内存泄漏检测",
+    "file": "cards/wx-re-doc-clang-clang-docs-leaksanitizer.md",
+    "sha256": "e534727fcfccfa2265deb85761c6f7574f7f6242ca0c7e0503bde9a253c40853",
+    "sourceIds": [
+      "doc-clang-clang-docs-leaksanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-msvccompatibility",
+    "title": "CLANG：MSVC 兼容性",
+    "file": "cards/wx-re-doc-clang-clang-docs-msvccompatibility.md",
+    "sha256": "bd23ab8ce2a3ea688b669f242049d25c2b2fe8c9e337f743cfb959a0eb6e078d",
+    "sourceIds": [
+      "doc-clang-clang-docs-msvccompatibility"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-memorysanitizer",
+    "title": "CLANG：未初始化内存检测",
+    "file": "cards/wx-re-doc-clang-clang-docs-memorysanitizer.md",
+    "sha256": "2ed14bad4fc5ddad4c17756ed6b594e867b547be52083d6bed7a180e49d2cab2",
+    "sourceIds": [
+      "doc-clang-clang-docs-memorysanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-pchinternals",
+    "title": "CLANG：预编译头内部格式",
+    "file": "cards/wx-re-doc-clang-clang-docs-pchinternals.md",
+    "sha256": "31229aebb97f7bb7c3da9c6358fa15e63c718a563ae1caf56bf7addfeae11311",
+    "sourceIds": [
+      "doc-clang-clang-docs-pchinternals"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-pointerauthentication",
+    "title": "CLANG：指针认证",
+    "file": "cards/wx-re-doc-clang-clang-docs-pointerauthentication.md",
+    "sha256": "f2b02c75743f8951b9d8bdc5bcfef9d7077c1cddb43415ce858a18b64e2b2c0e",
+    "sourceIds": [
+      "doc-clang-clang-docs-pointerauthentication"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-safebuffers",
+    "title": "CLANG：缓冲区安全",
+    "file": "cards/wx-re-doc-clang-clang-docs-safebuffers.md",
+    "sha256": "cf6902788083fefd3f282f311f145c75cd939e357bb02b783e55d3a4e605783a",
+    "sourceIds": [
+      "doc-clang-clang-docs-safebuffers"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-safestack",
+    "title": "CLANG：安全栈",
+    "file": "cards/wx-re-doc-clang-clang-docs-safestack.md",
+    "sha256": "8fc31b28115a9f8231ad155b0631fd95811228ca055223b3039abb58264a825d",
+    "sourceIds": [
+      "doc-clang-clang-docs-safestack"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-sanitizercoverage",
+    "title": "CLANG：覆盖率插桩",
+    "file": "cards/wx-re-doc-clang-clang-docs-sanitizercoverage.md",
+    "sha256": "e289d207a4b1f2ab1540c2e3ff30f16c99b6aa81c1e4a61e966aae803e49a40d",
+    "sourceIds": [
+      "doc-clang-clang-docs-sanitizercoverage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-shadowcallstack",
+    "title": "CLANG：影子调用栈",
+    "file": "cards/wx-re-doc-clang-clang-docs-shadowcallstack.md",
+    "sha256": "65bea4a08758d54540539622940a112d0cb6cbe6ad58ebaab6a551bdb17a934e",
+    "sourceIds": [
+      "doc-clang-clang-docs-shadowcallstack"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-sourcebasedcodecoverage",
+    "title": "CLANG：源码覆盖率",
+    "file": "cards/wx-re-doc-clang-clang-docs-sourcebasedcodecoverage.md",
+    "sha256": "457d6dd783f74999644d5adcfef6dabdfed39d4c4079e3b1e430c81fab33bebd",
+    "sourceIds": [
+      "doc-clang-clang-docs-sourcebasedcodecoverage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-thinlto",
+    "title": "CLANG：ThinLTO 链接优化",
+    "file": "cards/wx-re-doc-clang-clang-docs-thinlto.md",
+    "sha256": "760f675ff8089e20034ee6f86c60f40f70665c7e63a58536abf69791f1be911a",
+    "sourceIds": [
+      "doc-clang-clang-docs-thinlto"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-threadsafetyanalysis",
+    "title": "CLANG：线程安全分析",
+    "file": "cards/wx-re-doc-clang-clang-docs-threadsafetyanalysis.md",
+    "sha256": "387a3176f26ab4ffbe281fc1a2ecf1b8038ec94a63a0060e7e7687a80d67d6a9",
+    "sourceIds": [
+      "doc-clang-clang-docs-threadsafetyanalysis"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-threadsanitizer",
+    "title": "CLANG：数据竞争检测",
+    "file": "cards/wx-re-doc-clang-clang-docs-threadsanitizer.md",
+    "sha256": "a8ca3576592c32de865d521cb31976bd3b4e057738d8130a93658706af323c1f",
+    "sourceIds": [
+      "doc-clang-clang-docs-threadsanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-typesanitizer",
+    "title": "CLANG：类型别名违规检测",
+    "file": "cards/wx-re-doc-clang-clang-docs-typesanitizer.md",
+    "sha256": "ef498f436288296328bedeb2cc41f63860ec3d05587f3f7837cf7773cc6d470e",
+    "sourceIds": [
+      "doc-clang-clang-docs-typesanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-undefinedbehaviorsanitizer",
+    "title": "CLANG：未定义行为检测",
+    "file": "cards/wx-re-doc-clang-clang-docs-undefinedbehaviorsanitizer.md",
+    "sha256": "75323a68b73f0c462aa1082d5705d6abfee2dd7b3444d1e6a9b3ca42abaeec34",
+    "sourceIds": [
+      "doc-clang-clang-docs-undefinedbehaviorsanitizer"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-amdgpusupport",
+    "title": "CLANG：AMDGPU Support",
+    "file": "cards/wx-re-doc-clang-clang-docs-amdgpusupport.md",
+    "sha256": "4a4715d9f1a5391b14dda649e2d6457ce913bd96d3fca7d0f2a4a1cf4063614b",
+    "sourceIds": [
+      "doc-clang-clang-docs-amdgpusupport"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-apinotes",
+    "title": "CLANG：API Notes: Annotations Without Modifying Headers",
+    "file": "cards/wx-re-doc-clang-clang-docs-apinotes.md",
+    "sha256": "990dfe2daf767abc6adb4dd702f651a5f23b010a1117b02ed862c1a99ebec038",
+    "sourceIds": [
+      "doc-clang-clang-docs-apinotes"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-block-abi-apple",
+    "title": "CLANG：Block Implementation Specification",
+    "file": "cards/wx-re-doc-clang-clang-docs-block-abi-apple.md",
+    "sha256": "ad77b99028be69762515caf5c309e87af0f4cb36e2364b2af54f1bc781d3b88b",
+    "sourceIds": [
+      "doc-clang-clang-docs-block-abi-apple"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-blocklanguagespec",
+    "title": "CLANG：Language Specification for Blocks",
+    "file": "cards/wx-re-doc-clang-clang-docs-blocklanguagespec.md",
+    "sha256": "b2420edf4d72aac8e552acbae9eb0204cc2a8dad80e441edd064251a9899a0c7",
+    "sourceIds": [
+      "doc-clang-clang-docs-blocklanguagespec"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-boundssafety",
+    "title": "CLANG：-fbounds-safety: Enforcing bounds safety for C",
+    "file": "cards/wx-re-doc-clang-clang-docs-boundssafety.md",
+    "sha256": "266610a4443efa68f9e4d671378f50d100c142d734f08baef0e0f73ec10c21df",
+    "sourceIds": [
+      "doc-clang-clang-docs-boundssafety"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-boundssafetyadoptionguide",
+    "title": "CLANG：Adoption Guide for -fbounds-safety",
+    "file": "cards/wx-re-doc-clang-clang-docs-boundssafetyadoptionguide.md",
+    "sha256": "fea36dc7837e36a88873c81697527e62d059edafb856d2921843757170b20748",
+    "sourceIds": [
+      "doc-clang-clang-docs-boundssafetyadoptionguide"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-boundssafetyimplplans",
+    "title": "CLANG：Implementation plans for -fbounds-safety",
+    "file": "cards/wx-re-doc-clang-clang-docs-boundssafetyimplplans.md",
+    "sha256": "c6ee87cc5567b32c1df3da9e3a205760cefa24a76c37dc97f6ea22385a9ae4bd",
+    "sourceIds": [
+      "doc-clang-clang-docs-boundssafetyimplplans"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clanglinkerwrapper",
+    "title": "CLANG：Clang Linker Wrapper",
+    "file": "cards/wx-re-doc-clang-clang-docs-clanglinkerwrapper.md",
+    "sha256": "e10e79fdaecf8f97213a3f49de8163f04c29aaba27efd24a301ce4754a5633e5",
+    "sourceIds": [
+      "doc-clang-clang-docs-clanglinkerwrapper"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clangnvlinkwrapper",
+    "title": "CLANG：Clang nvlink Wrapper",
+    "file": "cards/wx-re-doc-clang-clang-docs-clangnvlinkwrapper.md",
+    "sha256": "1e75a8c50f277521b88c2d6ffc20c5f0a2905232f54af898d61250eef7111bcf",
+    "sourceIds": [
+      "doc-clang-clang-docs-clangnvlinkwrapper"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clangoffloadbundler",
+    "title": "CLANG：Clang Offload Bundler",
+    "file": "cards/wx-re-doc-clang-clang-docs-clangoffloadbundler.md",
+    "sha256": "90c5df7df219ad9bfd0059ba28b553e73ba94ae226f5fcb7fedb69a7879d3e2e",
+    "sourceIds": [
+      "doc-clang-clang-docs-clangoffloadbundler"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clangoffloadpackager",
+    "title": "CLANG：Clang Offload Packager",
+    "file": "cards/wx-re-doc-clang-clang-docs-clangoffloadpackager.md",
+    "sha256": "0635fd8ec0a8928372d7de33644040101e4307595d4d4a572e30428d38e21293",
+    "sourceIds": [
+      "doc-clang-clang-docs-clangoffloadpackager"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clangplugins",
+    "title": "CLANG：Clang Plugins",
+    "file": "cards/wx-re-doc-clang-clang-docs-clangplugins.md",
+    "sha256": "11254ba4c0d84e7ff1fd3ebecf5aff908dd9019c3659308f2c21babb68376fa0",
+    "sourceIds": [
+      "doc-clang-clang-docs-clangplugins"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clangrepl",
+    "title": "CLANG：Clang-Repl",
+    "file": "cards/wx-re-doc-clang-clang-docs-clangrepl.md",
+    "sha256": "2c6c597ed26b8bfc1261cf7f9452708b9a9973cab5a2cd8f6652e0097b856cf9",
+    "sourceIds": [
+      "doc-clang-clang-docs-clangrepl"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clangsycllinker",
+    "title": "CLANG：Clang SYCL Linker",
+    "file": "cards/wx-re-doc-clang-clang-docs-clangsycllinker.md",
+    "sha256": "57421be1f2b3466eb43be50e574b1db798d69a2e09e711c872a96f3a0c6dce3f",
+    "sourceIds": [
+      "doc-clang-clang-docs-clangsycllinker"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-clangtransformertutorial",
+    "title": "CLANG：Clang Transformer Tutorial",
+    "file": "cards/wx-re-doc-clang-clang-docs-clangtransformertutorial.md",
+    "sha256": "35d6585a78de06ded3ee46df447940b3d0918eed9ef83b86e17e77e21bc347c4",
+    "sourceIds": [
+      "doc-clang-clang-docs-clangtransformertutorial"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-crosscompilation",
+    "title": "CLANG：Cross-compilation using Clang",
+    "file": "cards/wx-re-doc-clang-clang-docs-crosscompilation.md",
+    "sha256": "278f08d3e1b71309f1b9fb415085ea7022596639ee4c2bf4574ddec37da8f691",
+    "sourceIds": [
+      "doc-clang-clang-docs-crosscompilation"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-dataflowsanitizerdesign",
+    "title": "CLANG：DataFlowSanitizer Design Document",
+    "file": "cards/wx-re-doc-clang-clang-docs-dataflowsanitizerdesign.md",
+    "sha256": "67590bd15bd0f05fd249b1d7c20fa86db842695d0c8a82ee8cd90324f47c81d5",
+    "sourceIds": [
+      "doc-clang-clang-docs-dataflowsanitizerdesign"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-debuggingcoroutines",
+    "title": "CLANG：Debugging C++ Coroutines",
+    "file": "cards/wx-re-doc-clang-clang-docs-debuggingcoroutines.md",
+    "sha256": "c10e342ebb7f59cd5cb4d4345836ca5d4d56ba29ad35874cf429fb396d50b7e4",
+    "sourceIds": [
+      "doc-clang-clang-docs-debuggingcoroutines"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-functioneffectanalysis",
+    "title": "CLANG：Function Effect Analysis",
+    "file": "cards/wx-re-doc-clang-clang-docs-functioneffectanalysis.md",
+    "sha256": "8ff86969caf173530e766ea9249da286cca86923dd830f3a2fc8be2f06aaa5aa",
+    "sourceIds": [
+      "doc-clang-clang-docs-functioneffectanalysis"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-hipsupport",
+    "title": "CLANG：HIP Support",
+    "file": "cards/wx-re-doc-clang-clang-docs-hipsupport.md",
+    "sha256": "f789ee3272198c60efb6e34cb4b26fdcc6e67a598fd8050acd7ede6bb59dd6d0",
+    "sourceIds": [
+      "doc-clang-clang-docs-hipsupport"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-hardwareassistedaddresssanitizerdesign",
+    "title": "CLANG：Hardware-assisted AddressSanitizer Design Documentation",
+    "file": "cards/wx-re-doc-clang-clang-docs-hardwareassistedaddresssanitizerdesign.md",
+    "sha256": "f4c041441012b65b6e43aeb409509c8ecc254685f2473bf35b8d4a4ae8560a9b",
+    "sourceIds": [
+      "doc-clang-clang-docs-hardwareassistedaddresssanitizerdesign"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-howtosetuptoolingforllvm",
+    "title": "CLANG：How To Setup Clang Tooling For LLVM",
+    "file": "cards/wx-re-doc-clang-clang-docs-howtosetuptoolingforllvm.md",
+    "sha256": "f44dc87fde9e2524d7b860c239740bb86addae5ead225504a28372a4a2ba593a",
+    "sourceIds": [
+      "doc-clang-clang-docs-howtosetuptoolingforllvm"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-jsoncompilationdatabase",
+    "title": "CLANG：JSON Compilation Database Format Specification",
+    "file": "cards/wx-re-doc-clang-clang-docs-jsoncompilationdatabase.md",
+    "sha256": "b64212484b349a26b131e9aad45378d2284eb64723f3495790f80ce877315a31",
+    "sourceIds": [
+      "doc-clang-clang-docs-jsoncompilationdatabase"
+    ]
+  },
+  {
+    "id": "wx-re-doc-clang-clang-docs-ltovisibility",
+    "title": "CLANG：LTO Visibility",
+    "file": "cards/wx-re-doc-clang-clang-docs-ltovisibility.md",
+    "sha256": "4951a35c08f2971e471a10682c36b2ec10ce8c00b43174d4b924c74b785c0fb9",
+    "sourceIds": [
+      "doc-clang-clang-docs-ltovisibility"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-atomics",
+    "title": "QEMU：原子操作",
+    "file": "cards/wx-re-doc-qemu-docs-devel-atomics.md",
+    "sha256": "d4a012fb4c50a317ba6d10d150d893db3cd7c56fdbd77e2f314f8653d590d212",
+    "sourceIds": [
+      "doc-qemu-docs-devel-atomics"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-block-coroutine-wrapper",
+    "title": "QEMU：block-coroutine-wrapper",
+    "file": "cards/wx-re-doc-qemu-docs-devel-block-coroutine-wrapper.md",
+    "sha256": "da4427c51a1e9c8871d50ff6ba22bfead7bae2f1c80eea32d80e699e8934f593",
+    "sourceIds": [
+      "doc-qemu-docs-devel-block-coroutine-wrapper"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-clocks",
+    "title": "QEMU：Modelling a clock tree in QEMU",
+    "file": "cards/wx-re-doc-qemu-docs-devel-clocks.md",
+    "sha256": "2a5764ac9eae065759a7bdd87014005fb5163484ebaeacbd9882f67ee23fa5e1",
+    "sourceIds": [
+      "doc-qemu-docs-devel-clocks"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-control-flow-integrity",
+    "title": "QEMU：控制流完整性",
+    "file": "cards/wx-re-doc-qemu-docs-devel-control-flow-integrity.md",
+    "sha256": "aff611f4316ff64c8943aef5f5562268a65455fe156c3c9dae0c1b567f443c1d",
+    "sourceIds": [
+      "doc-qemu-docs-devel-control-flow-integrity"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-decodetree",
+    "title": "QEMU：指令译码树",
+    "file": "cards/wx-re-doc-qemu-docs-devel-decodetree.md",
+    "sha256": "1e74fab5de05d3b023de2ee26f99d573201ab8caa9180b0526d20ba89bd21ba9",
+    "sourceIds": [
+      "doc-qemu-docs-devel-decodetree"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-ebpf-rss",
+    "title": "QEMU：eBPF RSS virtio-net support",
+    "file": "cards/wx-re-doc-qemu-docs-devel-ebpf-rss.md",
+    "sha256": "fef73181330da2b06f3f2e0d8d45f48719977983ef6852d202eba68bf6ae7343",
+    "sourceIds": [
+      "doc-qemu-docs-devel-ebpf-rss"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-kconfig",
+    "title": "QEMU：QEMU and Kconfig",
+    "file": "cards/wx-re-doc-qemu-docs-devel-kconfig.md",
+    "sha256": "3c6dfe125384a76311707c8066223df2d72e8701112b3093b2b8a676ab5e7733",
+    "sourceIds": [
+      "doc-qemu-docs-devel-kconfig"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-loads-stores",
+    "title": "QEMU：Load and Store APIs",
+    "file": "cards/wx-re-doc-qemu-docs-devel-loads-stores.md",
+    "sha256": "4d856a77e982f32025282be0618998c4927a95db8dbb82567b2d4d58df4e302c",
+    "sourceIds": [
+      "doc-qemu-docs-devel-loads-stores"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-lockcnt",
+    "title": "QEMU：Locked Counters (aka QemuLockCnt)",
+    "file": "cards/wx-re-doc-qemu-docs-devel-lockcnt.md",
+    "sha256": "79d54686217dcd82c02c0ee1ce96f1839f2100186a44383a21f9cb75a92b4106",
+    "sourceIds": [
+      "doc-qemu-docs-devel-lockcnt"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-luks-detached-header",
+    "title": "QEMU：LUKS volume with detached header",
+    "file": "cards/wx-re-doc-qemu-docs-devel-luks-detached-header.md",
+    "sha256": "25c0decf2b4bb07bc5d2b2cbf9bf33ee4c6e3dc2095668af04829530a68c0684",
+    "sourceIds": [
+      "doc-qemu-docs-devel-luks-detached-header"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-memory",
+    "title": "QEMU：内存模型",
+    "file": "cards/wx-re-doc-qemu-docs-devel-memory.md",
+    "sha256": "a632b0ba9b61e4098c067950ca0962a68e1590cbda55e240c05e15beb9355eaf",
+    "sourceIds": [
+      "doc-qemu-docs-devel-memory"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-cpr",
+    "title": "QEMU：CheckPoint and Restart (CPR)",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-cpr.md",
+    "sha256": "8d18732d42ebbb705144b1a1b81ef839cbcb44e321e2f2578425f35d9c74c1b3",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-cpr"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-compatibility",
+    "title": "QEMU：Backwards compatibility",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-compatibility.md",
+    "sha256": "a6f90a45eea6095fa8439e724e2d07a99d309b927ed6aea35a9158ad7a8ae6c5",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-compatibility"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-dirty-limit",
+    "title": "QEMU：Dirty limit",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-dirty-limit.md",
+    "sha256": "26b8f29849e32ea7e9057213c84d1d31cdda0b68a37247839d3af469a403952f",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-dirty-limit"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-main",
+    "title": "QEMU：Migration framework",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-main.md",
+    "sha256": "2ab190b8fd3cb57ed23af3a6c4bad5d08188db0ed9cb4395866946c4b217eb34",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-main"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-mapped-ram",
+    "title": "QEMU：Mapped-ram",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-mapped-ram.md",
+    "sha256": "e3d019f4087f850ec9d9b491257d2e6a26450f8600944121833a512dca6fb577",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-mapped-ram"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-postcopy",
+    "title": "QEMU：Postcopy",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-postcopy.md",
+    "sha256": "458f1b07a312a6a1b50ca79c36e110ca8586b4e92e98e9e40f748e2bcc4b8a8a",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-postcopy"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-qatzip-compression",
+    "title": "QEMU：QATzip Compression",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-qatzip-compression.md",
+    "sha256": "13bf7363cb4661e8f490a0634b1311cd422dfaa30a163d633d3601b8f37d157a",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-qatzip-compression"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-qpl-compression",
+    "title": "QEMU：QPL Compression",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-qpl-compression.md",
+    "sha256": "58401b788aa2b7ad386fdc2fb129d23b86f5d7934ecf4673ff5e8b1c0f680c29",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-qpl-compression"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-uadk-compression",
+    "title": "QEMU：User Space Accelerator Development Kit (UADK) Compression",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-uadk-compression.md",
+    "sha256": "1199d60621dc3e581c7bc5886d6527678cb0a4138adeca542f21a8231be66c57",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-uadk-compression"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-vfio",
+    "title": "QEMU：VFIO device migration",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-vfio.md",
+    "sha256": "1da1e70d8b27bd05a118de712df952ad1a40b4c7a28ad33a35a453f00bd23679",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-vfio"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-migration-virtio",
+    "title": "QEMU：半虚拟化设备",
+    "file": "cards/wx-re-doc-qemu-docs-devel-migration-virtio.md",
+    "sha256": "dba8f1beb0fa4851d0436ccfd3059ff0e638a12d40c862422eb82808f008ff16",
+    "sourceIds": [
+      "doc-qemu-docs-devel-migration-virtio"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-multi-process",
+    "title": "QEMU：Multi-process QEMU",
+    "file": "cards/wx-re-doc-qemu-docs-devel-multi-process.md",
+    "sha256": "674fbd77fb979eeba3cd4725c4802f5304661f02564e98500fbd737cd78e30e1",
+    "sourceIds": [
+      "doc-qemu-docs-devel-multi-process"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-multi-thread-tcg",
+    "title": "QEMU：多线程 TCG",
+    "file": "cards/wx-re-doc-qemu-docs-devel-multi-thread-tcg.md",
+    "sha256": "97be3f2e2f1d991f927aa1a6599bde99f9b69e62963c81ca23cba215bda68cf7",
+    "sourceIds": [
+      "doc-qemu-docs-devel-multi-thread-tcg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-multiple-iothreads",
+    "title": "QEMU：Using Multiple IOThread\\ s",
+    "file": "cards/wx-re-doc-qemu-docs-devel-multiple-iothreads.md",
+    "sha256": "733ce9981685ee342352ac64898948f65c235f2171eb2a9dce0bda4e1a9acc11",
+    "sourceIds": [
+      "doc-qemu-docs-devel-multiple-iothreads"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-qapi-code-gen",
+    "title": "QEMU：QAPI 代码生成",
+    "file": "cards/wx-re-doc-qemu-docs-devel-qapi-code-gen.md",
+    "sha256": "bcd375896d9480f4a0e4c27b6103acdc4c6e178fedd3f9e2b14def05ab7e87a5",
+    "sourceIds": [
+      "doc-qemu-docs-devel-qapi-code-gen"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-qapi-domain",
+    "title": "QEMU：The Sphinx QAPI Domain",
+    "file": "cards/wx-re-doc-qemu-docs-devel-qapi-domain.md",
+    "sha256": "0fb8b8e69ca5dc26c6a76f6476df2c44bae612109d4fe3a3ff1deb51ff59d755",
+    "sourceIds": [
+      "doc-qemu-docs-devel-qapi-domain"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-qom",
+    "title": "QEMU：对象模型",
+    "file": "cards/wx-re-doc-qemu-docs-devel-qom.md",
+    "sha256": "8b881534924f09f517394aa56081a9f279806c708cee9cb3f964ffda7aa5e018",
+    "sourceIds": [
+      "doc-qemu-docs-devel-qom"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-rcu",
+    "title": "QEMU：读复制更新",
+    "file": "cards/wx-re-doc-qemu-docs-devel-rcu.md",
+    "sha256": "2744d9acc31ae374d50330733041163f9bbb5d70978c7c956ffceedf618acd41",
+    "sourceIds": [
+      "doc-qemu-docs-devel-rcu"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-replay",
+    "title": "QEMU：Execution Record/Replay",
+    "file": "cards/wx-re-doc-qemu-docs-devel-replay.md",
+    "sha256": "9f77f5f5feaa2f88f033c1e8434ed893fe91329874d12ea884b7844a8f17b948",
+    "sourceIds": [
+      "doc-qemu-docs-devel-replay"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-reset",
+    "title": "QEMU：设备复位",
+    "file": "cards/wx-re-doc-qemu-docs-devel-reset.md",
+    "sha256": "53be449507ec1865d4bdea6d521bde72e35105fcd5c9141865f4379f22b5845f",
+    "sourceIds": [
+      "doc-qemu-docs-devel-reset"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-rust",
+    "title": "QEMU：Rust in QEMU",
+    "file": "cards/wx-re-doc-qemu-docs-devel-rust.md",
+    "sha256": "4707eb15d73257bbfd3f801d07101bdb1b19187ea33d8daeecbd2f1295b09f2d",
+    "sourceIds": [
+      "doc-qemu-docs-devel-rust"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-s390-cpu-topology",
+    "title": "QEMU：QAPI interface for S390 CPU topology",
+    "file": "cards/wx-re-doc-qemu-docs-devel-s390-cpu-topology.md",
+    "sha256": "fdc15ae5cbfb6c11d164d7764a3ea0e70a1d646585e198ae5c09a80a72961151",
+    "sourceIds": [
+      "doc-qemu-docs-devel-s390-cpu-topology"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-s390-dasd-ipl",
+    "title": "QEMU：Booting from real channel-attached devices on s390x",
+    "file": "cards/wx-re-doc-qemu-docs-devel-s390-dasd-ipl.md",
+    "sha256": "40cda8abcd16c1704c68657b7467982c9ef4e50c4064b5ab7af98b873878f90a",
+    "sourceIds": [
+      "doc-qemu-docs-devel-s390-dasd-ipl"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-secure-coding-practices",
+    "title": "QEMU：安全编码",
+    "file": "cards/wx-re-doc-qemu-docs-devel-secure-coding-practices.md",
+    "sha256": "39d8dfe37c0e680c48c5354d5a0eea444961f8c083fd3b33e63d728c809a99b4",
+    "sourceIds": [
+      "doc-qemu-docs-devel-secure-coding-practices"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-tcg-icount",
+    "title": "QEMU：TCG Instruction Counting",
+    "file": "cards/wx-re-doc-qemu-docs-devel-tcg-icount.md",
+    "sha256": "86bab3a61e9bfe5c365341d23eeb130f0361554bf7a304dc99f8c81156dcab94",
+    "sourceIds": [
+      "doc-qemu-docs-devel-tcg-icount"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-tcg-ops",
+    "title": "QEMU：TCG Intermediate Representation",
+    "file": "cards/wx-re-doc-qemu-docs-devel-tcg-ops.md",
+    "sha256": "ced4033de4f07f4854ff83ebc658f235741eda969960022871744c5c7957513f",
+    "sourceIds": [
+      "doc-qemu-docs-devel-tcg-ops"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-tcg-plugins",
+    "title": "QEMU：QEMU TCG Plugins",
+    "file": "cards/wx-re-doc-qemu-docs-devel-tcg-plugins.md",
+    "sha256": "339a721d7b012dd76fb8b4b8248cd6bdbe7f254329ba20b854c3c8a95700c59f",
+    "sourceIds": [
+      "doc-qemu-docs-devel-tcg-plugins"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-tcg",
+    "title": "QEMU：TCG 动态翻译",
+    "file": "cards/wx-re-doc-qemu-docs-devel-tcg.md",
+    "sha256": "5ee4e691c9341f309e9a7bbb5f900b9d039ef5d8a78c192ba42583255a0bfccd",
+    "sourceIds": [
+      "doc-qemu-docs-devel-tcg"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-tracing",
+    "title": "QEMU：Tracing",
+    "file": "cards/wx-re-doc-qemu-docs-devel-tracing.md",
+    "sha256": "dbacbfca0ce31880932f926eb33311d4ce712be546bc56c41d9087baae7981f2",
+    "sourceIds": [
+      "doc-qemu-docs-devel-tracing"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-uefi-vars",
+    "title": "QEMU：UEFI variables",
+    "file": "cards/wx-re-doc-qemu-docs-devel-uefi-vars.md",
+    "sha256": "84a143d2188f7ded7c8769b468652b9b9e15087182f99347faf793daaa8aabba",
+    "sourceIds": [
+      "doc-qemu-docs-devel-uefi-vars"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-vfio-iommufd",
+    "title": "QEMU：IOMMUFD BACKEND usage with VFIO",
+    "file": "cards/wx-re-doc-qemu-docs-devel-vfio-iommufd.md",
+    "sha256": "f380f01bf9ac526aa516d978aa2016977deadcf40245a43997982b7d3fc75cae",
+    "sourceIds": [
+      "doc-qemu-docs-devel-vfio-iommufd"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-virtio-backends",
+    "title": "QEMU：Writing VirtIO backends for QEMU",
+    "file": "cards/wx-re-doc-qemu-docs-devel-virtio-backends.md",
+    "sha256": "6a68bd71787e261a57a51e498d9aabfa62dd800ff3c96e55b662213dd5d38c72",
+    "sourceIds": [
+      "doc-qemu-docs-devel-virtio-backends"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-writing-monitor-commands",
+    "title": "QEMU：How to write monitor commands",
+    "file": "cards/wx-re-doc-qemu-docs-devel-writing-monitor-commands.md",
+    "sha256": "ea872c401c7229353cdb2531ad41dc9667d36850bf50b0ac97913d60927f0b7a",
+    "sourceIds": [
+      "doc-qemu-docs-devel-writing-monitor-commands"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-devel-zoned-storage",
+    "title": "QEMU：zoned-storage",
+    "file": "cards/wx-re-doc-qemu-docs-devel-zoned-storage.md",
+    "sha256": "039dee4837b721c6f699fa9252fb2b3a2b3791f3a42891eba437599a5ed180fd",
+    "sourceIds": [
+      "doc-qemu-docs-devel-zoned-storage"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-aspeed",
+    "title": "QEMU：ARM设备模型 · aspeed",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-aspeed.md",
+    "sha256": "b565fb8f2e5c1861cf0f87bf3db625bd8dcadc7044afa907d572f5c66af2b7a1",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-aspeed"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-bananapi-m2u",
+    "title": "QEMU：ARM设备模型 · bananapi_m2u",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-bananapi-m2u.md",
+    "sha256": "7dc3c9e6c7a00176749f46d812e13b3e14c95d8d439bbcefa3e3995ab5825bd3",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-bananapi-m2u"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-cpu-features",
+    "title": "QEMU：ARM设备模型 · cpu-features",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-cpu-features.md",
+    "sha256": "d8794f8996618429c6b430fae15254bd97608c401358b93e0f00457a13c717a3",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-cpu-features"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-emulation",
+    "title": "QEMU：ARM设备模型 · emulation",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-emulation.md",
+    "sha256": "8464940178eb79753e1ef112ef0d24dfed9c357f5fe4bb9143a02e8ffdf2eff7",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-emulation"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-fby35",
+    "title": "QEMU：ARM设备模型 · fby35",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-fby35.md",
+    "sha256": "a74bfea31266477c9643dc4cf07b660f268679c0e619c882214ed1a499a6921f",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-fby35"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-imx8mp-evk",
+    "title": "QEMU：ARM设备模型 · imx8mp-evk",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-imx8mp-evk.md",
+    "sha256": "89ccb5148fbae50a25e6acc622e1726ce66c51a95840f24a472666d698efd8fd",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-imx8mp-evk"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-mps2",
+    "title": "QEMU：ARM设备模型 · mps2",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-mps2.md",
+    "sha256": "056d8be0299225f1d01222efbe6bc9122d7dd8d83abdfd539d655398b1d7b32d",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-mps2"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-nuvoton",
+    "title": "QEMU：ARM设备模型 · nuvoton",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-nuvoton.md",
+    "sha256": "b2a8130b2be3aaa209eae0e205f3c4573afd863a7826c1976df799124c230de7",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-nuvoton"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-orangepi",
+    "title": "QEMU：ARM设备模型 · orangepi",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-orangepi.md",
+    "sha256": "e9e658117a78fa47ff2d9a4e3559734ec6353eabe1637a0ff81d90ff0c3178fe",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-orangepi"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-sabrelite",
+    "title": "QEMU：ARM设备模型 · sabrelite",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-sabrelite.md",
+    "sha256": "372ba5180a8bff87b336805dfaf265f982e955c14ae32df50dd4e3169e284c72",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-sabrelite"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-sbsa",
+    "title": "QEMU：ARM设备模型 · sbsa",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-sbsa.md",
+    "sha256": "f61721661920983b733953e9e07e06607bc8802cafc3ab3a0ff420b1398646f1",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-sbsa"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-stm32",
+    "title": "QEMU：ARM设备模型 · stm32",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-stm32.md",
+    "sha256": "823675d05952372da5a9e3be9de812acff896987dfe91c691a4d8b5fe1f772c6",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-stm32"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-versatile",
+    "title": "QEMU：ARM设备模型 · versatile",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-versatile.md",
+    "sha256": "c3632b538669d0be18e3a272f670f0a9c6a1a7b2407a4a569c3355cdcd7c116d",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-versatile"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-vexpress",
+    "title": "QEMU：ARM设备模型 · vexpress",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-vexpress.md",
+    "sha256": "6446ea569fce137b305a888f27135d661fcbb043c57e16cc01f0fbc1a2810e6f",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-vexpress"
+    ]
+  },
+  {
+    "id": "wx-re-doc-qemu-docs-system-arm-virt",
+    "title": "QEMU：ARM设备模型 · virt",
+    "file": "cards/wx-re-doc-qemu-docs-system-arm-virt.md",
+    "sha256": "5f44e5908a9ecc3bd9b03f062238dceb3e2cc88ad5c51a1f833cef498f2395b5",
+    "sourceIds": [
+      "doc-qemu-docs-system-arm-virt"
+    ]
+  }
+]

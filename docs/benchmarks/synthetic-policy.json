@@ -1,0 +1,3101 @@
+{
+  "kind": "synthetic in-distribution only; not private holdout or formal calibration",
+  "corpus": 20,
+  "positiveQueries": 80,
+  "unrelatedNegatives": 20,
+  "thresholds": [
+    {
+      "threshold": 0.3,
+      "recallAt5": 0.6625,
+      "MRR": 0.6625,
+      "falseInjectionRate": 0.05454545454545454,
+      "missRate": 0.3375,
+      "negativeInjectionRate": 0,
+      "injectedQueries": 55,
+      "missedQueries": 27
+    },
+    {
+      "threshold": 0.5,
+      "recallAt5": 0.4375,
+      "MRR": 0.4375,
+      "falseInjectionRate": 0,
+      "missRate": 0.5625,
+      "negativeInjectionRate": 0,
+      "injectedQueries": 35,
+      "missedQueries": 45
+    },
+    {
+      "threshold": 0.65,
+      "recallAt5": 0.2375,
+      "MRR": 0.2375,
+      "falseInjectionRate": 0,
+      "missRate": 0.7625,
+      "negativeInjectionRate": 0,
+      "injectedQueries": 19,
+      "missedQueries": 61
+    },
+    {
+      "threshold": 0.8,
+      "recallAt5": 0.15,
+      "MRR": 0.15,
+      "falseInjectionRate": 0,
+      "missRate": 0.85,
+      "negativeInjectionRate": 0,
+      "injectedQueries": 12,
+      "missedQueries": 68
+    },
+    {
+      "threshold": 1,
+      "recallAt5": 0.125,
+      "MRR": 0.125,
+      "falseInjectionRate": 0,
+      "missRate": 0.875,
+      "negativeInjectionRate": 0,
+      "injectedQueries": 10,
+      "missedQueries": 70
+    }
+  ],
+  "skipped": [
+    {
+      "category": "zh-two-char",
+      "query": "索引",
+      "reason": "short"
+    },
+    {
+      "category": "literal",
+      "query": "未检测",
+      "reason": "short"
+    },
+    {
+      "category": "zh-two-char",
+      "query": "回滚",
+      "reason": "short"
+    },
+    {
+      "category": "zh-two-char",
+      "query": "球体",
+      "reason": "short"
+    },
+    {
+      "category": "zh-two-char",
+      "query": "分页",
+      "reason": "short"
+    }
+  ],
+  "definitions": {
+    "falseInjectionRate": "queries with any injected irrelevant ID / queries with any injection",
+    "missRate": "positive queries with no relevant injected ID / all positive queries",
+    "recallAt5": "macro fraction of expected IDs among thresholded top5; skips/timeouts count as misses",
+    "timing": "isolated RecallSearch results; not production first-step injected rate"
+  },
+  "rows": [
+    {
+      "category": "error-code",
+      "query": "ERR_SQLITE_CORRUPT",
+      "expected": [
+        "r01"
+      ],
+      "candidates": [
+        {
+          "id": "r01",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 82.6716
+    },
+    {
+      "category": "intersection",
+      "query": "SQLite 重建",
+      "expected": [
+        "r01"
+      ],
+      "candidates": [
+        {
+          "id": "r01",
+          "score": 1
+        },
+        {
+          "id": "r18",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.4468000000000245
+    },
+    {
+      "category": "paraphrase",
+      "query": "数据库索引坏了如何恢复",
+      "expected": [
+        "r01"
+      ],
+      "candidates": [
+        {
+          "id": "r01",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "r11",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "r18",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "r10",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r13",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r20",
+          "score": 0.09090909090909091
+        }
+      ],
+      "reason": "success",
+      "ms": 1.2160000000000082
+    },
+    {
+      "category": "zh-two-char",
+      "query": "索引",
+      "expected": [
+        "r01",
+        "r11"
+      ],
+      "candidates": [],
+      "reason": "short",
+      "ms": 0.05920000000000414
+    },
+    {
+      "category": "mixed",
+      "query": "Intl.Segmenter 中文",
+      "expected": [
+        "r02"
+      ],
+      "candidates": [
+        {
+          "id": "r02",
+          "score": 0.5
+        }
+      ],
+      "reason": "success",
+      "ms": 0.7442999999999813
+    },
+    {
+      "category": "paraphrase",
+      "query": "为什么两个汉字查不到",
+      "expected": [
+        "r02"
+      ],
+      "candidates": [
+        {
+          "id": "r02",
+          "score": 0.7272727272727273
+        },
+        {
+          "id": "r14",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "r04",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "r03",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r20",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r15",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r18",
+          "score": 0
+        },
+        {
+          "id": "r17",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r09",
+          "score": 0
+        },
+        {
+          "id": "r10",
+          "score": 0
+        },
+        {
+          "id": "r08",
+          "score": 0
+        },
+        {
+          "id": "r12",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 2.045599999999979
+    },
+    {
+      "category": "windows-path",
+      "query": "C:\\合成项目\\知识 库",
+      "expected": [
+        "r03"
+      ],
+      "candidates": [
+        {
+          "id": "r11",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "r09",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r20",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r01",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r18",
+          "score": 0.16666666666666666
+        }
+      ],
+      "reason": "success",
+      "ms": 0.914999999999992
+    },
+    {
+      "category": "intersection",
+      "query": "Windows 非法字符",
+      "expected": [
+        "r03"
+      ],
+      "candidates": [
+        {
+          "id": "r03",
+          "score": 0.25
+        }
+      ],
+      "reason": "success",
+      "ms": 0.633499999999998
+    },
+    {
+      "category": "paraphrase",
+      "query": "中文带空格目录怎么拼接",
+      "expected": [
+        "r03"
+      ],
+      "candidates": [
+        {
+          "id": "r03",
+          "score": 0.5
+        },
+        {
+          "id": "r02",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r20",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r11",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r04",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r17",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r12",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.9912999999999954
+    },
+    {
+      "category": "command",
+      "query": "pwsh --version",
+      "expected": [
+        "r04"
+      ],
+      "candidates": [
+        {
+          "id": "r04",
+          "score": 0.5
+        }
+      ],
+      "reason": "success",
+      "ms": 0.9573000000000036
+    },
+    {
+      "category": "nfkc",
+      "query": "ＰｏｗｅｒＳｈｅｌｌ ７",
+      "expected": [
+        "r04"
+      ],
+      "candidates": [
+        {
+          "id": "r04",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.5734999999999957
+    },
+    {
+      "category": "paraphrase",
+      "query": "电脑自带终端为什么显示不可用",
+      "expected": [
+        "r04"
+      ],
+      "candidates": [
+        {
+          "id": "r04",
+          "score": 0.4
+        },
+        {
+          "id": "r05",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r18",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r13",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r11",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r03",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r20",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r17",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r15",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r09",
+          "score": 0
+        },
+        {
+          "id": "r10",
+          "score": 0
+        },
+        {
+          "id": "r08",
+          "score": 0
+        },
+        {
+          "id": "r12",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.2127999999999872
+    },
+    {
+      "category": "literal",
+      "query": "未检测",
+      "expected": [
+        "r05"
+      ],
+      "candidates": [],
+      "reason": "short",
+      "ms": 0.037499999999994316
+    },
+    {
+      "category": "mixed",
+      "query": "Node.js Python Git",
+      "expected": [
+        "r05"
+      ],
+      "candidates": [
+        {
+          "id": "r06",
+          "score": 0.3333333333333333
+        }
+      ],
+      "reason": "success",
+      "ms": 0.6313999999999851
+    },
+    {
+      "category": "paraphrase",
+      "query": "刚添加工具能标成可用吗",
+      "expected": [
+        "r05"
+      ],
+      "candidates": [
+        {
+          "id": "r05",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "r11",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r18",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r13",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r04",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r07",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r16",
+          "score": 0.07142857142857142
+        }
+      ],
+      "reason": "success",
+      "ms": 1.1520000000000152
+    },
+    {
+      "category": "slash",
+      "query": "feat/synthetic",
+      "expected": [
+        "r06"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.386099999999999
+    },
+    {
+      "category": "intersection",
+      "query": "Git 分支 提交",
+      "expected": [
+        "r06"
+      ],
+      "candidates": [
+        {
+          "id": "r06",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.47919999999999163
+    },
+    {
+      "category": "paraphrase",
+      "query": "每个功能要如何保存版本",
+      "expected": [
+        "r06"
+      ],
+      "candidates": [
+        {
+          "id": "r06",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "r05",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r11",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r02",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r14",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r03",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r04",
+          "score": 0
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r18",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8344999999999914
+    },
+    {
+      "category": "error-code",
+      "query": "EACCES",
+      "expected": [
+        "r07"
+      ],
+      "candidates": [
+        {
+          "id": "r07",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.44069999999999254
+    },
+    {
+      "category": "case",
+      "query": "NPM CI 权限",
+      "expected": [
+        "r07"
+      ],
+      "candidates": [
+        {
+          "id": "r07",
+          "score": 0.6666666666666666
+        }
+      ],
+      "reason": "success",
+      "ms": 0.48629999999999995
+    },
+    {
+      "category": "paraphrase",
+      "query": "安装包没有写入权限怎么处理",
+      "expected": [
+        "r07"
+      ],
+      "candidates": [
+        {
+          "id": "r07",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "r03",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "r02",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r13",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r05",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r04",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r17",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r08",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r06",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8588000000000022
+    },
+    {
+      "category": "mixed",
+      "query": "JSON 校验",
+      "expected": [
+        "r08"
+      ],
+      "candidates": [
+        {
+          "id": "r08",
+          "score": 1
+        },
+        {
+          "id": "r11",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.5386000000000024
+    },
+    {
+      "category": "intersection",
+      "query": "Markdown 围栏 seq",
+      "expected": [
+        "r08"
+      ],
+      "candidates": [
+        {
+          "id": "r08",
+          "score": 0.6
+        }
+      ],
+      "reason": "success",
+      "ms": 0.34600000000000364
+    },
+    {
+      "category": "paraphrase",
+      "query": "大模型返回畸形数据应该猜测修复吗",
+      "expected": [
+        "r08"
+      ],
+      "candidates": [
+        {
+          "id": "r08",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "r01",
+          "score": 0.13333333333333333
+        },
+        {
+          "id": "r18",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r13",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r12",
+          "score": 0
+        },
+        {
+          "id": "r06",
+          "score": 0
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r02",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r03",
+          "score": 0
+        },
+        {
+          "id": "r09",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.0304000000000144
+    },
+    {
+      "category": "injection-delimiter",
+      "query": "</wanxiang-recall>",
+      "expected": [
+        "r09"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.5132999999999868
+    },
+    {
+      "category": "punctuation",
+      "query": "redacted()",
+      "expected": [
+        "r09"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.39750000000000796
+    },
+    {
+      "category": "paraphrase",
+      "query": "资料里要求忽略规则会被执行吗",
+      "expected": [
+        "r09"
+      ],
+      "candidates": [
+        {
+          "id": "r09",
+          "score": 0.75
+        },
+        {
+          "id": "r03",
+          "score": 0.125
+        },
+        {
+          "id": "r10",
+          "score": 0.125
+        },
+        {
+          "id": "r20",
+          "score": 0.0625
+        },
+        {
+          "id": "r15",
+          "score": 0.0625
+        },
+        {
+          "id": "r07",
+          "score": 0.0625
+        },
+        {
+          "id": "r08",
+          "score": 0.0625
+        },
+        {
+          "id": "r04",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.9461999999999762
+    },
+    {
+      "category": "identifier",
+      "query": "generatedHash",
+      "expected": [
+        "r10"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.4136000000000024
+    },
+    {
+      "category": "intersection",
+      "query": "修订 撤销",
+      "expected": [
+        "r10"
+      ],
+      "candidates": [
+        {
+          "id": "r10",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.5602000000000089
+    },
+    {
+      "category": "paraphrase",
+      "query": "自动整理会覆盖我改的笔记吗",
+      "expected": [
+        "r10"
+      ],
+      "candidates": [
+        {
+          "id": "r10",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "r17",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r09",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r12",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r06",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r03",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r15",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r01",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r19",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r20",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r14",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.069800000000015
+    },
+    {
+      "category": "filename",
+      "query": "pending.json",
+      "expected": [
+        "r11"
+      ],
+      "candidates": [
+        {
+          "id": "r11",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.4113999999999862
+    },
+    {
+      "category": "intersection",
+      "query": "切换 解析 旧存储",
+      "expected": [
+        "r11"
+      ],
+      "candidates": [
+        {
+          "id": "r11",
+          "score": 0.4
+        },
+        {
+          "id": "r12",
+          "score": 0.2
+        },
+        {
+          "id": "r07",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.5331999999999937
+    },
+    {
+      "category": "paraphrase",
+      "query": "换库报错后原来的资料消失了",
+      "expected": [
+        "r11"
+      ],
+      "candidates": [
+        {
+          "id": "r11",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "r19",
+          "score": 0.17647058823529413
+        },
+        {
+          "id": "r12",
+          "score": 0.11764705882352941
+        },
+        {
+          "id": "r01",
+          "score": 0.11764705882352941
+        },
+        {
+          "id": "r15",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r09",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r20",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r18",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r05",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r14",
+          "score": 0.058823529411764705
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8628999999999962
+    },
+    {
+      "category": "zh-two-char",
+      "query": "回滚",
+      "expected": [
+        "r12"
+      ],
+      "candidates": [],
+      "reason": "short",
+      "ms": 0.03829999999999245
+    },
+    {
+      "category": "mixed",
+      "query": "notes cards 递归",
+      "expected": [
+        "r12"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.39220000000000255
+    },
+    {
+      "category": "paraphrase",
+      "query": "老版本可以读新文件夹吗",
+      "expected": [
+        "r12"
+      ],
+      "candidates": [
+        {
+          "id": "r03",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "r07",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "r11",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "r12",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "r06",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r05",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r04",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8087999999999909
+    },
+    {
+      "category": "scale",
+      "query": "3000 簇聚合",
+      "expected": [
+        "r13"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.49219999999999686
+    },
+    {
+      "category": "punctuation",
+      "query": "O(n²)",
+      "expected": [
+        "r13"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.38989999999998304
+    },
+    {
+      "category": "paraphrase",
+      "query": "关系图数据很多变卡怎么办",
+      "expected": [
+        "r13"
+      ],
+      "candidates": [
+        {
+          "id": "r13",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "r17",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "r02",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r16",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r08",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r20",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r01",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r18",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r15",
+          "score": 0
+        },
+        {
+          "id": "r14",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.7684999999999889
+    },
+    {
+      "category": "zh-two-char",
+      "query": "球体",
+      "expected": [
+        "r14"
+      ],
+      "candidates": [],
+      "reason": "short",
+      "ms": 0.0327999999999804
+    },
+    {
+      "category": "intersection",
+      "query": "大圆弧 透视",
+      "expected": [
+        "r14"
+      ],
+      "candidates": [
+        {
+          "id": "r14",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "r15",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r13",
+          "score": 0.16666666666666666
+        }
+      ],
+      "reason": "success",
+      "ms": 0.45359999999999445
+    },
+    {
+      "category": "paraphrase",
+      "query": "怎样让圆球上的点转到正面",
+      "expected": [
+        "r14"
+      ],
+      "candidates": [
+        {
+          "id": "r14",
+          "score": 0.4375
+        },
+        {
+          "id": "r15",
+          "score": 0.1875
+        },
+        {
+          "id": "r13",
+          "score": 0.0625
+        },
+        {
+          "id": "r06",
+          "score": 0.0625
+        },
+        {
+          "id": "r08",
+          "score": 0.0625
+        },
+        {
+          "id": "r20",
+          "score": 0.0625
+        },
+        {
+          "id": "r18",
+          "score": 0.0625
+        },
+        {
+          "id": "r02",
+          "score": 0.0625
+        },
+        {
+          "id": "r16",
+          "score": 0.0625
+        },
+        {
+          "id": "r17",
+          "score": 0.0625
+        },
+        {
+          "id": "r19",
+          "score": 0.0625
+        },
+        {
+          "id": "r09",
+          "score": 0.0625
+        },
+        {
+          "id": "r11",
+          "score": 0.0625
+        },
+        {
+          "id": "r12",
+          "score": 0.0625
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8803000000000054
+    },
+    {
+      "category": "identifier",
+      "query": "alpha",
+      "expected": [
+        "r15"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.3924000000000092
+    },
+    {
+      "category": "intersection",
+      "query": "力导向 降温",
+      "expected": [
+        "r15"
+      ],
+      "candidates": [
+        {
+          "id": "r15",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.6483000000000061
+    },
+    {
+      "category": "paraphrase",
+      "query": "网状节点什么时候停止运动",
+      "expected": [
+        "r15"
+      ],
+      "candidates": [
+        {
+          "id": "r15",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "r13",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r14",
+          "score": 0
+        },
+        {
+          "id": "r19",
+          "score": 0
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r18",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r03",
+          "score": 0
+        },
+        {
+          "id": "r11",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8201999999999998
+    },
+    {
+      "category": "csp",
+      "query": "script-src 'self'",
+      "expected": [
+        "r16"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.32970000000000255
+    },
+    {
+      "category": "punctuation",
+      "query": "blob: Worker",
+      "expected": [
+        "r16"
+      ],
+      "candidates": [
+        {
+          "id": "r16",
+          "score": 0.5
+        }
+      ],
+      "reason": "success",
+      "ms": 0.32910000000001105
+    },
+    {
+      "category": "paraphrase",
+      "query": "插件页面可以从外站加载脚本吗",
+      "expected": [
+        "r16"
+      ],
+      "candidates": [
+        {
+          "id": "r16",
+          "score": 0.47619047619047616
+        },
+        {
+          "id": "r18",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r17",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r20",
+          "score": 0.047619047619047616
+        },
+        {
+          "id": "r03",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.6779999999999973
+    },
+    {
+      "category": "budget",
+      "query": "200ms",
+      "expected": [
+        "r17"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.32220000000000937
+    },
+    {
+      "category": "mixed",
+      "query": "L0 L1 摘要",
+      "expected": [
+        "r17"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.3627999999999929
+    },
+    {
+      "category": "paraphrase",
+      "query": "自动检索太慢会卡住发送吗",
+      "expected": [
+        "r17"
+      ],
+      "candidates": [
+        {
+          "id": "r17",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r02",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r10",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r03",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r09",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r15",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r13",
+          "score": 0
+        },
+        {
+          "id": "r14",
+          "score": 0
+        },
+        {
+          "id": "r19",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8625999999999863
+    },
+    {
+      "category": "identifier",
+      "query": "node:sqlite",
+      "expected": [
+        "r18"
+      ],
+      "candidates": [
+        {
+          "id": "r18",
+          "score": 1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.40850000000000364
+    },
+    {
+      "category": "mixed",
+      "query": "sql.js FTS5",
+      "expected": [
+        "r18"
+      ],
+      "candidates": [
+        {
+          "id": "r18",
+          "score": 0.5
+        }
+      ],
+      "reason": "success",
+      "ms": 0.42439999999999145
+    },
+    {
+      "category": "paraphrase",
+      "query": "没有原生数据库时怎么兼容",
+      "expected": [
+        "r18"
+      ],
+      "candidates": [
+        {
+          "id": "r18",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "r01",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "r16",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "r11",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "r03",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r12",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r13",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r20",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r19",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r07",
+          "score": 0.09090909090909091
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8127000000000066
+    },
+    {
+      "category": "mixed",
+      "query": "embedding Off",
+      "expected": [
+        "r19"
+      ],
+      "candidates": [
+        {
+          "id": "r19",
+          "score": 0.5
+        }
+      ],
+      "reason": "success",
+      "ms": 0.33559999999999945
+    },
+    {
+      "category": "identifier",
+      "query": "VectorIndex",
+      "expected": [
+        "r19"
+      ],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.23840000000001282
+    },
+    {
+      "category": "paraphrase",
+      "query": "宿主没开向量服务还可以搜索吗",
+      "expected": [
+        "r19"
+      ],
+      "candidates": [
+        {
+          "id": "r19",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "r18",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r11",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r01",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r16",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r14",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r12",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r15",
+          "score": 0
+        },
+        {
+          "id": "r06",
+          "score": 0
+        },
+        {
+          "id": "r02",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.0716999999999928
+    },
+    {
+      "category": "zh-two-char",
+      "query": "分页",
+      "expected": [
+        "r20"
+      ],
+      "candidates": [],
+      "reason": "short",
+      "ms": 0.03989999999998872
+    },
+    {
+      "category": "intersection",
+      "query": "快照 待落库",
+      "expected": [
+        "r20"
+      ],
+      "candidates": [
+        {
+          "id": "r20",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "r01",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r18",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r11",
+          "score": 0.16666666666666666
+        }
+      ],
+      "reason": "success",
+      "ms": 0.585899999999981
+    },
+    {
+      "category": "paraphrase",
+      "query": "生成早已完成为什么还排在候选里",
+      "expected": [
+        "r20"
+      ],
+      "candidates": [
+        {
+          "id": "r20",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "r10",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r09",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r04",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r15",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r18",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r16",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r11",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r14",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r12",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r13",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.9632000000000005
+    },
+    {
+      "category": "paraphrase",
+      "query": "坏掉的数据文件怎样找回历史内容",
+      "expected": [
+        "r01"
+      ],
+      "candidates": [
+        {
+          "id": "r20",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r01",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r13",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r18",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r12",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r17",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r06",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r08",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r03",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r07",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r11",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r04",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.9819999999999993
+    },
+    {
+      "category": "paraphrase",
+      "query": "两个汉字查不出东西要怎么补救",
+      "expected": [
+        "r02"
+      ],
+      "candidates": [
+        {
+          "id": "r02",
+          "score": 0.5625
+        },
+        {
+          "id": "r14",
+          "score": 0.1875
+        },
+        {
+          "id": "r18",
+          "score": 0.0625
+        },
+        {
+          "id": "r03",
+          "score": 0.0625
+        },
+        {
+          "id": "r12",
+          "score": 0
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r17",
+          "score": 0
+        },
+        {
+          "id": "r04",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r09",
+          "score": 0
+        },
+        {
+          "id": "r10",
+          "score": 0
+        },
+        {
+          "id": "r08",
+          "score": 0
+        },
+        {
+          "id": "r20",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.3091000000000008
+    },
+    {
+      "category": "paraphrase",
+      "query": "文件夹名里有汉字和空格保存失败",
+      "expected": [
+        "r03"
+      ],
+      "candidates": [
+        {
+          "id": "r03",
+          "score": 0.631578947368421
+        },
+        {
+          "id": "r11",
+          "score": 0.2631578947368421
+        },
+        {
+          "id": "r07",
+          "score": 0.15789473684210525
+        },
+        {
+          "id": "r12",
+          "score": 0.15789473684210525
+        },
+        {
+          "id": "r06",
+          "score": 0.10526315789473684
+        },
+        {
+          "id": "r02",
+          "score": 0.05263157894736842
+        },
+        {
+          "id": "r09",
+          "score": 0.05263157894736842
+        },
+        {
+          "id": "r20",
+          "score": 0.05263157894736842
+        },
+        {
+          "id": "r04",
+          "score": 0.05263157894736842
+        },
+        {
+          "id": "r18",
+          "score": 0.05263157894736842
+        },
+        {
+          "id": "r05",
+          "score": 0.05263157894736842
+        }
+      ],
+      "reason": "success",
+      "ms": 1.0275000000000034
+    },
+    {
+      "category": "paraphrase",
+      "query": "系统自带终端和新版终端不是同一个吗",
+      "expected": [
+        "r04"
+      ],
+      "candidates": [
+        {
+          "id": "r04",
+          "score": 0.6111111111111112
+        },
+        {
+          "id": "r03",
+          "score": 0.1111111111111111
+        },
+        {
+          "id": "r07",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r06",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r17",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r14",
+          "score": 0
+        },
+        {
+          "id": "r02",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r09",
+          "score": 0
+        },
+        {
+          "id": "r10",
+          "score": 0
+        },
+        {
+          "id": "r08",
+          "score": 0
+        },
+        {
+          "id": "r12",
+          "score": 0
+        },
+        {
+          "id": "r20",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.0506000000000029
+    },
+    {
+      "category": "paraphrase",
+      "query": "刚录入应用能认为它已安装吗",
+      "expected": [
+        "r05"
+      ],
+      "candidates": [
+        {
+          "id": "r05",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "r07",
+          "score": 0.1111111111111111
+        },
+        {
+          "id": "r04",
+          "score": 0.1111111111111111
+        },
+        {
+          "id": "r18",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r11",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r17",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r03",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r20",
+          "score": 0.05555555555555555
+        },
+        {
+          "id": "r16",
+          "score": 0.05555555555555555
+        }
+      ],
+      "reason": "success",
+      "ms": 1.0467000000000155
+    },
+    {
+      "category": "paraphrase",
+      "query": "做完一个功能怎样留下一份版本",
+      "expected": [
+        "r06"
+      ],
+      "candidates": [
+        {
+          "id": "r06",
+          "score": 0.5
+        },
+        {
+          "id": "r20",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r05",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r08",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r04",
+          "score": 0
+        },
+        {
+          "id": "r02",
+          "score": 0
+        },
+        {
+          "id": "r14",
+          "score": 0
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r18",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r11",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8716000000000008
+    },
+    {
+      "category": "paraphrase",
+      "query": "装包提示没有写权限怎么办",
+      "expected": [
+        "r07"
+      ],
+      "candidates": [
+        {
+          "id": "r07",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "r03",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r02",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r16",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r17",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r08",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r20",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "r05",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r01",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r09",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r06",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.7913999999999817
+    },
+    {
+      "category": "paraphrase",
+      "query": "助手返回的结构坏了可以猜着修吗",
+      "expected": [
+        "r08"
+      ],
+      "candidates": [
+        {
+          "id": "r08",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "r01",
+          "score": 0.11764705882352941
+        },
+        {
+          "id": "r11",
+          "score": 0.11764705882352941
+        },
+        {
+          "id": "r12",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.695399999999978
+    },
+    {
+      "category": "paraphrase",
+      "query": "笔记叫我忽略规则会照做吗",
+      "expected": [
+        "r09"
+      ],
+      "candidates": [
+        {
+          "id": "r09",
+          "score": 0.4
+        },
+        {
+          "id": "r01",
+          "score": 0.13333333333333333
+        },
+        {
+          "id": "r03",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r15",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r04",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r17",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r19",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r13",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r11",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r14",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r12",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r20",
+          "score": 0.06666666666666667
+        }
+      ],
+      "reason": "success",
+      "ms": 1.0113000000000056
+    },
+    {
+      "category": "paraphrase",
+      "query": "我的批注会被机器改没吗",
+      "expected": [
+        "r10"
+      ],
+      "candidates": [
+        {
+          "id": "r10",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "r09",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "r03",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r06",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r15",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r07",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r08",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r04",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8549999999999898
+    },
+    {
+      "category": "paraphrase",
+      "query": "换存放位置失败会写进别处吗",
+      "expected": [
+        "r11"
+      ],
+      "candidates": [
+        {
+          "id": "r11",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "r03",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r18",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r05",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r09",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r15",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r04",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.780699999999996
+    },
+    {
+      "category": "paraphrase",
+      "query": "升级后老文件还能打开吗",
+      "expected": [
+        "r12"
+      ],
+      "candidates": [
+        {
+          "id": "r12",
+          "score": 0.5
+        },
+        {
+          "id": "r11",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "r18",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "r16",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "r07",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r14",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r05",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r03",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r01",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r04",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r15",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r19",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.7774000000000001
+    },
+    {
+      "category": "paraphrase",
+      "query": "画面点太多越用越卡",
+      "expected": [
+        "r13"
+      ],
+      "candidates": [
+        {
+          "id": "r13",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "r16",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r18",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r11",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r15",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r14",
+          "score": 0.08333333333333333
+        }
+      ],
+      "reason": "success",
+      "ms": 0.721100000000007
+    },
+    {
+      "category": "paraphrase",
+      "query": "背面的点如何转到眼前",
+      "expected": [
+        "r14"
+      ],
+      "candidates": [
+        {
+          "id": "r14",
+          "score": 0.7272727272727273
+        },
+        {
+          "id": "r15",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "r13",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r18",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r19",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r11",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r12",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r16",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.688999999999993
+    },
+    {
+      "category": "paraphrase",
+      "query": "连着的圆点怎样稳定下来不再耗电",
+      "expected": [
+        "r15"
+      ],
+      "candidates": [
+        {
+          "id": "r15",
+          "score": 0.4
+        },
+        {
+          "id": "r13",
+          "score": 0.2
+        },
+        {
+          "id": "r14",
+          "score": 0.2
+        },
+        {
+          "id": "r08",
+          "score": 0.05
+        },
+        {
+          "id": "r20",
+          "score": 0.05
+        },
+        {
+          "id": "r06",
+          "score": 0.05
+        },
+        {
+          "id": "r04",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r03",
+          "score": 0
+        },
+        {
+          "id": "r09",
+          "score": 0
+        },
+        {
+          "id": "r10",
+          "score": 0
+        },
+        {
+          "id": "r12",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.9821000000000026
+    },
+    {
+      "category": "paraphrase",
+      "query": "页面要离线可以从网上加载脚本吗",
+      "expected": [
+        "r16"
+      ],
+      "candidates": [
+        {
+          "id": "r16",
+          "score": 0.7619047619047619
+        },
+        {
+          "id": "r18",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r17",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "r20",
+          "score": 0.047619047619047616
+        },
+        {
+          "id": "r03",
+          "score": 0
+        },
+        {
+          "id": "r14",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.944500000000005
+    },
+    {
+      "category": "paraphrase",
+      "query": "查历史会拖慢我发消息吗",
+      "expected": [
+        "r17"
+      ],
+      "candidates": [
+        {
+          "id": "r17",
+          "score": 0.4
+        },
+        {
+          "id": "r15",
+          "score": 0.13333333333333333
+        },
+        {
+          "id": "r19",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r08",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r14",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r07",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r18",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r03",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r09",
+          "score": 0.06666666666666667
+        },
+        {
+          "id": "r13",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.1114000000000033
+    },
+    {
+      "category": "paraphrase",
+      "query": "内置数据库用不了还可以查吗",
+      "expected": [
+        "r18"
+      ],
+      "candidates": [
+        {
+          "id": "r18",
+          "score": 0.8235294117647058
+        },
+        {
+          "id": "r04",
+          "score": 0.17647058823529413
+        },
+        {
+          "id": "r01",
+          "score": 0.17647058823529413
+        },
+        {
+          "id": "r11",
+          "score": 0.17647058823529413
+        },
+        {
+          "id": "r07",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r17",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r13",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r20",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r16",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r12",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r14",
+          "score": 0.058823529411764705
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r03",
+          "score": 0
+        },
+        {
+          "id": "r09",
+          "score": 0
+        },
+        {
+          "id": "r10",
+          "score": 0
+        },
+        {
+          "id": "r08",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 1.2956000000000074
+    },
+    {
+      "category": "paraphrase",
+      "query": "没开语义服务能正常查找吗",
+      "expected": [
+        "r19"
+      ],
+      "candidates": [
+        {
+          "id": "r19",
+          "score": 0.6428571428571429
+        },
+        {
+          "id": "r07",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r18",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r04",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r16",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r05",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r11",
+          "score": 0.07142857142857142
+        },
+        {
+          "id": "r20",
+          "score": 0
+        },
+        {
+          "id": "r17",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8095000000000141
+    },
+    {
+      "category": "paraphrase",
+      "query": "事情做完为什么还留在候选里",
+      "expected": [
+        "r20"
+      ],
+      "candidates": [
+        {
+          "id": "r20",
+          "score": 0.5384615384615384
+        },
+        {
+          "id": "r09",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r04",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r06",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r11",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r14",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r15",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r18",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r16",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r12",
+          "score": 0.07692307692307693
+        },
+        {
+          "id": "r13",
+          "score": 0
+        },
+        {
+          "id": "r01",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.7892999999999972
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "明天午饭吃什么比较好？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r05",
+          "score": 0.1
+        }
+      ],
+      "reason": "success",
+      "ms": 1.115399999999994
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "帮我写一首关于春天的小诗",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r03",
+          "score": 0.06666666666666667
+        }
+      ],
+      "reason": "success",
+      "ms": 0.5076999999999998
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "给新出生的小猫起名字",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r03",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r12",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.48500000000001364
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "如何种植阳台上的薄荷？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r14",
+          "score": 0.1111111111111111
+        }
+      ],
+      "reason": "success",
+      "ms": 0.7231000000000165
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "介绍一下木星的卫星",
+      "expected": [],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.3574999999999875
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "怎样整理出游的行李箱？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r12",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r06",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "r19",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r10",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r08",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r20",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r04",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8837000000000046
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "推荐几个练习素描的方法",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r02",
+          "score": 0
+        },
+        {
+          "id": "r14",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.6202999999999861
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "烤面包的时候为什么会膨胀？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r15",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "r03",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r04",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r09",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r20",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r07",
+          "score": 0
+        },
+        {
+          "id": "r19",
+          "score": 0
+        },
+        {
+          "id": "r18",
+          "score": 0
+        },
+        {
+          "id": "r11",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8693000000000097
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "准备一段生日祝福文案",
+      "expected": [],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.34780000000000655
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "如何学习基础的钢琴和弦？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r04",
+          "score": 0
+        },
+        {
+          "id": "r06",
+          "score": 0
+        },
+        {
+          "id": "r03",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.47460000000000946
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "今天适合去哪里散步？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r10",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "r09",
+          "score": 0
+        },
+        {
+          "id": "r20",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.6299999999999955
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "给我讲一个航海冒险故事",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r02",
+          "score": 0
+        },
+        {
+          "id": "r14",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.7608000000000175
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "城市地铁的运营原理是什么？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r14",
+          "score": 0.18181818181818182
+        }
+      ],
+      "reason": "success",
+      "ms": 0.47059999999999036
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "怎样给多肉植物浇水？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r06",
+          "score": 0.1
+        },
+        {
+          "id": "r08",
+          "score": 0.1
+        },
+        {
+          "id": "r20",
+          "score": 0.1
+        }
+      ],
+      "reason": "success",
+      "ms": 0.6805999999999983
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "解释一下彩虹如何形成",
+      "expected": [],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.532999999999987
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "写一段关于秋天落叶的散文",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r03",
+          "score": 0.08333333333333333
+        },
+        {
+          "id": "r20",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.5350999999999999
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "如何在家制作草莓果酱？",
+      "expected": [],
+      "candidates": [],
+      "reason": "success",
+      "ms": 0.6710999999999956
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "教我几个简单的拉伸动作",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r14",
+          "score": 0
+        },
+        {
+          "id": "r02",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.9312999999999647
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "为什么月亮会出现不同形状？",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r09",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "r15",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "r07",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r04",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r03",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r20",
+          "score": 0.09090909090909091
+        },
+        {
+          "id": "r12",
+          "score": 0
+        },
+        {
+          "id": "r16",
+          "score": 0
+        },
+        {
+          "id": "r05",
+          "score": 0
+        },
+        {
+          "id": "r10",
+          "score": 0
+        },
+        {
+          "id": "r08",
+          "score": 0
+        }
+      ],
+      "reason": "success",
+      "ms": 0.8851000000000226
+    },
+    {
+      "category": "unrelated-negative",
+      "query": "介绍一下陶瓷烧制的过程",
+      "expected": [],
+      "candidates": [
+        {
+          "id": "r12",
+          "score": 0.08333333333333333
+        }
+      ],
+      "reason": "success",
+      "ms": 0.5530999999999722
+    }
+  ]
+}

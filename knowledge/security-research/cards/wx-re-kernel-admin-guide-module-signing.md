@@ -1,0 +1,282 @@
+---
+{
+  "schemaVersion": 2,
+  "id": "wx-re-kernel-admin-guide-module-signing",
+  "title": "Linux 内核：内核模块签名机制",
+  "type": "note",
+  "tags": [
+    "软件底层",
+    "Linux",
+    "admin-guide"
+  ],
+  "project": "软件底层研究",
+  "createdAt": "2026-10-25T00:00:00+08:00",
+  "updatedAt": "2026-10-25T00:00:00+08:00",
+  "sourceSession": "external:research-2026-10-25-002",
+  "sourceTitle": "外部公开技术文献（非宿主会话）",
+  "sourceSeqs": [],
+  "snapshotHash": "dfd1acbeb8e2773faa62cb8915c30d30118817fb21310b219f950cb4363c3600",
+  "generatedHash": "adbbea38e99473ec6a51cddb7dcc3e9e585f1a310974931f0fb8345886c8f7c9",
+  "archived": false,
+  "verification": "自动结构整理；未实测",
+  "l0": "内核模块签名机制在安装过程中对模块进行加密签名，然后在加载模块时检查签名。这 通过禁止加载未签名的模块或使用无效密钥签名的模块来提高内核安全性。模块签名通 过使恶意模块更难加载到内核中来增加安全性。模块签名检查在内核中完成，因此不需 要受信任的用户空间位。 此机制使用 X.509 ITU-T 标准证书对涉及的公钥进行编码。签名本身不以任何工业标准 类型编码。",
+  "l1": "内核模块签名机制在安装过程中对模块进行加密签名，然后在加载模块时检查签名。这 通过禁止加载未签名的模块或使用无效密钥签名的模块来提高内核安全性。模块签名通 过使恶意模块更难加载到内核中来增加安全性。模块签名检查在内核中完成，因此不需 要受信任的用户空间位。 此机制使用 X.509 ITU-T 标准证书对涉及的公钥进行编码。签名本身不以任何工业标准 类型编码。内置机制目前仅支持 RSA、NIST P-384 ECDSA 和 NIST FIPS-204 ML-DSA 公钥签名标准（尽管它是可插拔的并允许使用其他标准）。对于 RSA 和 ECDSA，可以使 用的可能的哈希算法是大小为 256、384 和 512 的 SHA-2 和 SHA-3（算法由签名中的 数据选择）；ML-DSA 会自行进行哈希运算，但允许与 SHA512 哈希算法结合用于签名属 性。 通过进入内核配置的 :menusele",
+  "questions": [
+    "Linux 内核：内核模块签名机制的原理是什么？",
+    "Linux 内核：内核模块签名机制有哪些边界和注意事项？"
+  ],
+  "validFrom": "2026-10-25T00:00:00+08:00",
+  "invalidAt": null,
+  "links": [],
+  "externalSources": [
+    {
+      "id": "kernel-admin-guide-module-signing",
+      "url": "https://docs.kernel.org/translations/zh_CN/admin-guide/module-signing.html",
+      "checkedAt": "2026-10-25",
+      "mode": "许可文献摘编，RST 转 Markdown；保留完整原始文档"
+    }
+  ],
+  "batchId": "research-2026-10-25-002",
+  "contentLicense": "GPL-2.0"
+}
+---
+# Linux 内核：内核模块签名机制
+
+> 本文由 Linux 内核中文文档转换收录。翻译可能滞后，版本相关的结构与行为应对照实际内核；本库没有运行文中命令。
+
+## 内核模块签名机制
+
+
+### 概述
+
+内核模块签名机制在安装过程中对模块进行加密签名，然后在加载模块时检查签名。这
+通过禁止加载未签名的模块或使用无效密钥签名的模块来提高内核安全性。模块签名通
+过使恶意模块更难加载到内核中来增加安全性。模块签名检查在内核中完成，因此不需
+要受信任的用户空间位。
+
+此机制使用 X.509 ITU-T 标准证书对涉及的公钥进行编码。签名本身不以任何工业标准
+类型编码。内置机制目前仅支持 RSA、NIST P-384 ECDSA 和 NIST FIPS-204 ML-DSA
+公钥签名标准（尽管它是可插拔的并允许使用其他标准）。对于 RSA 和 ECDSA，可以使
+用的可能的哈希算法是大小为 256、384 和 512 的 SHA-2 和 SHA-3（算法由签名中的
+数据选择）；ML-DSA 会自行进行哈希运算，但允许与 SHA512 哈希算法结合用于签名属
+性。
+
+### 配置模块签名
+
+通过进入内核配置的 :menuselection:`Enable Loadable Module Support` 菜单并打
+开以下选项来启用模块签名机制:
+
+```
+CONFIG_MODULE_SIG       "Module signature verification"
+```
+
+这有多个可用选项：
+
+> 1. :menuselection:`Require modules to be validly signed`
+>    (CONFIG\_MODULE\_SIG\_FORCE)
+>
+>    这指定了内核应如何处理其密钥未知或未签名的模块。
+>
+>    如果关闭（即"宽松模式"），则允许使用不可用密钥和未签名的模块，但内核将被
+>    标记为受污染，并且相关模块将被标记为受污染，显示字符'E'。
+>
+>    如果打开（即"限制模式"），只有具有有效签名且可由内核拥有的公钥验证的模块
+>    才会被加载。所有其他模块将生成错误。
+>
+>    无论此处的设置如何，如果模块的签名块无法解析，它将被直接拒绝。
+> 2. :menuselection:`Automatically sign all modules`
+>    (CONFIG\_MODULE\_SIG\_ALL)
+>
+>    如果打开此选项，则在构建的 modules\_install 阶段期间将自动签名模块。
+>    如果关闭，则必须使用以下命令手动签名模块:
+>
+>    ```
+>    scripts/sign-file
+>    ```
+> 3. :menuselection:`Which hash algorithm should modules be signed with?`
+>
+>    这提供了安装阶段将用于签名模块的哈希算法选择：
+>
+>    > |  |  |
+>    > | --- | --- |
+>    > | CONFIG\_MODULE\_SIG\_SHA256 | :menuselection:`Sign modules with SHA-256` |
+>    > | CONFIG\_MODULE\_SIG\_SHA384 | :menuselection:`Sign modules with SHA-384` |
+>    > | CONFIG\_MODULE\_SIG\_SHA512 | :menuselection:`Sign modules with SHA-512` |
+>    > | CONFIG\_MODULE\_SIG\_SHA3\_256 | :menuselection:`Sign modules with SHA3-256` |
+>    > | CONFIG\_MODULE\_SIG\_SHA3\_384 | :menuselection:`Sign modules with SHA3-384` |
+>    > | CONFIG\_MODULE\_SIG\_SHA3\_512 | :menuselection:`Sign modules with SHA3-512` |
+>
+>    此处选择的算法也将被构建到内核中（而不是作为模块），以便使用该算法签名的
+>    模块可以在不导致循环依赖的情况下检查其签名。
+> 4. :menuselection:`File name or PKCS#11 URI of module signing key`
+>    (CONFIG\_MODULE\_SIG\_KEY)
+>
+>    将此选项设置为除默认值 certs/signing\_key.pem 之外的其他值将禁用签名
+>    密钥的自动生成，并允许使用您选择的密钥对内核模块进行签名。提供的字符串应
+>    标识包含私钥及其对应的 PEM 格式 X.509 证书的文件，或者在 OpenSSL
+>    ENGINE\_pkcs11 功能正常的系统上，使用 RFC7512 定义的 PKCS#11 URI。在后一
+>    种情况下，PKCS#11 URI 应引用证书和私钥。
+>
+>    如果包含私钥的 PEM 文件已加密，或者 PKCS#11 令牌需要 PIN，可以通过
+>    KBUILD\_SIGN\_PIN 变量在构建时提供。
+> 5. :menuselection:`Additional X.509 keys for default system keyring`
+>    (CONFIG\_SYSTEM\_TRUSTED\_KEYS)
+>
+>    此选项可设置为包含附加证书的 PEM 编码文件的文件名，这些证书将默认包含在
+>    系统密钥环中。
+
+请注意，启用模块签名会为内核构建过程添加对执行签名工具的 OpenSSL 开发包的依赖。
+
+### 生成签名密钥
+
+生成和检查签名需要加密密钥对。私钥用于生成签名，相应的公钥用于检查签名。私钥
+仅在构建期间需要，之后可以删除或安全存储。公钥被构建到内核中，以便在加载模块
+时可以使用它来检查签名。
+
+在正常情况下，当 CONFIG\_MODULE\_SIG\_KEY 保持默认值时，如果文件中不存在密
+钥对，内核构建将使用 openssl 自动生成新的密钥对:
+
+```
+certs/signing_key.pem
+```
+
+在构建 vmlinux 期间（公钥需要构建到 vmlinux 中）使用参数:
+
+```
+certs/x509.genkey
+```
+
+文件（如果尚不存在也会生成）。
+
+可以在 RSA（MODULE\_SIG\_KEY\_TYPE\_RSA）、
+ECDSA（MODULE\_SIG\_KEY\_TYPE\_ECDSA）和
+ML-DSA（MODULE\_SIG\_KEY\_TYPE\_MLDSA\_\*）之间选择生成 RSA 4k、NIST P-384
+密钥对或 ML-DSA 44、65 或 87 密钥对。
+
+强烈建议您提供自己的 x509.genkey 文件。
+
+最值得注意的是，在 x509.genkey 文件中，req\_distinguished\_name 部分应从默认值
+更改:
+
+```
+[ req_distinguished_name ]
+#O = Unspecified company
+CN = Build time autogenerated kernel key
+#emailAddress = unspecified.user@unspecified.company
+```
+
+生成的 RSA 密钥大小也可以通过以下方式设置:
+
+```
+[ req ]
+default_bits = 4096
+```
+
+也可以使用位于 Linux 内核源代码树根节点中的 x509.genkey 密钥生成配置文件和
+openssl 命令手动生成公钥/私钥文件。以下是生成公钥/私钥文件的示例:
+
+```
+openssl req -new -nodes -utf8 -sha256 -days 36500 -batch -x509 \
+   -config x509.genkey -outform PEM -out kernel_key.pem \
+   -keyout kernel_key.pem
+```
+
+然后可以将生成的 kernel\_key.pem 文件的完整路径名指定在
+CONFIG\_MODULE\_SIG\_KEY 选项中，并且将使用其中的证书和密钥而不是自动生成的
+密钥对。
+
+### 内核中的公钥
+
+内核包含一个可由 root 查看的公钥环。它们在名为 ".builtin\_trusted\_keys" 的密
+钥环中，可以通过以下方式查看:
+
+```
+[root@deneb ~]# cat /proc/keys
+...
+223c7853 I------     1 perm 1f030000     0     0 keyring   .builtin_trusted_keys: 1
+302d2d52 I------     1 perm 1f010000     0     0 asymmetri Fedora kernel signing key: d69a84e6bce3d216b979e9505b3e3ef9a7118079: X509.RSA a7118079 []
+```
+
+除了专门为模块签名生成的公钥外，还可以在 CONFIG\_SYSTEM\_TRUSTED\_KEYS 配置
+选项引用的 PEM 编码文件中提供其他受信任的证书。
+
+此外，架构代码可以从硬件存储中获取公钥并将其添加（例如从 UEFI 密钥数据库）。
+
+最后，可以通过以下方式添加其他公钥:
+
+```
+keyctl padd asymmetric "" [.builtin_trusted_keys-ID] <[key-file]
+```
+
+例如:
+
+```
+keyctl padd asymmetric "" 0x223c7853 <my_public_key.x509
+```
+
+但是，请注意，内核只允许将由已驻留在 .builtin\_trusted\_keys 中的密钥有效
+签名的密钥添加到 .builtin\_trusted\_keys。
+
+### 模块手动签名
+
+要手动对模块进行签名，请使用 Linux 内核源代码树中可用的 scripts/sign-file 工
+具。该脚本需要 4 个参数：
+
+> 1. 哈希算法（例如，sha256）
+> 2. 私钥文件名或 PKCS#11 URI
+> 3. 公钥文件名
+> 4. 要签名的内核模块
+
+以下是签名内核模块的示例:
+
+```
+scripts/sign-file sha512 kernel-signkey.priv \
+        kernel-signkey.x509 module.ko
+```
+
+使用的哈希算法不必与配置的算法匹配，但如果不同，应确保哈希算法要么内置在内核
+中，要么可以在不需要自身的情况下加载。
+
+如果私钥需要密码或 PIN，可以在 $KBUILD\_SIGN\_PIN 环境变量中提供。
+
+### 已签名模块和剥离
+
+已签名模块在末尾简单地附加了数字签名。模块文件末尾的字符串
+~Module signature appended~. 确认签名存在，但不能确认签名有效！
+
+已签名模块是脆弱的，因为签名在定义的ELF容器之外。因此，一旦计算并附加签名，就
+不得剥离它们。请注意，整个模块都是签名的有效载荷，包括签名时存在的任何和所有
+调试信息。
+
+### 加载已签名模块
+
+模块通过 insmod、modprobe、 init\_module() 或 finit\_module() 加载，
+与未签名模块完全一样，因为在用户空间中不进行任何处理。
+所有签名检查都在内核内完成。
+
+### 无效签名和未签名模块
+
+如果启用了 CONFIG\_MODULE\_SIG\_FORCE 或在内核启动命令提供了
+module.sig\_enforce=1，内核将仅加载具有有效签名且具有公钥的模块。否则，它还将
+加载未签名的模块。任何具有不匹配签名的模块将不被允许加载。
+
+任何具有不可解析签名的模块将被拒绝。
+
+### 管理/保护私钥
+
+由于私钥用于签名模块，病毒和恶意软件可以使用私钥签名模块并危害操作系统。私钥
+必须被销毁或移动到安全位置，而不是保存在内核源代码树的根节点中。
+
+如果使用相同的私钥为多个内核配置签名模块，必须确保模块版本信息足以防止将模块
+加载到不同的内核中。要么设置 CONFIG\_MODVERSIONS=y，要么通过更改
+EXTRAVERSION 或 CONFIG\_LOCALVERSION 确保每个配置具有不同的内核发布字
+符串。
+
+## 来源、版本与核验
+
+- 来源：[内核模块签名机制](https://docs.kernel.org/translations/zh_CN/admin-guide/module-signing.html)
+- 作者/维护者：Linux kernel 文档作者及中文翻译者（完整署名见正文与原始 RST）
+- 获取日期：2026-10-25。docs.kernel.org snapshot retrieved 2026-10-25; not pinned to a Git commit
+- 收录方式：许可文献摘编，RST 转 Markdown；保留完整原始文档。自动结构整理；未实测。
+- 许可：GPL-2.0。原始署名及相关许可保留在本批 sources 附件中。
+- 原始文档随库保存：`sources/research-2026-10-25-002/kernel-originals/admin-guide/module-signing.rst`。

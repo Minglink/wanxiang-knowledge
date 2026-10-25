@@ -1,0 +1,3 @@
+Copyright © 2006–2026, The MITRE Corporation. CWE, CWSS, CWRAF and the CWE logo are trademarks of The MITRE Corporation.
+CWE content is used under the CWE Terms of Use, not the plugin MIT license.
+Chinese reference source: https://cwe.org.cn/ ; its Terms of Use: https://cwe.org.cn/about/termsofuse.html

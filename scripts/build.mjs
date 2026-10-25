@@ -7,4 +7,6 @@ await build({entryPoints:['src/client.tsx'],outfile:'lib/client.js',bundle:true,
 await build({entryPoints:['src/panel.ts'],outfile:'lib/panel.js',bundle:true,platform:'browser',format:'iife',target:'es2022'});
 for(const file of ['panel.html','style.css']) await copyFile(`src/${file}`,`lib/${file}`);
 await copyFile('node_modules/sql.js/dist/sql-wasm.wasm','lib/sql-wasm.wasm');
+await copyFile('src/security-worker.py','lib/security-worker.py');
+await copyFile('src/security-extra-worker.py','lib/security-extra-worker.py');
 console.log('Plugin built.');

@@ -1,15 +1,20 @@
 import { randomUUID } from 'node:crypto';
 import { redacted } from './knowledge-prompts.js';
 
-export function wanxiangCommand(tools: () => any) {
+export function wanxiangCommand(tools: () => any,study?: (sessionId:string)=>Promise<{id:string}>) {
   return {
     definitionId: 'wanxiang:knowledge-query',
     name: 'wanxiang',
-    description: '使用万象知识库查资料，帮助解决当前问题',
-    input: { hint: '问题（留空则处理当前会话的问题）' },
+    description: '查知识；输入 study 自动整理当前会话文件夹并存入知识库',
+    input: { hint: '问题 / study（学习当前会话文件夹）' },
     recordInput: false,
     handler: (invocation: any) => {
       invocation.signal.throwIfAborted();
+      if(/^study\s*$/i.test(String(invocation.rawInput||'').trim())){
+        const id=invocation.agent?.session?.id;
+        if(!study||!id)return {kind:'error',text:'当前会话无法启动文件夹学习，请在文件夹会话中使用。'};
+        return study(id).then(job=>({kind:'success',text:'已开始整理当前会话文件夹，完成后自动更新知识检索和图谱。任务 '+job.id+'，可在万象知识库的导入记录中查看进度、取消或继续。'})).catch((e:any)=>({kind:'error',text:redacted(String(e.message||e))}));
+      }
       if (typeof invocation.agent?.followup !== 'function') {
         return { kind: 'error', text: '当前宿主不支持将知识库请求交给会话 AI。' };
       }
@@ -32,10 +37,15 @@ export function wanxiangCommand(tools: () => any) {
   };
 }
 
-export function registerWanxiangCommand(ctx: any) {
+export function registerWanxiangCommand(ctx: any,study?: (sessionId:string)=>Promise<{id:string}>) {
   ctx.inject(['commands'], (child: any) => child.effect(() => {
     if (typeof child.commands?.register !== 'function') return;
-    try { return child.commands.register(wanxiangCommand(() => ctx.get?.('tools') || ctx.tools)); }
+    try {
+      const command=wanxiangCommand(() => ctx.get?.('tools') || ctx.tools,study);
+      const dispose=child.commands.register(command);
+      const alias=child.commands.register({...command,definitionId:'wanxiang:folder-study',name:'wanxiang-study',description:'学习当前会话文件夹，整理入库并更新图谱（同 /wanxiang study）',input:undefined,handler:(invocation:any)=>command.handler({...invocation,rawInput:'study'})});
+      return ()=>{alias?.();dispose?.();};
+    }
     catch { ctx.logger?.warn('万象知识库 /wanxiang 命令注册失败，知识工具仍可使用。'); }
   }));
 }

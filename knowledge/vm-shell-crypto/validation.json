@@ -1,0 +1,198 @@
+{
+  "checkedAt": "2026-10-25",
+  "before": 608,
+  "newEntries": 574,
+  "total": 1182,
+  "originalChineseNotes": 54,
+  "licensedEnglishDocuments": 520,
+  "counts": {
+    "逆向工程": 20,
+    "软件底层研究": 267,
+    "漏洞研究": 300,
+    "逆向与漏洞研究": 21,
+    "密码算法与实现": 320,
+    "编译器与漏洞研究": 140,
+    "VM与动态翻译": 60,
+    "VM与去虚拟化": 20,
+    "壳与装载研究": 12,
+    "密码算法机制": 22
+  },
+  "metadataAndHashes": "pass",
+  "exactIdTitleBodyDedup": "pass",
+  "originalDocumentDedup": "pass",
+  "relationships": "pass",
+  "idempotentImport": "pass",
+  "manualEditPreservation": "pass",
+  "searchChecks": [
+    {
+      "query": "RVA",
+      "expected": "wx-re-pe-address",
+      "total": 78
+    },
+    {
+      "query": "CWE-416",
+      "expected": "wx-re-cwe-416",
+      "total": 300
+    },
+    {
+      "query": "引用计数",
+      "expected": "wx-re-kernel-core-api-kref",
+      "total": 282
+    },
+    {
+      "query": "Handler融合",
+      "expected": "wx-re-focus-vm-superoperators",
+      "total": 7
+    },
+    {
+      "query": "VPC",
+      "expected": "wx-re-focus-vm-state-model",
+      "total": 5
+    },
+    {
+      "query": "寄存器轮转",
+      "expected": "wx-re-focus-vm-context-rotation",
+      "total": 374
+    },
+    {
+      "query": "不透明谓词",
+      "expected": "wx-re-focus-vm-opaque-predicate",
+      "total": 11
+    },
+    {
+      "query": "undef",
+      "expected": "wx-re-focus-vm-llvm-poison",
+      "total": 81
+    },
+    {
+      "query": "Overlay",
+      "expected": "wx-re-focus-shell-upx-overlay",
+      "total": 6
+    },
+    {
+      "query": "Themida",
+      "expected": "wx-re-focus-shell-themida-scope",
+      "total": 1
+    },
+    {
+      "query": "Code Virtualizer",
+      "expected": "wx-re-focus-shell-codevirtualizer",
+      "total": 90
+    },
+    {
+      "query": "WinLicense",
+      "expected": "wx-re-focus-shell-winlicense-layers",
+      "total": 1
+    },
+    {
+      "query": "ConfuserEx",
+      "expected": "wx-re-focus-shell-confuser-features",
+      "total": 1
+    },
+    {
+      "query": "InMemoryDexClassLoader",
+      "expected": "wx-re-focus-shell-android-inmemory",
+      "total": 1
+    },
+    {
+      "query": "XTEA",
+      "expected": "wx-re-focus-crypto-xtea-diff",
+      "total": 2
+    },
+    {
+      "query": "XXTEA",
+      "expected": "wx-re-focus-crypto-xxtea-length",
+      "total": 1
+    },
+    {
+      "query": "GCM",
+      "expected": "wx-re-focus-crypto-gcm-auth",
+      "total": 13
+    },
+    {
+      "query": "HKDF",
+      "expected": "wx-re-focus-crypto-hkdf-context",
+      "total": 14
+    },
+    {
+      "query": "Argon2id",
+      "expected": "wx-re-focus-crypto-argon2-memory",
+      "total": 2
+    },
+    {
+      "query": "X25519",
+      "expected": "wx-re-focus-crypto-x25519-kdf",
+      "total": 20
+    },
+    {
+      "query": "Ed25519ph",
+      "expected": "wx-re-focus-crypto-ed25519-variants",
+      "total": 2
+    },
+    {
+      "query": "SM4",
+      "expected": "wx-re-focus-crypto-sm4-provider",
+      "total": 6
+    },
+    {
+      "query": "CRYPTO_memcmp",
+      "expected": "wx-re-focus-crypto-constant-compare",
+      "total": 19
+    },
+    {
+      "query": "EVP_CIPHER-AES",
+      "expected": "wx-re-doc-openssl-doc-man7-evp-cipher-aes",
+      "total": 28
+    },
+    {
+      "query": "AddressSanitizer",
+      "expected": "wx-re-doc-clang-clang-docs-addresssanitizer",
+      "total": 43
+    },
+    {
+      "query": "TCG",
+      "expected": "wx-re-doc-qemu-docs-devel-tcg",
+      "total": 16
+    }
+  ],
+  "unresolvedRstDocuments": [
+    "wx-re-doc-llvm-llvm-docs-codegenerator",
+    "wx-re-doc-llvm-llvm-docs-jitlink",
+    "wx-re-doc-llvm-llvm-docs-langref",
+    "wx-re-doc-llvm-llvm-docs-mcjitdesignandimplementation",
+    "wx-re-doc-llvm-llvm-docs-mirlangref",
+    "wx-re-doc-llvm-llvm-docs-sourceleveldebugging",
+    "wx-re-doc-llvm-llvm-docs-typemetadata",
+    "wx-re-doc-llvm-llvm-docs-vectorizers",
+    "wx-re-doc-llvm-llvm-docs-writinganllvmbackend",
+    "wx-re-doc-llvm-llvm-docs-aarch64sme",
+    "wx-re-doc-llvm-llvm-docs-amdgpudwarfextensionsforheterogeneousdebugging",
+    "wx-re-doc-llvm-llvm-docs-amdgpuusage",
+    "wx-re-doc-llvm-llvm-docs-bigendianneon",
+    "wx-re-doc-llvm-llvm-docs-convergenceanduniformity",
+    "wx-re-doc-llvm-llvm-docs-cycleterminology",
+    "wx-re-doc-llvm-llvm-docs-directxusage",
+    "wx-re-doc-llvm-llvm-docs-extensions",
+    "wx-re-doc-llvm-llvm-docs-fatlto",
+    "wx-re-doc-llvm-llvm-docs-loopterminology",
+    "wx-re-doc-llvm-llvm-docs-misexpect",
+    "wx-re-doc-llvm-llvm-docs-riscvusage",
+    "wx-re-doc-llvm-llvm-docs-spirvusage",
+    "wx-re-doc-llvm-llvm-docs-telemetry",
+    "wx-re-doc-llvm-llvm-docs-vectorizationplan",
+    "wx-re-doc-clang-clang-docs-controlflowintegrity",
+    "wx-re-doc-clang-clang-docs-dataflowsanitizer",
+    "wx-re-doc-clang-clang-docs-driverinternals",
+    "wx-re-doc-clang-clang-docs-languageextensions",
+    "wx-re-doc-clang-clang-docs-pchinternals",
+    "wx-re-doc-clang-clang-docs-undefinedbehaviorsanitizer",
+    "wx-re-doc-clang-clang-docs-amdgpusupport",
+    "wx-re-doc-clang-clang-docs-clangoffloadbundler",
+    "wx-re-doc-clang-clang-docs-clangoffloadpackager",
+    "wx-re-doc-clang-clang-docs-clangrepl",
+    "wx-re-doc-clang-clang-docs-hipsupport",
+    "wx-re-doc-qemu-docs-devel-migration-qatzip-compression",
+    "wx-re-doc-qemu-docs-devel-tcg-ops"
+  ],
+  "scope": "临时隔离库；验证结构、导入及检索；不等于逐篇人工翻译、语义去重证明、代码实测或运行中宿主刷新"
+}

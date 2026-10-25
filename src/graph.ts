@@ -92,6 +92,8 @@ export function buildGraph(entries: Iterable<Entry>, tools: Tool[], options: Gra
   grouped(entry => entry.tags, 'shared_tag', 0.7);
   grouped(entry => [entry.project], 'same_project', 0.2);
   for (const entry of knowledge) {
+    for (const link of entry.links || []) edge(entry.id, link.to, 'link');
+    for (const target of entry.supersedes || []) edge(entry.id, target, 'supersedes');
     const references = new Set(entry._references || entry.body.match(/[\p{L}\p{N}_][\p{L}\p{N}_:.-]{2,}/gu) || []);
     for (const id of references) if (nodeMap.has(id)) edge(entry.id, id, 'link');
   }

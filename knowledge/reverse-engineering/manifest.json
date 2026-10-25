@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "batchId": "reverse-2026-10-25-001",
+  "checkedAt": "2026-10-25",
+  "project": "逆向工程",
+  "kind": "原创归纳知识正文",
+  "sourceCount": 29,
+  "entries": [
+    {
+      "id": "wx-re-pe-address",
+      "title": "PE：文件偏移、RVA、VA 与零填充区域",
+      "file": "cards/wx-re-pe-address.md",
+      "sha256": "60e55a249f4326a6dc58517967c7ca1b55b97ac7038f782b444ec2388c23c7c3",
+      "sourceIds": [
+        "pe"
+      ]
+    },
+    {
+      "id": "wx-re-pe-import",
+      "title": "PE：导入表、IAT 与间接调用的含义",
+      "file": "cards/wx-re-pe-import.md",
+      "sha256": "4408ae4e46397f89f8edd9d5878a3c89683893dfa1af086860e080582beaf82a",
+      "sourceIds": [
+        "pe"
+      ]
+    },
+    {
+      "id": "wx-re-pe-forwarder",
+      "title": "PE：导出转发字符串与函数地址的区别",
+      "file": "cards/wx-re-pe-forwarder.md",
+      "sha256": "399747e5f65b3fdb9cfee9d92f0e5f2313e8cac20780e2fc920668a75de2e1c8",
+      "sourceIds": [
+        "pe"
+      ]
+    },
+    {
+      "id": "wx-re-x64-abi",
+      "title": "Windows x64：参数位置、影子空间和栈偏移",
+      "file": "cards/wx-re-x64-abi.md",
+      "sha256": "ed0dd10645988d4cd3a0a55c2938512d5799b7bab120991c6c4afba381078b55",
+      "sourceIds": [
+        "abi"
+      ]
+    },
+    {
+      "id": "wx-re-decompiler-evidence",
+      "title": "反编译：伪代码、类型推断与真实指令证据",
+      "file": "cards/wx-re-decompiler-evidence.md",
+      "sha256": "bdb81d23b6d2c7e6136d6b9da6e1134da038bda78b5d60e517ac49b836645a9f",
+      "sourceIds": [
+        "ghidra",
+        "jadx"
+      ]
+    },
+    {
+      "id": "wx-re-watchpoints",
+      "title": "动态调试：执行断点与数据观察点如何定位不同问题",
+      "file": "cards/wx-re-watchpoints.md",
+      "sha256": "c5a6fbfaddb193c97f26be3878505fbfa143279eb0bd346d625aa6dca282fa70",
+      "sourceIds": [
+        "gdb-break",
+        "gdb-watch",
+        "x64dbg"
+      ]
+    },
+    {
+      "id": "wx-re-optimized-variables",
+      "title": "优化代码：变量不可见、内联与源码单步跳行",
+      "file": "cards/wx-re-optimized-variables.md",
+      "sha256": "8cdf753b2978a1a92c55dbbbabcd756f2dacfa31e6cd1b89dad0ef8d5a845f78",
+      "sourceIds": [
+        "gdb-var"
+      ]
+    },
+    {
+      "id": "wx-re-elf-views",
+      "title": "ELF：节视图、段视图与动态信息的交叉读取",
+      "file": "cards/wx-re-elf-views.md",
+      "sha256": "7eb86af443acecff86ac1efe0316dd778c8fb9b11a93f53712679ab2b707385d",
+      "sourceIds": [
+        "readelf"
+      ]
+    },
+    {
+      "id": "wx-re-elf-plt-got",
+      "title": "ELF：PLT、GOT 与延迟绑定的调用链",
+      "file": "cards/wx-re-elf-plt-got.md",
+      "sha256": "13ebe8562593fc4aee65d43ba4ca062f62add4bcb4de22ec79d40a94056a9917",
+      "sourceIds": [
+        "plt",
+        "readelf"
+      ]
+    },
+    {
+      "id": "wx-re-android-entry",
+      "title": "Android：多组件入口与界面事件到业务方法的定位",
+      "file": "cards/wx-re-android-entry.md",
+      "sha256": "ab066e6ebecbaf9b2a91fae1d5977767679195d7a960dccc802e8b80ba51d643",
+      "sourceIds": [
+        "activity",
+        "kanxue-apk",
+        "apktool"
+      ]
+    },
+    {
+      "id": "wx-re-dex-indices",
+      "title": "DEX：字符串、类型、方法索引与方法实现的区别",
+      "file": "cards/wx-re-dex-indices.md",
+      "sha256": "5c14b73fb33f63207d29559166fc4c28cfa3a5a50fd9e67beed34ab213c30c74",
+      "sourceIds": [
+        "dex"
+      ]
+    },
+    {
+      "id": "wx-re-jni-registration",
+      "title": "JNI：名称解析、动态注册与 Java 到 Native 的映射",
+      "file": "cards/wx-re-jni-registration.md",
+      "sha256": "2b736e6ba9561c8452fb25e398f5b05b1fa875e877641f1246d6a555da7751d8",
+      "sourceIds": [
+        "jni"
+      ]
+    },
+    {
+      "id": "wx-re-jadx-smali",
+      "title": "Android：反编译异常时用字节码核对分支与调用",
+      "file": "cards/wx-re-jadx-smali.md",
+      "sha256": "9f7250ea488f4e49ffdcfee1e8769b6c6922b994953e613c36a4d102e82cabc2",
+      "sourceIds": [
+        "jadx",
+        "apktool",
+        "dex"
+      ]
+    },
+    {
+      "id": "wx-re-frida-observation",
+      "title": "动态插桩：调用期间的数据生命周期与观测偏差",
+      "file": "cards/wx-re-frida-observation.md",
+      "sha256": "033e4b287fff93d19bea286b22bee3152430a459977d19d4a3bee307750c723a",
+      "sourceIds": [
+        "frida"
+      ]
+    },
+    {
+      "id": "wx-re-strings-context",
+      "title": "二进制字符串：编码、运行时构造与交叉引用证据",
+      "file": "cards/wx-re-strings-context.md",
+      "sha256": "d3d5a7891db0be93602b8d6f209401fba3cc329cde5226fbd1f9fdc66553410c",
+      "sourceIds": [
+        "floss"
+      ]
+    },
+    {
+      "id": "wx-re-capa-evidence",
+      "title": "能力识别：capa 规则命中与真实行为的证据层级",
+      "file": "cards/wx-re-capa-evidence.md",
+      "sha256": "077b0e495e79494505a93bfe5c628cd8992c79d9351e49a84c1b964586c9e5bd",
+      "sourceIds": [
+        "capa"
+      ]
+    },
+    {
+      "id": "wx-re-symbolic-constraints",
+      "title": "符号执行：路径条件、模型假设与结果复核",
+      "file": "cards/wx-re-symbolic-constraints.md",
+      "sha256": "c961285688b9c50bdc61c9ecf8fdab79b07e621f705dd4249b571aadd0139807",
+      "sourceIds": [
+        "symbolic",
+        "angr"
+      ]
+    },
+    {
+      "id": "wx-re-firmware-entropy",
+      "title": "固件：签名、熵与嵌入内容识别的边界",
+      "file": "cards/wx-re-firmware-entropy.md",
+      "sha256": "7ab5c823d39bf7796d662f0df717deaf5971d838d15738416e25f92ae6a3231f",
+      "sourceIds": [
+        "binwalk"
+      ]
+    },
+    {
+      "id": "wx-re-dotnet-layers",
+      "title": ".NET：元数据、IL 与本机代码的分析层次",
+      "file": "cards/wx-re-dotnet-layers.md",
+      "sha256": "e843690d69c66126a72f52fb5e82501435aaff10cc8b23f6b627d8846fc50ad4",
+      "sourceIds": [
+        "ilspy"
+      ]
+    },
+    {
+      "id": "wx-re-lexer-recovery",
+      "title": "编译前端：词法单元与语法结构为何必须分开",
+      "file": "cards/wx-re-lexer-recovery.md",
+      "sha256": "c315487e0d0950d69d655f1095f2065bf3004ac1c03dfa8ddbab069883436273",
+      "sourceIds": [
+        "kanxue-lexer"
+      ]
+    }
+  ]
+}

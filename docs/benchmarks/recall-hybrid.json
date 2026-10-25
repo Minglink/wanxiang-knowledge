@@ -1,0 +1,1366 @@
+{
+  "engine": "SearchService hybrid rules+questions+FTS",
+  "corpus": 20,
+  "queries": 80,
+  "recallAt5": 1,
+  "MRR": 0.98125,
+  "meanMs": 0.33650625000000145,
+  "p50Ms": 0.3457000000000079,
+  "p95Ms": 0.5503999999999962,
+  "groups": {
+    "error-code": {
+      "count": 2,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "intersection": {
+      "count": 9,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "paraphrase": {
+      "count": 40,
+      "recallAt5": 1,
+      "MRR": 0.975
+    },
+    "zh-two-char": {
+      "count": 4,
+      "recallAt5": 1,
+      "MRR": 0.875
+    },
+    "mixed": {
+      "count": 7,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "windows-path": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "command": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "nfkc": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "literal": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "slash": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "case": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "injection-delimiter": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "punctuation": {
+      "count": 3,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "identifier": {
+      "count": 4,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "filename": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "scale": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "csp": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    },
+    "budget": {
+      "count": 1,
+      "recallAt5": 1,
+      "MRR": 1
+    }
+  },
+  "results": [
+    {
+      "query": "ERR_SQLITE_CORRUPT",
+      "expected": [
+        "r01"
+      ],
+      "category": "error-code",
+      "top5": [
+        "r01"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 1.1131000000000029
+    },
+    {
+      "query": "SQLite 重建",
+      "expected": [
+        "r01"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r01",
+        "r18"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.4591000000000065
+    },
+    {
+      "query": "数据库索引坏了如何恢复",
+      "expected": [
+        "r01"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r01",
+        "r11",
+        "r18",
+        "r10",
+        "r20"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.5450000000000017
+    },
+    {
+      "query": "索引",
+      "expected": [
+        "r01",
+        "r11"
+      ],
+      "category": "zh-two-char",
+      "top5": [
+        "r20",
+        "r11",
+        "r01"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 0.5,
+      "latencyMs": 0.2831999999999937
+    },
+    {
+      "query": "Intl.Segmenter 中文",
+      "expected": [
+        "r02"
+      ],
+      "category": "mixed",
+      "top5": [
+        "r02",
+        "r03"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.26069999999999993
+    },
+    {
+      "query": "为什么两个汉字查不到",
+      "expected": [
+        "r02"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r02",
+        "r14",
+        "r08",
+        "r04",
+        "r03"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.4314999999999998
+    },
+    {
+      "query": "C:\\合成项目\\知识 库",
+      "expected": [
+        "r03"
+      ],
+      "category": "windows-path",
+      "top5": [
+        "r03",
+        "r11",
+        "r09",
+        "r20",
+        "r01"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.41330000000000666
+    },
+    {
+      "query": "Windows 非法字符",
+      "expected": [
+        "r03"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r03",
+        "r08",
+        "r04",
+        "r02",
+        "r17"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3457000000000079
+    },
+    {
+      "query": "中文带空格目录怎么拼接",
+      "expected": [
+        "r03"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r03",
+        "r07",
+        "r13",
+        "r05",
+        "r20"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.5005000000000024
+    },
+    {
+      "query": "pwsh --version",
+      "expected": [
+        "r04"
+      ],
+      "category": "command",
+      "top5": [
+        "r04"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.2879999999999967
+    },
+    {
+      "query": "ＰｏｗｅｒＳｈｅｌｌ ７",
+      "expected": [
+        "r04"
+      ],
+      "category": "nfkc",
+      "top5": [
+        "r04"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.22930000000000916
+    },
+    {
+      "query": "电脑自带终端为什么显示不可用",
+      "expected": [
+        "r04"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r04",
+        "r18",
+        "r05",
+        "r13",
+        "r14"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.4912999999999954
+    },
+    {
+      "query": "未检测",
+      "expected": [
+        "r05"
+      ],
+      "category": "literal",
+      "top5": [
+        "r05",
+        "r04",
+        "r19"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.2284000000000077
+    },
+    {
+      "query": "Node.js Python Git",
+      "expected": [
+        "r05"
+      ],
+      "category": "mixed",
+      "top5": [
+        "r05",
+        "r06"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.22329999999999472
+    },
+    {
+      "query": "刚添加工具能标成可用吗",
+      "expected": [
+        "r05"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r05",
+        "r11",
+        "r04",
+        "r02",
+        "r13"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.41610000000000014
+    },
+    {
+      "query": "feat/synthetic",
+      "expected": [
+        "r06"
+      ],
+      "category": "slash",
+      "top5": [
+        "r06"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.2569999999999908
+    },
+    {
+      "query": "Git 分支 提交",
+      "expected": [
+        "r06"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r06",
+        "r05"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.24750000000000227
+    },
+    {
+      "query": "每个功能要如何保存版本",
+      "expected": [
+        "r06"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r06",
+        "r07",
+        "r04",
+        "r05",
+        "r11"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3862000000000023
+    },
+    {
+      "query": "EACCES",
+      "expected": [
+        "r07"
+      ],
+      "category": "error-code",
+      "top5": [
+        "r07"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.15899999999999181
+    },
+    {
+      "query": "NPM CI 权限",
+      "expected": [
+        "r07"
+      ],
+      "category": "case",
+      "top5": [
+        "r07"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.17390000000000327
+    },
+    {
+      "query": "安装包没有写入权限怎么处理",
+      "expected": [
+        "r07"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r07",
+        "r03",
+        "r12",
+        "r05",
+        "r02"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.657599999999988
+    },
+    {
+      "query": "JSON 校验",
+      "expected": [
+        "r08"
+      ],
+      "category": "mixed",
+      "top5": [
+        "r08",
+        "r12",
+        "r11"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.28940000000000055
+    },
+    {
+      "query": "Markdown 围栏 seq",
+      "expected": [
+        "r08"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r08",
+        "r01"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.23120000000000118
+    },
+    {
+      "query": "大模型返回畸形数据应该猜测修复吗",
+      "expected": [
+        "r08"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r08",
+        "r18",
+        "r20",
+        "r01",
+        "r06"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.4936999999999898
+    },
+    {
+      "query": "</wanxiang-recall>",
+      "expected": [
+        "r09"
+      ],
+      "category": "injection-delimiter",
+      "top5": [
+        "r09"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.1705000000000041
+    },
+    {
+      "query": "redacted()",
+      "expected": [
+        "r09"
+      ],
+      "category": "punctuation",
+      "top5": [
+        "r09"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.13880000000000337
+    },
+    {
+      "query": "资料里要求忽略规则会被执行吗",
+      "expected": [
+        "r09"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r09",
+        "r03",
+        "r10",
+        "r04",
+        "r20"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3778000000000077
+    },
+    {
+      "query": "generatedHash",
+      "expected": [
+        "r10"
+      ],
+      "category": "identifier",
+      "top5": [
+        "r10"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.1413000000000011
+    },
+    {
+      "query": "修订 撤销",
+      "expected": [
+        "r10"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r10"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.15970000000001505
+    },
+    {
+      "query": "自动整理会覆盖我改的笔记吗",
+      "expected": [
+        "r10"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r10",
+        "r17",
+        "r12",
+        "r09",
+        "r13"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3499999999999943
+    },
+    {
+      "query": "pending.json",
+      "expected": [
+        "r11"
+      ],
+      "category": "filename",
+      "top5": [
+        "r11"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.1605000000000132
+    },
+    {
+      "query": "切换 解析 旧存储",
+      "expected": [
+        "r11"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r11",
+        "r07",
+        "r12"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.22030000000000882
+    },
+    {
+      "query": "换库报错后原来的资料消失了",
+      "expected": [
+        "r11"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r19",
+        "r11",
+        "r15",
+        "r09",
+        "r10"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 0.5,
+      "latencyMs": 0.39580000000000837
+    },
+    {
+      "query": "回滚",
+      "expected": [
+        "r12"
+      ],
+      "category": "zh-two-char",
+      "top5": [
+        "r12",
+        "r02"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.17379999999999995
+    },
+    {
+      "query": "notes cards 递归",
+      "expected": [
+        "r12"
+      ],
+      "category": "mixed",
+      "top5": [
+        "r12"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.1817000000000064
+    },
+    {
+      "query": "老版本可以读新文件夹吗",
+      "expected": [
+        "r12"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r12",
+        "r03",
+        "r11",
+        "r07",
+        "r05"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3311999999999955
+    },
+    {
+      "query": "3000 簇聚合",
+      "expected": [
+        "r13"
+      ],
+      "category": "scale",
+      "top5": [
+        "r13",
+        "r14",
+        "r15"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.19769999999999754
+    },
+    {
+      "query": "O(n²)",
+      "expected": [
+        "r13"
+      ],
+      "category": "punctuation",
+      "top5": [
+        "r13"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.15520000000000778
+    },
+    {
+      "query": "关系图数据很多变卡怎么办",
+      "expected": [
+        "r13"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r13",
+        "r17",
+        "r16",
+        "r02",
+        "r08"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3428000000000111
+    },
+    {
+      "query": "球体",
+      "expected": [
+        "r14"
+      ],
+      "category": "zh-two-char",
+      "top5": [
+        "r14"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.15469999999999118
+    },
+    {
+      "query": "大圆弧 透视",
+      "expected": [
+        "r14"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r14",
+        "r06",
+        "r15",
+        "r13"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.2213999999999885
+    },
+    {
+      "query": "怎样让圆球上的点转到正面",
+      "expected": [
+        "r14"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r14",
+        "r15",
+        "r13",
+        "r09",
+        "r20"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.49089999999998213
+    },
+    {
+      "query": "alpha",
+      "expected": [
+        "r15"
+      ],
+      "category": "identifier",
+      "top5": [
+        "r15"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.19900000000001228
+    },
+    {
+      "query": "力导向 降温",
+      "expected": [
+        "r15"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r15",
+        "r13",
+        "r19"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.24219999999999686
+    },
+    {
+      "query": "网状节点什么时候停止运动",
+      "expected": [
+        "r15"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r15",
+        "r13",
+        "r14",
+        "r19",
+        "r18"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3628999999999962
+    },
+    {
+      "query": "script-src 'self'",
+      "expected": [
+        "r16"
+      ],
+      "category": "csp",
+      "top5": [
+        "r16"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.16240000000001942
+    },
+    {
+      "query": "blob: Worker",
+      "expected": [
+        "r16"
+      ],
+      "category": "punctuation",
+      "top5": [
+        "r16"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.14799999999999613
+    },
+    {
+      "query": "插件页面可以从外站加载脚本吗",
+      "expected": [
+        "r16"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r16",
+        "r18",
+        "r17",
+        "r03",
+        "r20"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3872000000000071
+    },
+    {
+      "query": "200ms",
+      "expected": [
+        "r17"
+      ],
+      "category": "budget",
+      "top5": [
+        "r17"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.1449999999999818
+    },
+    {
+      "query": "L0 L1 摘要",
+      "expected": [
+        "r17"
+      ],
+      "category": "mixed",
+      "top5": [
+        "r17"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.17500000000001137
+    },
+    {
+      "query": "自动检索太慢会卡住发送吗",
+      "expected": [
+        "r17"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r17",
+        "r13",
+        "r19",
+        "r10",
+        "r02"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3599000000000103
+    },
+    {
+      "query": "node:sqlite",
+      "expected": [
+        "r18"
+      ],
+      "category": "identifier",
+      "top5": [
+        "r18"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.17260000000001696
+    },
+    {
+      "query": "sql.js FTS5",
+      "expected": [
+        "r18"
+      ],
+      "category": "mixed",
+      "top5": [
+        "r18",
+        "r02"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.2004000000000019
+    },
+    {
+      "query": "没有原生数据库时怎么兼容",
+      "expected": [
+        "r18"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r18",
+        "r01",
+        "r03",
+        "r16",
+        "r12"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.38749999999998863
+    },
+    {
+      "query": "embedding Off",
+      "expected": [
+        "r19"
+      ],
+      "category": "mixed",
+      "top5": [
+        "r19"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.16900000000001114
+    },
+    {
+      "query": "VectorIndex",
+      "expected": [
+        "r19"
+      ],
+      "category": "identifier",
+      "top5": [
+        "r19"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.13800000000000523
+    },
+    {
+      "query": "宿主没开向量服务还可以搜索吗",
+      "expected": [
+        "r19"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r19",
+        "r02",
+        "r01",
+        "r12",
+        "r06"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.38640000000000896
+    },
+    {
+      "query": "分页",
+      "expected": [
+        "r20"
+      ],
+      "category": "zh-two-char",
+      "top5": [
+        "r20",
+        "r16",
+        "r12"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.183400000000006
+    },
+    {
+      "query": "快照 待落库",
+      "expected": [
+        "r20"
+      ],
+      "category": "intersection",
+      "top5": [
+        "r20",
+        "r11",
+        "r01",
+        "r03",
+        "r18"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.24729999999999563
+    },
+    {
+      "query": "生成早已完成为什么还排在候选里",
+      "expected": [
+        "r20"
+      ],
+      "category": "paraphrase",
+      "top5": [
+        "r20",
+        "r07",
+        "r14",
+        "r09",
+        "r13"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.40280000000001337
+    },
+    {
+      "query": "坏掉的数据文件怎样找回历史内容",
+      "expected": [
+        "r01"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r20",
+        "r01",
+        "r17",
+        "r13",
+        "r12"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 0.5,
+      "latencyMs": 0.4719000000000051
+    },
+    {
+      "query": "两个汉字查不出东西要怎么补救",
+      "expected": [
+        "r02"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r02",
+        "r14",
+        "r08",
+        "r18",
+        "r12"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.4538000000000011
+    },
+    {
+      "query": "文件夹名里有汉字和空格保存失败",
+      "expected": [
+        "r03"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r03",
+        "r07",
+        "r11",
+        "r12",
+        "r06"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.45709999999999695
+    },
+    {
+      "query": "系统自带终端和新版终端不是同一个吗",
+      "expected": [
+        "r04"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r04",
+        "r18",
+        "r14",
+        "r09",
+        "r06"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.4607000000000028
+    },
+    {
+      "query": "刚录入应用能认为它已安装吗",
+      "expected": [
+        "r05"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r05",
+        "r20",
+        "r07",
+        "r04",
+        "r19"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.5503999999999962
+    },
+    {
+      "query": "做完一个功能怎样留下一份版本",
+      "expected": [
+        "r06"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r06",
+        "r04",
+        "r20",
+        "r16",
+        "r08"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.5523000000000025
+    },
+    {
+      "query": "装包提示没有写权限怎么办",
+      "expected": [
+        "r07"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r07",
+        "r03",
+        "r06",
+        "r16",
+        "r02"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.44079999999999586
+    },
+    {
+      "query": "助手返回的结构坏了可以猜着修吗",
+      "expected": [
+        "r08"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r08",
+        "r01",
+        "r11",
+        "r02",
+        "r12"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3850999999999942
+    },
+    {
+      "query": "笔记叫我忽略规则会照做吗",
+      "expected": [
+        "r09"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r09",
+        "r17",
+        "r10",
+        "r03",
+        "r15"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3982000000000028
+    },
+    {
+      "query": "我的批注会被机器改没吗",
+      "expected": [
+        "r10"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r10",
+        "r09",
+        "r03",
+        "r06",
+        "r16"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.772500000000008
+    },
+    {
+      "query": "换存放位置失败会写进别处吗",
+      "expected": [
+        "r11"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r11",
+        "r18",
+        "r05",
+        "r03",
+        "r07"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.46170000000000755
+    },
+    {
+      "query": "升级后老文件还能打开吗",
+      "expected": [
+        "r12"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r12",
+        "r11",
+        "r16",
+        "r18",
+        "r19"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3667999999999836
+    },
+    {
+      "query": "画面点太多越用越卡",
+      "expected": [
+        "r13"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r13",
+        "r16",
+        "r14",
+        "r15",
+        "r02"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3048000000000002
+    },
+    {
+      "query": "背面的点如何转到眼前",
+      "expected": [
+        "r14"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r14",
+        "r15",
+        "r16",
+        "r09",
+        "r13"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3130999999999915
+    },
+    {
+      "query": "连着的圆点怎样稳定下来不再耗电",
+      "expected": [
+        "r15"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r15",
+        "r13",
+        "r14",
+        "r16",
+        "r01"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.45300000000000296
+    },
+    {
+      "query": "页面要离线可以从网上加载脚本吗",
+      "expected": [
+        "r16"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r16",
+        "r18",
+        "r17",
+        "r13",
+        "r03"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.42150000000000887
+    },
+    {
+      "query": "查历史会拖慢我发消息吗",
+      "expected": [
+        "r17"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r17",
+        "r15",
+        "r13",
+        "r14",
+        "r19"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.3894999999999982
+    },
+    {
+      "query": "内置数据库用不了还可以查吗",
+      "expected": [
+        "r18"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r18",
+        "r01",
+        "r04",
+        "r05",
+        "r11"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.5015999999999963
+    },
+    {
+      "query": "没开语义服务能正常查找吗",
+      "expected": [
+        "r19"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r19",
+        "r07",
+        "r20",
+        "r18",
+        "r09"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.37520000000000664
+    },
+    {
+      "query": "事情做完为什么还留在候选里",
+      "expected": [
+        "r20"
+      ],
+      "category": "paraphrase",
+      "variant": "different-vocabulary",
+      "top5": [
+        "r20",
+        "r04",
+        "r14",
+        "r07",
+        "r09"
+      ],
+      "recallAt5": 1,
+      "reciprocalRank": 1,
+      "latencyMs": 0.433400000000006
+    }
+  ],
+  "definitions": {
+    "recallAt5": "macro mean of relevant IDs in top5 / all expected IDs",
+    "MRR": "first relevant rank within actual returned results (up to 200); missing=0",
+    "timing": "per query only, excludes corpus/file creation; tiny synthetic corpus, not a scale benchmark"
+  }
+}

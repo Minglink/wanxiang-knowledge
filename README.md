@@ -1,73 +1,223 @@
-# 万象知识库
+<p align="center">
+  <img src="docs/images/cover.png" width="100%" alt="万象知识库 — DeepSeek Harness 社区插件">
+</p>
 
-DeepSeek Harness 本地知识库插件。已针对 Windows 上的 `0.2.1-alpha.1` 运行时开发；其他版本需要兼容测试。
+<h1 align="center">万象知识库</h1>
 
-## 使用
+<p align="center"><strong>把 DeepSeek Harness 的会话、项目资料和实践经验，变成可以再次调用的本地知识。</strong></p>
 
-安装后从宿主侧栏打开「万象知识库」，或点击右下角「会话落库」。选择当前或历史会话，点击「生成到本地」。AI 整理使用宿主已配置的模型；「设置」可切换为无需模型的「原文导出」。
+<p align="center">
+  <a href="https://github.com/Minglink/wanxiang-knowledge/releases"><img src="https://img.shields.io/badge/version-0.2.0--alpha.8-4D6BFE" alt="0.2.0-alpha.8"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/code_license-MIT-4D6BFE" alt="Code license MIT"></a>
+  <img src="https://img.shields.io/badge/host-DeepSeek_Harness-4D6BFE" alt="DeepSeek Harness">
+  <img src="https://img.shields.io/badge/storage-local_Markdown_%2B_SQLite-008766" alt="Local Markdown and SQLite">
+</p>
 
-生成结果保存为本地 Markdown，带来源会话 ID、消息序号和生成方式；支持中文搜索、阅读编辑、复制引用、归档恢复及索引重建。相同快照重复生成不会重复发布；新增消息会生成独立的增量记录，保留旧笔记和手工修改。
+<p align="center">
+  <a href="#快速安装">安装</a> · <a href="#在-harness-中使用">使用</a> · <a href="#记忆检索">记忆检索</a> · <a href="#性能实测">性能</a> · <a href="#架构与数据">架构</a> · <a href="docs/测试报告.md">测试报告</a>
+</p>
 
-工具库支持登记 CLI、本地应用、MCP、脚本和链接，关联知识 ID。Node.js、Python、Git、PowerShell 的检测器仅在系统 PATH 中执行固定版本查询；登记的路径不会被当作命令执行。未检测条目不会显示为可用。
+万象知识库是为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 开发的社区插件。它在 Harness 内提供会话落库、本地检索、可选自动召回、知识图谱、工具目录和文件夹学习：当前 AI 可以通过 `/wanxiang` 查询已有知识，也可以按需读取摘要、正文和项目时间线。
 
-## 安装
+当前版本为 **0.2.0-alpha.8 预览版**，主要验证环境是 Windows + Harness Desktop `0.2.1-alpha.1`。插件代码采用 MIT 许可证；可选知识内容包保留各来源的署名和许可。本项目由社区维护。
 
-仓库附带 [0.2.0-alpha.2 插件安装包](https://github.com/Minglink/wanxiang-knowledge/raw/refs/heads/main/artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.2.tgz)，可下载后通过宿主的本地插件安装入口加载。源码验证与实机测试范围见 [测试报告](https://github.com/Minglink/wanxiang-knowledge/blob/main/docs/测试报告.md)。
+## 在 Harness 中使用
 
-使用宿主支持的本地插件包安装入口选择 `dsh-wanxiang-knowledge-0.2.0-alpha.2.tgz`。开发机也可在项目目录运行：
+![万象知识库在 DeepSeek Harness 中的工作台](docs/images/harness-overview.png)
+
+截图展示的是已导入知识和配置了工具环境的实际工作台；条目数、关系数和可用工具数随本地数据变化，安装插件不会自动获得截图中的全部工具。
+
+| 你要做的事 | 万象如何完成 |
+| --- | --- |
+| 留下这次讨论的经验 | 选中会话，一键生成笔记、方法、踩坑和项目卡片；记录来源，重复内容跳过 |
+| 让当前 AI 使用以前的知识 | 输入 `/wanxiang 问题`，保持当前会话模型和权限，由 AI 查询知识后回答 |
+| 学习项目资料 | 在绑定文件夹的会话发送 `/wanxiang study`，或从菜单选择 `/wanxiang-study` |
+| 导入已有笔记 | 拖入或选择 Markdown、UTF-8 文本/源代码、文件夹、ZIP 或万象内容包 |
+| 找到知识之间的关系 | 在球体/网络图谱中筛选、旋转、定位节点，双向跳转到正文 |
+| 管理常用工具 | 按类别登记工具、查看环境检测状态、关联使用方法；宿主工具能力另行发现 |
+
+### 当前会话查询
+
+```text
+/wanxiang 如何排查这个错误？
+```
+
+命令把查询交给当前 AI，通过插件提供的知识工具获取资料。省略问题时可结合当前会话问题查询，不额外切换模型。
+
+![通过 wanxiang 命令调用知识库](docs/images/query-command.png)
+
+### 文件夹学习与导入
+
+```text
+/wanxiang study
+# 斜杠菜单也可选择 /wanxiang-study
+```
+
+学习当前会话绑定目录中的支持文档与源代码，使用设置里选择的整理模型，保留文件来源，完成后更新检索和图谱。网络或模型失败可以继续，已完成文件的整理缓存会复用。普通文件导入直接保存内容，不调用模型。
+
+![文件夹学习命令](docs/images/study-command.png)
+
+<details>
+<summary>查看导入面板与支持范围</summary>
+
+![导入知识库](docs/images/import-knowledge.png)
+
+- 支持 Markdown、UTF-8 文本与声明的源代码/配置扩展名、文件夹和 ZIP。
+- 支持相对引用与 Obsidian `[[双向链接]]`；原生内容包校验清单及 SHA-256。
+- 相同内容跳过，同 ID 不同内容保留两份并映射引用，保留手工修改。
+- 单批最多 2000 文件、64 MiB；单文档/附件最多 2 MiB。不支持加密 ZIP、分卷和 ZIP64。
+- PDF、Word 和图片目前作为附件保留，不提取 PDF/Word 正文，也不提供 OCR。
+
+</details>
+
+### 会话落库
+
+回合结束后登记到「待落库」，点击「生成到本地」才开始整理。可选 AI 整理或无需模型的原文导出；会话新增消息生成独立增量记录，不覆盖旧笔记。AI 整理模型可跟随来源会话，也可在设置里明确选择。
+
+![把会话经验整理到本地](docs/images/session-archive.png)
+
+## 记忆检索
+
+### 中文召回与渐进读取
+
+检索以本地 `node:sqlite + FTS5` 为主，结合中文预分词、两字词、条目问法 `questions[]` 与本地别名表，补强中英混合、错误码和自然语言问法。没有嵌入模型依赖，当前向量检索为 **Off**。
+
+| 模式或层级 | 适用场景 |
+| --- | --- |
+| `exact` 精确检索 | 路径、错误码、卡片 ID 和原文片段 |
+| `hybrid` 混合检索 | 精确候选与 FTS 结果融合，利用标题、摘要和问法排序 |
+| `deep` 深度检索 | 扩展到正文，显示正文命中片段 |
+| `L0 → L1 → L2` | 先读短摘要，再读概览，最后按需读取正文，控制上下文体积 |
+
+模型工具包括 `knowledge_search`、`knowledge_read`、`knowledge_timeline` 和 `tool_catalog_search`。搜索默认返回 L0，正文读取有长度上限；条目附稳定 ID、来源、更新时间和有效状态，便于核对和追溯。
+
+### 可选自动召回
+
+自动召回提供 **关闭 / 仅提示 / 自动注入** 三档。自动注入必须先确认知识摘要会发送给宿主模型；未确认时不开始注入。
+
+检索在可终止的独立 SQL 子进程中运行。单槽预算 150ms、搜索总预算 190ms、缓存外层预算 200ms；同步提示词 section **只读取已就绪缓存**，不等待检索、不读取正文、不调用模型。未就绪或超时就跳过该步，优先保证会话继续。日志支持查看引用、反馈有用/无用，以及屏蔽条目或项目。
+
+**当前自动注入仍属实验能力。** 检索页合成评测与自动注入策略是不同口径：开发阈值 `0.65` 在固定合成策略集上的漏召率为 **76.25%**，真实历史留出评测与正式阈值尚未完成，不能用检索页 Recall@5 替代自动注入质量。
+
+<details>
+<summary>查看模型与召回设置</summary>
+
+![整理模型与自动召回设置](docs/images/settings-recall.png)
+
+文件、索引和规则检索保存在本机。AI 整理、文件夹学习、元数据补全和经确认的自动注入会按所选功能将相关文本或摘要发给 Harness 配置的模型；智能查询改写是独立可选项，默认关闭。
+
+</details>
+
+## 知识图谱与活动
+
+球体与网络两种布局展示知识关系；支持类型图例、标题/标签筛选、旋转、拖拽、重置和导出 PNG。知识详情与图谱可以双向定位，大规模输入会按阈值聚合。
+
+蓝色知识节点在发生已记录的读取、落库或实际注入时短暂变为柠檬黄。**活动表示知识被访问，不表示模型已经采纳结论。** 工具目录与知识图谱分开呈现。
+
+![知识使用活动与图谱](docs/images/knowledge-activity.png)
+
+## 性能实测
+
+性能报告同时给出范围和代价：下面是本机合成数据测量，不是所有资料、机器或模型的性能承诺。复现命令、原始 JSON 与局限见 [性能与架构说明](docs/performance.md)。
+
+| 实测项目 | 结果 | 测量范围 |
+| --- | --- | --- |
+| 中文混合检索合成评测 | 80 个查询，Recall@5 **100%**，MRR **0.98125** | 20 条固定合成知识，非真实历史留出集 |
+| 10 万条原生 FTS 查询 | p50 **0.75ms** / p95 **85.20ms** | 原生磁盘索引，含宽泛词；不含模型和完整服务 |
+| 10 万条隔离自动召回 | p95 **91.27ms**，40/40 未超时 | RecallSearch + IPC + 规则/置信度，含冷启动 |
+| 10 万条驻留 Map | 堆内存 **716.90 → 181.02 MiB**，约降低 **74.7%** | 全正文与仅元数据两种驻留方式；非应用总内存 |
+| 百万条压力测试 | FTS p95 **844.68ms**；隔离召回 **20/40 超时** | 用于暴露宽泛检索和预算限制，不宣称百万规模无损召回 |
+| 当前代码验证 | 构建、类型检查、**80/80 测试通过** | 本机验证，不代表所有宿主版本均兼容 |
+
+自动召回的截止预算用于限制开销，超时会放弃注入，不能把「预算 200ms」理解为任何规模都能成功检索。百万规模、宽泛词与冷启动的成本会在性能说明中一并展示。
+
+## 架构与数据
+
+```mermaid
+flowchart LR
+    A[DeepSeek Harness 会话与命令] --> B[万象插件服务]
+    C[本地文件与 ZIP] --> B
+    B --> D[结构校验 / 去重 / 来源 / 任务恢复]
+    D --> E[Markdown 正文与附件]
+    E --> F[SQLite 元数据 / FTS5 / 关系索引]
+    F --> G[检索 / 时间线 / 知识图谱]
+    F --> H[独立 SQL 子进程]
+    H --> I[带预算的已就绪召回缓存]
+    I --> J[Harness 动态提示词 section]
+    G --> K[模型按需读取 L0 / L1 / L2]
+```
+
+| 架构选择 | 实际收益与边界 |
+| --- | --- |
+| 原生 Harness 插件 | 接入会话、命令、工具与提示词扩展点，在宿主内完成查询和沉淀 |
+| Markdown 是正文来源 | 可以直接阅读、编辑与备份；索引可删除重建，知识不锁在数据库内 |
+| 原生 SQLite + FTS5 | 本地持久检索；能力缺失自动降级到 sql.js，并提示规模限制 |
+| 正文按需加载 | 常驻 Map 主要保留元数据，减少大正文的 JS 堆占用 |
+| SQL 子进程隔离 | 超时后终止查询进程；代价是冷启动和额外进程内存 |
+| 分片、修订与发布清单 | 笔记按年月、卡片按项目组织；支持异常恢复、冲突拒绝和整理撤销 |
+| 渐进披露与来源标识 | 先摘要再正文，控制送入模型的内容量，并保留可核对的来源 |
+
+新版本维护顶层兼容副本供旧版读取，副本会增加磁盘占用；两侧内容同时修改时拒绝静默覆盖。目录整理与撤销前先预检、备份，不能据此保证任意断电情况下都可恢复。
+
+```text
+知识目录/
+├─ notes/          会话笔记
+├─ cards/          方法、踩坑与项目卡片
+├─ sources/        会话摘录与外部来源
+├─ attachments/    导入附件
+├─ tools/          工具目录与分析记录
+└─ .wanxiang/      索引、任务、修订、召回日志及别名配置
+```
+
+## 工具库与分析扩展
+
+工具库按类别显示登记的工具、环境检测状态和知识关联。绿色表示检测可用，注册状态与环境状态独立显示，不能把「存在接口」当作「环境已安装」。
+
+可选安全分析扩展接入 PE/ELF、反汇编、字符串、已有流量文件、APK/DEX、.NET、YARA 等能力。**这些组件需要额外安装与配置，不随插件安装包捆绑全部工具。** 具体接口、安装方法和运行边界见 [安全分析工具库](docs/security-tools.md)。
+
+![分类工具库](docs/images/tool-library.png)
+
+## 快速安装
+
+### 安装插件包
+
+从 [GitHub Releases](https://github.com/Minglink/wanxiang-knowledge/releases) 下载 `dsh-wanxiang-knowledge-0.2.0-alpha.8.tgz`，在 Harness 的本地插件包安装入口选择该文件。仓库也保留 [同版本安装包](artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.8.tgz)。升级前请等待宿主会话和后台任务结束，并备份知识目录。
+
+普通 Web profile 可使用该版本宿主的插件管理命令：
 
 ```powershell
-npm install
+dsh plugin --profile web add "<插件包绝对路径>"
+```
+
+### 从源码构建
+
+```powershell
+git clone https://github.com/Minglink/wanxiang-knowledge.git
+cd wanxiang-knowledge
+npm ci
 npm run build
 npm run typecheck
 npm test
 npm run pack:plugin
-$env:WANXIANG_HOST_URL='http://127.0.0.1:<当前Harness端口>'
-node scripts/install-desktop.mjs
 ```
 
-安装脚本通过本机桌面版自带的插件管理 CLI 安装。必须提供当前本机 WANXIANG_HOST_URL；先确认全部会话明确处于空闲、无落库任务，完整备份知识目录并逐文件校验哈希，同时备份插件设置及 profile 的 manifest、锁文件和覆盖配置。检查或备份失败会停止安装。默认安装位置为 `%LOCALAPPDATA%/Programs/DeepSeek Harness`，可用环境变量 `WANXIANG_HARNESS_DIR` 指定其他位置。若宿主未热加载新插件，请在正在执行的会话完成后正常退出并重新打开 Harness。
+默认知识目录为用户 Documents 下的「万象知识库」，可在设置中切换。插件设置保存于 `<DSH_HOME>/wanxiang/settings.json`。桌面开发安装脚本还要求设置 `WANXIANG_HOST_URL` 为本机 Harness 地址，以核对会话/任务空闲并完整备份；见 [安装脚本](scripts/install-desktop.mjs)。
 
-普通 Web profile 可以使用该版本宿主的 `dsh plugin --profile web add <插件包路径>`。
+## 可选知识内容包
 
-## 数据
+[knowledge/](knowledge/README.md) 提供 **1182 条知识正文**，包括逆向基础、漏洞机制、系统底层、VM、密码算法，以及固定版本的 OpenSSL、LLVM/Clang、QEMU 技术文献。中文机制归纳与英文文献正文分别标注，来源、哈希和适用许可随内容保留。
 
-默认目录是用户 Documents 下的「万象知识库」，可在设置中填写新的绝对路径。切换目录不会移动或删除旧文件。配置保存于 `<DSH_HOME>/wanxiang/settings.json`。
+内容包不会在安装插件时自动写入你的个人库。可从「导入知识库」选择内容包文件夹，或使用 `scripts/import-reverse-knowledge.mjs --root <知识库绝对路径> --source <内容包绝对路径>`；重复内容跳过，冲突拒绝覆盖。文献收录和结构校验不等于逐篇代码实测。
 
-正文存于 `notes/`、`cards/`；工具登记保存在 `tools/catalog.json`；来源摘录存于 `sources/`；索引、任务和修订历史存于 `.wanxiang/`。Markdown 元数据以 YAML 兼容的 JSON 对象保存。主引擎为 node:sqlite + FTS5，不能使用时自动降级 sql.js 并提示“大规模场景受限”。检索支持精确子串、混合关键词、深度正文三模式；中文预分词与两字词、卡片 questions[] 和本地别名表共同补强自然语言召回，未实现向量检索。智能改写可选，发送查询给宿主模型，800ms超时回退到规则。
+## 当前边界与参与
 
-0.2.0-alpha.2 增加存储与检索：正文按需读取；新笔记按年月、新卡片按项目分片，同时维护顶层兼容副本，供0.1.0读取。旧目录不自动整理。设置提供整理预检、备份及撤销；单侧外部编辑可同步，双方不同修改会停止并提示人工处理。请保留 `.wanxiang/mirrors.json` 及备份。副本会增加磁盘占用。
+- 当前主要验证 Windows + Harness Desktop `0.2.1-alpha.1`，其他平台/宿主版本需进一步测试。
+- 尚无向量检索、OCR、PDF/Word 正文解析、云同步或多用户协作。
+- 自动召回的真实历史质量、正式阈值与生产首步覆盖率仍待评测；百万条完整 Markdown 与应用全链路性能尚未验收。
+- 模型整理的结论需要结合来源核验；分析扩展也不是恶意样本沙箱。
 
-日志页提供摘要与问法补全，每批20条、可暂停续跑，只补元数据并保留修订。启动补全会发送已有知识正文给宿主模型。别名配置保存在 `.wanxiang/aliases.json`，仅在本机使用。
+欢迎通过 [Issues](https://github.com/Minglink/wanxiang-knowledge/issues) 提交可复现问题，或提交改进检索、图谱与兼容性的 PR。请使用脱敏的最小示例，不上传私人会话、凭据或业务样本。
 
-知识文件与检索在本机处理；AI 模式会向宿主模型服务发送选定会话的正文。插件会屏蔽部分常见凭据格式，这不代表能识别所有敏感内容。原文导出不会调用模型。插件不修改或删除 Harness 会话日志，不自动执行知识中的命令。
+## 许可与致谢
 
-## 恢复与维护
-
-- 失败和取消可以从日志重试；发布阶段中断后根据已保存清单恢复。
-- 索引写入失败后重试会先恢复索引，避免再次模型生成。
-- 手工修改前保留修订副本，存在 `.wanxiang/revisions/`。
-- 备份时复制整个知识目录。索引可重建，来源、修订和任务记录应随正文一起备份。
-- 卸载插件可通过宿主插件管理器完成；知识目录默认保留。
-
-## 开发验证
-
-`npm test` 验证文件写入、中文检索、去重、增量、取消重试、恢复、工具检测和真实 HTTP 请求。`npm run dev` 提供独立调试载体，地址为 `http://127.0.0.1:3098/wanxiang`，只使用明确标识的开发测试会话，不读取个人会话或调用模型。它不代替在真实 Harness 中的集成测试。
-
-## 当前范围
-
-自动模式仅登记待落库候选，生成由用户触发。附件二进制、图像 OCR、语义搜索、批量历史迁移、自动主题合并和云同步未包含在 0.1.0 中。长会话按段整理，上限为 100 段；每张知识卡片必须引用输入中存在的消息序号。模型输出通过结构与来源序号校验，结论仍需结合原文核验。
-
-v0.2 调查结论见 `docs/审计清单.md`、`docs/注入点验证.md`、`docs/引擎探针.md` 和 `docs/测试报告.md`。`node scripts/audit-v02.mjs` 用临时合成库审计页面；`node scripts/eval-recall.mjs` 运行80条固定查询的召回评测（先 build）。`scripts/probes/` 默认关闭且不随产品入口加载；宿主探针需用已安装 Electron 的 Node 模式显式启动。0.2.0-alpha.2 提供总览、知识库、工具库三处图谱入口、球体/神经网络布局、关系详情双向跳转与节点定位。画布保持白色，3000输入自动聚合，支持键盘节点列表与减少动态效果。性能数据与实机限制见测试报告。
-
-回滚可使用保留的 `artifacts/dsh-wanxiang-knowledge-0.1.0.tgz` 重新安装，安装前仍需确认空闲并备份。第2期实现 node:sqlite/FTS5、questions[]、分片与兼容副本；自动召回、对账与反思仍待后续期。整理撤销会核对后续编辑，存在变化时拒绝覆盖；同步异常可回滚，跨文件断电恢复未实机验证。
-
-基准：`node scripts/bench.mjs --run`（三档原生FTS，不含Markdown文件或完整SearchService）；`node --expose-gc scripts/bench-memory.mjs` 对比10万条正文与元数据Map；`node scripts/eval-recall.mjs test/fixtures/recall-eval.json --hybrid` 复测关键词和自然语言。固定合成评测不是实际用户查询或在线模型质量承诺。
-
-## 第3期开发状态（尚未发布）
-
-源码已接入自动召回三档、隐私确认、只读缓存section、可强制终止的隔离SQL子进程、召回记录/反馈/屏蔽和渐进披露工具。默认档位为自动注入；首次确认会向宿主模型发送知识摘要前不会开始自动注入。section未就绪就跳过该步，不阻塞请求。智能改写默认关闭，实测provider单次改写已超过200ms预算。
-
-当前安装与交付包仍是alpha.2；第3期未整体验收、未安装上线。真实知识库正在准备，真实历史留出评测和正式阈值尚未完成；代码中的0.65是开发占位，合成策略评测在该值下漏召率76.25%，不可据此宣称效果达标。`node scripts/eval-recall-policy.mjs`仅运行合成正负例；`node scripts/bench-recall.mjs --run`测实际隔离检索耗时并保留超时比例。百万条基准20/40次超时放弃。
-
-仅显式构建的第3期临时探针包用于生产合成会话验证，产品包不导入探针。清理探针和安装新产品前仍必须确认宿主空闲、备份知识目录；用户制作知识库期间不自动重启。
+插件源码采用 [MIT](LICENSE)。`knowledge/` 中第三方文献遵循各条目及随附许可；DeepSeek、DeepSeek Harness 和第三方工具名称归各自权利人所有。封面为 AI 生成的社区项目宣传图，界面配图由项目维护者提供。

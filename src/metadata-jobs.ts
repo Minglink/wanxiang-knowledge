@@ -10,6 +10,7 @@ export class MetadataJobs {
   constructor(private owner: KnowledgeService) {}
   start() {
     if (this.status === 'running') return;
+    if (this.owner.imports?.busy) throw new Error('请等待文件导入完成');
     this.controller = new AbortController();
     this.status = 'running'; this.error = '';
     this.pending = this.run(this.controller.signal).catch(error => { this.status = this.controller?.signal.aborted ? 'paused' : 'failed'; this.error = redacted(String(error.message)); });

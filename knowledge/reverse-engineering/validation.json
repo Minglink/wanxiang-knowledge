@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-10-25",
+  "entries": 20,
+  "metadata": "pass",
+  "import": "pass",
+  "idempotence": "pass",
+  "manualEditPreservation": "pass",
+  "engine": "node:sqlite",
+  "searchChecks": [
+    {
+      "query": "RVA",
+      "expected": "wx-re-pe-address",
+      "total": 4
+    },
+    {
+      "query": "第五个参数",
+      "expected": "wx-re-x64-abi",
+      "total": 10
+    },
+    {
+      "query": "导出转发",
+      "expected": "wx-re-pe-forwarder",
+      "total": 7
+    },
+    {
+      "query": "RegisterNatives",
+      "expected": "wx-re-jni-registration",
+      "total": 1
+    },
+    {
+      "query": "PLT",
+      "expected": "wx-re-elf-plt-got",
+      "total": 1
+    },
+    {
+      "query": "谁修改",
+      "expected": "wx-re-watchpoints",
+      "total": 2
+    },
+    {
+      "query": "optimized out",
+      "expected": "wx-re-optimized-variables",
+      "total": 1
+    },
+    {
+      "query": "高熵",
+      "expected": "wx-re-firmware-entropy",
+      "total": 1
+    }
+  ],
+  "scope": "临时隔离库验证；未声称宿主页面已刷新，也未执行逆向工具或示例"
+}

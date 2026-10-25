@@ -10,7 +10,17 @@ import type { IndexEngine } from './index-engine.js';
 import type { Entry, Tool } from './types.js';
 export const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 export const now=()=>new Date().toISOString();
-export async function atomic(file:string,data:string|Uint8Array) { await fs.mkdir(path.dirname(file),{recursive:true});const tmp=file+'.'+randomUUID()+'.tmp';try{await fs.writeFile(tmp,data);await fs.rename(tmp,file);}finally{await fs.rm(tmp,{force:true}).catch(()=>{});} }
+export async function atomic(file:string,data:string|Uint8Array) {
+ await fs.mkdir(path.dirname(file),{recursive:true});const tmp=file+'.'+randomUUID()+'.tmp';
+ try{
+  await fs.writeFile(tmp,data);
+  for(let attempt=0;;attempt++)try{await fs.rename(tmp,file);break;}catch(error:any){
+   // Windows readers and antivirus can briefly deny replacement. Never unlink the old file.
+   if(!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt>=6)throw error;
+   await new Promise(resolve=>setTimeout(resolve,25*2**attempt));
+  }
+ }finally{await fs.rm(tmp,{force:true}).catch(()=>{});}
+}
 export async function json<T>(file:string,fallback:T):Promise<T>{try{return JSON.parse(await fs.readFile(file,'utf8'));}catch(e:any){if(e.code==='ENOENT')return fallback;throw new Error(`无法读取 ${path.basename(file)}：${e.message}`);}}
 export class Store {
   revision=0;

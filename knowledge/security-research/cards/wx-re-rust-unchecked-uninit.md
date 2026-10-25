@@ -1,0 +1,152 @@
+---
+{
+  "schemaVersion": 2,
+  "id": "wx-re-rust-unchecked-uninit",
+  "title": "Unsafe Rust：未经检查的未初始化的内存",
+  "type": "note",
+  "tags": [
+    "软件底层",
+    "Rust",
+    "内存安全",
+    "Unsafe Rust"
+  ],
+  "project": "软件底层研究",
+  "createdAt": "2026-10-25T00:00:00+08:00",
+  "updatedAt": "2026-10-25T00:00:00+08:00",
+  "sourceSession": "external:research-2026-10-25-002",
+  "sourceTitle": "外部公开技术文献（非宿主会话）",
+  "sourceSeqs": [],
+  "snapshotHash": "11ac5bf6a3094619085a29604b0177ebfe8063014381a3968c2a89ff234c952b",
+  "generatedHash": "3da8aa3e101b51e592e0fbfe777342d03de85359b8a3a24160b090320b044d23",
+  "archived": false,
+  "verification": "文献收录；代码未实测",
+  "l0": "这个规则的一个有趣的例外是与数组一起工作。Safe Rust 不允许你部分初始化一个数组。当你初始化一个数组时，你可以用`let x = [val; N]`将每个值设置为相同的东西，或者你可以用 `let x = [val1, val2, val3]`单独指定每个成员。不幸的是，这是很死板的，特别是当你需要以更多的增量或动态方式初始化你的数组时。 不安全的 ",
+  "l1": "这个规则的一个有趣的例外是与数组一起工作。Safe Rust 不允许你部分初始化一个数组。当你初始化一个数组时，你可以用`let x = [val; N]`将每个值设置为相同的东西，或者你可以用 `let x = [val1, val2, val3]`单独指定每个成员。不幸的是，这是很死板的，特别是当你需要以更多的增量或动态方式初始化你的数组时。 不安全的 Rust 给了我们一个强大的工具来处理这个问题：[`MaybeUninit`]。这个类型可以用来处理还没有完全初始化的内存。 使用`MaybeUninit`，我们可以对一个数组进行逐个元素的初始化，如下所示： 2. 初始化数组。这个问题的微妙之处在于，通常情况下，当我们使用`=`赋值给一个 Rust 类型检查器认为已经初始化的值时（比如`x[i]`），存储在左边的旧值会被丢掉。这将是一场灾难。然而，在这种情况下，左边的类型是`Maybe",
+  "questions": [
+    "Unsafe Rust：未经检查的未初始化的内存的原理是什么？",
+    "Unsafe Rust：未经检查的未初始化的内存有哪些边界和注意事项？"
+  ],
+  "validFrom": "2026-10-25T00:00:00+08:00",
+  "invalidAt": null,
+  "links": [],
+  "externalSources": [
+    {
+      "id": "rust-unchecked-uninit",
+      "url": "https://github.com/rust-lang-cn/nomicon-zh-Hans/blob/e6bf12f4d91d3a2211664f40c4b46fd3271996d6/src/unchecked-uninit.md",
+      "checkedAt": "2026-10-25",
+      "mode": "MIT 许可中文文献收录，保留原始 Markdown"
+    }
+  ],
+  "batchId": "research-2026-10-25-002",
+  "contentLicense": "MIT（上游双许可中选择 MIT）"
+}
+---
+# Unsafe Rust：未经检查的未初始化的内存
+
+> 收录自 Rust 秘典中文译本。原书说明其内容仍有不完整或可能过时之处；本库未编译和验证代码示例。
+
+# 未经检查的未初始化的内存
+
+这个规则的一个有趣的例外是与数组一起工作。Safe Rust 不允许你部分初始化一个数组。当你初始化一个数组时，你可以用`let x = [val; N]`将每个值设置为相同的东西，或者你可以用 `let x = [val1, val2, val3]`单独指定每个成员。不幸的是，这是很死板的，特别是当你需要以更多的增量或动态方式初始化你的数组时。
+
+不安全的 Rust 给了我们一个强大的工具来处理这个问题：[`MaybeUninit`]。这个类型可以用来处理还没有完全初始化的内存。
+
+使用`MaybeUninit`，我们可以对一个数组进行逐个元素的初始化，如下所示：
+
+```rust
+use std::mem::{self, MaybeUninit};
+
+// 数组的大小是硬编码的，可以很方便地修改（改变几个硬编码的常数非常容易）
+// 这表示我们不能用 [a, b, c] 这种方式初始化数组，因为我们必须要和硬编码中的 `SIZE` 保持同步！
+const SIZE: usize = 10;
+
+let x = {
+    // 创建一个未初始化，类型为 `MaybeUninit` 的数组
+    let mut x = [const { MaybeUninit::uninit() }; SIZE];
+
+    // 因为 drop 一个 `MaybeUninit` 什么都不做，
+    // 所以使用直接的裸指针赋值（而非 ptr::write）不会导致原先未初始化的变量被 drop
+    // 不需要在这里考虑异常安全，因为 Box 永远不会 panic
+    for i in 0..SIZE {
+        x[i] = MaybeUninit::new(Box::new(i as u32));
+    }
+
+    // 一切都初始化完毕，将未初始化的类型强制转换为初始化的类型
+    unsafe { mem::transmute::<_, [Box<u32>; SIZE]>(x) }
+};
+
+println!("{x:?}");
+```
+
+这段代码分三步进行：
+
+1. 创建一个`MaybeUninit<T>`的数组。
+
+2. 初始化数组。这个问题的微妙之处在于，通常情况下，当我们使用`=`赋值给一个 Rust 类型检查器认为已经初始化的值时（比如`x[i]`），存储在左边的旧值会被丢掉。这将是一场灾难。然而，在这种情况下，左边的类型是`MaybeUninit<Box<u32>>`，丢弃这个类型什么都不会发生，关于这个`drop`问题的更多讨论，见下文。
+
+3. 最后，我们必须改变我们数组的类型，以去除`MaybeUninit`。在当前稳定的 Rust 中，这需要一个`transmute`。这种转换是合法的，因为在内存中，`MaybeUninit<T>`看起来和`T`一样。
+
+   然而，请注意，在一般情况下，`Container<MaybeUninit<T>>`与`Container<T>`看起来*并不*一样! 假如`Container`是`Option`，而`T`是`bool`，那么`Option<bool>`就利用了`bool`只有两个有效值，但`Option<MaybeUninit<bool>>`不能这样做，因为`bool`不需要被初始化。
+
+   所以，这取决于`Container`是否允许将`MaybeUninit`转化掉。对于数组来说，它是允许的（最终标准库会通过提供适当的方法来达到这一点）。
+
+让我们在中间的循环上多花一点时间，特别是赋值运算符和它与`drop`的交互。比如这样的代码：
+
+<!-- ignore: simplified code -->
+
+```rust,ignore
+*x[i].as_mut_ptr() = Box::new(i as u32); // 错误！
+```
+
+我们实际上会覆盖一个`Box<u32>`，导致在未初始化数据上调用`drop`，这将给你带来很多乐子。
+
+如果由于某种原因我们不能使用`MaybeUninit::new`，正确的选择是使用[`ptr`]模块。特别是，它提供了三个函数，允许我们将字节分配到内存中的某个位置而不丢弃旧值。[`write`]、[`copy`]和[`copy_nonoverlapping`]。
+
+- `ptr::write(ptr, val)`接收一个`val`并将其移动到`ptr`所指向的地址
+- `ptr::copy(src, dest, count)`将`count`个 T 所占用的位从 src 复制到 dest(这等同于 C 的 memmove —— 注意参数顺序是相反的！)
+- `ptr::copy_nonoverlapping(src, dest, count)`做的是`copy`的工作，但是在假设两个内存范围不重叠的情况下，速度更快(这等同于 C 的 memcpy —— 注意参数顺序是相反的！)
+
+自然不用说，这些函数如果被误用，会造成严重的破坏，或者直接导致未定义行为。这些函数*本身*需要的唯一东西是，你想读和写的位置已经被分配并正确对齐。然而，向内存的任意位置写入任意位的方式所带来的问题是无穷无尽的。
+
+值得注意的是，你不需要担心在未实现`Drop`或者不包含`Drop`类型的类型上使用`ptr::write`带来的问题，因为 Rust 知道这个信息，并且不会调用`drop`。这也是我们在上面的例子中所依赖的。
+
+然而，当你处理未初始化的内存时，你需要时刻警惕 Rust 试图在它们完全初始化之前丢弃你创建的这些值。如果它有一个析构器的话，该变量作用域内的每个控制路径必须在结束前初始化该值。*[这包括 panic](https://github.com/rust-lang-cn/nomicon-zh-Hans/blob/e6bf12f4d91d3a2211664f40c4b46fd3271996d6/src/unwinding.html)*。`MaybeUninit`在这方面有一点用，因为它不会隐式地丢弃它的内容——但在 panic 的情况下，这实际上意味着不是对尚未初始化的部分进行双重释放，而是对已经初始化的部分导致了内存泄漏。
+
+注意，为了使用`ptr`方法，你需要首先获得一个你想初始化的数据的*raw pointer*。对未初始化的数据构建一个*引用*是非法的，这意味着你在获得上述原始指针时必须小心：
+
+- 对于一个`T`的数组，你可以使用`base_ptr.add(idx)`，其中`base_ptr: *mut T`来计算数组索引`idx`的地址。这依赖于数组在内存中的布局方式
+- 然而，对于一个结构体，一般来说，我们不知道它是如何布局的，而且我们也不能使用`&mut base_ptr.field`，因为这将创建一个引用。因此，当你使用[`raw 引用`][raw_reference]的时候，你必须非常小心，这将跳过中间层直接创建一个指向该字段的裸指针：
+
+```rust
+use std::{ptr, mem::MaybeUninit};
+struct Demo {
+    field: bool,
+}
+let mut uninit = MaybeUninit::<Demo>::uninit();
+// `&uninit.as_mut().field`将会创建一个指向未初始化的`bool`的指针，而这是 UB 行为。
+let f1_ptr = unsafe { &raw mut (*uninit.as_mut_ptr()).field };
+unsafe { f1_ptr.write(true); }
+let init = unsafe { uninit.assume_init() };
+```
+
+最后一句话：在阅读旧的 Rust 代码时，你可能会无意中发现被废弃的`mem::uninitialized`函数。这个函数曾经是处理栈上未初始化内存的唯一方法，但它被证明不能与语言的其他部分很好地结合在一起。在新的代码中你总是应该使用`MaybeUninit`来代替，并且当你有机会的时候，可以把旧的代码移植过来。
+
+这就是与未初始化内存打交道的方法。基本上没有任何地方希望得到未初始化的内存，所以如果你要传递它，一定要*非常*小心。
+
+[`maybeuninit`]: https://doc.rust-lang.org/core/mem/union.MaybeUninit.html
+[assume_init]: https://doc.rust-lang.org/core/mem/union.MaybeUninit.html#method.assume_init
+[`ptr`]: https://doc.rust-lang.org/core/ptr/index.html
+[raw_reference]: https://doc.rust-lang.org/reference/types/pointer.html#r-type.pointer.raw.constructor
+[`write`]: https://doc.rust-lang.org/core/ptr/fn.write.html
+[`copy`]: https://doc.rust-lang.org/std/ptr/fn.copy.html
+[`copy_nonoverlapping`]: https://doc.rust-lang.org/std/ptr/fn.copy_nonoverlapping.html
+
+
+## 来源、版本与核验
+
+- 来源：[未经检查的未初始化的内存](https://github.com/rust-lang-cn/nomicon-zh-Hans/blob/e6bf12f4d91d3a2211664f40c4b46fd3271996d6/src/unchecked-uninit.md)
+- 作者/维护者：The Rust Project Developers 与 nomicon-zh-Hans 中文贡献者
+- 获取日期：2026-10-25。固定提交 e6bf12f4d91d3a2211664f40c4b46fd3271996d6
+- 收录方式：MIT 许可中文文献收录，保留原始 Markdown。文献收录；代码未实测。
+- 许可：MIT（上游双许可中选择 MIT）。原始署名及相关许可保留在本批 sources 附件中。
+- 原始文档随库保存：`sources/research-2026-10-25-002/rust-originals/unchecked-uninit.md`。

@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-10-25",
+  "entries": 608,
+  "counts": {
+    "逆向工程": 20,
+    "软件底层研究": 267,
+    "漏洞研究": 300,
+    "逆向与漏洞研究": 21
+  },
+  "metadataAndHashes": "pass",
+  "exactIdTitleBodyDedup": "pass",
+  "idempotentImport": "pass",
+  "manualEditPreservation": "pass",
+  "relationships": "pass",
+  "searchChecks": [
+    {
+      "query": "RVA",
+      "expected": "wx-re-pe-address",
+      "total": 29
+    },
+    {
+      "query": "第五个参数",
+      "expected": "wx-re-x64-abi",
+      "total": 199
+    },
+    {
+      "query": "RegisterNatives",
+      "expected": "wx-re-jni-registration",
+      "total": 1
+    },
+    {
+      "query": "PDB",
+      "expected": "wx-re-forum-pdb-rsds-identity",
+      "total": 1
+    },
+    {
+      "query": "NextEntryOffset",
+      "expected": "wx-re-forum-native-process-buffer",
+      "total": 1
+    },
+    {
+      "query": "Session 0",
+      "expected": "wx-re-forum-session-owner-token",
+      "total": 44
+    },
+    {
+      "query": "PID",
+      "expected": "wx-re-forum-process-parent-temporal",
+      "total": 29
+    },
+    {
+      "query": "CWE-415",
+      "expected": "wx-re-cwe-415",
+      "total": 300
+    },
+    {
+      "query": "CWE-416",
+      "expected": "wx-re-cwe-416",
+      "total": 300
+    },
+    {
+      "query": "CWE-190",
+      "expected": "wx-re-cwe-190",
+      "total": 300
+    },
+    {
+      "query": "CWE-362",
+      "expected": "wx-re-cwe-362",
+      "total": 300
+    },
+    {
+      "query": "CWE-787",
+      "expected": "wx-re-cwe-787",
+      "total": 300
+    },
+    {
+      "query": "引用计数",
+      "expected": "wx-re-kernel-core-api-kref",
+      "total": 251
+    },
+    {
+      "query": "Seccomp",
+      "expected": "wx-re-kernel-userspace-api-seccomp-filter",
+      "total": 4
+    }
+  ],
+  "renderLimitations": [],
+  "scope": "临时隔离库；检查结构与检索，不等于逐条文献事实核对、代码实测或宿主页面刷新"
+}

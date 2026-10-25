@@ -1,0 +1,335 @@
+{
+  "size": 1000000,
+  "indexMs": 69772.6177,
+  "attempts": [
+    {
+      "index": 0,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 108.02210000000196
+    },
+    {
+      "index": 1,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 163.10550000000512
+    },
+    {
+      "index": 2,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 80.85940000000119
+    },
+    {
+      "index": 3,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 151.8457999999955
+    },
+    {
+      "index": 4,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 85.72589999999036
+    },
+    {
+      "index": 5,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 163.79739999999583
+    },
+    {
+      "index": 6,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 81.14500000000407
+    },
+    {
+      "index": 7,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 152.4997000000003
+    },
+    {
+      "index": 8,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 79.0673999999999
+    },
+    {
+      "index": 9,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 152.00970000000962
+    },
+    {
+      "index": 10,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 79.04170000000158
+    },
+    {
+      "index": 11,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 153.45679999999993
+    },
+    {
+      "index": 12,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 83.86630000000878
+    },
+    {
+      "index": 13,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 163.9155000000028
+    },
+    {
+      "index": 14,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 78.07719999999972
+    },
+    {
+      "index": 15,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 155.44719999999506
+    },
+    {
+      "index": 16,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 77.21989999999641
+    },
+    {
+      "index": 17,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 156.16839999999502
+    },
+    {
+      "index": 18,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 78.95369999999821
+    },
+    {
+      "index": 19,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 153.00100000000384
+    },
+    {
+      "index": 20,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 85.39929999999003
+    },
+    {
+      "index": 21,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 162.26480000000447
+    },
+    {
+      "index": 22,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 79.80000000000291
+    },
+    {
+      "index": 23,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 152.75530000000435
+    },
+    {
+      "index": 24,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 78.0503999999928
+    },
+    {
+      "index": 25,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 154.9383000000089
+    },
+    {
+      "index": 26,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 79.71360000000277
+    },
+    {
+      "index": 27,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 155.069599999988
+    },
+    {
+      "index": 28,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 77.88499999999476
+    },
+    {
+      "index": 29,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 157.13340000000608
+    },
+    {
+      "index": 30,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 90.62750000000233
+    },
+    {
+      "index": 31,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 159.83550000000105
+    },
+    {
+      "index": 32,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 76.34810000000289
+    },
+    {
+      "index": 33,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 156.37890000001062
+    },
+    {
+      "index": 34,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 78.5167999999976
+    },
+    {
+      "index": 35,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 156.26260000000184
+    },
+    {
+      "index": 36,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 77.58669999999984
+    },
+    {
+      "index": 37,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 155.28369999999995
+    },
+    {
+      "index": 38,
+      "kind": "selective",
+      "readyWithinWindow": false,
+      "status": "success",
+      "count": 1,
+      "ms": 81.11280000000261
+    },
+    {
+      "index": 39,
+      "kind": "broad",
+      "readyWithinWindow": false,
+      "status": "RecallTimeout",
+      "reason": "timeout",
+      "ms": 152.800900000002
+    }
+  ],
+  "p50": 108.02210000000196,
+  "p95": 163.10550000000512,
+  "p99": 163.9155000000028,
+  "max": 163.9155000000028,
+  "success": 20,
+  "timeouts": 20,
+  "readyWithinWindow": 0,
+  "childRssMiB": 46.74609375,
+  "scope": "Actual RecallSearch + IPC + isolated FTS/rules/confidence with deadline; includes cold startup/timeouts. Excludes Markdown creation and resident metadata Map; 3ms window is simulation, not production first-step coverage."
+}

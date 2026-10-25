@@ -43,6 +43,8 @@ export async function hostIdle(base) {
   if (sessions.some(session => session.running)) throw new Error('存在正在执行的会话，停止安装');
   const state = await api('state');
   if (state.jobs.some(job => ['running', 'queued'].includes(job.status))) throw new Error('存在未完成落库任务，停止安装');
+  if (state.imports?.some(job => ['running', 'queued'].includes(job.status))) throw new Error('存在未完成导入或文件夹学习任务，停止安装');
+  if (state.metadataJob?.status === 'running') throw new Error('存在未完成元数据整理任务，停止安装');
   return { knowledgeRoot: state.settings.root, sessions: sessions.length, checkedAt: new Date().toISOString() };
 }
 

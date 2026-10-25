@@ -1,0 +1,496 @@
+[
+  {
+    "id": "wx-re-focus-vm-state-model",
+    "title": "保护虚拟机：把指令流建模为状态转移",
+    "file": "cards/wx-re-focus-vm-state-model.md",
+    "sha256": "9e1f158524005b6f3d5745f8bff4be3ff0170dd7eb295481a645a1a834580d57",
+    "sourceIds": [
+      "tigress-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-dispatch-topology",
+    "title": "VM分发：中心循环与线程化调度的图形差异",
+    "file": "cards/wx-re-focus-vm-dispatch-topology.md",
+    "sha256": "afc77edb1c1274207394a83dfb3d31f49cc84308b86ce257212f6a3051014676",
+    "sourceIds": [
+      "tigress-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-opcode-operands",
+    "title": "虚拟字节码：操作码与操作数长度共同决定解码",
+    "file": "cards/wx-re-focus-vm-opcode-operands.md",
+    "sha256": "1001e971fe84a6cf6e5b3c9c92e6b48875ea6d940118d5ef0a02f36a56e73639",
+    "sourceIds": [
+      "tigress-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-stack-register",
+    "title": "虚拟栈与寄存器槽：按读写语义建立映射",
+    "file": "cards/wx-re-focus-vm-stack-register.md",
+    "sha256": "7f4c41175844b6d8a35189422a9a9572bb08f4adc9f8494f8e197f5af4ce0378",
+    "sourceIds": [
+      "tigress-vm",
+      "kanxue-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-superoperators",
+    "title": "Handler融合：超级指令为何破坏一对一匹配",
+    "file": "cards/wx-re-focus-vm-superoperators.md",
+    "sha256": "1019b9a583641e9691cfd5cdf26654404ce835e3f070a4736a7b8bcecf48b441",
+    "sourceIds": [
+      "tigress-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-reentrant-context",
+    "title": "可重入解释器：VM执行片段之间的状态连续性",
+    "file": "cards/wx-re-focus-vm-reentrant-context.md",
+    "sha256": "6d183eee62d8d75711ebf8106665c0d534aef3afa7fc606b253bc8852df43180",
+    "sourceIds": [
+      "tigress-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-duplicate-semantics",
+    "title": "操作码多样性：多个编码可以拥有同一语义",
+    "file": "cards/wx-re-focus-vm-duplicate-semantics.md",
+    "sha256": "bf1527aee598808ec2376b0548b418f0141d081bdccac0d6bc3da4a09dfd87aa",
+    "sourceIds": [
+      "tigress-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-trace-completeness",
+    "title": "吾爱研究归纳：跟踪缓存、记录字段与可解释性",
+    "file": "cards/wx-re-focus-vm-trace-completeness.md",
+    "sha256": "12e24172f31c8177defe18dba55314adb2d8ccf62d30906d2a500179a24b913c",
+    "sourceIds": [
+      "52-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-context-rotation",
+    "title": "看雪研究归纳：物理寄存器轮转与上下文槽轮转",
+    "file": "cards/wx-re-focus-vm-context-rotation.md",
+    "sha256": "780904906a33ea025ebbf6e746ce669e5abcd6ac5f45446be4c91d3fc9a034cf",
+    "sourceIds": [
+      "kanxue-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-pure-function-limit",
+    "title": "去虚拟化研究：纯函数结果恢复的适用范围",
+    "file": "cards/wx-re-focus-vm-pure-function-limit.md",
+    "sha256": "aea1308fd2537769df050bdebfc2dc8747e5844da09462837e19381089b7f41c",
+    "sourceIds": [
+      "vmp-research"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-path-coverage",
+    "title": "动态去虚拟化：轨迹覆盖与函数语义覆盖",
+    "file": "cards/wx-re-focus-vm-path-coverage.md",
+    "sha256": "42d7cc4eabf5edf706ad85fc0ace860fa551602e90412d4468edc72cd5f1959c",
+    "sourceIds": [
+      "vmp-research",
+      "triton"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-taint-slice",
+    "title": "VM数据切片：从业务结果回溯必要状态",
+    "file": "cards/wx-re-focus-vm-taint-slice.md",
+    "sha256": "0af7d4196d0352de62cdf1acf660a8c00cdebbab3a52587ce553dd348336fba8",
+    "sourceIds": [
+      "triton",
+      "llvm-alias"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-lifting-memory",
+    "title": "二进制提升：寄存器之外还要保留内存语义",
+    "file": "cards/wx-re-focus-vm-lifting-memory.md",
+    "sha256": "1c2771de5e92662775be01c03014298a53c47e44fe06d1d42bd11593273c3e6f",
+    "sourceIds": [
+      "remill"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-bitvector-mba",
+    "title": "MBA表达式：等价简化必须固定整数位宽",
+    "file": "cards/wx-re-focus-vm-bitvector-mba.md",
+    "sha256": "79c0995b8f71d5bae4a128b22f3018b09a96113678702cbca188bfd2fee4a134",
+    "sourceIds": [
+      "llvm-ir"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-flags-liveness",
+    "title": "标志活跃性：算术结果未使用不等于指令无效",
+    "file": "cards/wx-re-focus-vm-flags-liveness.md",
+    "sha256": "5828b95e324757202393112a8ff350582848344996b4b4c2e50272cc67c9ef19",
+    "sourceIds": [
+      "llvm-ir",
+      "remill"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-llvm-poison",
+    "title": "IR反混淆：undef、poison与freeze不能混用",
+    "file": "cards/wx-re-focus-vm-llvm-poison.md",
+    "sha256": "f1b4cfa5fe182dee45eadf8c4ffcf5ca3364178285116d587f0980848f13d83a",
+    "sourceIds": [
+      "llvm-ir"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-alias-state",
+    "title": "VM上下文建模：别名关系决定优化是否可靠",
+    "file": "cards/wx-re-focus-vm-alias-state.md",
+    "sha256": "33c00292fa72594f7183d30a491d4ca7d9cce29a7c2c73f415399612852732e6",
+    "sourceIds": [
+      "llvm-alias"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-flatten-vs-virtualize",
+    "title": "控制流平坦化与字节码虚拟化：按语义层区分",
+    "file": "cards/wx-re-focus-vm-flatten-vs-virtualize.md",
+    "sha256": "3fa7bae40b8016f2ca0feca5ec7feafcde320a090e0ff26c021ec21ccbbace5a",
+    "sourceIds": [
+      "tigress-flat",
+      "tigress-vm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-opaque-predicate",
+    "title": "不透明谓词：分支结果不变仍须验证其副作用",
+    "file": "cards/wx-re-focus-vm-opaque-predicate.md",
+    "sha256": "62f05d6f2e1b87a7eeffce1be82dd5e3ff1494c4094bc5481fc8097e2776a55c",
+    "sourceIds": [
+      "tigress-opaque",
+      "llvm-ir"
+    ]
+  },
+  {
+    "id": "wx-re-focus-vm-jit-cache",
+    "title": "JIT与解释器：代码缓存键必须包含影响译码的状态",
+    "file": "cards/wx-re-focus-vm-jit-cache.md",
+    "sha256": "2b59d33bee2ca80b1350f6866833c627158ab6736fcb9112f28f1f06cc44f286",
+    "sourceIds": [
+      "jit"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-upx-layers",
+    "title": "UPX：压缩层、恢复代码与原程序语义",
+    "file": "cards/wx-re-focus-shell-upx-layers.md",
+    "sha256": "76215f5a65b1ac3db52b6f71fe2a053fbcc68329a8c2aeab44272facc3017000",
+    "sourceIds": [
+      "upx"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-upx-overlay",
+    "title": "UPX附加数据：Overlay会影响恢复后的文件行为",
+    "file": "cards/wx-re-focus-shell-upx-overlay.md",
+    "sha256": "8750ea899e6ea7fed39f36830b71b805f0e4f304852aab1e8111f8d9c0467dd7",
+    "sourceIds": [
+      "upx"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-themida-scope",
+    "title": "Themida：把产品能力说明与样本已启用特征分开",
+    "file": "cards/wx-re-focus-shell-themida-scope.md",
+    "sha256": "6aef076b3aab566a8afcf56d266448b5298fd773491738f2b0a49c6c3ec855da",
+    "sourceIds": [
+      "themida"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-codevirtualizer",
+    "title": "Code Virtualizer：函数虚拟化与文件包装的研究边界",
+    "file": "cards/wx-re-focus-shell-codevirtualizer.md",
+    "sha256": "3623d33637b0153d2678a6c989baae9693f6b8658782f672006c90901357bfcd",
+    "sourceIds": [
+      "codevirtualizer"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-winlicense-layers",
+    "title": "WinLicense：保护引擎与授权状态是两个分析层",
+    "file": "cards/wx-re-focus-shell-winlicense-layers.md",
+    "sha256": "012b07a4a87e709cc1f9ccd15efd7ea17dc88f14714fa8280208fa839f284f15",
+    "sourceIds": [
+      "winlicense"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-enigma-virtualbox",
+    "title": "Enigma：文件虚拟化与代码虚拟机不能混为一谈",
+    "file": "cards/wx-re-focus-shell-enigma-virtualbox.md",
+    "sha256": "f766568977c544b6a2858c32b36e02ec5e3577d01d5740f72e00b06b22d5d07c",
+    "sourceIds": [
+      "enigma"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-confuser-features",
+    "title": "ConfuserEx：名称、控制流、常量与方法体保护的层次",
+    "file": "cards/wx-re-focus-shell-confuser-features.md",
+    "sha256": "880f65d0ec42e506d557f61e59f01cadb71521a9b192eb5fefc3e64008d1a9c0",
+    "sourceIds": [
+      "confuser"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-pe-tls",
+    "title": "PE初始化：TLS回调与入口点之前的执行",
+    "file": "cards/wx-re-focus-shell-pe-tls.md",
+    "sha256": "352ff1fe30d8834df17022c4d1cdf1939e4652e0446f3a8254219d688ca70875",
+    "sourceIds": [
+      "pe"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-pe-relocation",
+    "title": "重建映像：重定位状态决定地址能否换基址",
+    "file": "cards/wx-re-focus-shell-pe-relocation.md",
+    "sha256": "c75676564b6e7d33c63b453d9e98a7a4a54500dd0fca1c87f1fc1b926f557b85",
+    "sourceIds": [
+      "pe"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-page-permission",
+    "title": "动态代码页：写入、权限变化与指令缓存一致性",
+    "file": "cards/wx-re-focus-shell-page-permission.md",
+    "sha256": "8cc78ffbfe738b886ef9f0f50b06a3caf600e248701a0ab4fb08b7918e1250b1",
+    "sourceIds": [
+      "vprotect"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-unwind-metadata",
+    "title": "x64展开信息：复制代码还需保留异常与栈恢复关系",
+    "file": "cards/wx-re-focus-shell-unwind-metadata.md",
+    "sha256": "d32e15ed56e8ab22a021c710a842c3f2139dabd5634c4b8c09f551f12f3a23c1",
+    "sourceIds": [
+      "unwind"
+    ]
+  },
+  {
+    "id": "wx-re-focus-shell-android-inmemory",
+    "title": "Android内存DEX加载：载体变化与执行语义变化",
+    "file": "cards/wx-re-focus-shell-android-inmemory.md",
+    "sha256": "10e2ab2d937f157cb037207996d9cac2146d72d81845987fbf27cf20b0a451d9",
+    "sourceIds": [
+      "classloader"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-tea-width",
+    "title": "TEA识别：32位回绕、双字状态与轮常数",
+    "file": "cards/wx-re-focus-crypto-tea-width.md",
+    "sha256": "24c9b749e66c93a2bc3e5ec030eff538ec541e303d42a35b14014d6687d1617c",
+    "sourceIds": [
+      "tea"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-xtea-diff",
+    "title": "XTEA与TEA：轮函数和密钥选择不能混用",
+    "file": "cards/wx-re-focus-crypto-xtea-diff.md",
+    "sha256": "1794c72f654b5464c899604f32bc6a871c68b1d51c98d32a38b136e6524c79fb",
+    "sourceIds": [
+      "tea",
+      "xtea"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-xxtea-length",
+    "title": "XXTEA：按字数组处理时长度本身进入算法",
+    "file": "cards/wx-re-focus-crypto-xxtea-length.md",
+    "sha256": "a5295907ecc46cbaa6367ec6204f239bc7a89705dada643f5a1c10e0cd58f57c",
+    "sourceIds": [
+      "xxtea"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-aes-shape",
+    "title": "AES识别：分组长度、密钥长度和实现形态分开看",
+    "file": "cards/wx-re-focus-crypto-aes-shape.md",
+    "sha256": "ec442a589a875ab869083728755b08121069e6abf4396f624d424a75d166ff49",
+    "sourceIds": [
+      "aes"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-cbc-chain",
+    "title": "CBC模式：前一密文块与IV参与解密结果",
+    "file": "cards/wx-re-focus-crypto-cbc-chain.md",
+    "sha256": "fe73e8aaa6a2ff4850ce8be5d84497f261db8e450f1170ae9536a2fce929cb0b",
+    "sourceIds": [
+      "modes"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-ctr-counter",
+    "title": "CTR模式：计数器布局决定密钥流的位置",
+    "file": "cards/wx-re-focus-crypto-ctr-counter.md",
+    "sha256": "7a8ecbda8705baacc15a239ab5f1dc8e739006fe8ce441f62f542a60df66d63c",
+    "sourceIds": [
+      "modes"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-gcm-auth",
+    "title": "GCM：密文、附加数据和认证标签是一组验证对象",
+    "file": "cards/wx-re-focus-crypto-gcm-auth.md",
+    "sha256": "a29db37e88f43a541b3d6a3b2d8da2445765cf503abf4af42d8c2e535670aeae",
+    "sourceIds": [
+      "gcm"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-chacha-quarter",
+    "title": "ChaCha20：ARX四分之一轮与状态序列化",
+    "file": "cards/wx-re-focus-crypto-chacha-quarter.md",
+    "sha256": "a8da2ce981a941353155e477bc1954da9ec14f47f086b0c4ddf16c62195bffce",
+    "sourceIds": [
+      "chacha"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-sha-state",
+    "title": "SHA-256识别：压缩函数与消息包装是两层",
+    "file": "cards/wx-re-focus-crypto-sha-state.md",
+    "sha256": "de35a6a09a9fa38ed8a48fa2d0491bb43c7e3bd156f4b81d6559605241c1ae0b",
+    "sourceIds": [
+      "sha"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-hmac-layers",
+    "title": "HMAC：内外层哈希与密钥规范化",
+    "file": "cards/wx-re-focus-crypto-hmac-layers.md",
+    "sha256": "0b25dc0f14b60d03b44fc1bf192c18dd2597b556cb6ff10675aa2a4a93c3f158",
+    "sourceIds": [
+      "hmac"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-hkdf-context",
+    "title": "HKDF：提取、扩展与上下文绑定",
+    "file": "cards/wx-re-focus-crypto-hkdf-context.md",
+    "sha256": "53dcf74676eaaf13cdd31159734bbafe3a95c5c8d1767bfca890b77d8026b251",
+    "sourceIds": [
+      "hkdf"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-pbkdf2-params",
+    "title": "PBKDF2：PRF、盐、迭代和输出长度共同定义结果",
+    "file": "cards/wx-re-focus-crypto-pbkdf2-params.md",
+    "sha256": "6a6fe46f0e7681256dffcd55f3b25532105ebff074611c69cf005336e22402f0",
+    "sourceIds": [
+      "pbkdf"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-argon2-memory",
+    "title": "Argon2id：内存、时间与并行参数不能折叠成一个成本",
+    "file": "cards/wx-re-focus-crypto-argon2-memory.md",
+    "sha256": "051f5503734c8ff279152cd1a50db5b2aedf07baa7dd5506aff3f1d593aa4a9f",
+    "sourceIds": [
+      "argon"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-rsa-oaep",
+    "title": "RSA-OAEP：大整数运算之外还有编码约束",
+    "file": "cards/wx-re-focus-crypto-rsa-oaep.md",
+    "sha256": "9f83c720801e99d8f87ce0622c632e3c16465ebff01881c651c92891c0087268",
+    "sourceIds": [
+      "rsa"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-rsa-pss",
+    "title": "RSA-PSS：签名验证中的盐长度与消息摘要",
+    "file": "cards/wx-re-focus-crypto-rsa-pss.md",
+    "sha256": "870312397065c893530c55e5d1f0ab6ee922dceea5286ffab7745e1601fc8f9b",
+    "sourceIds": [
+      "rsa"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-x25519-kdf",
+    "title": "X25519：共享结果还需要密钥派生与身份绑定",
+    "file": "cards/wx-re-focus-crypto-x25519-kdf.md",
+    "sha256": "b86b2c894346f5dae9a76b3558a6dafc31242151f908a3f55008511925d9c2e6",
+    "sourceIds": [
+      "curve",
+      "hkdf"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-ed25519-variants",
+    "title": "Ed25519：签名变体与预哈希不能随意互换",
+    "file": "cards/wx-re-focus-crypto-ed25519-variants.md",
+    "sha256": "f2a8c25012390b4a778e677ac8b1535b6d4453309f6a55e0404d6944f716161f",
+    "sourceIds": [
+      "eddsa"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-sm4-provider",
+    "title": "SM4接口识别：算法名称与模式名称必须同时记录",
+    "file": "cards/wx-re-focus-crypto-sm4-provider.md",
+    "sha256": "a565080fca666a1fffdef328f7cc3556c8e41f776af601148769f1099f65c410",
+    "sourceIds": [
+      "sm4"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-sm3-interface",
+    "title": "SM3与SHA-256：相同摘要长度不能替代算法身份",
+    "file": "cards/wx-re-focus-crypto-sm3-interface.md",
+    "sha256": "6859b9ed6752ad99bb47d476d15ec5173358deb8de1a1bb77913cc1b1ae2c016",
+    "sourceIds": [
+      "sm3"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-base64-canonical",
+    "title": "Base64：编码字母表、填充与规范表示",
+    "file": "cards/wx-re-focus-crypto-base64-canonical.md",
+    "sha256": "df98b69be5bd559fd04869fd24fc269c001b42cdc5782bee4eb887d4e95ac609",
+    "sourceIds": [
+      "base64"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-crc-vs-mac",
+    "title": "CRC32：校验参数与消息认证的边界",
+    "file": "cards/wx-re-focus-crypto-crc-vs-mac.md",
+    "sha256": "b7320d553cd64dde4fc5b7e83007db66732edc092ba95b003c1fdf9a34a3b0db",
+    "sourceIds": [
+      "crc"
+    ]
+  },
+  {
+    "id": "wx-re-focus-crypto-constant-compare",
+    "title": "认证值比较：固定长度内容无关不等于整个流程等时",
+    "file": "cards/wx-re-focus-crypto-constant-compare.md",
+    "sha256": "9e9d354c84b3d4d67207f8f4c9ed359a1bd7dbfd52285fe2fe0055443be4aa19",
+    "sourceIds": [
+      "ct"
+    ]
+  }
+]

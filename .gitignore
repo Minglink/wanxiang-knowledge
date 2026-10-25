@@ -14,3 +14,8 @@ dist/
 /实机测试产物/
 /开发与实机测试报告.md
 /.publish/
+
+# Local corpus import receipts and machine baselines
+knowledge/**/import-report.json
+knowledge/**/installed-validation.json
+knowledge/**/pre-import-baseline.json
