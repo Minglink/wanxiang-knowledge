@@ -81,7 +81,7 @@ Folder learning reads supported documents and source files from the current conv
 
 ### Archive conversations locally
 
-Completed turns are registered in the pending archive list. Organization starts when you click the local-generation action. Choose AI organization or a model-free raw export. New messages produce separate incremental records rather than overwriting existing notes. The organization model can follow the source conversation or be selected explicitly in settings.
+Completed turns are registered in the pending archive list. Organization starts when you click the local-generation action. Choose AI organization or a model-free raw export. New messages produce separate incremental records rather than overwriting existing notes. Long conversations are split automatically to fit the context budget, with no hard limit on the number of segments; elapsed time and model usage increase with conversation length. The organization model can follow the source conversation or be selected explicitly in settings.
 
 ![Archiving conversation knowledge locally](docs/images/session-archive.png)
 
