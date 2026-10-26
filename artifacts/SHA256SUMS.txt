@@ -1,2 +1,2 @@
 f4d365d1c4561e397a8ec375478884720298b7be7246034eeb08ffae2af7203d  dsh-wanxiang-knowledge-0.2.0-alpha.8.tgz
-d2fe6995a67cb7cea46d18066ba7f963aace8a63cbc9780efe2690d5e5a52844  dsh-wanxiang-knowledge-0.2.0-alpha.10.tgz
+1ce24a86946b6565625306c674deafc5807b8441cc45354ebbb52a10296c91e4  dsh-wanxiang-knowledge-0.2.0-alpha.10.tgz
