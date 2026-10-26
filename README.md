@@ -9,7 +9,7 @@
 <p align="center"><strong>让你的DeepSeek Harness成为你的专属Agent，陪你一起无限进步！</strong></p>
 
 <p align="center">
-  <a href="https://github.com/Minglink/wanxiang-knowledge/releases"><img src="https://img.shields.io/badge/version-0.2.0--alpha.8-4D6BFE" alt="0.2.0-alpha.8"></a>
+  <a href="https://github.com/Minglink/wanxiang-knowledge/releases"><img src="https://img.shields.io/badge/version-0.2.0--alpha.10-4D6BFE" alt="0.2.0-alpha.10"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/code_license-MIT-4D6BFE" alt="Code license MIT"></a>
   <img src="https://img.shields.io/badge/host-DeepSeek_Harness-4D6BFE" alt="DeepSeek Harness">
   <img src="https://img.shields.io/badge/storage-local_Markdown_%2B_SQLite-008766" alt="Local Markdown and SQLite">
@@ -21,7 +21,14 @@
 
 万象知识库是为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 开发的社区插件。它在 Harness 内提供会话落库、本地检索、可选自动召回、知识图谱、工具目录和文件夹学习，支持构建属于你的专属Agent：当前 AI 可以通过 `/wanxiang` 查询已有知识，也可以按需读取摘要、正文和项目时间线。
 
-当前版本为 **0.2.0-alpha.8 预览版**，主要验证环境是 Windows + Harness Desktop `0.2.1-alpha.1`。插件代码采用 MIT 许可证，后续我作者的知识库链接也会放在这个介绍（我的主要方向是逆向工程，也欢迎大家提交自己的知识库链接分享(*^▽^*)）。
+当前版本为 **0.2.0-alpha.10 预览版**，主要验证环境是 Windows + Harness Desktop `0.2.1-alpha.1`。插件代码采用 MIT 许可证，后续我作者的知识库链接也会放在这个介绍（我的主要方向是逆向工程，也欢迎大家提交自己的知识库链接分享(*^▽^*)）。
+
+## alpha.10 更新
+
+- 图谱按稳定快照分页加载全部真实节点，修复大库突然缩成紫色簇、绿色方法点被遮盖的问题。
+- 长知识正文支持完整分页读取，Markdown 支持本地图片、表格和附件链接，附件通过鉴权接口访问。
+- 修复导入附件路径的特殊字符编码，提升文章完整标题的检索排序。
+- 工作台顶部直接展示可点击的 GitHub 项目完整网址。
 
 ## 在 Harness 中使用
 
@@ -91,7 +98,9 @@
 | `deep` 深度检索 | 扩展到正文，显示正文命中片段 |
 | `L0 → L1 → L2` | 先读短摘要，再读概览，最后按需读取正文，控制上下文体积 |
 
-模型工具包括 `knowledge_search`、`knowledge_read`、`knowledge_timeline` 和 `tool_catalog_search`。搜索默认返回 L0，正文读取有长度上限；条目附稳定 ID、来源、更新时间和有效状态，便于核对和追溯。
+模型工具包括 `knowledge_search`、`knowledge_read`、`knowledge_timeline` 和 `tool_catalog_search`。搜索默认返回 L0，完整标题优先，并分散同一来源的拆分条目。`knowledge_read` 每页最多读取 12,000 字符；返回 `nextOffset` 时，用同一 ID 和该偏移继续，直到 `nextOffset=null`。偏移基于脱敏后的正文。条目附稳定 ID、关联条目、来源、更新时间和有效状态，便于核对和追溯。
+
+详情面板支持库内图片、附件下载和表格；知识条目间的链接可打开目标详情。附件接口检查访问令牌、正文引用和来源目录范围，非图片文件以下载方式提供。
 
 ### 可选自动召回
 
@@ -112,7 +121,7 @@
 
 ## 知识图谱与活动
 
-球体与网络两种布局展示知识关系；支持类型图例、标题/标签筛选、旋转、拖拽、重置和导出 PNG。知识详情与图谱可以双向定位，大规模输入会按阈值聚合。
+球体与网络两种布局展示真实知识节点；支持类型图例、标题/标签筛选、旋转、拖拽、重置和导出 PNG。图谱不设条目总量硬上限，通过稳定快照每批加载 1,000 条，持续加载至全部完成；超过 1,500 或 5,000 条时不会缩成少数簇，也不会统一变紫色。节点列表按批展开，球体保留全部节点与原始类型颜色；大图降低普通连线密度并按视野绘制，选中和活动关系仍可查看。网络布局按需初始化。已用 50,001 条合成节点验证完整加载、搜索与定位；实际帧率仍取决于设备和数据规模。
 
 蓝色知识节点在发生已记录的读取、落库或实际注入时短暂变为柠檬黄。**活动表示知识被访问，不表示模型已经采纳结论。** 工具目录与知识图谱分开呈现。
 
@@ -183,7 +192,7 @@ flowchart LR
 
 ### 安装插件包
 
-从 [GitHub Releases](https://github.com/Minglink/wanxiang-knowledge/releases) 下载 `dsh-wanxiang-knowledge-0.2.0-alpha.8.tgz`，在 Harness 的本地插件包安装入口选择该文件。仓库也保留 [同版本安装包](artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.8.tgz)。升级前请等待宿主会话和后台任务结束，并备份知识目录。
+从 [GitHub Releases](https://github.com/Minglink/wanxiang-knowledge/releases) 下载 `dsh-wanxiang-knowledge-0.2.0-alpha.10.tgz`，在 Harness 的本地插件包安装入口选择该文件。仓库也保留 [同版本安装包](artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.10.tgz)。升级前请等待宿主会话和后台任务结束，并备份知识目录。
 
 普通 Web profile 可使用该版本宿主的插件管理命令：
 

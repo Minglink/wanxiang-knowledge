@@ -16,13 +16,15 @@ export class CanvasGraph {
   frames = 0;
   drawMs = 0;
   private ctx: CanvasRenderingContext2D;
-  private network: NetworkLayout;
+  private networkState?: NetworkLayout;
+  private lastDrawAt = 0;
   private sphere: Particle[];
   private networkAngle = 0;
   private networkCenter = { x: 0, y: 0 };
   private networkExtent = { x: 200, y: 150 };
   private nodes: Map<string, GraphNode>;
   private neighbors = new Map<string, Set<string>>();
+  private incident = new Map<string, GraphEdge[]>();
   private positions = new Map<string, HitPoint>();
   private grid = new HitGrid();
   private frame = 0;
@@ -48,32 +50,23 @@ export class CanvasGraph {
   constructor(public canvas: HTMLCanvasElement, public data: GraphData, private select: (id: string) => void, private open: (id: string) => void) {
     this.ctx = canvas.getContext('2d')!;
     this.nodes = new Map(data.nodes.map(node => [node.id, node]));
-    this.network = new NetworkLayout(data.nodes, data.edges);
-    // Warm up before fitting, so the opening view includes the settled graph.
-    for (let i = 0; i < 80; i++) this.network.tick();
-    const particles = this.network.particles;
-    if (particles.length) {
-      const minX = Math.min(...particles.map(p => p.x));
-      const maxX = Math.max(...particles.map(p => p.x));
-      const minY = Math.min(...particles.map(p => p.y));
-      const maxY = Math.max(...particles.map(p => p.y));
-      this.networkCenter = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
-      this.networkExtent = { x: Math.max(100, (maxX - minX) * 0.6), y: Math.max(100, (maxY - minY) * 0.6) };
-    }
+    canvas.dataset.kindCounts = JSON.stringify(data.nodes.reduce<Record<string,number>>((counts,node)=>{counts[node.kind]=(counts[node.kind]||0)+1;return counts;},{}));
     this.sphere = sphereLayout(data.nodes);
     for (const edge of data.edges) {
       for (const [s, t] of [[edge.s, edge.t], [edge.t, edge.s]]) {
         const values = this.neighbors.get(s) || new Set<string>();
         values.add(t); this.neighbors.set(s, values);
+        const incident=this.incident.get(s)||[]; incident.push(edge); this.incident.set(s,incident);
       }
     }
     // Weak edges are visually sampled at medium scale, selected edges are always restored.
     const rankedEdges = [...data.edges].sort((a, b) => b.w - a.w);
     const bridges = rankedEdges.filter(edge => this.nodes.get(edge.s)?.cluster !== this.nodes.get(edge.t)?.cluster).slice(0, 60);
     this.bridges = new Set(bridges);
-    this.networkEdges = data.nodes.length > 300 ? rankedEdges.slice(0, data.nodes.length * 2) : data.edges;
+    const edgeBudget=Math.min(4000,data.nodes.length*2);
+    this.networkEdges = data.nodes.length > 300 ? rankedEdges.slice(0, edgeBudget) : data.edges;
     this.edges = data.nodes.length > 300
-      ? [...new Set([...bridges, ...rankedEdges.slice(0, data.nodes.length * 2)])] : data.edges;
+      ? [...new Set([...bridges, ...rankedEdges.slice(0, edgeBudget)])] : data.edges;
     const options = { signal: this.lifetime.signal };
     canvas.addEventListener('pointerdown', this.pointerDown, options);
     canvas.addEventListener('pointermove', this.pointerMove, options);
@@ -103,6 +96,20 @@ export class CanvasGraph {
     this.resize = new ResizeObserver(() => this.measure());
     this.resize.observe(canvas);
     this.measure();
+  }
+
+  private get network() {
+    if (!this.networkState) {
+      this.networkState = new NetworkLayout(this.data.nodes, this.data.edges);
+      for (let i = 0; i < (this.data.nodes.length <= 1500 ? 80 : 4); i++) this.networkState.tick();
+      let minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
+      for (const p of this.networkState.particles) { minX=Math.min(minX,p.x); maxX=Math.max(maxX,p.x); minY=Math.min(minY,p.y); maxY=Math.max(maxY,p.y); }
+      if (Number.isFinite(minX)) {
+        this.networkCenter={x:(minX+maxX)/2,y:(minY+maxY)/2};
+        this.networkExtent={x:Math.max(100,(maxX-minX)*0.6),y:Math.max(100,(maxY-minY)*0.6)};
+      }
+    }
+    return this.networkState;
   }
 
   setActivity(events: GraphActivityEvent[], raw: GraphData, enabled: boolean) {
@@ -182,6 +189,9 @@ export class CanvasGraph {
   }
   private draw = (time: number) => {
     this.frame = 0;
+    const interval = this.data.nodes.length > 20000 ? 66 : this.data.nodes.length > 5000 ? 33 : 0;
+    if (time - this.lastDrawAt < interval) { this.wake(); return; }
+    this.lastDrawAt = time;
     const started = performance.now(), ctx = this.ctx;
     if (!this.canvas.isConnected || document.hidden) return;
     if (this.layout === 'network') {
@@ -213,16 +223,14 @@ export class CanvasGraph {
       const node = this.nodes.get(p.id)!;
       return { ...point, id: p.id, radius: (this.layout === 'network' ? Math.min(5.5, 2.5 + Math.log2(1 + node.degree) * 0.45)
         : Math.min(4.6, 2.3 + Math.log2(1 + node.degree) * 0.32)) * (this.layout === 'sphere' ? point.scale : 1) };
-    }).sort((a, b) => a.depth - b.depth);
+    }).filter(point=>point.x+point.radius>=0&&point.y+point.radius>=0&&point.x-point.radius<=this.width&&point.y-point.radius<=this.height).sort((a, b) => a.depth - b.depth);
     this.positions = new Map(projected.map(p => [p.id, p]));
-    this.grid.rebuild(projected);
+    this.grid.rebuild(projected.map(point=>this.nodes.get(point.id)!.kind==='note'?point:{...point,depth:point.depth+3}));
     const activityNow = Date.now();
     this.activity.expire(activityNow);
     const visibleEdges = new Set(this.layout === 'network' ? this.networkEdges : this.edges);
-    if (this.selected || this.hover) for (const edge of this.data.edges) {
-      if ([edge.s, edge.t].includes(this.hover || this.selected)) visibleEdges.add(edge);
-    }
-    for (const edge of this.data.edges) {
+    if (this.selected || this.hover) for (const edge of this.incident.get(this.hover || this.selected)||[]) visibleEdges.add(edge);
+    for (const id of this.activity.marks.keys()) for (const edge of this.incident.get(id)||[]) {
       if (this.activity.edgeStrength(edge.s, edge.t, activityNow) > 0 && this.active(edge.s) && this.active(edge.t)) visibleEdges.add(edge);
     }
     const sphereMap = new Map(this.sphere.map(p => [p.id, p]));
@@ -254,12 +262,34 @@ export class CanvasGraph {
         ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b7e9d'; ctx.fillText(edge.kind, (a.x + b.x) / 2, (a.y + b.y) / 2);
       }
     }
-    for (const point of projected) {
+    const dense = this.data.nodes.length > 5000;
+    if (dense) {
+      const batches = new Map<string,{color:string;alpha:number;depth:number;points:HitPoint[];rare:boolean}>();
+      for(const point of projected){
+        if(point.id===this.selected||point.id===this.hover||this.activity.strength(point.id,activityNow)>0)continue;
+        const node=this.nodes.get(point.id)!, active=this.active(point.id)&&this.related(point.id);
+        const depth=this.layout==='sphere'?Math.max(0,Math.min(7,Math.floor((point.depth+1)*4))):7;
+        const color=node.status==='已失效'?'#9ba7ba':graphColors[node.kind];
+        const key=depth+':'+color+':'+active;
+        const batch=batches.get(key)||{color,alpha:(node.kind!=='note'?1:this.layout==='sphere'?0.3+depth/10:1)*(active?1:0.15),depth,points:[],rare:node.kind!=='note'};
+        batch.points.push(point);batches.set(key,batch);
+      }
+      const density=Math.max(0.22,Math.sqrt(3000/this.data.nodes.length));
+      for(const batch of [...batches.values()].sort((a,b)=>Number(a.rare)-Number(b.rare)||a.depth-b.depth)){
+        ctx.fillStyle=batch.color;ctx.globalAlpha=batch.alpha;
+        for(const point of batch.points){const r=batch.rare?Math.max(1.8,point.radius*density):Math.max(0.65,point.radius*density);ctx.fillRect(point.x-r,point.y-r,2*r,2*r);}
+      }
+    }
+    // Rare semantic types must remain visible above a dense imported note cloud.
+    // Position/depth and hit testing still use the actual node, never a synthetic proxy.
+    const paintOrder=projected.length>300?projected.filter(p=>this.nodes.get(p.id)!.kind==='note').concat(projected.filter(p=>this.nodes.get(p.id)!.kind!=='note')):projected;
+    for (const point of paintOrder) {
       const node = this.nodes.get(point.id)!;
       const active = this.active(point.id), related = this.related(point.id);
-      ctx.globalAlpha = (this.layout === 'sphere' ? 0.3 + (point.depth + 1) * 0.35 : 1) * (active && related ? 1 : 0.15);
+      ctx.globalAlpha = (node.kind !== 'note' ? 1 : this.layout === 'sphere' ? 0.3 + (point.depth + 1) * 0.35 : 1) * (active && related ? 1 : 0.15);
       const gold = active ? this.activity.strength(point.id, activityNow) : 0;
       const selected = point.id === this.selected || point.id === this.hover;
+      if(dense&&!selected&&!gold)continue;
       const radius = point.radius * (!this.motion.matches && this.data.nodes.length <= 300 ? 1 + 0.025 * Math.sin(time / 900) : 1);
       if (selected || this.data.nodes.length <= 60 && Date.now() - Date.parse(node.updatedAt) < 7 * 86400000) {
         ctx.fillStyle = '#3563ff15'; ctx.beginPath(); ctx.arc(point.x, point.y, radius + 5, 0, Math.PI * 2); ctx.fill();
@@ -305,6 +335,8 @@ export class CanvasGraph {
     this.canvas.dataset.frames = String(this.frames);
     this.canvas.dataset.drawMs = String(this.drawMs);
     this.canvas.dataset.layout = this.layout;
+    this.canvas.dataset.nodes = String(this.data.nodes.length);
+    this.canvas.dataset.drawnNodes = String(projected.length);
     if (!this.motion.matches && (activityVisible || this.layout === 'sphere' && (!this.selected || this.target || Math.abs(this.velocity.x) + Math.abs(this.velocity.y) > 0.0001) || this.layout === 'network' && (this.network.alpha >= 0.005 || this.data.nodes.length <= 300))) this.wake();
   };
   private drawGlobe() {

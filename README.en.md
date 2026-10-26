@@ -9,7 +9,7 @@
 <p align="center"><strong>Make DeepSeek Harness your personal agent, growing alongside you without limits!</strong></p>
 
 <p align="center">
-  <a href="https://github.com/Minglink/wanxiang-knowledge/releases"><img src="https://img.shields.io/badge/version-0.2.0--alpha.8-4D6BFE" alt="0.2.0-alpha.8"></a>
+  <a href="https://github.com/Minglink/wanxiang-knowledge/releases"><img src="https://img.shields.io/badge/version-0.2.0--alpha.10-4D6BFE" alt="0.2.0-alpha.10"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/code_license-MIT-4D6BFE" alt="Code license MIT"></a>
   <img src="https://img.shields.io/badge/host-DeepSeek_Harness-4D6BFE" alt="DeepSeek Harness">
   <img src="https://img.shields.io/badge/storage-local_Markdown_%2B_SQLite-008766" alt="Local Markdown and SQLite">
@@ -21,7 +21,14 @@
 
 Wanxiang Knowledge is a community plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It turns conversations and project material into reusable local knowledge, with conversation archiving, local search, optional automatic recall, a knowledge graph, a tool catalog, and folder learning. Your current AI can use `/wanxiang` to search existing knowledge and read summaries, full text, or project timelines as needed.
 
-The current release is **0.2.0-alpha.8 (preview)**, primarily tested on Windows with Harness Desktop `0.2.1-alpha.1`. Plugin source code is MIT-licensed. The author's knowledge-library links will also be shared here; the main focus is reverse engineering, and community members are welcome to share their own libraries.
+The current release is **0.2.0-alpha.10 (preview)**, primarily tested on Windows with Harness Desktop `0.2.1-alpha.1`. Plugin source code is MIT-licensed. The author's knowledge-library links will also be shared here; the main focus is reverse engineering, and community members are welcome to share their own libraries.
+
+## Changes in alpha.10
+
+- Load the full knowledge graph in stable pages and preserve green method nodes in dense spheres.
+- Page long knowledge-tool responses without losing sanitized content; render local Markdown images, tables, and attachment links through an authenticated endpoint.
+- Encode special characters in imported attachment paths and prioritize exact article titles in search.
+- Show the clickable GitHub project URL beside the workspace title.
 
 ## Using Wanxiang in Harness
 
@@ -112,7 +119,7 @@ Files, indexes, and rule-based retrieval stay local. AI organization, folder lea
 
 ## Knowledge graph and activity
 
-Sphere and network layouts visualize relationships, with type legends, title/tag filtering, rotation, dragging, reset, and PNG export. Knowledge details and graph nodes support navigation in both directions. Large inputs are aggregated according to thresholds.
+Sphere and network layouts visualize relationships, with type legends, title/tag filtering, rotation, dragging, reset, and PNG export. Knowledge details and graph nodes support navigation in both directions. The graph loads every real node through stable 1,000-node pages, without a configured total-node cutoff or replacement by aggregate nodes. Type colors remain visible, including rare method and pitfall nodes. The node list expands in batches; rendering uses viewport culling and adaptive frame pacing. Complete loading and search were verified with 50,001 synthetic nodes; frame rates depend on hardware and library size.
 
 Blue nodes briefly turn lemon yellow when a read, archive, or actual injection event is recorded. **Activity means knowledge was accessed, not that the model adopted its conclusions.** The tool catalog is presented separately from the knowledge graph.
 
@@ -183,7 +190,7 @@ Optional security-analysis extensions cover PE/ELF, disassembly, strings, existi
 
 ### Install a plugin package
 
-Download `dsh-wanxiang-knowledge-0.2.0-alpha.8.tgz` from [GitHub Releases](https://github.com/Minglink/wanxiang-knowledge/releases) and select it through Harness's local plugin-package installation entry. The [same package](artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.8.tgz) is also stored in this repository. Before upgrading, wait for host conversations and background jobs to finish, and back up your knowledge directory.
+Download `dsh-wanxiang-knowledge-0.2.0-alpha.10.tgz` from [GitHub Releases](https://github.com/Minglink/wanxiang-knowledge/releases) and select it through Harness's local plugin-package installation entry. The [same package](artifacts/dsh-wanxiang-knowledge-0.2.0-alpha.10.tgz) is also stored in this repository. Before upgrading, wait for host conversations and background jobs to finish, and back up your knowledge directory.
 
 For a standard Web profile, this host version supports:
 

@@ -24,7 +24,7 @@ test('导入保存正文、附件、双向链接；索引与图谱立即可用�
  const files=[file('资料/A.md','---\ntitle: 测试甲\ntags: [虚拟机, Handler]\n---\n# A\nVM语义核对 [[B]] ![图片](assets/a.png)\n```text\n[[B]]\n```'),file('资料/B.md','# B\n回链 [A](A.md)\n保留原始证据'),file('资料/assets/a.png','image bytes')];
  const job=await service.imports.upload(files);await service.imports.wait();assert.equal(job.status,'success',job.error);assert.equal(job.entryIds.length,2);
  const all=[...service.store.entries.values()];const a=all.find(e=>e.title==='测试甲'),b=all.find(e=>e.title==='B');assert.ok(a&&b);
- assert.ok(a.links.some(l=>l.to===b.id));assert.ok(b.links.some(l=>l.to===a.id));assert.match(a.body,/\[B\]\(\.\.\/notes\/import-/);assert.match(a.body,/```text\n\[\[B\]\]\n```/);assert.match(a.body,/sources\/imports\/.+\/files\/资料\/assets\/a.png/);
+ assert.ok(a.links.some(l=>l.to===b.id));assert.ok(b.links.some(l=>l.to===a.id));assert.match(a.body,/\[B\]\(\.\.\/notes\/import-/);assert.match(a.body,/```text\n\[\[B\]\]\n```/);assert.match(decodeURIComponent(a.body),/sources\/imports\/.+\/files\/资料\/assets\/a.png/);
  assert.equal(await readFile(service.store.local('sources','imports',job.id,'files','资料','assets','a.png'),'utf8'),'image bytes');
  assert.ok((await new SearchService(service.store).search('VM语义核对',{mode:'hybrid'})).items.some(e=>e.id===a.id));
  assert.ok(buildGraph(service.store.entries.values(),[],{scope:'library'}).edges.some(e=>e.s===a.id&&e.t===b.id&&e.kind==='link'));

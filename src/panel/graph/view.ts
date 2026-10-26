@@ -4,7 +4,6 @@ import type { GraphActivityEvent } from '../../graph-activity.js';
 import type { GraphData, GraphNode } from '../../graph.js';
 import type { Layout } from './layouts.js';
 import { CanvasGraph, graphColors } from './canvas.js';
-import { aggregateGraph } from './aggregate.js';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 const names: Record<string, string> = { note: '笔记', method: '方法', pitfall: '踩坑', project: '项目' };
@@ -24,26 +23,33 @@ export class GraphView {
   private data?: GraphData;
   private cluster = '';
   private revision = 0;
+  private listLimit = 200;
 
   constructor(private element: HTMLElement, private state: GraphViewState,
-    private load: (cluster?: string) => Promise<GraphData>, private open: (id: string) => void,
+    private load: (cluster?: string, offset?: number, snapshot?: string) => Promise<GraphData>, private open: (id: string) => void,
     private expand?: () => void) {}
 
   async mount(cluster = '') {
     this.cluster = cluster;
     const revision = ++this.revision;
-    const raw = await this.load(cluster);
+    let raw = await this.load(cluster);
+    raw = { ...raw, nodes: [...raw.nodes], edges: [...raw.edges] };
+    while (raw.nextOffset != null) {
+      if (this.lifetime.signal.aborted || revision !== this.revision) return;
+      const status = this.element.querySelector('.wx-graph-loading,.wx-graph-count');
+      if (status) status.textContent = `正在加载真实节点：${raw.nodes.length} / ${raw.total}`;
+      const offset = raw.nextOffset;
+      const next = await this.load(cluster, offset, raw.snapshot);
+      if (next.snapshot !== raw.snapshot || next.total !== raw.total || next.nextOffset != null && next.nextOffset <= offset) throw new Error('图谱数据已更新，请重新加载');
+      raw.nodes.push(...next.nodes); for(const edge of next.edges) raw.edges.push(edge); raw.nextOffset = next.nextOffset;
+      // Yield between responses so the loading status and the rest of the app remain usable.
+      await new Promise(resolve => setTimeout(resolve, 0));
+    }
     if (this.lifetime.signal.aborted || revision !== this.revision) return;
     this.engine?.destroy();
     this.engine = undefined;
     this.raw = raw;
-    const located = raw.truncated && !this.state.selected.startsWith('cluster:') && raw.nodes.some(node => node.id === this.state.selected);
-    if (located) {
-      // Explicit locate is a semantic zoom into a bounded neighborhood, not the whole graph.
-      const nodes = raw.nodes.slice(0, 300);
-      const ids = new Set(nodes.map(node => node.id));
-      this.data = { ...raw, nodes, edges: raw.edges.filter(edge => ids.has(edge.s) && ids.has(edge.t)), truncated: false };
-    } else this.data = aggregateGraph(raw);
+    this.data = raw;
     const data = this.data;
     if (!this.feed) {
       this.feed = new ActivityFeed(this.element, (page, reset) => {
@@ -65,10 +71,6 @@ export class GraphView {
       this.element.innerHTML = '<h2>知识图谱</h2><div class="empty"><strong>暂无关系图谱</strong><p>保存知识后，这里显示真实知识条目与关系。</p></div>';
       return;
     }
-    if (data.nodes.length > 1500) {
-      this.element.innerHTML = '<h2>知识图谱</h2><div class="empty"><strong>簇数量过多</strong><p>请先按项目或类型缩小范围。</p></div>';
-      return;
-    }
     this.element.innerHTML = `<h2>${esc(this.element.getAttribute('aria-label') || '知识图谱')}</h2><div class="wx-graph-toolbar">
       <div class="wx-graph-layout"><button type="button" data-graph-action="sphere">球体</button><button type="button" data-graph-action="network">网络</button></div>
       <input class="wx-graph-search" aria-label="搜索图谱节点" placeholder="高亮标题或标签…" value="${esc(this.state.text)}">
@@ -79,11 +81,11 @@ export class GraphView {
       </div><div class="wx-graph-rotation" hidden>
       <label>网络旋转 <input type="range" min="-180" max="180" step="1" value="0" aria-label="网络旋转角度"><output>0°</output></label>
       <span>Shift＋拖拽旋转 · 普通拖拽平移 · 滚轮缩放</span>
-      </div><div class="wx-graph-legend">${Object.entries(names).map(([kind, name]) => `<button type="button" data-graph-kind="${kind}" aria-pressed="${this.state.kinds.has(kind)}"><i style="background:${graphColors[kind]}"></i>${name}</button>`).join('')}</div>
-      <p class="wx-graph-activity-status" aria-live="polite">等待知识使用事件</p><p class="wx-graph-count">${raw.total} 个条目 · 当前 ${data.nodes.length} 个${!located && (raw.truncated || raw.nodes.length > 1500) ? '簇节点（点击展开成员）' : '节点'} · ${data.edges.length} 条可见关系 · ${raw.clusters.length} 个簇${located ? ' · 定位视图（邻域样本）' : ''}${raw.truncated ? ' · 已截断；关系为返回样本，按项目/类型筛选可缩小范围' : ''}</p>
+      </div><div class="wx-graph-legend">${Object.entries(names).map(([kind, name]) => `<button type="button" data-graph-kind="${kind}" aria-pressed="${this.state.kinds.has(kind)}"><i style="background:${graphColors[kind]}"></i>${name} ${data.nodes.filter(n=>n.kind===kind).length}</button>`).join('')}</div>
+      <p class="wx-graph-activity-status" aria-live="polite">等待知识使用事件</p><p class="wx-graph-count">${raw.total} 个条目 · 已加载 ${data.nodes.length} 个真实节点 · ${data.edges.length} 条关系 · ${raw.clusters.length} 个分组</p>
       <div class="wx-graph-body"><canvas class="wx-graph-canvas" aria-label="知识关系图；下方节点列表提供等价键盘操作"></canvas>
       <aside class="wx-graph-info" aria-live="polite">点击节点查看关联信息</aside></div>
-      <details class="wx-graph-list"><summary>节点列表（可用键盘打开）</summary><div>${data.nodes.map(node => `<button type="button" data-graph-node="${esc(node.id)}">${esc(node.title)}<small>${names[node.kind]} · ${esc(node.status)}</small></button>`).join('')}</div></details>`;
+      <details class="wx-graph-list"><summary>节点列表（可用键盘打开）</summary><div data-graph-list></div><button type="button" data-graph-action="more-list">继续显示节点</button></details>`;
     this.engine = new CanvasGraph(this.element.querySelector('canvas')!, data, id => this.select(id), this.open);
     this.engine.setLayout(this.state.layout);
     this.engine.setNetworkRotation(this.state.networkRotation);
@@ -134,10 +136,11 @@ export class GraphView {
   destroy() { this.feed?.stop(); this.revision++; this.lifetime.abort(); this.engine?.destroy(); delete this.element.dataset.wxBound; }
   private applyFilter() {
     this.engine?.setFilter(this.state.text, this.state.kinds);
-    for (const button of this.element.querySelectorAll<HTMLButtonElement>('[data-graph-node]')) {
-      const node = this.data?.nodes.find(item => item.id === button.dataset.graphNode);
-      button.hidden = !!node && (!this.state.kinds.has(node.kind) || !!this.state.text && !(node.title + ' ' + node.tags.join(' ')).toLocaleLowerCase().includes(this.state.text.toLocaleLowerCase()));
-    }
+    const rows = this.data?.nodes.filter(node => this.state.kinds.has(node.kind) && (!this.state.text || (node.title + ' ' + node.tags.join(' ')).toLocaleLowerCase().includes(this.state.text.toLocaleLowerCase()))) || [];
+    const list = this.element.querySelector('[data-graph-list]');
+    if (list) list.innerHTML = rows.slice(0,this.listLimit).map(node=>`<button type="button" data-graph-node="${esc(node.id)}">${esc(node.title)}<small>${names[node.kind]} · ${esc(node.status)}</small></button>`).join('');
+    const more = this.element.querySelector<HTMLButtonElement>('[data-graph-action="more-list"]');
+    if (more) { more.hidden = rows.length <= this.listLimit; more.textContent = `继续显示节点（${Math.min(rows.length,this.listLimit)} / ${rows.length}）`; }
   }
   private updateRotation() {
     const control = this.element.querySelector<HTMLInputElement>('.wx-graph-rotation input');
@@ -167,6 +170,7 @@ export class GraphView {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
     if (!button) return;
     const action = button.dataset.graphAction;
+    if (action === 'more-list') { this.listLimit += 200; this.applyFilter(); }
     if (action === 'sphere' || action === 'network') { this.state.layout = action; this.engine?.setLayout(action); this.updateLayout(); if (this.state.selected) this.engine?.focus(this.state.selected); }
     if (action === 'reset') this.engine?.reset();
     if (action === 'export') this.engine?.exportPNG();

@@ -48,7 +48,7 @@ try {
     console.log(JSON.stringify(result));
     assert.ok(result.drawnFrames > 50);
     if (count === 1000) assert.ok(result.fps >= 50, '1000 nodes require >=50fps');
-    if (count === 3000) assert.equal(result.aggregation, true);
+    assert.equal(result.aggregation, false, '真实节点不能被替换成少数簇');
   }
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.evaluate(() => { window.engine.setLayout('sphere'); window.engine.reset(); });
@@ -56,7 +56,7 @@ try {
   const before = await page.evaluate(() => window.engine.frames);
   await page.waitForTimeout(300);
   assert.equal(await page.evaluate(() => window.engine.frames), before, 'reduced motion must stop continuous animation');
-  await page.evaluate(() => { window.engine.focus('cluster:簇0'); window.engine.setLayout('network'); });
-  assert.equal(await page.evaluate(() => window.engine.selected), 'cluster:簇0');
+  await page.evaluate(() => { window.engine.focus('synthetic-0'); window.engine.setLayout('network'); });
+  assert.equal(await page.evaluate(() => window.engine.selected), 'synthetic-0');
   await writeFile('dist/graph-bench/results.json', JSON.stringify({ environment: 'Headless installed Chrome; 1000x600 CSS canvas, DPR 1; synthetic edges; hot network simulation held active', reports, reducedMotion: true, selectionAcrossLayouts: true }, null, 2));
 } finally { await browser.close(); }

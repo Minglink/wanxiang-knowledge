@@ -19,3 +19,8 @@ dist/
 knowledge/**/import-report.json
 knowledge/**/installed-validation.json
 knowledge/**/pre-import-baseline.json
+
+# Local audit material and source-content backups are not release artifacts
+/artifacts/*
+!/artifacts/*.tgz
+!/artifacts/SHA256SUMS.txt

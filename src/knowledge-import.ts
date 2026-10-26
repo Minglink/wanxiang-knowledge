@@ -1,4 +1,5 @@
 import { promises as fs } from 'node:fs';
+import { markdownLinks } from './markdown.js';
 import path from 'node:path';
 import { randomUUID, createHash } from 'node:crypto';
 import type { Entry, Host, Settings } from './types.js';
@@ -142,16 +143,25 @@ export class KnowledgeImports{
     const links:{to:string;kind:string}[]=[];
     for(const link of doc.nativeLinks){const to=nativeMap.get(link.to)||link.to;if((draftIds.has(to)||owner.store.entries.has(to))&&to!==doc.id)links.push({to,kind:link.kind});}
     const linkTarget=(value:string)=>{
-     let href=value.split('|')[0];let anchor='';const hashAt=href.indexOf('#');if(hashAt>=0){anchor=href.slice(hashAt);href=href.slice(0,hashAt);}
+     let href=value.split('|')[0];let anchor='';
      if(!href||/^[a-z][a-z0-9+.-]*:|^\/|^\\/i.test(href))return value;
      try{href=decodeURIComponent(href);}catch{return value;}
+     const complete=path.posix.normalize(path.posix.join(path.posix.dirname(doc.file.path),href));
+     // A literal # may belong to the filename. Resolve an existing file before treating it as an anchor.
+     const hashAt=href.indexOf('#');if(hashAt>=0&&!files!.some(f=>f.path===complete)){anchor=href.slice(hashAt);href=href.slice(0,hashAt);}
      const normalized=path.posix.normalize(path.posix.join(path.posix.dirname(doc.file.path),href));
+     const encodePath=(p:string)=>p.split('/').map(part=>encodeURIComponent(part).replace(/\(/g,'%28').replace(/\)/g,'%29')).join('/');
      const to=pathMap.get(normalized)||pathMap.get(normalized+'.md');
-     if(to){if(to!==doc.id)links.push({to,kind:'正文引用'});const target=draftById.get(to);const filename=target?storedFile(to,target.type):owner.store.entries.get(to)?.file?.replace(/\\/g,'/');return filename?'../'+filename+anchor:value;}
-     if(files!.some(f=>f.path===normalized&&(f.attachment||fileKind(f.path)==='asset')))return '../sources/imports/'+j.id+'/files/'+normalized+anchor;
+     if(to){if(to!==doc.id)links.push({to,kind:'正文引用'});const target=draftById.get(to);const filename=target?storedFile(to,target.type):owner.store.entries.get(to)?.file?.replace(/\\/g,'/');return filename?encodePath('../'+filename)+anchor:value;}
+     if(files!.some(f=>f.path===normalized&&(f.attachment||fileKind(f.path)==='asset')))return encodePath('../sources/imports/'+j.id+'/files/'+normalized)+anchor;
      return value;
     };
-    body=body.split(/(^```[^\n]*\n[\s\S]*?^```[^\n]*$|^~~~[^\n]*\n[\s\S]*?^~~~[^\n]*$)/m).map((part,index)=>index%2?part:part.replace(/\[\[([^\]\n]+)\]\]/g,(_all,value:string)=>{const href=linkTarget(value);return href===value?_all:`[${value.split('|')[1]||value.split('|')[0]}](${href})`;}).replace(/(!?\[[^\]\n]*\]\()([^\s)]+)(\))/g,(_all,start:string,url:string,end:string)=>start+linkTarget(url)+end)).join('');
+    body=body.split(/(^```[^\n]*\n[\s\S]*?^```[^\n]*$|^~~~[^\n]*\n[\s\S]*?^~~~[^\n]*$)/m).map((part,index)=>{
+     if(index%2)return part;
+     part=part.replace(/\[\[([^\]\n]+)\]\]/g,(_all,value:string)=>{const href=linkTarget(value);return href===value?_all:`[${value.split('|')[1]||value.split('|')[0]}](${href})`;});
+     for(const link of markdownLinks(part).reverse()){const target=linkTarget(link.target);part=part.slice(0,link.start)+`${link.image?'!':''}[${link.label}](${target})`+part.slice(link.end);}
+     return part;
+    }).join('');
     body=redacted(body);const time=now();const sourceFile='sources/imports/'+j.id+'/files/'+doc.file.path;
     const entry:any={schemaVersion:2,id:doc.id,title,type:doc.type,body,tags:[...new Set(tags)].slice(0,24),project:doc.project||j.title,createdAt:time,updatedAt:time,sourceSession:'external:file:'+doc.sourceHash,sourceTitle:doc.file.path,sourceSeqs:[],snapshotHash:doc.sourceHash,generatedHash:hash(body),archived:false,verification:j.mode==='ai'?'文件资料经模型整理；未运行示例，结论待核验':'外部文件原文收录；未验证技术结论',...fields,l0:fields.l0||body.replace(/[#*`]/g,'').trim().slice(0,80),l1:fields.l1||body.replace(/[#*`]/g,'').trim().slice(0,300),questions:fields.questions?.length?fields.questions:[doc.title+'是什么？',doc.title+'如何使用？'],links:[...new Map(links.map(l=>[l.to,l])).values()],validFrom:time,invalidAt:null,file:storedFile(doc.id,doc.type),sourceContentHash:doc.sourceHash,sourceFile,importBatch:j.id,importMode:j.mode};
     await atomic(this.base(j.id,'drafts',doc.id+'.json'),JSON.stringify(entry));entries.push(entry);j.progress.done++;await this.save(j);

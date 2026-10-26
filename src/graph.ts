@@ -19,6 +19,8 @@ export interface GraphData {
   clusters: { id: string; label: string; count: number }[];
   truncated: boolean;
   total: number;
+  snapshot?: string;
+  nextOffset?: number | null;
 }
 export interface GraphOptions {
   scope?: string;
@@ -33,7 +35,7 @@ export interface GraphOptions {
 export function buildGraph(entries: Iterable<Entry>, tools: Tool[], options: GraphOptions = {}): GraphData {
   const scope = options.scope || 'all';
   if (!['all', 'library', 'tools'].includes(scope)) throw new Error('无效图谱范围');
-  const limit = Math.max(1, Math.min(5000, Math.floor(Number(options.limit) || 1500)));
+  const limit = Math.max(1, Math.min(Number.MAX_SAFE_INTEGER, Math.floor(Number(options.limit) || 1500)));
   const selected = [...entries].filter(entry => entry.archived === !!options.archived
     && (!options.project || entry.project === options.project)
     && (!options.type || entry.type === options.type));
@@ -133,7 +135,7 @@ export function relatedGraph(entries: Iterable<Entry>, tools: Tool[], id: string
     }));
     return { knowledge, tools: [], edges: knowledge.map(item => ({ s: id, t: item.id, kind: 'tool_link', w: 1.5 })) };
   }
-  const graph = buildGraph(rows, tools, { archived: entry?.archived, focus: id, limit: 5000 });
+  const graph = buildGraph(rows, tools, { archived: entry?.archived, focus: id, limit: Number.MAX_SAFE_INTEGER });
   const edges = graph.edges.filter(edge => edge.s === id || edge.t === id);
   const ids = new Set(edges.map(edge => edge.s === id ? edge.t : edge.s));
   const nodes = graph.nodes.filter(node => ids.has(node.id));

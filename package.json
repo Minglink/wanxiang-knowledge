@@ -1,6 +1,6 @@
 {
   "name": "dsh-wanxiang-knowledge",
-  "version": "0.2.0-alpha.8",
+  "version": "0.2.0-alpha.10",
   "description": "万象知识库：一键沉淀 Harness 会话、本地知识检索与工具目录",
   "type": "module",
   "main": "./lib/index.js",
@@ -29,7 +29,7 @@
   "dsh": {
     "id": "dsh-wanxiang-knowledge",
     "name": "万象知识库",
-    "version": "0.2.0-alpha.8",
+    "version": "0.2.0-alpha.10",
     "permissions": "读取选定会话；在配置的本地目录保存知识、来源和索引；按用户操作调用宿主模型；检测工具版本；使用专用环境分析本机二进制和已有流量文件、枚举Frida设备并保存结果；静态分析APK、DEX、.NET、文档宏与固件；按明确接口和过滤条件限量抓包，保存流量与分析产物；按用户拖入内容导入本地知识文件和附件；/wanxiang study读取当前会话工作目录的支持文档与源代码，调用已配置模型整理并更新知识索引和图谱；按用户点击打开本机知识目录",
     "bundle": {
       "patch": "./cordis.patch.yml"
